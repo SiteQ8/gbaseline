@@ -1,7 +1,6 @@
-// From per domain results to what is published: totals by country, sector and check, the weekly series,
-// the open data files and the hall of fame. No per domain failure ever leaves this module.
-import { CHECKS, hallEligible } from '../docs/assets/engine/checks.js';
-import { expand } from './scan.mjs';
+// From per domain results to what is published: totals by country, sector and check, the weekly series and
+// the open data files. No domain name ever leaves this module.
+import { CHECKS } from '../docs/assets/engine/checks.js';
 
 const cell = () => ({ pass: 0, fail: 0, na: 0, unknown: 0, levels: {} });
 const counts = () => ({ discovered: 0, live: 0, retired: 0, broken: 0 });
@@ -18,7 +17,6 @@ export function aggregate(rows, scope, meta = {}) {
   const inventory = grid(counts);
   const checks = Object.fromEntries(CHECKS.map((c) => [c.id, grid(cell)]));
   const quality = { agreement: { same: 0, differ: 0, single: 0 }, web: { measured: 0, unreachable: 0, none: 0 } };
-  const hall = [];
 
   for (const row of rows) {
     const targets = [[row.c, row.s], [row.c, 'all'], ['GCC', row.s], ['GCC', 'all']];
@@ -46,9 +44,7 @@ export function aggregate(rows, scope, meta = {}) {
     if (https[1] === 'unreachable') quality.web.unreachable += 1;
     else if (https[1] === 'no-web') quality.web.none += 1;
     else if (https[0] === 'pass' || https[0] === 'fail') quality.web.measured += 1;
-    if (hallEligible(expand(row.r))) hall.push({ d: row.d, c: row.c, s: row.s });
   }
-  hall.sort((a, b) => places.indexOf(a.c) - places.indexOf(b.c) || (a.d < b.d ? -1 : 1));
 
   const summary = {
     schema: 'summary/1',
@@ -59,9 +55,8 @@ export function aggregate(rows, scope, meta = {}) {
     quality: { ...quality, seconds: meta.seconds ?? null, queries: meta.resolver ? meta.resolver.queries : null },
     scanner: meta.scanner || null,
     sources: meta.sources || null,
-    hall: hall.length,
   };
-  return { summary, hall: { date: meta.date, domains: hall } };
+  return { summary };
 }
 
 export function historyEntry(summary) {

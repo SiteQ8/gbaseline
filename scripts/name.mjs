@@ -92,7 +92,7 @@ export function nameReadme(text, { en, ar, domain, repo, slug }) {
   return text
     .replaceAll('__NAME_EN__', en).replaceAll('__NAME_AR__', ar).replaceAll('__DOMAIN__', domain)
     .replaceAll('__REPO__', repo).replaceAll('__SLUG__', slug)
-    .replace(/`[a-z][a-z0-9_]*_(overview|figures|compare|check_info|history|hall_of_fame|methodology|check_domain)`/g, `\`${prefix}_$1\``);
+    .replace(/`[a-z][a-z0-9_]*_(overview|figures|compare|check_info|history|methodology|check_domain)`/g, `\`${prefix}_$1\``);
 }
 
 export function namePackage(pkg, { slug, domain, repo }) {

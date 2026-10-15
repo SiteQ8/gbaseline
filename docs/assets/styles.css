@@ -228,10 +228,6 @@ code { font-family: var(--mono); font-size: .88em; direction: ltr; unicode-bidi:
 .res .lvl { grid-column: 2; color: var(--ink-2); font-size: .93rem; }
 .res li.unknown .what { color: var(--ink-2); font-weight: 400; }
 
-/* Hall of fame. */
-.hall { columns: 2 16rem; column-gap: 2.4rem; list-style: none; margin: 1rem 0 0; padding: 0; }
-.hall li { break-inside: avoid; padding: .3rem 0; border-bottom: 1px solid var(--rule-2); font-family: var(--text); }
-
 /* Method. */
 .method section { margin-bottom: 2rem; }
 .suffixes { display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: 0 1.5rem; list-style: none; margin: 0; padding: 0; }

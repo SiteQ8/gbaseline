@@ -32,7 +32,7 @@ test('mcp answers a JSON-RPC session over stdio', () => {
   const byId = new Map(lines.map((m) => [m.id, m]));
   assert.equal(lines.length, 7, 'the notification gets no reply');
   assert.equal(byId.get(1).result.protocolVersion, '2025-06-18');
-  assert.equal(byId.get(2).result.tools.length, 8);
+  assert.equal(byId.get(2).result.tools.length, 7);
   for (const t of byId.get(2).result.tools) assert.equal(t.annotations.readOnlyHint, true, `${t.name} read-only`);
   const info = byId.get(3).result.structuredContent;
   assert.ok(/[\u0600-\u06FF]/.test(info.why) && info.passes_when.includes('X25519MLKEM768'));
@@ -47,6 +47,6 @@ test('README documents every tool by name', () => {
   const readme = readFileSync(join(root, 'README.md'), 'utf8');
   const src = readFileSync(SERVER, 'utf8');
   const names = [...src.matchAll(/name: T\('([a-z_]+)'\)/g)].map((m) => `${prefix}_${m[1]}`);
-  assert.equal(new Set(names).size, 8);
+  assert.equal(new Set(names).size, 7);
   for (const n of names) assert.ok(readme.includes(n), `README mentions ${n}`);
 });

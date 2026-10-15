@@ -1,4 +1,4 @@
-// The site: this week's issue, the countries, the checks, the live domain check, the hall of fame and the method.
+// The site: this week's issue, the countries, the checks, the live domain check and the method.
 // Everything is built from the bundle and the published data with DOM nodes; no markup strings, no inline styles.
 import { createResolver, cleanDomain } from './engine/dns.js';
 import { CHECKS, GROUPS, PASS_LEVELS, NA_LEVELS, observeDns, evaluate, suffixChain } from './engine/checks.js';
@@ -8,7 +8,7 @@ const KEY = 'register:v1';
 const SVGNS = 'http://www.w3.org/2000/svg';
 const $ = (id) => document.getElementById(id);
 let B;
-let D = { summary: null, history: [], hall: null };
+let D = { summary: null, history: [] };
 let S;
 
 function h(tag, props = {}, ...kids) {
@@ -111,7 +111,7 @@ function renderMasthead() {
   }
 }
 
-const NAV = [['overview', '#/', 'nav_overview'], ['countries', '#/countries', 'nav_countries'], ['checks', '#/checks', 'nav_checks'], ['domain', '#/domain', 'nav_domain'], ['hall', '#/hall', 'nav_hall'], ['method', '#/method', 'nav_method']];
+const NAV = [['overview', '#/', 'nav_overview'], ['countries', '#/countries', 'nav_countries'], ['checks', '#/checks', 'nav_checks'], ['domain', '#/domain', 'nav_domain'], ['method', '#/method', 'nav_method']];
 function renderNav(r) {
   const nav = $('sections');
   nav.setAttribute('aria-label', t('nav_label'));
@@ -380,7 +380,6 @@ function viewChecks() {
 function viewCheck(id) {
   const c = B.checks[id];
   if (!c) return viewChecks();
-  const meta = checkMeta(id);
   const s = D.summary;
   const main = h('div', {},
     h('section', {}, h('h2', {}, t('check_why')), h('p', { class: 'measure' }, P(c.why))),
@@ -404,7 +403,6 @@ function viewCheck(id) {
   return [
     h('h1', {}, P(c.title)),
     h('p', { class: 'question' }, P(c.question)),
-    h('p', {}, h('span', { class: 'tag' }, t(meta.core ? 'check_core' : 'check_extra'))),
     h('div', { class: 'entry' }, main, side),
   ];
 }
@@ -420,7 +418,6 @@ function suffixFor(domain) {
 function renderResult(box, domain, results) {
   const measured = Object.values(results).filter((x) => x.state === 'pass' || x.state === 'fail');
   const passed = measured.filter((x) => x.state === 'pass').length;
-  const inHall = D.hall && (D.hall.domains || []).some((d) => d.d === domain);
   const groups = GROUPS.map((g) => [
     h('h3', { class: 'group-h' }, P(B.groups[g])),
     h('ul', { class: 'res' }, CHECKS.filter((c) => c.group === g).map((c) => {
@@ -431,7 +428,6 @@ function renderResult(box, domain, results) {
   box.replaceChildren(...[
     h('h2', {}, ltr(domain)),
     h('p', {}, t('domain_summary', { pass: num(passed), checks: words(measured.length, 'w_check') })),
-    inHall ? h('p', {}, mark('pass'), ' ', t('domain_hall')) : null,
     ...groups.flat()].filter(Boolean));
 }
 
@@ -478,21 +474,6 @@ function viewDomain(r) {
   ];
 }
 
-/* ---------- hall of fame ---------- */
-
-function viewHall() {
-  const out = [h('h1', {}, t('hall_title')), h('p', { class: 'lede' }, t('hall_intro'))];
-  if (!D.summary) return [...out, pendingBlock()];
-  const list = (D.hall && D.hall.domains) || [];
-  out.push(h('p', {}, list.length ? t('hall_count', { domains: words(list.length, 'w_domain') }) : t('hall_empty')));
-  for (const c of Object.keys(B.scope.countries)) {
-    const mine = list.filter((d) => d.c === c);
-    if (!mine.length) continue;
-    out.push(h('h2', { class: 'group-h' }, placeName(c)), h('ul', { class: 'hall' }, mine.map((d) => h('li', {}, ltr(d.d)))));
-  }
-  return out;
-}
-
 /* ---------- method and data ---------- */
 
 function viewMethod() {
@@ -534,11 +515,10 @@ function renderMain(r) {
   else if (r.view === 'countries' || r.view === 'country') nodes = r.arg ? viewCountry(r.arg.toUpperCase(), r) : viewCountries();
   else if (r.view === 'checks' || r.view === 'check') nodes = r.arg ? viewCheck(r.arg) : viewChecks();
   else if (r.view === 'domain') nodes = viewDomain(r);
-  else if (r.view === 'hall') nodes = viewHall();
   else if (r.view === 'method') nodes = viewMethod();
   else nodes = viewOverview(r);
   main.replaceChildren(...nodes.filter(Boolean));
-  const titleBits = { overview: 'nav_overview', countries: 'nav_countries', country: 'nav_countries', checks: 'nav_checks', check: 'nav_checks', domain: 'nav_domain', hall: 'nav_hall', method: 'nav_method' };
+  const titleBits = { overview: 'nav_overview', countries: 'nav_countries', country: 'nav_countries', checks: 'nav_checks', check: 'nav_checks', domain: 'nav_domain', method: 'nav_method' };
   document.title = [t(titleBits[r.view] || 'nav_overview'), name() || t('tagline').replace(/\.$/, '')].join(' · ');
   const target = r.query.get('c');
   if (target) { const el = $(`c${target}`); if (el) { el.classList.add('stamped'); el.scrollIntoView({ block: 'center' }); } }
@@ -569,8 +549,8 @@ function setLang(lang) {
 async function boot() {
   B = await getJson('data/bundle.json');
   if (!B) return;
-  const [summary, hist, hall] = await Promise.all([getJson('data/summary.json'), getJson('data/history.json'), getJson('data/hall.json')]);
-  D = { summary: summary && summary.checks ? summary : null, history: Array.isArray(hist) ? hist : [], hall };
+  const [summary, hist] = await Promise.all([getJson('data/summary.json'), getJson('data/history.json')]);
+  D = { summary: summary && summary.checks ? summary : null, history: Array.isArray(hist) ? hist : [] };
   S = load();
   render();
   addEventListener('hashchange', () => { render(true); scrollTo({ top: 0 }); });

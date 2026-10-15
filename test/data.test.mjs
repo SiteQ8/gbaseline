@@ -44,7 +44,7 @@ test('every interface string is complete, faithful and follows the Arabic rules'
     check(v, `ui.${k}`);
     n += 1;
   }
-  assert.ok(n > 120, `checked ${n} strings`);
+  assert.ok(n > 110, `checked ${n} strings`);
 });
 
 test('every check reads in both languages, with labels, questions and one sentence per step', () => {

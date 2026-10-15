@@ -29,7 +29,7 @@ codes.forEach((c, i) => {
   rows.push({ d: `good${i}.gov.${c.toLowerCase()}`, c, s: 'government', dns: 'live', agree: true, r: compact(i % 2 ? good : { ...good, dnssec: R('fail', 'chain-unavailable') }) });
   rows.push({ d: `weak${i}.edu.${c.toLowerCase()}`, c, s: 'education', dns: 'live', agree: true, r: compact(weak) });
 });
-const { summary, hall } = aggregate(rows, scope, { date: '2026-10-19', chain: Object.fromEntries(scope.suffixes.map((s) => [s.suffix, !/\.(ae|qa|om)$/.test(s.suffix)])), seconds: 1234, resolver: { queries: 98765 } });
+const { summary } = aggregate(rows, scope, { date: '2026-10-19', chain: Object.fromEntries(scope.suffixes.map((s) => [s.suffix, !/\.(ae|qa|om)$/.test(s.suffix)])), seconds: 1234, resolver: { queries: 98765 } });
 summary.issue = 2;
 const previous = { ...summary, date: '2026-10-12' };
 const history = appendHistory(appendHistory([], previous), summary);
@@ -70,7 +70,6 @@ async function preparePage(viewport, scale = 1) {
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   await page.route('**/data/summary.json', (r) => r.fulfill({ contentType: 'application/json', body: JSON.stringify(summary) }));
   await page.route('**/data/history.json', (r) => r.fulfill({ contentType: 'application/json', body: JSON.stringify(history) }));
-  await page.route('**/data/hall.json', (r) => r.fulfill({ contentType: 'application/json', body: JSON.stringify(hall) }));
   await page.route(/https:\/\/(cloudflare-dns\.com|dns\.google)\/.*/, (r) => r.fulfill({ contentType: 'application/dns-json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(dohAnswer(r.request().url())) }));
   return page;
 }
@@ -110,14 +109,15 @@ try {
   const NOT_JOINED = /\.\s+[وف]/;
   assert.ok(!NOT_JOINED.test(await pageText(page)), 'no Arabic sentence is cut by a period before its connective');
   // Every other view renders.
-  for (const [hash, expect] of [['#/countries', /الكويت/], ['#/countries/SA', /السعودية/], ['#/checks', /الحماية من انتحال البريد/], ['#/checks/pq_kex', /X25519MLKEM768/], ['#/hall', /لوحة الشرف/], ['#/method', /مصادر الأسماء/]]) {
+  for (const [hash, expect] of [['#/countries', /الكويت/], ['#/countries/SA', /السعودية/], ['#/checks', /الحماية من انتحال البريد/], ['#/checks/pq_kex', /X25519MLKEM768/], ['#/method', /مصادر الأسماء/]]) {
     await page.goto(`http://localhost:${PORT}/?lang=ar${hash}`, { waitUntil: 'networkidle' });
     assert.match(await page.textContent('main'), expect, hash);
     assert.ok(!STRAY.test(await pageText(page)), `${hash}: no stray null, undefined or NaN`);
     assert.ok(!NOT_JOINED.test(await pageText(page)), `${hash}: no Arabic sentence is cut by a period before its connective`);
   }
   await page.goto(`http://localhost:${PORT}/?lang=ar#/hall`, { waitUntil: 'networkidle' });
-  assert.equal(await page.locator('.hall li').count(), hall.domains.length, 'the hall lists every passing domain');
+  assert.equal(await page.locator('#c1').count(), 1, 'an old link to a removed page lands on this week');
+  assert.equal(await page.locator('#sections a').count(), 5, 'five sections: this week, countries, checks, check a domain, method');
   // The live check, with the resolvers mocked.
   await page.goto(`http://localhost:${PORT}/?lang=ar#/domain`, { waitUntil: 'networkidle' });
   await page.fill('#domain-input', 'https://Example.com/path');
@@ -152,7 +152,7 @@ try {
   }
   // A phone: no sideways scroll on any view, the register shows the Gulf and one chosen country.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const hash of ['#/', '#/countries/KW', '#/checks/dmarc', '#/domain', '#/method', '#/hall']) {
+  for (const hash of ['#/', '#/countries/KW', '#/checks/dmarc', '#/domain', '#/method']) {
     await phone.goto(`http://localhost:${PORT}/?lang=ar${hash}`, { waitUntil: 'networkidle' });
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${hash}: no sideways scroll on a phone (overflow ${overflow}px)`);
@@ -169,7 +169,6 @@ try {
   empty.on('pageerror', (e) => errors.push(e.message));
   await empty.route('**/data/summary.json', (r) => r.fulfill({ status: 404, body: '' }));
   await empty.route('**/data/history.json', (r) => r.fulfill({ status: 404, body: '' }));
-  await empty.route('**/data/hall.json', (r) => r.fulfill({ status: 404, body: '' }));
   await empty.goto(`http://localhost:${PORT}/?lang=ar#/`, { waitUntil: 'networkidle' });
   assert.match(await empty.textContent('main'), /العدد الأول قيد القياس/);
   assert.deepEqual(errors, [], 'no console errors');

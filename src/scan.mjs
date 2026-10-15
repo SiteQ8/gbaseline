@@ -1,5 +1,5 @@
 // The weekly scan: every domain in the inventory, observed and evaluated with the shared engine.
-// Per domain results stay in memory and in a temporary file. Only totals and the hall of fame are published.
+// Per domain results stay in memory and in a temporary file. Only totals are published.
 import { createResolver } from '../docs/assets/engine/dns.js';
 import { suffixChain, CHECKS } from '../docs/assets/engine/checks.js';
 import { observeDomain } from './probe.mjs';

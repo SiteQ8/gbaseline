@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Command line: check one domain fully, or run the weekly pipeline (inventory, scan, publish), or serve MCP.
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createResolver, cleanDomain } from '../docs/assets/engine/dns.js';
-import { CHECKS, GROUPS, hallEligible, suffixChain } from '../docs/assets/engine/checks.js';
+import { CHECKS, GROUPS, suffixChain } from '../docs/assets/engine/checks.js';
 import { tr, ui, counted } from '../docs/assets/engine/i18n.js';
 import { observeDomain, pqCapable } from '../src/probe.mjs';
 import { emptyInventory, refresh, serialize, bySuffixLength } from '../src/inventory.mjs';
@@ -43,7 +43,7 @@ async function cmdCheck(a) {
   const chain = suffix ? await suffixChain(suffix, resolver) : undefined;
   const { obs, results } = await observeDomain(domain, resolver, { chain, agent: userAgent(), skipWeb: Boolean(a['dns-only']) });
   if (a.json) {
-    console.log(JSON.stringify({ domain, at: obs.at, results: Object.fromEntries(Object.entries(results).map(([k, v]) => [k, { ...v, label: levelText(k, v.level, lang) }])), hall: hallEligible(results), observation: obs }, null, 2));
+    console.log(JSON.stringify({ domain, at: obs.at, results: Object.fromEntries(Object.entries(results).map(([k, v]) => [k, { ...v, label: levelText(k, v.level, lang) }])), observation: obs }, null, 2));
     return;
   }
   const state = { pass: ui(bundle, 'state_pass', lang), fail: ui(bundle, 'state_fail', lang), na: ui(bundle, 'state_na', lang), unknown: ui(bundle, 'state_unknown', lang) };
@@ -61,7 +61,6 @@ async function cmdCheck(a) {
   const measured = Object.values(results).filter((r) => r.state === 'pass' || r.state === 'fail');
   const passed = measured.filter((r) => r.state === 'pass').length;
   lines.push('', ui(bundle, 'domain_summary', lang, { pass: passed, checks: counted(measured.length, bundle.ui.w_check, lang) }));
-  if (hallEligible(results)) lines.push(ui(bundle, 'domain_hall', lang));
   console.log(lines.join('\n'));
 }
 
@@ -112,19 +111,19 @@ async function cmdPublish(a, res) {
   const date = a.date || new Date().toISOString().slice(0, 10);
   const inv = loadInventory(a.file || INVENTORY);
   const scanner = { version: project.version, node: process.versions.node, openssl: process.versions.openssl, pq: pqCapable(), runner: process.env.GITHUB_ACTIONS ? 'github-hosted' : 'local', web: !scanned.rows.every((r) => (r.r.https || [])[1] === 'not-measured') };
-  const { summary, hall } = aggregate(scanned.rows, scope, { date, chain: scanned.chain, seconds: scanned.seconds, resolver: scanned.resolver, scanner, sources: inv.sources });
+  const { summary } = aggregate(scanned.rows, scope, { date, chain: scanned.chain, seconds: scanned.seconds, resolver: scanned.resolver, scanner, sources: inv.sources });
   const historyPath = join(root, 'docs/data/history.json');
   const history = existsSync(historyPath) ? JSON.parse(readFileSync(historyPath, 'utf8')) : [];
   const nextHistory = appendHistory(history, summary);
   summary.issue = nextHistory.findIndex((h) => h.date === date) + 1;
   writeText('docs/data/summary.json', JSON.stringify(summary, null, 1) + '\n');
   writeText('docs/data/history.json', JSON.stringify(nextHistory) + '\n');
-  writeText('docs/data/hall.json', JSON.stringify({ ...hall, issue: summary.issue }, null, 1) + '\n');
+  rmSync(join(root, 'docs/data/hall.json'), { force: true });
   writeText('docs/data/open/latest.csv', [CSV_HEAD, ...csvRows(summary)].join('\n') + '\n');
   const histCsv = join(root, 'docs/data/open/history.csv');
   writeText('docs/data/open/history.csv', historyCsv(existsSync(histCsv) ? readFileSync(histCsv, 'utf8') : '', summary));
   const g = summary.inventory.GCC.all;
-  console.log(`publish: issue ${summary.issue} for ${date}, ${g.live} live of ${g.discovered} discovered, ${summary.hall} in the hall of fame`);
+  console.log(`publish: issue ${summary.issue} for ${date}, ${g.live} live of ${g.discovered} discovered`);
   return summary;
 }
 
@@ -138,7 +137,7 @@ const HELP = `usage:
   check <domain> [--json] [--lang ar|en] [--dns-only]   every check for one domain, from this machine
   inventory [--no-ct]                                    refresh ${INVENTORY} from certificate logs and Tranco
   scan [--limit N] [--concurrency N] [--skip-web]        scan the inventory, rows to a temporary file
-  publish [--rows file] [--date YYYY-MM-DD]              write the totals, series, hall of fame and open data
+  publish [--rows file] [--date YYYY-MM-DD]              write the totals, the weekly series and the open data
   weekly                                                 inventory, scan and publish in one run
   mcp                                                    the MCP server over stdio`;
 
