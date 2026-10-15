@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { txtValue, parseMx, parseCaa, cleanDomain, normalize, createResolver } from '../docs/assets/engine/dns.js';
 import { parseDmarc, isDmarc, parseSpf, isSpf, parseMtaStsPolicy, parseMtaStsRecord, parseTlsRpt, parseHsts, parseSecurityTxt } from '../docs/assets/engine/records.js';
-import { evaluateSpf, observeDns, evaluate, hallEligible, CHECKS, LEVELS, COMMON_LEVELS, PASS_LEVELS, existence } from '../docs/assets/engine/checks.js';
+import { evaluateSpf, observeDns, evaluate, CHECKS, LEVELS, COMMON_LEVELS, PASS_LEVELS, existence } from '../docs/assets/engine/checks.js';
 import { counted, percent, number } from '../docs/assets/engine/i18n.js';
 import { fakeResolver } from './helpers.mjs';
 
@@ -201,17 +201,15 @@ test('existence: gone, broken DNSSEC seen by one resolver, and the two resolvers
 
 const webOk = { state: 'ok', site: 'www.good.example', https: { ok: true, certOk: true, chainComplete: true, hsts: { maxAge: 63072000, includeSubDomains: true, preload: true } }, http: { state: 'redirects-https' }, tls: { tls13: true, pq: true, tls10: false, tls11: false }, securityTxt: { found: true, valid: true } };
 
-test('web observations become verdicts, and a domain passing everything earns the hall of fame', async () => {
+test('web observations become verdicts', async () => {
   const obs = await observeDns('good.example', fakeResolver(strong));
   obs.web = webOk;
   const r = evaluate(obs, { chain: true });
   for (const id of ['https', 'redirect', 'hsts', 'tls13', 'legacy_tls', 'pq_kex', 'security_txt']) assert.equal(r[id].state, 'pass', id);
   assert.equal(r.hsts.level, 'preload-ready');
-  assert.equal(hallEligible(r), true);
   obs.web = { ...webOk, tls: { tls13: false, pq: false, tls10: true, tls11: false } };
   const legacy = evaluate(obs, { chain: true });
   assert.deepEqual([legacy.tls13.level, legacy.pq_kex.level, legacy.legacy_tls.level], ['not-supported', 'no-tls13', 'tls10']);
-  assert.equal(hallEligible(legacy), false);
   obs.web = { ...webOk, https: { ok: true, certOk: false, certProblem: 'expired', hsts: null } };
   const expired = evaluate(obs);
   assert.deepEqual([expired.https.level, expired.hsts.level], ['expired', 'no-https']);
@@ -226,14 +224,6 @@ test('web observations become verdicts, and a domain passing everything earns th
   assert.equal(evaluate(obs).security_txt.level, 'expired');
   obs.web = { ...webOk, https: { ...webOk.https, chainComplete: false } };
   assert.equal(evaluate(obs).https.level, 'valid-incomplete-chain');
-});
-
-test('DNSSEC is excused for the hall of fame only where the suffix cannot validate', () => {
-  const all = Object.fromEntries(CHECKS.map((c) => [c.id, { state: 'pass', level: 'x' }]));
-  assert.equal(hallEligible({ ...all, dnssec: { state: 'fail', level: 'chain-unavailable' } }), true);
-  assert.equal(hallEligible({ ...all, dnssec: { state: 'fail', level: 'unsigned' } }), false);
-  assert.equal(hallEligible({ ...all, https: { state: 'unknown', level: 'unreachable' } }), false);
-  assert.equal(hallEligible({ ...all, mta_sts: { state: 'fail', level: 'missing' } }), true, 'advanced checks are not required');
 });
 
 test('every level the evaluator returns is declared, and every pass level is a real level', async () => {

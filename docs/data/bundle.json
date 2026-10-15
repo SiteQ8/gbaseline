@@ -122,68 +122,55 @@
  "order": [
   {
    "id": "dmarc",
-   "group": "email",
-   "core": true
+   "group": "email"
   },
   {
    "id": "spf",
-   "group": "email",
-   "core": true
+   "group": "email"
   },
   {
    "id": "mta_sts",
-   "group": "email",
-   "core": false
+   "group": "email"
   },
   {
    "id": "tls_rpt",
-   "group": "email",
-   "core": false
+   "group": "email"
   },
   {
    "id": "dnssec",
-   "group": "dns",
-   "core": true
+   "group": "dns"
   },
   {
    "id": "caa",
-   "group": "dns",
-   "core": false
+   "group": "dns"
   },
   {
    "id": "https",
-   "group": "web",
-   "core": true
+   "group": "web"
   },
   {
    "id": "redirect",
-   "group": "web",
-   "core": true
+   "group": "web"
   },
   {
    "id": "hsts",
-   "group": "web",
-   "core": true
+   "group": "web"
   },
   {
    "id": "tls13",
-   "group": "web",
-   "core": false
+   "group": "web"
   },
   {
    "id": "legacy_tls",
-   "group": "web",
-   "core": true
+   "group": "web"
   },
   {
    "id": "pq_kex",
-   "group": "web",
-   "core": false
+   "group": "web"
   },
   {
    "id": "security_txt",
-   "group": "disclosure",
-   "core": true
+   "group": "disclosure"
   }
  ],
  "groups": {
@@ -1122,10 +1109,6 @@
    "en": "Check a domain",
    "ar": "افحص نطاقاً"
   },
-  "nav_hall": {
-   "en": "Hall of fame",
-   "ar": "لوحة الشرف"
-  },
   "nav_method": {
    "en": "Method and data",
    "ar": "المنهجية والبيانات"
@@ -1386,14 +1369,6 @@
    "en": "What the scan found",
    "ar": "ما وجده الفحص"
   },
-  "check_core": {
-   "en": "Core check, counted for the hall of fame.",
-   "ar": "فحص أساسي يُحتسب في لوحة الشرف."
-  },
-  "check_extra": {
-   "en": "Advanced check, not required for the hall of fame.",
-   "ar": "فحص متقدم لا يُشترط لدخول لوحة الشرف."
-  },
   "domain_title": {
    "en": "Check a domain",
    "ar": "افحص نطاقاً"
@@ -1442,10 +1417,6 @@
    "en": "{pass} of the {checks} measured here pass.",
    "ar": "اجتاز النطاق {pass} من أصل {checks} قيست هنا."
   },
-  "domain_hall": {
-   "en": "This domain is in the hall of fame for this issue.",
-   "ar": "هذا النطاق في لوحة الشرف لهذا العدد."
-  },
   "state_pass": {
    "en": "Passes",
    "ar": "يجتاز"
@@ -1461,22 +1432,6 @@
   "state_unknown": {
    "en": "Not measured",
    "ar": "لم يُقَس"
-  },
-  "hall_title": {
-   "en": "Hall of fame",
-   "ar": "لوحة الشرف"
-  },
-  "hall_intro": {
-   "en": "Domains that pass every core check that applies to them in this issue, namely DMARC, SPF, DNSSEC where the suffix allows it, valid HTTPS, the redirect to HTTPS, HSTS, no old TLS and security.txt.",
-   "ar": "نطاقات اجتازت في هذا العدد كل فحص أساسي ينطبق عليها وهي DMARC وSPF وDNSSEC حيث يسمح النطاق الأعلى بذلك وHTTPS الصالح والتحويل إلى HTTPS وHSTS وإيقاف TLS القديم وملف security.txt."
-  },
-  "hall_count": {
-   "en": "{domains} in this issue.",
-   "ar": "{domains} في هذا العدد."
-  },
-  "hall_empty": {
-   "en": "No domain passes every core check yet.",
-   "ar": "لم يجتز أي نطاق كل الفحوص الأساسية حتى الآن."
   },
   "method_title": {
    "en": "Method and data",
@@ -1518,8 +1473,8 @@
   },
   "m_publish": [
    {
-    "en": "Each issue publishes totals by country, sector and check, the weekly series and the open data. Domains that pass every core check are named in the hall of fame. No list or ranking of organisations that fail is published, while anyone can check a single domain live.",
-    "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والفحص والسلسلة الأسبوعية والبيانات المفتوحة وتُذكر أسماء النطاقات التي تجتاز كل الفحوص الأساسية في لوحة الشرف ولا تُنشر أي قائمة أو ترتيب للجهات التي لا تجتاز بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
+    "en": "Each issue publishes totals by country, sector and check, the weekly series and the open data. No domain is named, and no list or ranking of organisations is published, while anyone can check a single domain live.",
+    "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والفحص والسلسلة الأسبوعية والبيانات المفتوحة دون ذكر اسم أي نطاق أو نشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
    }
   ],
   "m_limits_h": {

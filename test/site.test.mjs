@@ -64,14 +64,12 @@ test('house style holds in every text file', () => {
   }
 });
 
-test('no per domain failure is ever published', () => {
-  for (const f of ['docs/data/summary.json', 'docs/data/history.json']) {
+test('no published file names a domain', () => {
+  for (const f of ['docs/data/summary.json', 'docs/data/history.json', 'docs/data/open/latest.csv', 'docs/data/open/history.csv']) {
     if (!existsSync(join(root, f))) continue;
     const s = read(f);
-    assert.ok(!/"d"\s*:/.test(s) && !/\.(gov|edu|ac)\.(kw|sa|ae|qa|bh|om)"/.test(s), `${f} carries totals only`);
+    assert.ok(!/"d"\s*:/.test(s) && !/[a-z0-9-]\.(gov|edu|ac)\.(kw|sa|ae|qa|bh|om)\b/.test(s), `${f} carries totals only`);
   }
-  if (existsSync(join(root, 'docs/data/hall.json'))) {
-    const hall = JSON.parse(read('docs/data/hall.json'));
-    assert.ok(Array.isArray(hall.domains));
-  }
+  assert.ok(!existsSync(join(root, 'docs/data/hall.json')), 'no list of named domains is published');
+  assert.ok(!/hall/i.test(app), 'the site has no page that lists domains by name');
 });

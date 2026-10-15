@@ -32,7 +32,6 @@ export function runSummary(summary, bundle) {
   out.push(`- Websites: measured ${w.measured ?? 0}, unreachable from the scanner ${w.unreachable ?? 0}, no website ${w.none ?? 0}.`);
   if (q.seconds !== null && q.seconds !== undefined) out.push(`- Scan time ${Math.round(q.seconds / 60)} minutes, ${q.queries ?? '?'} DNS queries.`);
   if (s.node) out.push(`- Scanner: Node ${s.node}, OpenSSL ${s.openssl}, post quantum check ${s.pq ? 'on' : 'off'}, web checks ${s.web ? 'on' : 'off'}.`);
-  out.push(`- Hall of fame: ${summary.hall} domains.`);
   const src = summary.sources;
   if (src && src.ct) {
     const cellOf = (v) => (v === undefined ? '' : typeof v === 'number' ? String(v) : `failed: ${v}`);

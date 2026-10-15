@@ -40,7 +40,7 @@ test('naming writes every file that depends on the name, passes the release buil
   const dir = mkdtempSync(join(tmpdir(), 'name-'));
   try {
     cpSync(root, dir, { recursive: true, filter: (src) => !SKIP.has(src.split(/[\\/]/).pop()) });
-    for (const f of ['docs/data/summary.json', 'docs/data/history.json', 'docs/data/hall.json']) rmSync(join(dir, f), { force: true });
+    for (const f of ['docs/data/summary.json', 'docs/data/history.json']) rmSync(join(dir, f), { force: true });
     const run = () => spawnSync(process.execPath, [join(dir, 'scripts/name.mjs'), ...sample], { cwd: dir, encoding: 'utf8' });
     const first = run();
     assert.equal(first.status, 0, first.stdout + first.stderr);

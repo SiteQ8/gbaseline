@@ -35,8 +35,7 @@
 ### ما يُنشر وما لا يُنشر
 
 - تُنشر المجاميع حسب الدولة والقطاع والفحص مع البسط والمقام ومستويات النتائج والسلسلة الأسبوعية.
-- وتُذكر في لوحة الشرف أسماء النطاقات التي تجتاز كل فحص أساسي ينطبق عليها.
-- ولا تُنشر أي قائمة أو ترتيب للجهات التي لا تجتاز بينما يستطيع أي شخص فحص نطاق واحد مباشرة.
+- ولا يُذكر اسم أي نطاق ولا تُنشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص فحص نطاق واحد مباشرة.
 
 ### الفحص المباشر
 
@@ -78,8 +77,6 @@ Talks, articles, papers and policy notes about cybersecurity in the Gulf need fi
 | Websites | Post quantum key exchange | a handshake offering only X25519MLKEM768 completes |
 | Vulnerability disclosure | security.txt (RFC 9116) | Contact present and one Expires date still ahead |
 
-Core checks (DMARC, SPF, DNSSEC where the suffix allows it, valid HTTPS, the redirect, HSTS, old TLS off, security.txt) decide the hall of fame. MTA-STS, TLS-RPT, CAA, TLS 1.3 and the post quantum check are measured and published but not required.
-
 ### How the numbers are made
 
 1. **Inventory.** Names come from public Certificate Transparency logs (crt.sh, through its read only PostgreSQL guest login first and its JSON interface second) and from the Tranco list of popular sites. Each name is reduced to its registrable domain under the suffix. A name stays once seen; a source that fails never shrinks the inventory.
@@ -94,12 +91,11 @@ Core checks (DMARC, SPF, DNSSEC where the suffix allows it, valid HTTPS, the red
 |---|---|
 | `docs/data/summary.json` | This issue: totals and levels by country, sector and check, inventory counts, DNSSEC availability per suffix, data quality |
 | `docs/data/history.json` | The weekly series |
-| `docs/data/hall.json` | Domains that pass every core check that applies to them |
 | `docs/data/open/latest.csv` | This issue as CSV |
 | `docs/data/open/history.csv` | Every issue as CSV |
 | `data/inventory/domains.json` | The measured names, where each came from and when it was first seen |
 
-No file carries a per domain failure.
+No published file names a domain next to a result. The inventory lists the names that are measured, as found in public certificate logs, and nothing about how any of them did.
 
 ### Check any domain
 
@@ -126,7 +122,6 @@ npx -y github:__REPO__ check example.com --dns-only
 | `observatory_compare` | One check across the six states |
 | `observatory_check_info` | What a check means, when it passes, how to fix it, the standards |
 | `observatory_history` | The weekly series of one check |
-| `observatory_hall_of_fame` | Domains that pass every core check |
 | `observatory_methodology` | Method, limits, data quality and how to cite |
 | `observatory_check_domain` | A live full check of any domain from your machine |
 
@@ -137,7 +132,7 @@ Every tool is read only, works offline from the published data except the live c
 ```sh
 node bin/cli.mjs inventory          # refresh data/inventory/domains.json
 node bin/cli.mjs scan --limit 50    # scan, rows to a temporary file
-node bin/cli.mjs publish            # write the totals, series, hall of fame and open data
+node bin/cli.mjs publish            # write the totals, the weekly series and the open data
 node bin/cli.mjs weekly             # all three
 ```
 

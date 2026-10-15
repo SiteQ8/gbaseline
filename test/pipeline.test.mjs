@@ -86,8 +86,10 @@ function rows() {
   ];
 }
 
-test('totals by country, sector and check, with levels, quality and the hall of fame', () => {
-  const { summary, hall } = aggregate(rows(), scope, { date: '2026-10-19', chain: { 'gov.kw': true }, seconds: 600, resolver: { queries: 1234 } });
+test('totals by country, sector and check, with levels and quality, and no domain named', () => {
+  const { summary, ...rest } = aggregate(rows(), scope, { date: '2026-10-19', chain: { 'gov.kw': true }, seconds: 600, resolver: { queries: 1234 } });
+  assert.deepEqual(Object.keys(rest), [], 'only the summary comes out');
+  assert.ok(!/[a-z]\.(gov|edu|ac)\.[a-z]{2}\b/.test(JSON.stringify(summary)), 'the summary names no domain');
   assert.deepEqual(summary.inventory.GCC.all, { discovered: 5, live: 3, retired: 1, broken: 1 });
   assert.deepEqual(summary.inventory.OM.government, { discovered: 2, live: 0, retired: 1, broken: 1 });
   const d = summary.checks.dmarc;
@@ -96,7 +98,6 @@ test('totals by country, sector and check, with levels, quality and the hall of 
   assert.equal(summary.checks.mta_sts.SA.education.na, 1);
   assert.deepEqual(summary.quality.agreement, { same: 1, differ: 1, single: 1 });
   assert.equal(summary.quality.web.unreachable, 1);
-  assert.deepEqual(hall.domains, [{ d: 'a.gov.kw', c: 'KW', s: 'government' }]);
   assert.equal(percent({ pass: 1, fail: 2 }), 33.3);
   assert.equal(percent({ pass: 0, fail: 0 }), null);
   for (const p of Object.keys(summary.checks.dmarc)) for (const g of Object.keys(summary.checks.dmarc[p])) {

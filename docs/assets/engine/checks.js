@@ -5,19 +5,19 @@ import { txtValue, parseMx, parseCaa } from './dns.js';
 import { isDmarc, parseDmarc, isSpf, parseSpf, isMtaSts, parseMtaStsRecord, isTlsRpt, parseTlsRpt } from './records.js';
 
 export const CHECKS = [
-  { id: 'dmarc', group: 'email', core: true },
-  { id: 'spf', group: 'email', core: true },
-  { id: 'mta_sts', group: 'email', core: false },
-  { id: 'tls_rpt', group: 'email', core: false },
-  { id: 'dnssec', group: 'dns', core: true },
-  { id: 'caa', group: 'dns', core: false },
-  { id: 'https', group: 'web', core: true },
-  { id: 'redirect', group: 'web', core: true },
-  { id: 'hsts', group: 'web', core: true },
-  { id: 'tls13', group: 'web', core: false },
-  { id: 'legacy_tls', group: 'web', core: true },
-  { id: 'pq_kex', group: 'web', core: false },
-  { id: 'security_txt', group: 'disclosure', core: true },
+  { id: 'dmarc', group: 'email' },
+  { id: 'spf', group: 'email' },
+  { id: 'mta_sts', group: 'email' },
+  { id: 'tls_rpt', group: 'email' },
+  { id: 'dnssec', group: 'dns' },
+  { id: 'caa', group: 'dns' },
+  { id: 'https', group: 'web' },
+  { id: 'redirect', group: 'web' },
+  { id: 'hsts', group: 'web' },
+  { id: 'tls13', group: 'web' },
+  { id: 'legacy_tls', group: 'web' },
+  { id: 'pq_kex', group: 'web' },
+  { id: 'security_txt', group: 'disclosure' },
 ];
 export const GROUPS = ['email', 'dns', 'web', 'disclosure'];
 // Every level evaluate() can return, per check. The build fails when one has no wording in both languages.
@@ -290,14 +290,4 @@ export function evaluate(obs, ctx = {}) {
     else out.security_txt = R('fail', 'incomplete');
   }
   return out;
-}
-
-// A domain earns the hall of fame when every core check that applies passes. DNSSEC is excused where the suffix cannot validate.
-export function hallEligible(results) {
-  return CHECKS.filter((c) => c.core).every((c) => {
-    const r = results[c.id];
-    if (!r) return false;
-    if (c.id === 'dnssec' && r.level === 'chain-unavailable') return true;
-    return r.state === 'pass' || r.state === 'na';
-  }) && Object.values(results).some((r) => r && r.state === 'pass');
 }
