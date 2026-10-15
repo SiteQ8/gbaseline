@@ -1,0 +1,76 @@
+name: Weekly issue
+
+# Every Monday: refresh the inventory from the certificate logs and Tranco, scan every domain, publish the totals,
+# test what is about to be published, then commit it. A push that changes this file runs it once as well.
+on:
+  schedule:
+    - cron: '17 2 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/weekly.yml']
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: weekly-issue
+  cancel-in-progress: false
+
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - name: Check the scanner can offer the post quantum group
+        run: |
+          node -e "
+            const [a, b] = process.versions.openssl.split('.').map(Number);
+            console.log('Node ' + process.version + ', OpenSSL ' + process.versions.openssl);
+            if (!(a > 3 || (a === 3 && b >= 5))) { console.error('OpenSSL 3.5 or later is needed for X25519MLKEM768'); process.exit(1); }
+          "
+
+      - name: Make sure psql is present for the certificate logs
+        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Inventory, scan and publish
+        run: node bin/cli.mjs weekly --concurrency 24
+
+      - name: Refresh the site files
+        run: node scripts/site-files.mjs
+
+      - name: Test what is about to be published
+        run: |
+          node scripts/build.mjs --check
+          npm test
+
+      - name: Commit the issue
+        run: |
+          git config user.name "SiteQ8"
+          git config user.email "311682+SiteQ8@users.noreply.github.com"
+          for f in docs/data data/inventory docs/CNAME docs/robots.txt docs/sitemap.xml docs/.well-known; do
+            if [ -e "$f" ]; then git add -A "$f"; fi
+          done
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          subject=$(node -p "const s = JSON.parse(require('fs').readFileSync('docs/data/summary.json', 'utf8')); 'Issue ' + s.issue + ', week of ' + s.date")
+          git commit -q -m "$subject"
+          git pull -q --rebase origin main
+          git push -q origin HEAD:main
+          echo "Committed: $subject"
+
+      - name: Ask Pages to publish the new issue
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
+
+      - name: Totals for this run
+        run: node scripts/run-summary.mjs >> "$GITHUB_STEP_SUMMARY"

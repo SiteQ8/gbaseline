@@ -1,0 +1,6 @@
+PRODUCT.md
+DESIGN.md
+.impeccable/
+node_modules/
+.DS_Store
+*.log
