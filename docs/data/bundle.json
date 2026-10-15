@@ -1,0 +1,1697 @@
+{
+ "schema": "bundle/1",
+ "project": {
+  "name_en": "",
+  "name_ar": "",
+  "slug": "",
+  "version": "0.1.0",
+  "domain": "",
+  "repo": "",
+  "updated": "2026-10-15",
+  "author": {
+   "en": "Ali AlEnezi",
+   "ar": "علي العنزي"
+  },
+  "author_url": "https://3li.info",
+  "about": {
+   "en": "An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, published as totals anyone can quote with a live check for any single domain.",
+   "ar": "قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق."
+  }
+ },
+ "scope": {
+  "countries": {
+   "KW": {
+    "en": "Kuwait",
+    "ar": "الكويت"
+   },
+   "SA": {
+    "en": "Saudi Arabia",
+    "ar": "السعودية"
+   },
+   "AE": {
+    "en": "UAE",
+    "ar": "الإمارات"
+   },
+   "QA": {
+    "en": "Qatar",
+    "ar": "قطر"
+   },
+   "BH": {
+    "en": "Bahrain",
+    "ar": "البحرين"
+   },
+   "OM": {
+    "en": "Oman",
+    "ar": "عُمان"
+   }
+  },
+  "sectors": {
+   "government": {
+    "en": "Government",
+    "ar": "الجهات الحكومية"
+   },
+   "education": {
+    "en": "Education",
+    "ar": "التعليم"
+   }
+  },
+  "suffixes": [
+   {
+    "suffix": "gov.kw",
+    "country": "KW",
+    "sector": "government"
+   },
+   {
+    "suffix": "edu.kw",
+    "country": "KW",
+    "sector": "education"
+   },
+   {
+    "suffix": "gov.sa",
+    "country": "SA",
+    "sector": "government"
+   },
+   {
+    "suffix": "edu.sa",
+    "country": "SA",
+    "sector": "education"
+   },
+   {
+    "suffix": "gov.ae",
+    "country": "AE",
+    "sector": "government"
+   },
+   {
+    "suffix": "ac.ae",
+    "country": "AE",
+    "sector": "education"
+   },
+   {
+    "suffix": "gov.qa",
+    "country": "QA",
+    "sector": "government"
+   },
+   {
+    "suffix": "edu.qa",
+    "country": "QA",
+    "sector": "education"
+   },
+   {
+    "suffix": "gov.bh",
+    "country": "BH",
+    "sector": "government"
+   },
+   {
+    "suffix": "edu.bh",
+    "country": "BH",
+    "sector": "education"
+   },
+   {
+    "suffix": "gov.om",
+    "country": "OM",
+    "sector": "government"
+   },
+   {
+    "suffix": "edu.om",
+    "country": "OM",
+    "sector": "education"
+   }
+  ],
+  "exclude": []
+ },
+ "order": [
+  {
+   "id": "dmarc",
+   "group": "email",
+   "core": true
+  },
+  {
+   "id": "spf",
+   "group": "email",
+   "core": true
+  },
+  {
+   "id": "mta_sts",
+   "group": "email",
+   "core": false
+  },
+  {
+   "id": "tls_rpt",
+   "group": "email",
+   "core": false
+  },
+  {
+   "id": "dnssec",
+   "group": "dns",
+   "core": true
+  },
+  {
+   "id": "caa",
+   "group": "dns",
+   "core": false
+  },
+  {
+   "id": "https",
+   "group": "web",
+   "core": true
+  },
+  {
+   "id": "redirect",
+   "group": "web",
+   "core": true
+  },
+  {
+   "id": "hsts",
+   "group": "web",
+   "core": true
+  },
+  {
+   "id": "tls13",
+   "group": "web",
+   "core": false
+  },
+  {
+   "id": "legacy_tls",
+   "group": "web",
+   "core": true
+  },
+  {
+   "id": "pq_kex",
+   "group": "web",
+   "core": false
+  },
+  {
+   "id": "security_txt",
+   "group": "disclosure",
+   "core": true
+  }
+ ],
+ "groups": {
+  "email": {
+   "en": "Email",
+   "ar": "البريد الإلكتروني"
+  },
+  "dns": {
+   "en": "DNS",
+   "ar": "نظام أسماء النطاقات"
+  },
+  "web": {
+   "en": "Websites",
+   "ar": "المواقع"
+  },
+  "disclosure": {
+   "en": "Vulnerability disclosure",
+   "ar": "الإبلاغ عن الثغرات"
+  }
+ },
+ "checks": {
+  "dmarc": {
+   "title": {
+    "en": "Email spoofing protection (DMARC)",
+    "ar": "الحماية من انتحال البريد (DMARC)"
+   },
+   "short": {
+    "en": "DMARC enforced",
+    "ar": "سياسة DMARC مُلزمة"
+   },
+   "question": {
+    "en": "Can anyone send email that claims to come from this domain?",
+    "ar": "هل يستطيع أي شخص أن يرسل بريداً ينتحل اسم هذا النطاق؟"
+   },
+   "why": {
+    "en": "Without an enforced DMARC policy, receiving mail servers have no instruction to reject messages that forge the domain in the From line, so phishing that impersonates a ministry or a university lands in inboxes looking genuine. A policy of quarantine or reject applied to 100 percent of messages tells every receiver to stop them.",
+    "ar": "إذا لم يكن للنطاق سياسة DMARC مُلزمة فلن تجد خوادم البريد المستقبِلة تعليمات برفض الرسائل التي تزوّر اسمه في حقل المرسل لذلك تصل رسائل التصيد التي تنتحل اسم الوزارة أو الجامعة إلى صناديق الوارد وكأنها رسمية بينما تطلب سياسة العزل أو الرفض المطبقة على 100٪ من الرسائل من كل خادم مستقبِل أن يوقفها."
+   },
+   "pass": {
+    "en": "Passes with exactly one DMARC record whose policy is quarantine or reject, applied to 100 percent of messages.",
+    "ar": "يجتاز النطاق عندما ينشر سجل DMARC واحداً فقط بسياسة العزل أو الرفض المطبقة على 100٪ من الرسائل."
+   },
+   "fix": [
+    {
+     "en": "Publish a DMARC TXT record on the domain, starting with the monitoring policy and an address that receives the aggregate reports.",
+     "ar": "انشر سجل DMARC من نوع TXT على النطاق وابدأ بسياسة المراقبة مع عنوان يستقبل التقارير المجمّعة."
+    },
+    {
+     "en": "Read the reports for a few weeks to find every service that sends mail as the domain, and make each one pass SPF or DKIM.",
+     "ar": "راجع التقارير بضعة أسابيع لتتعرف على كل خدمة ترسل البريد باسم النطاق ثم اجعل كل خدمة منها تجتاز SPF أو DKIM."
+    },
+    {
+     "en": "Move the policy to quarantine and then to reject, applied to all messages.",
+     "ar": "انقل السياسة إلى العزل ثم إلى الرفض وطبّقها على جميع الرسائل."
+    },
+    {
+     "en": "A domain that never sends mail can go straight to reject, together with an SPF record that authorises no one.",
+     "ar": "أما النطاق الذي لا يرسل بريداً أبداً فيمكنه الانتقال مباشرة إلى الرفض مع سجل SPF لا يعتمد أي مرسل."
+    }
+   ],
+   "example": "_dmarc.example.com  TXT  \"v=DMARC1; p=reject; rua=mailto:dmarc-reports@example.com\"",
+   "refs": [
+    {
+     "label": "RFC 7489",
+     "url": "https://www.rfc-editor.org/rfc/rfc7489"
+    }
+   ],
+   "levels": {
+    "reject": {
+     "en": "Reject",
+     "ar": "الرفض"
+    },
+    "quarantine": {
+     "en": "Quarantine",
+     "ar": "العزل"
+    },
+    "partial": {
+     "en": "Enforced on part of the mail only",
+     "ar": "مُطبّقة على جزء من الرسائل فقط"
+    },
+    "none": {
+     "en": "Monitoring only",
+     "ar": "مراقبة فقط"
+    },
+    "invalid": {
+     "en": "Malformed record",
+     "ar": "سجل غير صالح"
+    },
+    "multiple": {
+     "en": "More than one record",
+     "ar": "أكثر من سجل"
+    },
+    "missing": {
+     "en": "No record",
+     "ar": "لا يوجد سجل"
+    }
+   }
+  },
+  "spf": {
+   "title": {
+    "en": "Authorised senders (SPF)",
+    "ar": "المرسلون المعتمدون (SPF)"
+   },
+   "short": {
+    "en": "SPF in place",
+    "ar": "سجل SPF سليم"
+   },
+   "question": {
+    "en": "Does the domain list the servers allowed to send its mail?",
+    "ar": "هل يحدد النطاق الخوادم المسموح لها بإرسال بريده؟"
+   },
+   "why": {
+    "en": "SPF lets a receiver check whether the server handing over a message is one the domain authorises. A record without a closing fail rule, a second record, or a chain that needs more than 10 DNS lookups is treated as no record at all by many receivers, and DMARC cannot rely on it.",
+    "ar": "يتيح SPF للخادم المستقبِل أن يتحقق من أن الخادم الذي يسلّمه الرسالة معتمد من النطاق لكن كثيراً من الخوادم تعامل السجل كأنه غير موجود إذا خلا من قاعدة رفض ختامية أو تكرر أو احتاج إلى أكثر من 10 استعلامات في نظام أسماء النطاقات فلا يعود DMARC قادراً على الاعتماد عليه."
+   },
+   "pass": {
+    "en": "Passes with exactly one SPF record that ends in a strict or soft fail rule and stays within 10 DNS lookups.",
+    "ar": "يجتاز النطاق عندما ينشر سجل SPF واحداً ينتهي بقاعدة رفض صارمة أو مخففة ولا يتجاوز 10 استعلامات."
+   },
+   "fix": [
+    {
+     "en": "List every service that sends mail as the domain, such as the mail platform, newsletters and ticketing systems.",
+     "ar": "حدد كل خدمة ترسل البريد باسم النطاق مثل منصة البريد والنشرات وأنظمة التذاكر."
+    },
+    {
+     "en": "Publish one SPF record that includes them all and ends with the strict fail rule, or the soft one while you are still checking.",
+     "ar": "انشر سجل SPF واحداً يضم تلك الخدمات جميعها وينتهي بقاعدة الرفض الصارمة أو بالمخففة أثناء مرحلة التحقق."
+    },
+    {
+     "en": "Merge duplicate records and flatten includes that push the chain past 10 lookups.",
+     "ar": "ادمج السجلات المكررة واختصر الإدراجات التي ترفع السلسلة فوق 10 استعلامات."
+    }
+   ],
+   "example": "example.com  TXT  \"v=spf1 include:spf.protection.outlook.com -all\"",
+   "refs": [
+    {
+     "label": "RFC 7208",
+     "url": "https://www.rfc-editor.org/rfc/rfc7208"
+    }
+   ],
+   "levels": {
+    "strict": {
+     "en": "Strict fail rule",
+     "ar": "قاعدة رفض صارمة"
+    },
+    "soft": {
+     "en": "Soft fail rule",
+     "ar": "قاعدة رفض مخففة"
+    },
+    "neutral": {
+     "en": "Neutral closing rule",
+     "ar": "قاعدة ختامية محايدة"
+    },
+    "open": {
+     "en": "Allows any sender",
+     "ar": "يسمح لأي مرسل"
+    },
+    "no-all": {
+     "en": "No closing rule",
+     "ar": "بلا قاعدة ختامية"
+    },
+    "too-many-lookups": {
+     "en": "More than 10 lookups",
+     "ar": "أكثر من 10 استعلامات"
+    },
+    "multiple": {
+     "en": "More than one record",
+     "ar": "أكثر من سجل"
+    },
+    "error": {
+     "en": "Broken include or syntax",
+     "ar": "خطأ في الصياغة أو الإدراج"
+    },
+    "invalid": {
+     "en": "Malformed record",
+     "ar": "سجل غير صالح"
+    },
+    "missing": {
+     "en": "No record",
+     "ar": "لا يوجد سجل"
+    }
+   }
+  },
+  "mta_sts": {
+   "title": {
+    "en": "Encrypted inbound mail (MTA-STS)",
+    "ar": "فرض تشفير البريد الوارد (MTA-STS)"
+   },
+   "short": {
+    "en": "MTA-STS enforced",
+    "ar": "MTA-STS بوضع الإلزام"
+   },
+   "question": {
+    "en": "Must other servers encrypt the mail they deliver to this domain?",
+    "ar": "هل يُلزم النطاق الخوادم الأخرى بتشفير البريد الذي ترسله إليه؟"
+   },
+   "why": {
+    "en": "Mail servers encrypt delivery only when both sides offer it, and an attacker on the network can strip that offer without anyone noticing. MTA-STS publishes a policy that tells senders to refuse delivery unless the connection is encrypted to a named mail server with a valid certificate.",
+    "ar": "تُشفّر خوادم البريد الرسائل أثناء التسليم فقط عندما يعرض الطرفان ذلك ويستطيع المهاجم على الشبكة أن يحذف هذا العرض دون أن يلاحظه أحد بينما ينشر MTA-STS سياسة تطلب من الخوادم المرسِلة رفض التسليم ما لم يكن الاتصال مشفراً إلى خادم بريد محدد يحمل شهادة صالحة."
+   },
+   "pass": {
+    "en": "Passes when the domain publishes an MTA-STS record and a policy file in enforce mode. Applies only to domains that receive mail.",
+    "ar": "يجتاز النطاق عندما ينشر سجل MTA-STS وملف سياسة بوضع الإلزام ولا ينطبق هذا الفحص إلا على النطاقات التي تستقبل البريد."
+   },
+   "fix": [
+    {
+     "en": "Serve a policy file over HTTPS on the mta-sts subdomain that lists the mail servers, in testing mode first.",
+     "ar": "انشر ملف السياسة عبر HTTPS على النطاق الفرعي المخصص له مع قائمة خوادم البريد وابدأ بوضع الاختبار."
+    },
+    {
+     "en": "Publish the MTA-STS TXT record with an id that changes whenever the policy changes.",
+     "ar": "انشر سجل MTA-STS من نوع TXT مع معرّف يتغير كلما تغيرت السياسة."
+    },
+    {
+     "en": "Add TLS-RPT to receive failure reports, then switch the policy to enforce.",
+     "ar": "أضف TLS-RPT لتصلك تقارير الإخفاق ثم حوّل السياسة إلى وضع الإلزام."
+    }
+   ],
+   "example": "https://mta-sts.example.com/.well-known/mta-sts.txt\nversion: STSv1\nmode: enforce\nmx: mail.example.com\nmax_age: 604800",
+   "refs": [
+    {
+     "label": "RFC 8461",
+     "url": "https://www.rfc-editor.org/rfc/rfc8461"
+    }
+   ],
+   "levels": {
+    "enforce": {
+     "en": "Enforce",
+     "ar": "الإلزام"
+    },
+    "testing": {
+     "en": "Testing",
+     "ar": "الاختبار"
+    },
+    "none": {
+     "en": "Switched off",
+     "ar": "معطّلة"
+    },
+    "missing": {
+     "en": "No record",
+     "ar": "لا يوجد سجل"
+    },
+    "invalid": {
+     "en": "Malformed record",
+     "ar": "سجل غير صالح"
+    },
+    "policy-unreachable": {
+     "en": "Policy file unreachable",
+     "ar": "تعذّر الوصول إلى ملف السياسة"
+    },
+    "policy-invalid": {
+     "en": "Malformed policy file",
+     "ar": "ملف السياسة غير صالح"
+    },
+    "record-only": {
+     "en": "Record found, policy file read by the full check",
+     "ar": "السجل موجود ويقرأ الفحص الكامل ملف السياسة"
+    }
+   }
+  },
+  "tls_rpt": {
+   "title": {
+    "en": "Mail encryption reports (TLS-RPT)",
+    "ar": "تقارير تشفير البريد (TLS-RPT)"
+   },
+   "short": {
+    "en": "TLS-RPT published",
+    "ar": "سجل TLS-RPT منشور"
+   },
+   "question": {
+    "en": "Will the domain hear about failed encrypted deliveries?",
+    "ar": "هل يتلقى النطاق تقارير عن إخفاق تسليم البريد المشفر؟"
+   },
+   "why": {
+    "en": "TLS-RPT asks sending servers to report delivery attempts that failed encryption, which is how a domain notices an interception attempt or a broken certificate before mail is lost.",
+    "ar": "يطلب TLS-RPT من الخوادم المرسِلة أن تبلّغ النطاق بمحاولات التسليم التي أخفق فيها التشفير فيعرف النطاق بمحاولات الاعتراض أو بالشهادات المعطوبة قبل ضياع الرسائل."
+   },
+   "pass": {
+    "en": "Passes when a valid TLS-RPT record names at least one reporting address. Applies only to domains that receive mail.",
+    "ar": "يجتاز النطاق عندما ينشر سجل TLS-RPT صالحاً يحدد عنواناً واحداً على الأقل لاستقبال التقارير ولا ينطبق هذا الفحص إلا على النطاقات التي تستقبل البريد."
+   },
+   "fix": [
+    {
+     "en": "Publish a TLS-RPT TXT record with a mailbox or an HTTPS endpoint that collects the reports.",
+     "ar": "انشر سجل TLS-RPT من نوع TXT مع صندوق بريد أو رابط HTTPS يجمع التقارير."
+    },
+    {
+     "en": "Read the reports regularly, or send them to a service that summarises them.",
+     "ar": "راجع التقارير بانتظام أو أرسلها إلى خدمة تلخّصها."
+    }
+   ],
+   "example": "_smtp._tls.example.com  TXT  \"v=TLSRPTv1; rua=mailto:tls-reports@example.com\"",
+   "refs": [
+    {
+     "label": "RFC 8460",
+     "url": "https://www.rfc-editor.org/rfc/rfc8460"
+    }
+   ],
+   "levels": {
+    "present": {
+     "en": "Published",
+     "ar": "منشور"
+    },
+    "missing": {
+     "en": "No record",
+     "ar": "لا يوجد سجل"
+    },
+    "invalid": {
+     "en": "Malformed record",
+     "ar": "سجل غير صالح"
+    }
+   }
+  },
+  "dnssec": {
+   "title": {
+    "en": "Signed DNS (DNSSEC)",
+    "ar": "التوقيع الرقمي لسجلات النطاق (DNSSEC)"
+   },
+   "short": {
+    "en": "DNSSEC validates",
+    "ar": "توقيع DNSSEC سليم"
+   },
+   "question": {
+    "en": "Can a resolver prove that the domain's DNS answers are genuine?",
+    "ar": "هل يستطيع المحلل أن يتحقق من أن إجابات نظام أسماء النطاقات الخاصة بالنطاق أصلية؟"
+   },
+   "why": {
+    "en": "Without DNSSEC, a forged DNS answer can send visitors and mail to an attacker's servers. With it, validating resolvers reject any answer that lacks a valid signature chain back to the root. A domain can only be signed end to end if the suffix above it is signed too.",
+    "ar": "يستطيع المهاجم دون DNSSEC أن يرسل إجابة مزورة توجّه الزوار والبريد إلى خوادمه أما مع DNSSEC فترفض المحللات التي تتحقق من التوقيع كل إجابة لا تحمل سلسلة توقيع صالحة حتى الجذر ولا يمكن توقيع النطاق توقيعاً كاملاً إلا إذا كان النطاق الأعلى الذي يتبعه موقّعاً أيضاً."
+   },
+   "pass": {
+    "en": "Passes when validating resolvers mark the domain's answers as authenticated.",
+    "ar": "يجتاز النطاق عندما تعدّ المحللات التي تتحقق من التوقيع إجاباته موثّقة."
+   },
+   "fix": [
+    {
+     "en": "Turn on DNSSEC signing at your DNS host.",
+     "ar": "فعّل توقيع DNSSEC لدى مزود خدمة أسماء النطاقات."
+    },
+    {
+     "en": "Give the DS record to the body that runs the suffix above the domain, then confirm that validation succeeds.",
+     "ar": "سلّم سجل DS إلى الجهة المسؤولة عن النطاق الأعلى ثم تأكد من نجاح التحقق."
+    },
+    {
+     "en": "Where the suffix itself is not signed, ask the body that runs it to sign it, since no domain under it can validate until then.",
+     "ar": "وإذا لم يكن النطاق الأعلى نفسه موقّعاً فاطلب من الجهة المسؤولة عنه توقيعه لأن أي نطاق يتبعه لن يجتاز التحقق قبل ذلك."
+    }
+   ],
+   "example": "example.com  DS  370 13 2 BE74359954660069D5C63D200C39F5603827D7DD02B56F120EE9F3A86764247C",
+   "refs": [
+    {
+     "label": "RFC 4033",
+     "url": "https://www.rfc-editor.org/rfc/rfc4033"
+    },
+    {
+     "label": "RFC 9364",
+     "url": "https://www.rfc-editor.org/rfc/rfc9364"
+    }
+   ],
+   "levels": {
+    "validated": {
+     "en": "Validated",
+     "ar": "موثّق"
+    },
+    "unsigned": {
+     "en": "Not signed",
+     "ar": "غير موقّع"
+    },
+    "chain-unavailable": {
+     "en": "Suffix above is not signed",
+     "ar": "النطاق الأعلى غير موقّع"
+    },
+    "bogus": {
+     "en": "Signatures fail to validate",
+     "ar": "التوقيع لا يجتاز التحقق"
+    }
+   }
+  },
+  "caa": {
+   "title": {
+    "en": "Allowed certificate issuers (CAA)",
+    "ar": "جهات إصدار الشهادات المسموح لها (CAA)"
+   },
+   "short": {
+    "en": "CAA published",
+    "ar": "سجل CAA منشور"
+   },
+   "question": {
+    "en": "Does the domain name the certificate authorities allowed to issue for it?",
+    "ar": "هل يحدد النطاق جهات إصدار الشهادات المسموح لها بإصدار شهادات له؟"
+   },
+   "why": {
+    "en": "Certificate authorities must check CAA before they issue. A CAA record that names your chosen authorities stops every other authority from issuing a certificate for the domain, which narrows the paths to a fraudulent certificate.",
+    "ar": "تلتزم جهات إصدار الشهادات بفحص سجل CAA قبل الإصدار فإذا حدد السجل الجهات التي اخترتها امتنعت أي جهة أخرى عن إصدار شهادة للنطاق وهكذا تضيق الطرق المؤدية إلى شهادة احتيالية."
+   },
+   "pass": {
+    "en": "Passes when a CAA record applies to the domain, either its own or one inherited from a parent name.",
+    "ar": "يجتاز النطاق عندما ينطبق عليه سجل CAA سواء أكان سجله الخاص أم موروثاً من نطاق أعلى."
+   },
+   "fix": [
+    {
+     "en": "List the authorities that issue your certificates today.",
+     "ar": "حدد الجهات التي تصدر شهاداتك حالياً."
+    },
+    {
+     "en": "Publish CAA records with an issue entry for each of them and an address for incident reports.",
+     "ar": "انشر سجلات CAA تتضمن إذن إصدار لكل جهة منها مع عنوان لتلقي البلاغات."
+    }
+   ],
+   "example": "example.com  CAA  0 issue \"letsencrypt.org\"\nexample.com  CAA  0 iodef \"mailto:pki@example.com\"",
+   "refs": [
+    {
+     "label": "RFC 8659",
+     "url": "https://www.rfc-editor.org/rfc/rfc8659"
+    }
+   ],
+   "levels": {
+    "own": {
+     "en": "Own record",
+     "ar": "سجل خاص بالنطاق"
+    },
+    "inherited": {
+     "en": "Inherited from a parent name",
+     "ar": "موروث من نطاق أعلى"
+    },
+    "none": {
+     "en": "No record",
+     "ar": "لا يوجد سجل"
+    }
+   }
+  },
+  "https": {
+   "title": {
+    "en": "Valid HTTPS",
+    "ar": "اتصال HTTPS صالح"
+   },
+   "short": {
+    "en": "Valid HTTPS",
+    "ar": "HTTPS صالح"
+   },
+   "question": {
+    "en": "Does the website open over HTTPS with a valid certificate?",
+    "ar": "هل يفتح الموقع عبر HTTPS بشهادة صالحة؟"
+   },
+   "why": {
+    "en": "HTTPS encrypts the connection and proves that the visitor reached the real site. An expired, self signed or mismatched certificate trains people to click through warnings, which is exactly what an attacker relies on.",
+    "ar": "يشفّر HTTPS الاتصال ويثبت للزائر أنه وصل إلى الموقع الحقيقي أما الشهادة المنتهية أو الموقّعة ذاتياً أو التي لا تطابق اسم الموقع فتعوّد الناس على تجاوز التحذيرات وهذا بالضبط ما يعتمد عليه المهاجم."
+   },
+   "pass": {
+    "en": "Passes when the TLS handshake succeeds with a certificate that is in date, matches the name and chains to a trusted authority. A missing intermediate certificate is noted but still passes.",
+    "ar": "يجتاز الموقع عندما تنجح مصافحة TLS بشهادة سارية تطابق اسم الموقع وترتبط بجهة إصدار موثوقة ويُسجَّل غياب الشهادة الوسيطة ملاحظةً دون أن يمنع الاجتياز."
+   },
+   "fix": [
+    {
+     "en": "Use certificates from a trusted authority and renew them automatically, for example over ACME.",
+     "ar": "استخدم شهادات من جهة إصدار موثوقة وجدّدها تلقائياً بوسيلة مثل ACME."
+    },
+    {
+     "en": "Serve the full chain, including the intermediate certificates.",
+     "ar": "قدّم السلسلة كاملة بما فيها الشهادات الوسيطة."
+    },
+    {
+     "en": "Make the certificate cover the bare domain and the usual web prefix.",
+     "ar": "اجعل الشهادة تغطي اسم النطاق مجرداً ومع بادئة المواقع المعتادة."
+    }
+   ],
+   "example": "",
+   "refs": [
+    {
+     "label": "RFC 9525",
+     "url": "https://www.rfc-editor.org/rfc/rfc9525"
+    }
+   ],
+   "levels": {
+    "valid": {
+     "en": "Valid",
+     "ar": "صالحة"
+    },
+    "valid-incomplete-chain": {
+     "en": "Valid, intermediate certificate missing",
+     "ar": "صالحة مع غياب الشهادة الوسيطة"
+    },
+    "expired": {
+     "en": "Expired certificate",
+     "ar": "شهادة منتهية"
+    },
+    "self-signed": {
+     "en": "Self signed certificate",
+     "ar": "شهادة موقّعة ذاتياً"
+    },
+    "name-mismatch": {
+     "en": "Certificate for another name",
+     "ar": "شهادة لاسم آخر"
+    },
+    "untrusted": {
+     "en": "Untrusted certificate",
+     "ar": "شهادة غير موثوقة"
+    },
+    "handshake-failed": {
+     "en": "Handshake failed",
+     "ar": "تعذّرت المصافحة"
+    },
+    "no-https": {
+     "en": "No HTTPS",
+     "ar": "لا يوجد HTTPS"
+    }
+   }
+  },
+  "redirect": {
+   "title": {
+    "en": "Plain HTTP sends visitors to HTTPS",
+    "ar": "التحويل من HTTP إلى HTTPS"
+   },
+   "short": {
+    "en": "Redirects to HTTPS",
+    "ar": "يحوّل إلى HTTPS"
+   },
+   "question": {
+    "en": "Does typing the plain address end up on HTTPS?",
+    "ar": "هل يُحوَّل الزائر إلى HTTPS إذا كتب العنوان دون تشفير؟"
+   },
+   "why": {
+    "en": "People type addresses without a scheme, so the first request often leaves unencrypted. Redirecting it straight to HTTPS keeps that first visit from being read or rewritten on the way.",
+    "ar": "يكتب الناس العناوين دون تحديد البروتوكول فيخرج الطلب الأول غالباً دون تشفير لذلك يمنع التحويل الفوري إلى HTTPS قراءة تلك الزيارة الأولى أو تعديلها في الطريق."
+   },
+   "pass": {
+    "en": "Passes when plain HTTP redirects to HTTPS, or when plain HTTP is not served at all.",
+    "ar": "يجتاز الموقع عندما يحوّل HTTP إلى HTTPS أو عندما لا يقدّم HTTP أصلاً."
+   },
+   "fix": [
+    {
+     "en": "Answer every plain HTTP request with a permanent redirect to the same path over HTTPS.",
+     "ar": "أجب عن كل طلب HTTP بتحويل دائم إلى المسار نفسه عبر HTTPS."
+    },
+    {
+     "en": "Then add HSTS so the browser skips the plain request next time.",
+     "ar": "ثم أضف HSTS حتى يتخطى المتصفح الطلب غير المشفر في المرات التالية."
+    }
+   ],
+   "example": "",
+   "refs": [
+    {
+     "label": "RFC 9110",
+     "url": "https://www.rfc-editor.org/rfc/rfc9110"
+    }
+   ],
+   "levels": {
+    "redirects-https": {
+     "en": "Redirects to HTTPS",
+     "ar": "يحوّل إلى HTTPS"
+    },
+    "closed": {
+     "en": "Plain HTTP not served",
+     "ar": "لا يقدّم HTTP"
+    },
+    "serves-http": {
+     "en": "Serves the page over plain HTTP",
+     "ar": "يقدّم الصفحة دون تشفير"
+    },
+    "redirects-http": {
+     "en": "Redirects but stays on plain HTTP",
+     "ar": "يحوّل مع البقاء دون تشفير"
+    },
+    "http-error": {
+     "en": "Plain HTTP did not answer in time",
+     "ar": "لم يستجب HTTP في الوقت المحدد"
+    }
+   }
+  },
+  "hsts": {
+   "title": {
+    "en": "HTTPS enforced by the browser (HSTS)",
+    "ar": "إلزام المتصفح باستخدام HTTPS (HSTS)"
+   },
+   "short": {
+    "en": "HSTS for a year or more",
+    "ar": "HSTS لمدة سنة أو أكثر"
+   },
+   "question": {
+    "en": "Will browsers refuse to load the site without HTTPS?",
+    "ar": "هل يرفض المتصفح تحميل الموقع دون HTTPS؟"
+   },
+   "why": {
+    "en": "HSTS tells a browser to use HTTPS for the site from now on, which closes the gap a redirect leaves on the first plain request and blocks clicking through certificate warnings. One year is the minimum that browsers accept for their preload lists.",
+    "ar": "يطلب HSTS من المتصفح أن يستخدم HTTPS مع الموقع من الآن فصاعداً فيسد الثغرة التي يتركها التحويل في الطلب الأول غير المشفر ويمنع تجاوز تحذيرات الشهادة كما أن مدة السنة هي الحد الأدنى الذي تقبله المتصفحات في قوائم التحميل المسبق."
+   },
+   "pass": {
+    "en": "Passes when the HTTPS response carries Strict-Transport-Security with a max-age of at least one year.",
+    "ar": "يجتاز الموقع عندما تحمل استجابة HTTPS ترويسة HSTS بمدة لا تقل عن سنة."
+   },
+   "fix": [
+    {
+     "en": "Send Strict-Transport-Security with a max-age of 31536000 seconds or more on every HTTPS response.",
+     "ar": "أرسل ترويسة HSTS بمدة 31536000 ثانية أو أكثر مع كل استجابة HTTPS."
+    },
+    {
+     "en": "Add includeSubDomains once every subdomain works over HTTPS, then preload to join the browser lists.",
+     "ar": "أضف خيار تضمين النطاقات الفرعية بعد أن تعمل جميعها عبر HTTPS ثم خيار التحميل المسبق للانضمام إلى قوائم المتصفحات."
+    }
+   ],
+   "example": "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+   "refs": [
+    {
+     "label": "RFC 6797",
+     "url": "https://www.rfc-editor.org/rfc/rfc6797"
+    },
+    {
+     "label": "hstspreload.org",
+     "url": "https://hstspreload.org/"
+    }
+   ],
+   "levels": {
+    "preload-ready": {
+     "en": "Ready for preload",
+     "ar": "جاهز للتحميل المسبق"
+    },
+    "one-year": {
+     "en": "One year or more",
+     "ar": "سنة أو أكثر"
+    },
+    "short": {
+     "en": "Shorter than a year",
+     "ar": "أقل من سنة"
+    },
+    "disabled": {
+     "en": "Switched off",
+     "ar": "معطّل"
+    },
+    "missing": {
+     "en": "Not sent",
+     "ar": "غير مُرسَل"
+    },
+    "no-https": {
+     "en": "No HTTPS",
+     "ar": "لا يوجد HTTPS"
+    }
+   }
+  },
+  "tls13": {
+   "title": {
+    "en": "Current TLS (1.3)",
+    "ar": "إصدار TLS الحالي (1.3)"
+   },
+   "short": {
+    "en": "TLS 1.3 supported",
+    "ar": "يدعم TLS 1.3"
+   },
+   "question": {
+    "en": "Does the site speak TLS 1.3?",
+    "ar": "هل يدعم الموقع TLS 1.3؟"
+   },
+   "why": {
+    "en": "TLS 1.3 removes the weak options that older versions still allow, completes the handshake faster and is the only version that carries the post quantum key exchange available today.",
+    "ar": "يحذف TLS 1.3 الخيارات الضعيفة التي ما زالت الإصدارات الأقدم تسمح بها ويُتم المصافحة أسرع وهو الإصدار الوحيد الذي يحمل تبادل المفاتيح المقاوم للحوسبة الكمية المتاح اليوم."
+   },
+   "pass": {
+    "en": "Passes when the server negotiates TLS 1.3.",
+    "ar": "يجتاز الموقع عندما يتفاوض الخادم على TLS 1.3."
+   },
+   "fix": [
+    {
+     "en": "Enable TLS 1.3 on the web server, the load balancer or the CDN, since current versions of all of them support it.",
+     "ar": "فعّل TLS 1.3 على خادم الويب أو موزّع الأحمال أو شبكة توصيل المحتوى لأن إصداراتها الحالية جميعها تدعمه."
+    }
+   ],
+   "example": "",
+   "refs": [
+    {
+     "label": "RFC 8446",
+     "url": "https://www.rfc-editor.org/rfc/rfc8446"
+    }
+   ],
+   "levels": {
+    "supported": {
+     "en": "Supported",
+     "ar": "مدعوم"
+    },
+    "not-supported": {
+     "en": "Not supported",
+     "ar": "غير مدعوم"
+    },
+    "no-https": {
+     "en": "No HTTPS",
+     "ar": "لا يوجد HTTPS"
+    }
+   }
+  },
+  "legacy_tls": {
+   "title": {
+    "en": "Old TLS switched off (1.0 and 1.1)",
+    "ar": "إيقاف إصدارات TLS القديمة (1.0 و1.1)"
+   },
+   "short": {
+    "en": "No TLS 1.0 or 1.1",
+    "ar": "لا يقبل TLS 1.0 أو 1.1"
+   },
+   "question": {
+    "en": "Does the site still accept TLS 1.0 or 1.1?",
+    "ar": "هل ما زال الموقع يقبل TLS 1.0 أو 1.1؟"
+   },
+   "why": {
+    "en": "TLS 1.0 and 1.1 were formally deprecated in 2021 because their cryptography no longer holds up. Leaving them on lets an attacker push a connection down to them.",
+    "ar": "أُلغي اعتماد TLS 1.0 و1.1 رسمياً في 2021 لأن تشفيرهما لم يعد آمناً وإبقاؤهما مفعّلين يتيح للمهاجم أن يخفض الاتصال إليهما."
+   },
+   "pass": {
+    "en": "Passes when the server refuses both TLS 1.0 and TLS 1.1.",
+    "ar": "يجتاز الموقع عندما يرفض الخادم TLS 1.0 وTLS 1.1 معاً."
+   },
+   "fix": [
+    {
+     "en": "Set the minimum protocol to TLS 1.2 on every server and CDN in front of the site.",
+     "ar": "اضبط الحد الأدنى للبروتوكول على TLS 1.2 في كل خادم وشبكة توصيل محتوى أمام الموقع."
+    }
+   ],
+   "example": "",
+   "refs": [
+    {
+     "label": "RFC 8996",
+     "url": "https://www.rfc-editor.org/rfc/rfc8996"
+    }
+   ],
+   "levels": {
+    "refused": {
+     "en": "Both refused",
+     "ar": "كلاهما مرفوض"
+    },
+    "tls10": {
+     "en": "Accepts TLS 1.0",
+     "ar": "يقبل TLS 1.0"
+    },
+    "tls11": {
+     "en": "Accepts TLS 1.1",
+     "ar": "يقبل TLS 1.1"
+    },
+    "no-https": {
+     "en": "No HTTPS",
+     "ar": "لا يوجد HTTPS"
+    }
+   }
+  },
+  "pq_kex": {
+   "title": {
+    "en": "Post quantum key exchange",
+    "ar": "تبادل المفاتيح المقاوم للحوسبة الكمية"
+   },
+   "short": {
+    "en": "Post quantum ready",
+    "ar": "جاهز لما بعد الحوسبة الكمية"
+   },
+   "question": {
+    "en": "Is traffic sent today protected against decryption by a future quantum computer?",
+    "ar": "هل حركة البيانات المرسلة اليوم محمية من فك تشفيرها لاحقاً بحاسوب كمي؟"
+   },
+   "why": {
+    "en": "Anyone recording encrypted traffic today could decrypt it once a large quantum computer exists, which is why browsers now offer a hybrid key exchange that adds ML-KEM to X25519. A server that accepts it protects what it sends today against that later decryption.",
+    "ar": "يستطيع من يسجّل حركة البيانات المشفرة اليوم أن يفك تشفيرها متى توفّر حاسوب كمي كبير لذلك تعرض المتصفحات الآن تبادلاً هجيناً للمفاتيح يضيف ML-KEM إلى X25519 فإذا قبله الخادم حمى ما يرسله اليوم من فك التشفير لاحقاً."
+   },
+   "pass": {
+    "en": "Passes when the server completes a TLS 1.3 handshake that offers only the hybrid group X25519MLKEM768.",
+    "ar": "يجتاز الموقع عندما يُتم الخادم مصافحة TLS 1.3 لا تعرض سوى المجموعة الهجينة X25519MLKEM768."
+   },
+   "fix": [
+    {
+     "en": "Upgrade to a TLS library that supports ML-KEM, such as OpenSSL 3.5 or later, or turn it on at your CDN.",
+     "ar": "حدّث مكتبة TLS إلى إصدار يدعم ML-KEM مثل OpenSSL 3.5 أو أحدث أو فعّله لدى شبكة توصيل المحتوى."
+    },
+    {
+     "en": "Keep X25519MLKEM768 first in the server's list of groups.",
+     "ar": "اجعل X25519MLKEM768 أول مجموعة في قائمة الخادم."
+    }
+   ],
+   "example": "",
+   "refs": [
+    {
+     "label": "FIPS 203",
+     "url": "https://csrc.nist.gov/pubs/fips/203/final"
+    },
+    {
+     "label": "IETF draft ecdhe-mlkem",
+     "url": "https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/"
+    }
+   ],
+   "levels": {
+    "hybrid": {
+     "en": "Hybrid accepted",
+     "ar": "يقبل التبادل الهجين"
+    },
+    "classical": {
+     "en": "Classical only",
+     "ar": "تقليدي فقط"
+    },
+    "no-tls13": {
+     "en": "Needs TLS 1.3 first",
+     "ar": "يحتاج إلى TLS 1.3 أولاً"
+    },
+    "no-https": {
+     "en": "No HTTPS",
+     "ar": "لا يوجد HTTPS"
+    },
+    "probe-failed": {
+     "en": "Could not be measured",
+     "ar": "تعذّر القياس"
+    }
+   }
+  },
+  "security_txt": {
+   "title": {
+    "en": "A way to report vulnerabilities (security.txt)",
+    "ar": "قناة للإبلاغ عن الثغرات (security.txt)"
+   },
+   "short": {
+    "en": "security.txt published",
+    "ar": "ملف security.txt منشور"
+   },
+   "question": {
+    "en": "Can a researcher find out how to report a vulnerability?",
+    "ar": "هل يعرف الباحث كيف يبلّغ عن ثغرة في هذا الموقع؟"
+   },
+   "why": {
+    "en": "Researchers who find a weakness often cannot find anyone to tell, so the report goes nowhere or goes public. A security.txt file at a standard address names the contact and stays current through an expiry date.",
+    "ar": "يعثر الباحثون على ثغرات ثم لا يجدون جهة يبلّغونها فيضيع البلاغ أو يُنشر علناً بينما يحدد ملف security.txt في عنوان معياري جهة التواصل ويبقى محدّثاً بفضل تاريخ الانتهاء."
+   },
+   "pass": {
+    "en": "Passes when the file is served over HTTPS at its standard address with a Contact field and one Expires date that is still in the future.",
+    "ar": "يجتاز الموقع عندما يقدّم الملف عبر HTTPS في عنوانه المعياري مع حقل جهة التواصل وتاريخ انتهاء واحد لم يحن بعد."
+   },
+   "fix": [
+    {
+     "en": "Create a plain text file with Contact, Expires and Preferred-Languages fields.",
+     "ar": "أنشئ ملفاً نصياً يتضمن حقول جهة التواصل وتاريخ الانتهاء واللغات المفضلة."
+    },
+    {
+     "en": "Serve it over HTTPS at its standard address and renew Expires before it lapses.",
+     "ar": "قدّمه عبر HTTPS في عنوانه المعياري وجدّد تاريخ الانتهاء قبل أن يحين."
+    },
+    {
+     "en": "Point Contact at a monitored mailbox or a disclosure form.",
+     "ar": "اجعل جهة التواصل صندوق بريد يُتابَع أو نموذجاً للإفصاح."
+    }
+   ],
+   "example": "https://example.com/.well-known/security.txt\nContact: mailto:security@example.com\nExpires: 2027-12-31T21:00:00.000Z\nPreferred-Languages: ar, en",
+   "refs": [
+    {
+     "label": "RFC 9116",
+     "url": "https://www.rfc-editor.org/rfc/rfc9116"
+    }
+   ],
+   "levels": {
+    "valid": {
+     "en": "Valid",
+     "ar": "صالح"
+    },
+    "expired": {
+     "en": "Expired",
+     "ar": "منتهي الصلاحية"
+    },
+    "incomplete": {
+     "en": "Missing a required field",
+     "ar": "ينقصه حقل مطلوب"
+    },
+    "missing": {
+     "en": "Not found",
+     "ar": "غير موجود"
+    },
+    "fetch-error": {
+     "en": "Could not be fetched",
+     "ar": "تعذّر جلبه"
+    }
+   }
+  }
+ },
+ "common_levels": {
+  "not-measured": {
+   "en": "Measured by the full check",
+   "ar": "يقيسه الفحص الكامل"
+  },
+  "no-web": {
+   "en": "No website",
+   "ar": "لا يوجد موقع"
+  },
+  "no-mail": {
+   "en": "Does not receive mail",
+   "ar": "لا يستقبل بريداً"
+  },
+  "unreachable": {
+   "en": "Unreachable from the scanner",
+   "ar": "تعذّر الوصول إليه من موقع الفحص"
+  },
+  "dns-error": {
+   "en": "DNS did not answer",
+   "ar": "لم يستجب نظام أسماء النطاقات"
+  },
+  "dns-broken": {
+   "en": "DNS is broken for this domain",
+   "ar": "نظام أسماء النطاقات معطّل لهذا النطاق"
+  },
+  "no-domain": {
+   "en": "The domain no longer exists",
+   "ar": "النطاق لم يعد موجوداً"
+  },
+  "resolvers-disagree": {
+   "en": "The two resolvers disagree",
+   "ar": "المحللان مختلفان"
+  },
+  "missing": {
+   "en": "Missing",
+   "ar": "غير موجود"
+  },
+  "probe-failed": {
+   "en": "Could not be measured",
+   "ar": "تعذّر القياس"
+  }
+ },
+ "ui": {
+  "tagline": {
+   "en": "How well the public domains of the six Gulf states protect email, DNS and the web, measured every week.",
+   "ar": "قياس أسبوعي لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع."
+  },
+  "skip": {
+   "en": "Skip to the figures",
+   "ar": "انتقل إلى الأرقام"
+  },
+  "nav_overview": {
+   "en": "This week",
+   "ar": "هذا الأسبوع"
+  },
+  "nav_countries": {
+   "en": "Countries",
+   "ar": "الدول"
+  },
+  "nav_checks": {
+   "en": "The checks",
+   "ar": "الفحوص"
+  },
+  "nav_domain": {
+   "en": "Check a domain",
+   "ar": "افحص نطاقاً"
+  },
+  "nav_hall": {
+   "en": "Hall of fame",
+   "ar": "لوحة الشرف"
+  },
+  "nav_method": {
+   "en": "Method and data",
+   "ar": "المنهجية والبيانات"
+  },
+  "nav_label": {
+   "en": "Sections",
+   "ar": "الأقسام"
+  },
+  "issue": {
+   "en": "Issue {n}",
+   "ar": "العدد {n}"
+  },
+  "week_of": {
+   "en": "Week of {date}",
+   "ar": "أسبوع {date}"
+  },
+  "weekly": {
+   "en": "Published every week",
+   "ar": "يصدر كل أسبوع"
+  },
+  "pending_title": {
+   "en": "The first issue is being measured",
+   "ar": "العدد الأول قيد القياس"
+  },
+  "pending_body": {
+   "en": "The weekly scan has not published its first figures yet, but the checks, the method and the live domain check are ready now.",
+   "ar": "لم ينشر الفحص الأسبوعي أرقامه الأولى بعد لكن الفحوص والمنهجية والفحص المباشر للنطاقات جاهزة الآن."
+  },
+  "country_label": {
+   "en": "Country",
+   "ar": "الدولة"
+  },
+  "sector_label": {
+   "en": "Sector",
+   "ar": "القطاع"
+  },
+  "place_GCC": {
+   "en": "The Gulf",
+   "ar": "الخليج"
+  },
+  "sector_all": {
+   "en": "All sectors",
+   "ar": "كل القطاعات"
+  },
+  "in_GCC": {
+   "en": "the Gulf",
+   "ar": "الخليج"
+  },
+  "in_KW": {
+   "en": "Kuwait",
+   "ar": "الكويت"
+  },
+  "in_SA": {
+   "en": "Saudi Arabia",
+   "ar": "السعودية"
+  },
+  "in_AE": {
+   "en": "the UAE",
+   "ar": "الإمارات"
+  },
+  "in_QA": {
+   "en": "Qatar",
+   "ar": "قطر"
+  },
+  "in_BH": {
+   "en": "Bahrain",
+   "ar": "البحرين"
+  },
+  "in_OM": {
+   "en": "Oman",
+   "ar": "عُمان"
+  },
+  "of_all": {
+   "en": "government and education",
+   "ar": "الحكومة والتعليم"
+  },
+  "of_government": {
+   "en": "government",
+   "ar": "الجهات الحكومية"
+  },
+  "of_education": {
+   "en": "education",
+   "ar": "التعليم"
+  },
+  "lead_dmarc": {
+   "en": "{pct} of {sector} domains in {place} can be impersonated in email, because they have no enforced DMARC policy.",
+   "ar": "{pct} من نطاقات {sector} في {place} يمكن انتحال أسمائها في البريد الإلكتروني لأنها بلا سياسة DMARC مُلزمة."
+  },
+  "lead_pq_kex": {
+   "en": "{pct} of their websites accept post quantum key exchange.",
+   "ar": "{pct} من مواقعها تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
+  },
+  "lead_security_txt": {
+   "en": "{pct} of their websites say how to report a vulnerability.",
+   "ar": "{pct} من مواقعها توضح طريقة الإبلاغ عن الثغرات."
+  },
+  "lead_dnssec": {
+   "en": "{pct} of the domains carry DNSSEC signatures that validate.",
+   "ar": "{pct} من النطاقات تحمل توقيع DNSSEC يجتاز التحقق."
+  },
+  "cite_pq_kex": {
+   "en": "{pct} of the websites of {sector} domains in {place} accept post quantum key exchange.",
+   "ar": "{pct} من مواقع نطاقات {sector} في {place} تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
+  },
+  "cite_security_txt": {
+   "en": "{pct} of the websites of {sector} domains in {place} say how to report a vulnerability.",
+   "ar": "{pct} من مواقع نطاقات {sector} في {place} توضح طريقة الإبلاغ عن الثغرات."
+  },
+  "cite_dnssec": {
+   "en": "{pct} of {sector} domains in {place} carry DNSSEC signatures that validate.",
+   "ar": "{pct} من نطاقات {sector} في {place} تحمل توقيع DNSSEC يجتاز التحقق."
+  },
+  "basis": {
+   "en": "{count} of {domains} measured.",
+   "ar": "{count} من أصل {domains} ضمن القياس."
+  },
+  "no_data": {
+   "en": "No data",
+   "ar": "لا بيانات"
+  },
+  "no_data_sentence": {
+   "en": "No domain could be measured for this yet.",
+   "ar": "لم يُقَس أي نطاق لهذا الفحص بعد."
+  },
+  "cite": {
+   "en": "Cite",
+   "ar": "اقتبس"
+  },
+  "cite_title": {
+   "en": "Citation",
+   "ar": "صيغة الاقتباس"
+  },
+  "copy_ar": {
+   "en": "Copy Arabic",
+   "ar": "انسخ النص العربي"
+  },
+  "copy_en": {
+   "en": "Copy English",
+   "ar": "انسخ النص الإنجليزي"
+  },
+  "cite_source": {
+   "en": "Source: {name}, issue {issue}, clause {clause}, week of {date}, {url}",
+   "ar": "المصدر {name} في البند {clause} من العدد {issue} لأسبوع {date} على {url}"
+  },
+  "copied": {
+   "en": "Copied",
+   "ar": "نُسخ"
+  },
+  "close": {
+   "en": "Close",
+   "ar": "إغلاق"
+  },
+  "clause": {
+   "en": "Clause {n}",
+   "ar": "البند {n}"
+  },
+  "table_caption": {
+   "en": "Share of measured domains that pass each check",
+   "ar": "نسبة النطاقات المقيسة التي تجتاز كل فحص"
+  },
+  "table_no": {
+   "en": "Table 1",
+   "ar": "الجدول 1"
+  },
+  "table_check": {
+   "en": "Check",
+   "ar": "الفحص"
+  },
+  "source_line": {
+   "en": "Measured in the week of {date} over {domains}. A share leaves out the domains where its check does not apply or could not be measured.",
+   "ar": "قيس في أسبوع {date} على {domains} وتستبعد كل نسبة النطاقات التي لا ينطبق عليها فحصها أو تعذّر قياسه فيها."
+  },
+  "compare_label": {
+   "en": "Compare with",
+   "ar": "قارن مع"
+  },
+  "trend_title": {
+   "en": "Week by week",
+   "ar": "أسبوعاً بعد أسبوع"
+  },
+  "trend_source": {
+   "en": "Each figure is the share of measured {sector} domains in {place} that pass the check it is listed against.",
+   "ar": "يمثل كل رقم نسبة نطاقات {sector} المقيسة في {place} التي تجتاز الفحص المقابل له."
+  },
+  "countries_title": {
+   "en": "Countries",
+   "ar": "الدول"
+  },
+  "country_count": {
+   "en": "{domains} measured in this issue.",
+   "ar": "قيس في هذا العدد {domains}."
+  },
+  "country_lede": {
+   "en": "{domains} measured in this issue, {gov} government and {edu} education.",
+   "ar": "قيس في هذا العدد {domains} منها {gov} للجهات الحكومية و{edu} للتعليم."
+  },
+  "country_retired": {
+   "en": "{n} names seen in certificate logs no longer exist in DNS and are not counted.",
+   "ar": "{n} من الأسماء الواردة في سجلات الشهادات لم تعد موجودة في نظام أسماء النطاقات فلم تُحتسب."
+  },
+  "chain_off": {
+   "en": "Domains under {suffix} cannot pass DNSSEC until {suffix} itself is signed.",
+   "ar": "لن تجتاز النطاقات التابعة لـ {suffix} فحص DNSSEC حتى يُوقَّع {suffix} نفسه."
+  },
+  "chain_on": {
+   "en": "{suffix} is signed, so every domain under it can validate.",
+   "ar": "النطاق {suffix} موقّع لذلك يستطيع كل نطاق تابع له أن يجتاز التحقق."
+  },
+  "chain_yes": {
+   "en": "DNSSEC possible",
+   "ar": "التوقيع ممكن"
+  },
+  "chain_no": {
+   "en": "DNSSEC not possible yet",
+   "ar": "التوقيع غير ممكن بعد"
+  },
+  "of_count": {
+   "en": "{pass} of {measured}",
+   "ar": "{pass} من {measured}"
+  },
+  "open_country": {
+   "en": "Open {country}",
+   "ar": "افتح {country}"
+  },
+  "checks_title": {
+   "en": "The checks",
+   "ar": "الفحوص"
+  },
+  "checks_intro": {
+   "en": "Thirteen checks in four groups, ordered from the foundations to the frontier.",
+   "ar": "ثلاثة عشر فحصاً في أربع مجموعات مرتبة من الأساسيات إلى الأحدث."
+  },
+  "check_pass": {
+   "en": "When it passes",
+   "ar": "متى يجتاز"
+  },
+  "check_why": {
+   "en": "Why it matters",
+   "ar": "لماذا يهم"
+  },
+  "check_fix": {
+   "en": "How to fix it",
+   "ar": "طريقة المعالجة"
+  },
+  "check_example": {
+   "en": "Example",
+   "ar": "مثال"
+  },
+  "check_refs": {
+   "en": "Standards",
+   "ar": "المعايير"
+  },
+  "check_by_country": {
+   "en": "By country",
+   "ar": "حسب الدولة"
+  },
+  "check_found": {
+   "en": "What the scan found",
+   "ar": "ما وجده الفحص"
+  },
+  "check_core": {
+   "en": "Core check, counted for the hall of fame.",
+   "ar": "فحص أساسي يُحتسب في لوحة الشرف."
+  },
+  "check_extra": {
+   "en": "Advanced check, not required for the hall of fame.",
+   "ar": "فحص متقدم لا يُشترط لدخول لوحة الشرف."
+  },
+  "domain_title": {
+   "en": "Check a domain",
+   "ar": "افحص نطاقاً"
+  },
+  "domain_intro": {
+   "en": "Your browser runs the DNS checks live through two public resolvers, while the website and TLS checks need the command line tool because a browser cannot read them.",
+   "ar": "يجري متصفحك فحوص نظام أسماء النطاقات مباشرة عبر محللين عامين أما فحوص المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
+  },
+  "domain_label": {
+   "en": "Domain",
+   "ar": "النطاق"
+  },
+  "domain_button": {
+   "en": "Check",
+   "ar": "افحص"
+  },
+  "domain_running": {
+   "en": "Asking the resolvers",
+   "ar": "جارٍ سؤال المحللين"
+  },
+  "domain_invalid": {
+   "en": "Enter a domain name such as example.com.",
+   "ar": "أدخل اسم نطاق صحيحاً مثل example.com."
+  },
+  "domain_error": {
+   "en": "The resolvers could not be reached, so check your connection and try again.",
+   "ar": "تعذّر الوصول إلى المحللين فتحقق من اتصالك ثم أعد المحاولة."
+  },
+  "domain_nx": {
+   "en": "This domain does not exist in DNS.",
+   "ar": "هذا النطاق غير موجود في نظام أسماء النطاقات."
+  },
+  "domain_broken": {
+   "en": "DNS for this domain is broken, so nothing could be measured.",
+   "ar": "نظام أسماء النطاقات معطّل لهذا النطاق فلم يُقَس شيء."
+  },
+  "domain_cli": {
+   "en": "Run every check, websites and TLS included, from your own machine.",
+   "ar": "شغّل الفحوص كلها بما فيها فحوص المواقع وTLS من جهازك."
+  },
+  "domain_privacy": {
+   "en": "Nothing you type is sent to this site, because your browser asks the resolvers directly.",
+   "ar": "لا يصل ما تكتبه إلى هذا الموقع لأن متصفحك يسأل المحللين مباشرة."
+  },
+  "domain_summary": {
+   "en": "{pass} of the {checks} measured here pass.",
+   "ar": "اجتاز النطاق {pass} من أصل {checks} قيست هنا."
+  },
+  "domain_hall": {
+   "en": "This domain is in the hall of fame for this issue.",
+   "ar": "هذا النطاق في لوحة الشرف لهذا العدد."
+  },
+  "state_pass": {
+   "en": "Passes",
+   "ar": "يجتاز"
+  },
+  "state_fail": {
+   "en": "Does not pass",
+   "ar": "لا يجتاز"
+  },
+  "state_na": {
+   "en": "Does not apply",
+   "ar": "لا ينطبق"
+  },
+  "state_unknown": {
+   "en": "Not measured",
+   "ar": "لم يُقَس"
+  },
+  "hall_title": {
+   "en": "Hall of fame",
+   "ar": "لوحة الشرف"
+  },
+  "hall_intro": {
+   "en": "Domains that pass every core check that applies to them in this issue, namely DMARC, SPF, DNSSEC where the suffix allows it, valid HTTPS, the redirect to HTTPS, HSTS, no old TLS and security.txt.",
+   "ar": "نطاقات اجتازت في هذا العدد كل فحص أساسي ينطبق عليها وهي DMARC وSPF وDNSSEC حيث يسمح النطاق الأعلى بذلك وHTTPS الصالح والتحويل إلى HTTPS وHSTS وإيقاف TLS القديم وملف security.txt."
+  },
+  "hall_count": {
+   "en": "{domains} in this issue.",
+   "ar": "{domains} في هذا العدد."
+  },
+  "hall_empty": {
+   "en": "No domain passes every core check yet.",
+   "ar": "لم يجتز أي نطاق كل الفحوص الأساسية حتى الآن."
+  },
+  "method_title": {
+   "en": "Method and data",
+   "ar": "المنهجية والبيانات"
+  },
+  "m_scope_h": {
+   "en": "What is measured",
+   "ar": "ما الذي يُقاس"
+  },
+  "m_scope": [
+   {
+    "en": "Every registrable domain under the government and education suffixes of the six Gulf states is measured. Each domain counts once, as an organisation, rather than every host beneath it.",
+    "ar": "يُقاس كل نطاق قابل للتسجيل تحت لواحق الجهات الحكومية والتعليم في دول الخليج الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته."
+   }
+  ],
+  "m_sources_h": {
+   "en": "Where the names come from",
+   "ar": "مصادر الأسماء"
+  },
+  "m_sources": [
+   {
+    "en": "Names come from public Certificate Transparency logs, read through crt.sh, and from the Tranco list of popular sites. A name stays in the inventory once seen, and each issue counts only the names that still exist in DNS.",
+    "ar": "تأتي الأسماء من سجلات شفافية الشهادات العامة عبر crt.sh ومن قائمة Tranco للمواقع الشائعة ويبقى الاسم في السجل متى ظهر مرة بينما لا يحتسب كل عدد إلا الأسماء الموجودة فعلاً في نظام أسماء النطاقات."
+   }
+  ],
+  "m_how_h": {
+   "en": "How the checks run",
+   "ar": "طريقة إجراء الفحوص"
+  },
+  "m_how": [
+   {
+    "en": "DNS is read over HTTPS through two public validating resolvers, Cloudflare and Google, and a DMARC answer counts only when both agree. Websites and TLS are probed with ordinary single requests from a runner hosted by GitHub, with a user agent that links back to this page. Anything inconclusive is then measured again later in the same run, and a broken DNSSEC result stands only when it is seen twice.",
+    "ar": "يُقرأ نظام أسماء النطاقات عبر HTTPS من محللين عامين يتحققان من التوقيع هما Cloudflare وGoogle ولا تُحتسب إجابة DMARC إلا إذا اتفق عليها المحللان وتُفحص المواقع وTLS بطلبات عادية مفردة من خادم تشغيل تستضيفه GitHub مع وكيل مستخدم يدل على هذه الصفحة ثمّ يُعاد قياس كل نتيجة غير حاسمة لاحقاً في الدورة نفسها ولا تثبت نتيجة تعطل DNSSEC إلا إذا ظهرت مرتين."
+   }
+  ],
+  "m_publish_h": {
+   "en": "What is published and what is not",
+   "ar": "ما يُنشر وما لا يُنشر"
+  },
+  "m_publish": [
+   {
+    "en": "Each issue publishes totals by country, sector and check, the weekly series and the open data. Domains that pass every core check are named in the hall of fame. No list or ranking of organisations that fail is published, while anyone can check a single domain live.",
+    "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والفحص والسلسلة الأسبوعية والبيانات المفتوحة وتُذكر أسماء النطاقات التي تجتاز كل الفحوص الأساسية في لوحة الشرف ولا تُنشر أي قائمة أو ترتيب للجهات التي لا تجتاز بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
+   }
+  ],
+  "m_limits_h": {
+   "en": "Limits",
+   "ar": "حدود القياس"
+  },
+  "m_limits": [
+   {
+    "en": "The weekly scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Some government namespaces sit outside these suffixes and are not included yet.",
+    "ar": "يجري الفحص الأسبوعي من خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج وتقع بعض نطاقات الجهات الحكومية خارج هذه اللواحق ولم تُضمّن بعد."
+   },
+   {
+    "en": "A share is the passing domains divided by the domains where the check applies and could be measured.",
+    "ar": "تُحسب النسبة بقسمة عدد النطاقات المجتازة على عدد النطاقات التي ينطبق عليها الفحص وأمكن قياسها فيه."
+   }
+  ],
+  "m_suffixes": {
+   "en": "Suffixes in this issue",
+   "ar": "اللواحق المشمولة في هذا العدد"
+  },
+  "m_data_h": {
+   "en": "Open data",
+   "ar": "البيانات المفتوحة"
+  },
+  "m_data": [
+   {
+    "en": "Every issue is published as CSV and JSON under the MIT licence, alongside the full weekly series.",
+    "ar": "يُنشر كل عدد بصيغتي CSV وJSON برخصة MIT إلى جانب السلسلة الأسبوعية الكاملة."
+   }
+  ],
+  "dl_latest_csv": {
+   "en": "This issue, CSV",
+   "ar": "هذا العدد بصيغة CSV"
+  },
+  "dl_history_csv": {
+   "en": "Every issue, CSV",
+   "ar": "كل الأعداد بصيغة CSV"
+  },
+  "dl_summary_json": {
+   "en": "This issue with every detail, JSON",
+   "ar": "هذا العدد بكل تفاصيله بصيغة JSON"
+  },
+  "dl_history_json": {
+   "en": "Weekly series, JSON",
+   "ar": "السلسلة الأسبوعية بصيغة JSON"
+  },
+  "m_cite_h": {
+   "en": "How to cite",
+   "ar": "طريقة الاقتباس"
+  },
+  "m_cite": [
+   {
+    "en": "Give the issue number and its date, so readers can find the exact figures you used.",
+    "ar": "اذكر رقم العدد وتاريخه حتى يجد القراء الأرقام نفسها التي استخدمتها."
+   }
+  ],
+  "m_quality_h": {
+   "en": "Data quality in this issue",
+   "ar": "جودة البيانات في هذا العدد"
+  },
+  "q_agree": {
+   "en": "The two resolvers gave the same DMARC answer for {pct} of the domains where both answered.",
+   "ar": "أعطى المحللان إجابة DMARC نفسها في {pct} من النطاقات التي أجاب عنها كلاهما."
+  },
+  "q_unreachable": {
+   "en": "{n} websites could not be reached from the scanner.",
+   "ar": "تعذّر الوصول من موقع الفحص إلى {n} من المواقع."
+  },
+  "q_runtime": {
+   "en": "The scan took {minutes} and made {queries}.",
+   "ar": "استغرق الفحص {minutes} وأجرى {queries}."
+  },
+  "m_code_h": {
+   "en": "Code and contact",
+   "ar": "الشيفرة والتواصل"
+  },
+  "m_code": [
+   {
+    "en": "The scanner, this site and the MCP server are open source. Report a mistake, or ask for a domain to be added or left out, by opening an issue on GitHub.",
+    "ar": "الماسح وهذا الموقع وخادم MCP مفتوحة المصدر ويمكنك الإبلاغ عن خطأ أو طلب إضافة نطاق أو استبعاده بفتح بلاغ في GitHub."
+   }
+  ],
+  "m_cli_h": {
+   "en": "Command line and MCP server",
+   "ar": "أداة سطر الأوامر وخادم MCP"
+  },
+  "m_cli": [
+   {
+    "en": "The same engine runs the full check of any domain from your own machine and answers AI assistants through MCP.",
+    "ar": "يجري المحرك نفسه الفحص الكامل لأي نطاق من جهازك ويجيب المساعدات الذكية عبر MCP."
+   }
+  ],
+  "foot_note": {
+   "en": "An independent open project whose figures describe public configuration only and are not an audit of any organisation.",
+   "ar": "مشروع مستقل مفتوح المصدر تصف أرقامه الإعدادات العامة فقط ولا تُعد تدقيقاً لأي جهة."
+  },
+  "foot_author": {
+   "en": "Made by {author}",
+   "ar": "إعداد {author}"
+  },
+  "foot_code": {
+   "en": "Source code",
+   "ar": "الشيفرة المصدرية"
+  },
+  "noscript": {
+   "en": "This page needs JavaScript to show the figures, and the open data files work without it.",
+   "ar": "تحتاج هذه الصفحة إلى JavaScript لعرض الأرقام بينما تعمل ملفات البيانات المفتوحة دونها."
+  },
+  "w_domain": {
+   "en": [
+    "domain",
+    "domains"
+   ],
+   "ar": [
+    "نطاق واحد",
+    "نطاقان",
+    "نطاقات",
+    "نطاقاً",
+    "نطاق"
+   ]
+  },
+  "w_live_domain": {
+   "en": [
+    "live domain",
+    "live domains"
+   ],
+   "ar": [
+    "نطاق حي واحد",
+    "نطاقان حيان",
+    "نطاقات حية",
+    "نطاقاً حياً",
+    "نطاق حي"
+   ]
+  },
+  "w_minute": {
+   "en": [
+    "minute",
+    "minutes"
+   ],
+   "ar": [
+    "دقيقة واحدة",
+    "دقيقتان",
+    "دقائق",
+    "دقيقة",
+    "دقيقة"
+   ]
+  },
+  "w_query": {
+   "en": [
+    "DNS query",
+    "DNS queries"
+   ],
+   "ar": [
+    "استعلام واحد",
+    "استعلامان",
+    "استعلامات",
+    "استعلاماً",
+    "استعلام"
+   ]
+  },
+  "w_check": {
+   "en": [
+    "check",
+    "checks"
+   ],
+   "ar": [
+    "فحص واحد",
+    "فحصان",
+    "فحوص",
+    "فحصاً",
+    "فحص"
+   ]
+  }
+ }
+}

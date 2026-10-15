@@ -1,0 +1,29 @@
+{
+  "countries": {
+    "KW": { "en": "Kuwait", "ar": "الكويت" },
+    "SA": { "en": "Saudi Arabia", "ar": "السعودية" },
+    "AE": { "en": "UAE", "ar": "الإمارات" },
+    "QA": { "en": "Qatar", "ar": "قطر" },
+    "BH": { "en": "Bahrain", "ar": "البحرين" },
+    "OM": { "en": "Oman", "ar": "عُمان" }
+  },
+  "sectors": {
+    "government": { "en": "Government", "ar": "الجهات الحكومية" },
+    "education": { "en": "Education", "ar": "التعليم" }
+  },
+  "suffixes": [
+    { "suffix": "gov.kw", "country": "KW", "sector": "government" },
+    { "suffix": "edu.kw", "country": "KW", "sector": "education" },
+    { "suffix": "gov.sa", "country": "SA", "sector": "government" },
+    { "suffix": "edu.sa", "country": "SA", "sector": "education" },
+    { "suffix": "gov.ae", "country": "AE", "sector": "government" },
+    { "suffix": "ac.ae", "country": "AE", "sector": "education" },
+    { "suffix": "gov.qa", "country": "QA", "sector": "government" },
+    { "suffix": "edu.qa", "country": "QA", "sector": "education" },
+    { "suffix": "gov.bh", "country": "BH", "sector": "government" },
+    { "suffix": "edu.bh", "country": "BH", "sector": "education" },
+    { "suffix": "gov.om", "country": "OM", "sector": "government" },
+    { "suffix": "edu.om", "country": "OM", "sector": "education" }
+  ],
+  "exclude": []
+}

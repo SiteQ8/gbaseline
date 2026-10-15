@@ -1,0 +1,61 @@
+{
+  "name": "observatory",
+  "version": "0.1.0",
+  "description": "An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, with a live check for any domain, open data and an MCP server",
+  "type": "module",
+  "bin": {
+    "observatory": "bin/cli.mjs"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "test": "node --test test/engine.test.mjs test/probe.test.mjs test/pipeline.test.mjs test/data.test.mjs test/name.test.mjs test/mcp.test.mjs test/site.test.mjs",
+    "test:ui": "node test/ui.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "selftest": "node mcp/server.mjs --selftest",
+    "weekly": "node bin/cli.mjs weekly",
+    "start": "node mcp/server.mjs",
+    "links": "node scripts/links.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "mcp/",
+    "docs/assets/engine/",
+    "docs/data/bundle.json",
+    "docs/data/summary.json",
+    "docs/data/history.json",
+    "docs/data/hall.json",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "author": "Ali AlEnezi",
+  "license": "MIT",
+  "keywords": [
+    "dmarc",
+    "spf",
+    "dnssec",
+    "hsts",
+    "tls",
+    "post-quantum",
+    "ml-kem",
+    "security-txt",
+    "observatory",
+    "gcc",
+    "kuwait",
+    "saudi-arabia",
+    "uae",
+    "qatar",
+    "bahrain",
+    "oman",
+    "open-data",
+    "mcp",
+    "mcp-server",
+    "arabic",
+    "bilingual"
+  ]
+}

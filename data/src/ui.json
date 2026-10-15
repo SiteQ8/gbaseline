@@ -1,0 +1,597 @@
+{
+  "tagline": {
+    "en": "How well the public domains of the six Gulf states protect email, DNS and the web, measured every week.",
+    "ar": "قياس أسبوعي لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع."
+  },
+  "skip": {
+    "en": "Skip to the figures",
+    "ar": "انتقل إلى الأرقام"
+  },
+  "nav_overview": {
+    "en": "This week",
+    "ar": "هذا الأسبوع"
+  },
+  "nav_countries": {
+    "en": "Countries",
+    "ar": "الدول"
+  },
+  "nav_checks": {
+    "en": "The checks",
+    "ar": "الفحوص"
+  },
+  "nav_domain": {
+    "en": "Check a domain",
+    "ar": "افحص نطاقاً"
+  },
+  "nav_hall": {
+    "en": "Hall of fame",
+    "ar": "لوحة الشرف"
+  },
+  "nav_method": {
+    "en": "Method and data",
+    "ar": "المنهجية والبيانات"
+  },
+  "nav_label": {
+    "en": "Sections",
+    "ar": "الأقسام"
+  },
+  "issue": {
+    "en": "Issue {n}",
+    "ar": "العدد {n}"
+  },
+  "week_of": {
+    "en": "Week of {date}",
+    "ar": "أسبوع {date}"
+  },
+  "weekly": {
+    "en": "Published every week",
+    "ar": "يصدر كل أسبوع"
+  },
+  "pending_title": {
+    "en": "The first issue is being measured",
+    "ar": "العدد الأول قيد القياس"
+  },
+  "pending_body": {
+    "en": "The weekly scan has not published its first figures yet, but the checks, the method and the live domain check are ready now.",
+    "ar": "لم ينشر الفحص الأسبوعي أرقامه الأولى بعد لكن الفحوص والمنهجية والفحص المباشر للنطاقات جاهزة الآن."
+  },
+  "country_label": {
+    "en": "Country",
+    "ar": "الدولة"
+  },
+  "sector_label": {
+    "en": "Sector",
+    "ar": "القطاع"
+  },
+  "place_GCC": {
+    "en": "The Gulf",
+    "ar": "الخليج"
+  },
+  "sector_all": {
+    "en": "All sectors",
+    "ar": "كل القطاعات"
+  },
+  "in_GCC": {
+    "en": "the Gulf",
+    "ar": "الخليج"
+  },
+  "in_KW": {
+    "en": "Kuwait",
+    "ar": "الكويت"
+  },
+  "in_SA": {
+    "en": "Saudi Arabia",
+    "ar": "السعودية"
+  },
+  "in_AE": {
+    "en": "the UAE",
+    "ar": "الإمارات"
+  },
+  "in_QA": {
+    "en": "Qatar",
+    "ar": "قطر"
+  },
+  "in_BH": {
+    "en": "Bahrain",
+    "ar": "البحرين"
+  },
+  "in_OM": {
+    "en": "Oman",
+    "ar": "عُمان"
+  },
+  "of_all": {
+    "en": "government and education",
+    "ar": "الحكومة والتعليم"
+  },
+  "of_government": {
+    "en": "government",
+    "ar": "الجهات الحكومية"
+  },
+  "of_education": {
+    "en": "education",
+    "ar": "التعليم"
+  },
+  "lead_dmarc": {
+    "en": "{pct} of {sector} domains in {place} can be impersonated in email, because they have no enforced DMARC policy.",
+    "ar": "{pct} من نطاقات {sector} في {place} يمكن انتحال أسمائها في البريد الإلكتروني لأنها بلا سياسة DMARC مُلزمة."
+  },
+  "lead_pq_kex": {
+    "en": "{pct} of their websites accept post quantum key exchange.",
+    "ar": "{pct} من مواقعها تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
+  },
+  "lead_security_txt": {
+    "en": "{pct} of their websites say how to report a vulnerability.",
+    "ar": "{pct} من مواقعها توضح طريقة الإبلاغ عن الثغرات."
+  },
+  "lead_dnssec": {
+    "en": "{pct} of the domains carry DNSSEC signatures that validate.",
+    "ar": "{pct} من النطاقات تحمل توقيع DNSSEC يجتاز التحقق."
+  },
+  "cite_pq_kex": {
+    "en": "{pct} of the websites of {sector} domains in {place} accept post quantum key exchange.",
+    "ar": "{pct} من مواقع نطاقات {sector} في {place} تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
+  },
+  "cite_security_txt": {
+    "en": "{pct} of the websites of {sector} domains in {place} say how to report a vulnerability.",
+    "ar": "{pct} من مواقع نطاقات {sector} في {place} توضح طريقة الإبلاغ عن الثغرات."
+  },
+  "cite_dnssec": {
+    "en": "{pct} of {sector} domains in {place} carry DNSSEC signatures that validate.",
+    "ar": "{pct} من نطاقات {sector} في {place} تحمل توقيع DNSSEC يجتاز التحقق."
+  },
+  "basis": {
+    "en": "{count} of {domains} measured.",
+    "ar": "{count} من أصل {domains} ضمن القياس."
+  },
+  "no_data": {
+    "en": "No data",
+    "ar": "لا بيانات"
+  },
+  "no_data_sentence": {
+    "en": "No domain could be measured for this yet.",
+    "ar": "لم يُقَس أي نطاق لهذا الفحص بعد."
+  },
+  "cite": {
+    "en": "Cite",
+    "ar": "اقتبس"
+  },
+  "cite_title": {
+    "en": "Citation",
+    "ar": "صيغة الاقتباس"
+  },
+  "copy_ar": {
+    "en": "Copy Arabic",
+    "ar": "انسخ النص العربي"
+  },
+  "copy_en": {
+    "en": "Copy English",
+    "ar": "انسخ النص الإنجليزي"
+  },
+  "cite_source": {
+    "en": "Source: {name}, issue {issue}, clause {clause}, week of {date}, {url}",
+    "ar": "المصدر {name} في البند {clause} من العدد {issue} لأسبوع {date} على {url}"
+  },
+  "copied": {
+    "en": "Copied",
+    "ar": "نُسخ"
+  },
+  "close": {
+    "en": "Close",
+    "ar": "إغلاق"
+  },
+  "clause": {
+    "en": "Clause {n}",
+    "ar": "البند {n}"
+  },
+  "table_caption": {
+    "en": "Share of measured domains that pass each check",
+    "ar": "نسبة النطاقات المقيسة التي تجتاز كل فحص"
+  },
+  "table_no": {
+    "en": "Table 1",
+    "ar": "الجدول 1"
+  },
+  "table_check": {
+    "en": "Check",
+    "ar": "الفحص"
+  },
+  "source_line": {
+    "en": "Measured in the week of {date} over {domains}. A share leaves out the domains where its check does not apply or could not be measured.",
+    "ar": "قيس في أسبوع {date} على {domains} وتستبعد كل نسبة النطاقات التي لا ينطبق عليها فحصها أو تعذّر قياسه فيها."
+  },
+  "compare_label": {
+    "en": "Compare with",
+    "ar": "قارن مع"
+  },
+  "trend_title": {
+    "en": "Week by week",
+    "ar": "أسبوعاً بعد أسبوع"
+  },
+  "trend_source": {
+    "en": "Each figure is the share of measured {sector} domains in {place} that pass the check it is listed against.",
+    "ar": "يمثل كل رقم نسبة نطاقات {sector} المقيسة في {place} التي تجتاز الفحص المقابل له."
+  },
+  "countries_title": {
+    "en": "Countries",
+    "ar": "الدول"
+  },
+  "country_count": {
+    "en": "{domains} measured in this issue.",
+    "ar": "قيس في هذا العدد {domains}."
+  },
+  "country_lede": {
+    "en": "{domains} measured in this issue, {gov} government and {edu} education.",
+    "ar": "قيس في هذا العدد {domains} منها {gov} للجهات الحكومية و{edu} للتعليم."
+  },
+  "country_retired": {
+    "en": "{n} names seen in certificate logs no longer exist in DNS and are not counted.",
+    "ar": "{n} من الأسماء الواردة في سجلات الشهادات لم تعد موجودة في نظام أسماء النطاقات فلم تُحتسب."
+  },
+  "chain_off": {
+    "en": "Domains under {suffix} cannot pass DNSSEC until {suffix} itself is signed.",
+    "ar": "لن تجتاز النطاقات التابعة لـ {suffix} فحص DNSSEC حتى يُوقَّع {suffix} نفسه."
+  },
+  "chain_on": {
+    "en": "{suffix} is signed, so every domain under it can validate.",
+    "ar": "النطاق {suffix} موقّع لذلك يستطيع كل نطاق تابع له أن يجتاز التحقق."
+  },
+  "chain_yes": {
+    "en": "DNSSEC possible",
+    "ar": "التوقيع ممكن"
+  },
+  "chain_no": {
+    "en": "DNSSEC not possible yet",
+    "ar": "التوقيع غير ممكن بعد"
+  },
+  "of_count": {
+    "en": "{pass} of {measured}",
+    "ar": "{pass} من {measured}"
+  },
+  "open_country": {
+    "en": "Open {country}",
+    "ar": "افتح {country}"
+  },
+  "checks_title": {
+    "en": "The checks",
+    "ar": "الفحوص"
+  },
+  "checks_intro": {
+    "en": "Thirteen checks in four groups, ordered from the foundations to the frontier.",
+    "ar": "ثلاثة عشر فحصاً في أربع مجموعات مرتبة من الأساسيات إلى الأحدث."
+  },
+  "check_pass": {
+    "en": "When it passes",
+    "ar": "متى يجتاز"
+  },
+  "check_why": {
+    "en": "Why it matters",
+    "ar": "لماذا يهم"
+  },
+  "check_fix": {
+    "en": "How to fix it",
+    "ar": "طريقة المعالجة"
+  },
+  "check_example": {
+    "en": "Example",
+    "ar": "مثال"
+  },
+  "check_refs": {
+    "en": "Standards",
+    "ar": "المعايير"
+  },
+  "check_by_country": {
+    "en": "By country",
+    "ar": "حسب الدولة"
+  },
+  "check_found": {
+    "en": "What the scan found",
+    "ar": "ما وجده الفحص"
+  },
+  "check_core": {
+    "en": "Core check, counted for the hall of fame.",
+    "ar": "فحص أساسي يُحتسب في لوحة الشرف."
+  },
+  "check_extra": {
+    "en": "Advanced check, not required for the hall of fame.",
+    "ar": "فحص متقدم لا يُشترط لدخول لوحة الشرف."
+  },
+  "domain_title": {
+    "en": "Check a domain",
+    "ar": "افحص نطاقاً"
+  },
+  "domain_intro": {
+    "en": "Your browser runs the DNS checks live through two public resolvers, while the website and TLS checks need the command line tool because a browser cannot read them.",
+    "ar": "يجري متصفحك فحوص نظام أسماء النطاقات مباشرة عبر محللين عامين أما فحوص المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
+  },
+  "domain_label": {
+    "en": "Domain",
+    "ar": "النطاق"
+  },
+  "domain_button": {
+    "en": "Check",
+    "ar": "افحص"
+  },
+  "domain_running": {
+    "en": "Asking the resolvers",
+    "ar": "جارٍ سؤال المحللين"
+  },
+  "domain_invalid": {
+    "en": "Enter a domain name such as example.com.",
+    "ar": "أدخل اسم نطاق صحيحاً مثل example.com."
+  },
+  "domain_error": {
+    "en": "The resolvers could not be reached, so check your connection and try again.",
+    "ar": "تعذّر الوصول إلى المحللين فتحقق من اتصالك ثم أعد المحاولة."
+  },
+  "domain_nx": {
+    "en": "This domain does not exist in DNS.",
+    "ar": "هذا النطاق غير موجود في نظام أسماء النطاقات."
+  },
+  "domain_broken": {
+    "en": "DNS for this domain is broken, so nothing could be measured.",
+    "ar": "نظام أسماء النطاقات معطّل لهذا النطاق فلم يُقَس شيء."
+  },
+  "domain_cli": {
+    "en": "Run every check, websites and TLS included, from your own machine.",
+    "ar": "شغّل الفحوص كلها بما فيها فحوص المواقع وTLS من جهازك."
+  },
+  "domain_privacy": {
+    "en": "Nothing you type is sent to this site, because your browser asks the resolvers directly.",
+    "ar": "لا يصل ما تكتبه إلى هذا الموقع لأن متصفحك يسأل المحللين مباشرة."
+  },
+  "domain_summary": {
+    "en": "{pass} of the {checks} measured here pass.",
+    "ar": "اجتاز النطاق {pass} من أصل {checks} قيست هنا."
+  },
+  "domain_hall": {
+    "en": "This domain is in the hall of fame for this issue.",
+    "ar": "هذا النطاق في لوحة الشرف لهذا العدد."
+  },
+  "state_pass": {
+    "en": "Passes",
+    "ar": "يجتاز"
+  },
+  "state_fail": {
+    "en": "Does not pass",
+    "ar": "لا يجتاز"
+  },
+  "state_na": {
+    "en": "Does not apply",
+    "ar": "لا ينطبق"
+  },
+  "state_unknown": {
+    "en": "Not measured",
+    "ar": "لم يُقَس"
+  },
+  "hall_title": {
+    "en": "Hall of fame",
+    "ar": "لوحة الشرف"
+  },
+  "hall_intro": {
+    "en": "Domains that pass every core check that applies to them in this issue, namely DMARC, SPF, DNSSEC where the suffix allows it, valid HTTPS, the redirect to HTTPS, HSTS, no old TLS and security.txt.",
+    "ar": "نطاقات اجتازت في هذا العدد كل فحص أساسي ينطبق عليها وهي DMARC وSPF وDNSSEC حيث يسمح النطاق الأعلى بذلك وHTTPS الصالح والتحويل إلى HTTPS وHSTS وإيقاف TLS القديم وملف security.txt."
+  },
+  "hall_count": {
+    "en": "{domains} in this issue.",
+    "ar": "{domains} في هذا العدد."
+  },
+  "hall_empty": {
+    "en": "No domain passes every core check yet.",
+    "ar": "لم يجتز أي نطاق كل الفحوص الأساسية حتى الآن."
+  },
+  "method_title": {
+    "en": "Method and data",
+    "ar": "المنهجية والبيانات"
+  },
+  "m_scope_h": {
+    "en": "What is measured",
+    "ar": "ما الذي يُقاس"
+  },
+  "m_scope": [
+    {
+      "en": "Every registrable domain under the government and education suffixes of the six Gulf states is measured. Each domain counts once, as an organisation, rather than every host beneath it.",
+      "ar": "يُقاس كل نطاق قابل للتسجيل تحت لواحق الجهات الحكومية والتعليم في دول الخليج الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته."
+    }
+  ],
+  "m_sources_h": {
+    "en": "Where the names come from",
+    "ar": "مصادر الأسماء"
+  },
+  "m_sources": [
+    {
+      "en": "Names come from public Certificate Transparency logs, read through crt.sh, and from the Tranco list of popular sites. A name stays in the inventory once seen, and each issue counts only the names that still exist in DNS.",
+      "ar": "تأتي الأسماء من سجلات شفافية الشهادات العامة عبر crt.sh ومن قائمة Tranco للمواقع الشائعة ويبقى الاسم في السجل متى ظهر مرة بينما لا يحتسب كل عدد إلا الأسماء الموجودة فعلاً في نظام أسماء النطاقات."
+    }
+  ],
+  "m_how_h": {
+    "en": "How the checks run",
+    "ar": "طريقة إجراء الفحوص"
+  },
+  "m_how": [
+    {
+      "en": "DNS is read over HTTPS through two public validating resolvers, Cloudflare and Google, and a DMARC answer counts only when both agree. Websites and TLS are probed with ordinary single requests from a runner hosted by GitHub, with a user agent that links back to this page. Anything inconclusive is then measured again later in the same run, and a broken DNSSEC result stands only when it is seen twice.",
+      "ar": "يُقرأ نظام أسماء النطاقات عبر HTTPS من محللين عامين يتحققان من التوقيع هما Cloudflare وGoogle ولا تُحتسب إجابة DMARC إلا إذا اتفق عليها المحللان وتُفحص المواقع وTLS بطلبات عادية مفردة من خادم تشغيل تستضيفه GitHub مع وكيل مستخدم يدل على هذه الصفحة ثمّ يُعاد قياس كل نتيجة غير حاسمة لاحقاً في الدورة نفسها ولا تثبت نتيجة تعطل DNSSEC إلا إذا ظهرت مرتين."
+    }
+  ],
+  "m_publish_h": {
+    "en": "What is published and what is not",
+    "ar": "ما يُنشر وما لا يُنشر"
+  },
+  "m_publish": [
+    {
+      "en": "Each issue publishes totals by country, sector and check, the weekly series and the open data. Domains that pass every core check are named in the hall of fame. No list or ranking of organisations that fail is published, while anyone can check a single domain live.",
+      "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والفحص والسلسلة الأسبوعية والبيانات المفتوحة وتُذكر أسماء النطاقات التي تجتاز كل الفحوص الأساسية في لوحة الشرف ولا تُنشر أي قائمة أو ترتيب للجهات التي لا تجتاز بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
+    }
+  ],
+  "m_limits_h": {
+    "en": "Limits",
+    "ar": "حدود القياس"
+  },
+  "m_limits": [
+    {
+      "en": "The weekly scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Some government namespaces sit outside these suffixes and are not included yet.",
+      "ar": "يجري الفحص الأسبوعي من خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج وتقع بعض نطاقات الجهات الحكومية خارج هذه اللواحق ولم تُضمّن بعد."
+    },
+    {
+      "en": "A share is the passing domains divided by the domains where the check applies and could be measured.",
+      "ar": "تُحسب النسبة بقسمة عدد النطاقات المجتازة على عدد النطاقات التي ينطبق عليها الفحص وأمكن قياسها فيه."
+    }
+  ],
+  "m_suffixes": {
+    "en": "Suffixes in this issue",
+    "ar": "اللواحق المشمولة في هذا العدد"
+  },
+  "m_data_h": {
+    "en": "Open data",
+    "ar": "البيانات المفتوحة"
+  },
+  "m_data": [
+    {
+      "en": "Every issue is published as CSV and JSON under the MIT licence, alongside the full weekly series.",
+      "ar": "يُنشر كل عدد بصيغتي CSV وJSON برخصة MIT إلى جانب السلسلة الأسبوعية الكاملة."
+    }
+  ],
+  "dl_latest_csv": {
+    "en": "This issue, CSV",
+    "ar": "هذا العدد بصيغة CSV"
+  },
+  "dl_history_csv": {
+    "en": "Every issue, CSV",
+    "ar": "كل الأعداد بصيغة CSV"
+  },
+  "dl_summary_json": {
+    "en": "This issue with every detail, JSON",
+    "ar": "هذا العدد بكل تفاصيله بصيغة JSON"
+  },
+  "dl_history_json": {
+    "en": "Weekly series, JSON",
+    "ar": "السلسلة الأسبوعية بصيغة JSON"
+  },
+  "m_cite_h": {
+    "en": "How to cite",
+    "ar": "طريقة الاقتباس"
+  },
+  "m_cite": [
+    {
+      "en": "Give the issue number and its date, so readers can find the exact figures you used.",
+      "ar": "اذكر رقم العدد وتاريخه حتى يجد القراء الأرقام نفسها التي استخدمتها."
+    }
+  ],
+  "m_quality_h": {
+    "en": "Data quality in this issue",
+    "ar": "جودة البيانات في هذا العدد"
+  },
+  "q_agree": {
+    "en": "The two resolvers gave the same DMARC answer for {pct} of the domains where both answered.",
+    "ar": "أعطى المحللان إجابة DMARC نفسها في {pct} من النطاقات التي أجاب عنها كلاهما."
+  },
+  "q_unreachable": {
+    "en": "{n} websites could not be reached from the scanner.",
+    "ar": "تعذّر الوصول من موقع الفحص إلى {n} من المواقع."
+  },
+  "q_runtime": {
+    "en": "The scan took {minutes} and made {queries}.",
+    "ar": "استغرق الفحص {minutes} وأجرى {queries}."
+  },
+  "m_code_h": {
+    "en": "Code and contact",
+    "ar": "الشيفرة والتواصل"
+  },
+  "m_code": [
+    {
+      "en": "The scanner, this site and the MCP server are open source. Report a mistake, or ask for a domain to be added or left out, by opening an issue on GitHub.",
+      "ar": "الماسح وهذا الموقع وخادم MCP مفتوحة المصدر ويمكنك الإبلاغ عن خطأ أو طلب إضافة نطاق أو استبعاده بفتح بلاغ في GitHub."
+    }
+  ],
+  "m_cli_h": {
+    "en": "Command line and MCP server",
+    "ar": "أداة سطر الأوامر وخادم MCP"
+  },
+  "m_cli": [
+    {
+      "en": "The same engine runs the full check of any domain from your own machine and answers AI assistants through MCP.",
+      "ar": "يجري المحرك نفسه الفحص الكامل لأي نطاق من جهازك ويجيب المساعدات الذكية عبر MCP."
+    }
+  ],
+  "foot_note": {
+    "en": "An independent open project whose figures describe public configuration only and are not an audit of any organisation.",
+    "ar": "مشروع مستقل مفتوح المصدر تصف أرقامه الإعدادات العامة فقط ولا تُعد تدقيقاً لأي جهة."
+  },
+  "foot_author": {
+    "en": "Made by {author}",
+    "ar": "إعداد {author}"
+  },
+  "foot_code": {
+    "en": "Source code",
+    "ar": "الشيفرة المصدرية"
+  },
+  "noscript": {
+    "en": "This page needs JavaScript to show the figures, and the open data files work without it.",
+    "ar": "تحتاج هذه الصفحة إلى JavaScript لعرض الأرقام بينما تعمل ملفات البيانات المفتوحة دونها."
+  },
+  "w_domain": {
+    "en": [
+      "domain",
+      "domains"
+    ],
+    "ar": [
+      "نطاق واحد",
+      "نطاقان",
+      "نطاقات",
+      "نطاقاً",
+      "نطاق"
+    ]
+  },
+  "w_live_domain": {
+    "en": [
+      "live domain",
+      "live domains"
+    ],
+    "ar": [
+      "نطاق حي واحد",
+      "نطاقان حيان",
+      "نطاقات حية",
+      "نطاقاً حياً",
+      "نطاق حي"
+    ]
+  },
+  "w_minute": {
+    "en": [
+      "minute",
+      "minutes"
+    ],
+    "ar": [
+      "دقيقة واحدة",
+      "دقيقتان",
+      "دقائق",
+      "دقيقة",
+      "دقيقة"
+    ]
+  },
+  "w_query": {
+    "en": [
+      "DNS query",
+      "DNS queries"
+    ],
+    "ar": [
+      "استعلام واحد",
+      "استعلامان",
+      "استعلامات",
+      "استعلاماً",
+      "استعلام"
+    ]
+  },
+  "w_check": {
+    "en": [
+      "check",
+      "checks"
+    ],
+    "ar": [
+      "فحص واحد",
+      "فحصان",
+      "فحوص",
+      "فحصاً",
+      "فحص"
+    ]
+  }
+}
