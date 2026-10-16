@@ -1,5 +1,6 @@
-// Renders docs/og.png, the 1200 by 630 card that link previews show, from the site's own fonts and colours, then
-// writes its provenance into the PNG. Needs Playwright: set PW_MODULE and PW_CHROME when they are not on the
+// Renders docs/og.png, the 1200 by 630 card that link previews show: the site's card with its measuring scale
+// beside the photograph of the Gulf at night, from the site's own fonts and image, then writes its provenance into
+// the PNG. Needs Playwright: set PW_MODULE and PW_CHROME when they are not on the
 // default paths. --out writes elsewhere, and --ar, --en and --domain override project.json for a trial render.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -11,7 +12,7 @@ const here = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const WIDTH = 1200;
 export const HEIGHT = 630;
 export const PROVENANCE_KEY = 'impeccable:prompt';
-export const PROVENANCE = "Origin: rendered by scripts/og.mjs from the site's own fonts (Amiri and Noto Naskh Arabic, SIL Open Font License) and its colour tokens. No generated, stock or sourced imagery.";
+export const PROVENANCE = "Origin: rendered by scripts/og.mjs from the site's own fonts (El Messiri and Alexandria, SIL Open Font License), its colour tokens and its photograph of the Gulf at night taken from the International Space Station by the NASA Expedition 63 crew on 31 August 2020 (public domain, Wikimedia Commons page 99981618). No generated imagery.";
 
 // A PNG tEXt chunk placed before IEND. Keyword and text are Latin-1, which the provenance line is.
 export function withText(png, key, text) {
@@ -43,46 +44,43 @@ export function readText(png) {
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
-export function cardHtml({ nameAr, nameEn, domain, tagline, countries }, root = here) {
+export function cardHtml({ nameAr, nameEn, domain, title }, root = here) {
   const font = (f) => `data:font/woff2;base64,${readFileSync(join(root, 'docs/fonts', f)).toString('base64')}`;
-  const cells = Object.values(countries).map((c) => `<td><b>${esc(c.ar)}</b><span>${esc(c.en)}</span></td>`).join('');
+  const photo = `data:image/jpeg;base64,${readFileSync(join(root, 'docs/img/gulf-night-1600.jpg')).toString('base64')}`;
+  const AR = 'U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F';
+  const LA = 'U+0000-00FF, U+2000-206F';
+  const ticks = Array.from({ length: 29 }, (_, i) => `<i${i % 4 === 0 ? ' class="major"' : ''}></i>`).join('');
   return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
-@font-face { font-family: 'Amiri'; font-weight: 700; src: url(${font('amiri-arabic-700.woff2')}) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
-@font-face { font-family: 'Amiri'; font-weight: 700; src: url(${font('amiri-latin-700.woff2')}) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
-@font-face { font-family: 'Naskh'; font-weight: 400 700; src: url(${font('noto-naskh-arabic.woff2')}) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+200C-200E; }
-@font-face { font-family: 'Naskh'; font-weight: 400 700; src: url(${font('noto-naskh-latin.woff2')}) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'El Messiri'; font-weight: 400; src: url(${font('el-messiri-arabic-400.woff2')}) format('woff2'); unicode-range: ${AR}; }
+@font-face { font-family: 'El Messiri'; font-weight: 500; src: url(${font('el-messiri-arabic-500.woff2')}) format('woff2'); unicode-range: ${AR}; }
+@font-face { font-family: 'El Messiri'; font-weight: 400; src: url(${font('el-messiri-latin-400.woff2')}) format('woff2'); unicode-range: ${LA}; }
+@font-face { font-family: 'Alexandria'; font-weight: 400; src: url(${font('alexandria-latin-400.woff2')}) format('woff2'); unicode-range: ${LA}; }
 * { box-sizing: border-box; margin: 0; }
-html, body { width: ${WIDTH}px; height: ${HEIGHT}px; background: #F3F4F1; color: #15181B; }
-.card { width: 100%; height: 100%; padding: 48px 72px 44px; display: flex; flex-direction: column; font-family: 'Naskh', serif; }
-.card > * { flex-shrink: 0; }
-.mast { display: flex; align-items: baseline; justify-content: space-between; gap: 40px; }
-.ar { font-family: 'Amiri', serif; font-weight: 700; font-size: 108px; line-height: 1.1; white-space: nowrap; }
-.en { font-family: 'Amiri', serif; font-weight: 700; font-size: 40px; line-height: 1.2; white-space: nowrap; direction: ltr; }
-.rule { border-top: 5px solid #15181B; border-bottom: 1.5px solid #15181B; height: 10px; margin: 6px 0 26px; }
-.tag-ar { font-size: 31px; line-height: 1.6; font-weight: 500; text-wrap: balance; }
-.tag-en { font-size: 21px; line-height: 1.5; color: #474D53; direction: ltr; text-align: left; margin-top: 8px; text-wrap: balance; }
-table { width: 100%; border-collapse: collapse; margin-top: auto; table-layout: fixed; }
-td { border-top: 1px solid #AEB3AB; border-bottom: 1px solid #AEB3AB; border-inline-start: 1px solid #CDD1CA; padding: 10px 14px 8px; vertical-align: top; }
-td:first-child { border-inline-start: 0; padding-inline-start: 0; }
-td b { display: block; font-size: 25px; line-height: 1.5; font-weight: 700; }
-td span { display: block; font-size: 16px; line-height: 1.3; color: #61686F; direction: ltr; text-align: right; }
-.foot { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
-.mark { width: 22px; height: 22px; border-radius: 50%; background: #1C3D8C; }
-.domain { font-size: 25px; color: #1C3D8C; direction: ltr; font-weight: 600; letter-spacing: .01em; }
-</style></head><body><div class="card">
-<div class="mast"><div class="ar" id="ar">${esc(nameAr)}</div><div class="en" id="en">${esc(nameEn)}</div></div>
-<div class="rule"></div>
-<p class="tag-ar">${esc(tagline.ar)}</p>
-<p class="tag-en">${esc(tagline.en)}</p>
-<table><tr>${cells}</tr></table>
-<div class="foot"><span class="mark"></span><span class="domain">${esc(domain)}</span></div>
+html, body { width: ${WIDTH}px; height: ${HEIGHT}px; background: #161c1a; }
+.stage { width: 100%; height: 100%; padding: 16px; display: grid; grid-template-columns: 600px 1fr; gap: 16px; }
+.card { background: #e3e2da; color: #161c1a; display: flex; flex-direction: column; min-width: 0; }
+.scale { display: flex; justify-content: space-between; align-items: flex-start; height: 44px; padding: 0 16px; flex: none; }
+.scale i { width: 5px; height: 18px; background: #161c1a; }
+.scale i.major { height: 36px; }
+.body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 8px 40px; text-align: center; }
+.ar { font: 500 34px/1.35 'El Messiri', serif; white-space: nowrap; }
+.en { font: 400 22px/1.3 'El Messiri', serif; color: #49524e; direction: ltr; white-space: nowrap; }
+h1 { font: 400 66px/1.28 'El Messiri', serif; margin-top: 18px; }
+h1 span { display: block; white-space: nowrap; }
+.foot { padding: 0 32px 26px; text-align: center; font: 400 22px/1 'Alexandria', sans-serif; direction: ltr; color: #161c1a; }
+.photo { background: #0c100f url(${photo}) 58% 50% / cover no-repeat; }
+</style></head><body><div class="stage">
+<div class="card"><div class="scale">${ticks}</div>
+<div class="body"><p class="ar" id="ar">${esc(nameAr)}</p><p class="en" id="en">${esc(nameEn)}</p><h1 id="title"><span>${esc(title[0])}</span><span>${esc(title[1])}</span></h1></div>
+<p class="foot">${esc(domain)}</p></div>
+<div class="photo"></div>
 </div></body></html>`;
 }
 
 export async function renderOg({ out, nameAr, nameEn, domain, root = here } = {}) {
   const bundle = JSON.parse(readFileSync(join(root, 'docs/data/bundle.json'), 'utf8'));
   const p = bundle.project;
-  const card = { nameAr: nameAr || p.name_ar, nameEn: nameEn || p.name_en, domain: domain || p.domain, tagline: bundle.ui.tagline, countries: bundle.scope.countries };
+  const card = { nameAr: nameAr || p.name_ar, nameEn: nameEn || p.name_en, domain: domain || p.domain, title: [bundle.ui.hero_title_1.ar, bundle.ui.hero_title_2.ar] };
   if (!card.nameAr || !card.nameEn || !card.domain) throw new Error('the card needs the Arabic and English names and the domain');
   const require = createRequire(import.meta.url);
   const { chromium } = require(process.env.PW_MODULE || 'playwright');
@@ -91,38 +89,14 @@ export async function renderOg({ out, nameAr, nameEn, domain, root = here } = {}
     const page = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 });
     await page.setContent(cardHtml(card, root), { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);
-    // Fit the names on one line and the card in its frame: the Arabic name shrinks first, then the English one.
-    // Amiri's descenders run deep, so the ink of the Arabic name is measured and the double rule kept clear of it.
+    // Each line keeps to one line on the card: a long name or headline steps down until it fits.
     const overflow = await page.evaluate(() => {
-      const card = document.querySelector('.card');
-      const mast = document.querySelector('.mast');
-      const rule = document.querySelector('.rule');
-      const ar = document.getElementById('ar');
-      const en = document.getElementById('en');
-      const ctx = document.createElement('canvas').getContext('2d');
-      const probe = document.createElement('span');
-      probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
-      const settle = (size) => {
-        ar.style.fontSize = `${size}px`;
-        card.style.paddingTop = '';
-        rule.style.marginTop = '';
-        const cs = getComputedStyle(ar);
-        ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-        const ink = ctx.measureText(ar.textContent);
-        ar.append(probe);
-        const top = probe.getBoundingClientRect().top - ink.actualBoundingBoxAscent;
-        if (top < 34) card.style.paddingTop = `${48 + 34 - top}px`;
-        const gap = rule.getBoundingClientRect().top - (probe.getBoundingClientRect().top + ink.actualBoundingBoxDescent);
-        if (gap < 16) rule.style.marginTop = `${6 + 16 - gap}px`;
-        probe.remove();
-        return document.documentElement.scrollHeight - innerHeight;
-      };
-      const wide = () => ar.scrollWidth + en.scrollWidth + 40 > mast.clientWidth;
-      let size = 108;
-      let over = settle(size);
-      while ((wide() || over > 0) && size > 56) { size -= 2; over = settle(size); }
-      for (let s = 40; s > 22 && wide(); s -= 1) en.style.fontSize = `${s}px`;
-      return Math.max(over, wide() ? 1 : 0);
+      const body = document.querySelector('.body');
+      const room = body.clientWidth - 80;
+      const fit = (el, from, floor) => { let size = from; el.style.fontSize = `${size}px`; while (el.scrollWidth > room && size > floor) { size -= 1; el.style.fontSize = `${size}px`; } return el.scrollWidth > room; };
+      const lines = [...document.querySelectorAll('#title span')];
+      const tooWide = [fit(document.getElementById('ar'), 34, 22), fit(document.getElementById('en'), 22, 16), ...lines.map((l) => fit(l, 66, 40))].some(Boolean);
+      return Math.max(document.documentElement.scrollHeight - innerHeight, tooWide ? 1 : 0);
     });
     if (overflow > 0) throw new Error(`the card does not fit its frame (${overflow}px over)`);
     const png = await page.screenshot({ type: 'png' });

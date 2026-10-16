@@ -35,7 +35,8 @@
 ### ما يُنشر وما لا يُنشر
 
 - تُنشر المجاميع حسب الدولة والقطاع والفحص مع البسط والمقام ومستويات النتائج والسلسلة الأسبوعية.
-- ولا يُذكر اسم أي نطاق ولا تُنشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص فحص نطاق واحد مباشرة.
+- تعرض الصفحة الرئيسية مجموع الخليج وحده بينما لكل دولة صفحة تعرض أرقامها وحدها لأن المشروع لا يرتب الدول ولا يقارن بينها.
+- لا يُذكر اسم أي نطاق ولا تُنشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص فحص نطاق واحد مباشرة.
 
 ### الفحص المباشر
 
@@ -117,15 +118,14 @@ npx -y github:SiteQ8/gbaseline check example.com --dns-only
 
 | Tool | What it answers |
 |---|---|
-| `gbaseline_overview` | The latest issue, its date and the headline figures with their counts |
-| `gbaseline_figures` | Every check for the Gulf or one country, all sectors or one |
-| `gbaseline_compare` | One check across the six states |
-| `gbaseline_check_info` | What a check means, when it passes, how to fix it, the standards |
+| `gbaseline_overview` | The latest issue, its date and the six headline figures for the Gulf, with their counts and ready to quote sentences |
+| `gbaseline_figures` | Every check for the Gulf as a whole or for one state on its own, all sectors or one |
+| `gbaseline_check_info` | What a check means, when it passes, how to fix it, the standards and the Gulf figure |
 | `gbaseline_history` | The weekly series of one check |
 | `gbaseline_methodology` | Method, limits, data quality and how to cite |
 | `gbaseline_check_domain` | A live full check of any domain from your machine |
 
-Every tool is read only, works offline from the published data except the live check, and answers in Arabic or English.
+Every tool is read only, works offline from the published data except the live check, and answers in Arabic or English. No tool lists organisations, and no tool ranks or compares the states: each answer covers the Gulf as a whole or one state at a time, as the site does.
 
 ### Run it yourself
 
@@ -153,12 +153,16 @@ npm run preflight   # everything above plus the publication gates
 - DKIM is not measured, because selectors cannot be listed from outside.
 - Some government namespaces sit outside these suffixes (for example names directly under a country code) and are not included yet.
 
+### The site
+
+Each issue is printed as stationery: a card with a measuring scale along its top, set beside a NASA photograph of the Gulf at night taken from the International Space Station, then the Gulf's figures as a ledger aligned on the decimal point, the citation slips, the run printed as an itinerary, a reply card for the live check and the back of a postcard as the footer. The home page shows the Gulf as a whole; each state has a page of its own. Display type is El Messiri and text is Alexandria, both drawing Arabic and Latin.
+
 ### Citing
 
-Give the issue number and its date. Every figure on the site has a citation slip that copies the exact reference in Arabic or English.
+Give the issue number and its date. Every figure on the site has a citation slip that copies the exact reference in Arabic or English, and the link in that reference reopens the figure as it was published in that issue, even after later issues come out.
 
 ### Licence
 
-MIT, for the code and the published data. Fonts under the SIL Open Font License, see `NOTICE.md`.
+MIT, for the code and the published data. Fonts under the SIL Open Font License; the photographs are NASA's and in the public domain. See `NOTICE.md`.
 
 By [Ali AlEnezi](https://3li.info).

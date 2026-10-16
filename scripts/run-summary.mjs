@@ -1,5 +1,5 @@
-// The weekly run's summary for the GitHub job page: totals, data quality and the health of each name source.
-// Totals only, like everything else this project publishes: no domain is ever named here.
+// The weekly run's summary for the GitHub job page: how many names each state's inventory holds, the Gulf's
+// shares, data quality and the health of each name source. No domain is ever named here.
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -21,8 +21,9 @@ export function runSummary(summary, bundle) {
     const n = summary.inventory[p].all;
     out.push(`| ${placeName(p)} | ${n.discovered} | ${n.live} | ${n.retired} | ${n.broken} |`);
   }
-  out.push('', '### Share passing, all sectors', '', `| Check | ${places.map(placeName).join(' | ')} |`, `|---|${places.map(() => '---:').join('|')}|`);
-  for (const c of bundle.order) out.push(`| ${bundle.checks[c.id].short.en} | ${places.map((p) => share(summary.checks[c.id][p].all)).join(' | ')} |`);
+  // Shares for the Gulf as a whole only: like the site, the run never sets the states side by side.
+  out.push('', '### Share passing in the Gulf', '', '| Check | All sectors | Government | Education |', '|---|---:|---:|---:|');
+  for (const c of bundle.order) out.push(`| ${bundle.checks[c.id].short.en} | ${['all', 'government', 'education'].map((g) => share(summary.checks[c.id].GCC[g])).join(' | ')} |`);
   const q = summary.quality || {};
   const a = q.agreement || {};
   const w = q.web || {};
