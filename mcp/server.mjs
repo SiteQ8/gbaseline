@@ -81,7 +81,7 @@ export function makeHandlers(data) {
       const clauses = CLAUSES.map((cl) => {
         const f = clauseShare(s.checks[cl.id].GCC.all, cl.mode);
         const pct = f.v === null ? null : Math.round(f.v * 10) / 10;
-        return { clause: cl.n, check: cl.id, counts: cl.mode === 'fail' ? 'not_passing' : 'passing', share: pct, count: f.count, measured: f.measured, sentence: f.measured ? ui(bundle, `cite_${cl.id}`, lang, { ...vars, pct: pctText(pct, lang) }) : ui(bundle, 'no_data_sentence', lang), cite: site() ? `${site()}?lang=${lang}#/?i=${s.issue}&c=${cl.n}` : null };
+        return { clause: cl.n, check: cl.id, counts: cl.mode === 'fail' ? 'not_passing' : 'passing', share: pct, count: f.count, measured: f.measured, sentence: f.measured ? ui(bundle, `cite_${cl.id}`, lang, { ...vars, pct: pctText(pct, lang) }) : ui(bundle, 'no_data_sentence', lang), cite: site() ? `${site()}${lang === 'ar' ? '' : 'en/'}issues/${s.issue}/#c${cl.n}` : null };
       });
       const out = { ...base, issue: s.issue, date: s.date, live_domains: g.live, discovered: g.discovered, clauses, data: site() ? { latest_csv: `${site()}data/open/latest.csv`, history_csv: `${site()}data/open/history.csv`, summary_json: `${site()}data/summary.json` } : null };
       const md = [

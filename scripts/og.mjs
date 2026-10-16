@@ -1,7 +1,7 @@
-// Renders docs/og.png, the 1200 by 630 card that link previews show: the site's card with its measuring scale
-// beside a photograph of the Arabian Gulf coast at night, from the site's own fonts and image, then writes its provenance into
-// the PNG. Needs Playwright: set PW_MODULE and PW_CHROME when they are not on the
-// default paths. --out writes elsewhere, and --ar, --en and --domain override project.json for a trial render.
+// Renders docs/og.png, the 1200 by 630 card that link previews show: the six states at night as a mosaic beside the
+// title, set in the site's own type and colours, then writes its provenance into the PNG. Needs Playwright: set
+// PW_MODULE and PW_CHROME when they are not on the default paths. --out writes elsewhere, and --ar, --en and --domain
+// override project.json for a trial render.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -12,7 +12,10 @@ const here = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const WIDTH = 1200;
 export const HEIGHT = 630;
 export const PROVENANCE_KEY = 'impeccable:prompt';
-export const PROVENANCE = "Origin: rendered by scripts/og.mjs from the site's own fonts (El Messiri and Alexandria, SIL Open Font License), its colour tokens and its photograph of Dammam and the Eastern Province coast of the Arabian Gulf at night, taken from the International Space Station by the NASA Expedition 62 crew on 25 March 2020 (public domain, Wikimedia Commons page 88992012). No generated imagery.";
+export function provenance(pictures) {
+  const pages = pictures.map((p) => p.commons).join(', ');
+  return `Origin: rendered by scripts/og.mjs from the site's own typeface (Alexandria, SIL Open Font License), its colour tokens and its six night photographs of the Arabian Gulf's cities taken from the International Space Station by NASA crews (public domain, Wikimedia Commons pages ${pages}). No generated imagery.`;
+}
 
 // A PNG tEXt chunk placed before IEND. Keyword and text are Latin-1, which the provenance line is.
 export function withText(png, key, text) {
@@ -44,43 +47,44 @@ export function readText(png) {
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
-export function cardHtml({ nameAr, nameEn, domain, title }, root = here) {
+export function cardHtml({ nameAr, nameEn, domain, title, pictures }, root = here) {
   const font = (f) => `data:font/woff2;base64,${readFileSync(join(root, 'docs/fonts', f)).toString('base64')}`;
-  const photo = `data:image/jpeg;base64,${readFileSync(join(root, 'docs/img/dammam-night-1600.jpg')).toString('base64')}`;
+  const photo = (p) => `data:image/jpeg;base64,${readFileSync(join(root, 'docs/img', p.files.tile.file)).toString('base64')}`;
   const AR = 'U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F';
   const LA = 'U+0000-00FF, U+2000-206F';
-  const ticks = Array.from({ length: 29 }, (_, i) => `<i${i % 4 === 0 ? ' class="major"' : ''}></i>`).join('');
+  const tiles = pictures.map((p) => `<i style="background-image:url(${photo(p)})"></i>`).join('');
   return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
-@font-face { font-family: 'El Messiri'; font-weight: 400; src: url(${font('el-messiri-arabic-400.woff2')}) format('woff2'); unicode-range: ${AR}; }
-@font-face { font-family: 'El Messiri'; font-weight: 500; src: url(${font('el-messiri-arabic-500.woff2')}) format('woff2'); unicode-range: ${AR}; }
-@font-face { font-family: 'El Messiri'; font-weight: 400; src: url(${font('el-messiri-latin-400.woff2')}) format('woff2'); unicode-range: ${LA}; }
+@font-face { font-family: 'Alexandria'; font-weight: 600; src: url(${font('alexandria-arabic-600.woff2')}) format('woff2'); unicode-range: ${AR}; }
+@font-face { font-family: 'Alexandria'; font-weight: 400; src: url(${font('alexandria-arabic-400.woff2')}) format('woff2'); unicode-range: ${AR}; }
+@font-face { font-family: 'Alexandria'; font-weight: 600; src: url(${font('alexandria-latin-600.woff2')}) format('woff2'); unicode-range: ${LA}; }
 @font-face { font-family: 'Alexandria'; font-weight: 400; src: url(${font('alexandria-latin-400.woff2')}) format('woff2'); unicode-range: ${LA}; }
 * { box-sizing: border-box; margin: 0; }
-html, body { width: ${WIDTH}px; height: ${HEIGHT}px; background: #161c1a; }
-.stage { width: 100%; height: 100%; padding: 16px; display: grid; grid-template-columns: 600px 1fr; gap: 16px; }
-.card { background: #e3e2da; color: #161c1a; display: flex; flex-direction: column; min-width: 0; }
-.scale { display: flex; justify-content: space-between; align-items: flex-start; height: 44px; padding: 0 16px; flex: none; }
-.scale i { width: 5px; height: 18px; background: #161c1a; }
-.scale i.major { height: 36px; }
-.body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 8px 40px; text-align: center; }
-.ar { font: 500 34px/1.35 'El Messiri', serif; white-space: nowrap; }
-.en { font: 400 22px/1.3 'El Messiri', serif; color: #49524e; direction: ltr; white-space: nowrap; }
-h1 { font: 400 66px/1.28 'El Messiri', serif; margin-top: 18px; }
+html, body { width: ${WIDTH}px; height: ${HEIGHT}px; background: #0f1928; color: #f3b562; font-family: 'Alexandria', sans-serif; }
+.stage { width: 100%; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 520px; }
+.text { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; padding: 0 48px 40px 40px; }
+.mark { align-self: flex-start; background: #f3b562; color: #0f1928; padding: 14px 20px; font-weight: 600; font-size: 22px; line-height: 1.3; }
+.mark span { display: block; white-space: nowrap; }
+.mark span + span { font-weight: 400; }
+h1 { font-weight: 600; font-size: 80px; line-height: 1.22; }
 h1 span { display: block; white-space: nowrap; }
-.foot { padding: 0 32px 26px; text-align: center; font: 400 22px/1 'Alexandria', sans-serif; direction: ltr; color: #161c1a; }
-.photo { background: #0c100f url(${photo}) 58% 50% / cover no-repeat; }
+.foot { display: flex; justify-content: space-between; align-items: baseline; font-size: 22px; }
+.en { color: #cfa064; direction: ltr; }
+.dom { direction: ltr; font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+.tiles i { background: #0a121e center / cover no-repeat; }
 </style></head><body><div class="stage">
-<div class="card"><div class="scale">${ticks}</div>
-<div class="body"><p class="ar" id="ar">${esc(nameAr)}</p><p class="en" id="en">${esc(nameEn)}</p><h1 id="title"><span>${esc(title[0])}</span><span>${esc(title[1])}</span></h1></div>
-<p class="foot">${esc(domain)}</p></div>
-<div class="photo"></div>
+<div class="text"><p class="mark" id="ar"><span>${esc(nameAr.split(' ').slice(0, -2).join(' '))}</span><span>${esc(nameAr.split(' ').slice(-2).join(' '))}</span></p>
+<h1 id="title"><span>${esc(title[0])}</span><span>${esc(title[1])}</span></h1>
+<p class="foot"><span class="dom" id="dom">${esc(domain)}</span><span class="en" id="en">${esc(nameEn)}</span></p></div>
+<div class="tiles">${tiles}</div>
 </div></body></html>`;
 }
 
 export async function renderOg({ out, nameAr, nameEn, domain, root = here } = {}) {
   const bundle = JSON.parse(readFileSync(join(root, 'docs/data/bundle.json'), 'utf8'));
   const p = bundle.project;
-  const card = { nameAr: nameAr || p.name_ar, nameEn: nameEn || p.name_en, domain: domain || p.domain, title: [bundle.ui.hero_title_1.ar, bundle.ui.hero_title_2.ar] };
+  const pictures = JSON.parse(readFileSync(join(root, 'data/src/pictures.json'), 'utf8')).pictures;
+  const card = { nameAr: nameAr || p.name_ar, nameEn: nameEn || p.name_en, domain: domain || p.domain, title: [bundle.ui.title_1.ar, bundle.ui.title_2.ar], pictures };
   if (!card.nameAr || !card.nameEn || !card.domain) throw new Error('the card needs the Arabic and English names and the domain');
   const require = createRequire(import.meta.url);
   const { chromium } = require(process.env.PW_MODULE || 'playwright');
@@ -91,17 +95,17 @@ export async function renderOg({ out, nameAr, nameEn, domain, root = here } = {}
     await page.evaluate(() => document.fonts.ready);
     // Each line keeps to one line on the card: a long name or headline steps down until it fits.
     const overflow = await page.evaluate(() => {
-      const body = document.querySelector('.body');
-      const room = body.clientWidth - 80;
+      const box = document.querySelector('.text');
+      const room = box.clientWidth - 88;
       const fit = (el, from, floor) => { let size = from; el.style.fontSize = `${size}px`; while (el.scrollWidth > room && size > floor) { size -= 1; el.style.fontSize = `${size}px`; } return el.scrollWidth > room; };
       const lines = [...document.querySelectorAll('#title span')];
-      const tooWide = [fit(document.getElementById('ar'), 34, 22), fit(document.getElementById('en'), 22, 16), ...lines.map((l) => fit(l, 66, 40))].some(Boolean);
+      const tooWide = lines.map((l) => fit(l, 80, 48)).some(Boolean) || document.querySelector('.foot').scrollWidth > room + 40;
       return Math.max(document.documentElement.scrollHeight - innerHeight, tooWide ? 1 : 0);
     });
     if (overflow > 0) throw new Error(`the card does not fit its frame (${overflow}px over)`);
     const png = await page.screenshot({ type: 'png' });
     const target = out || join(root, 'docs/og.png');
-    writeFileSync(target, withText(png, PROVENANCE_KEY, PROVENANCE));
+    writeFileSync(target, withText(png, PROVENANCE_KEY, provenance(pictures)));
     return target;
   } finally {
     await browser.close();

@@ -48,7 +48,7 @@
 ### ما يُنشر وما لا يُنشر
 
 - تُنشر المجاميع حسب الدولة والقطاع والفحص مع البسط والمقام ومستويات النتائج والسلسلة الأسبوعية.
-- تعرض الصفحة الرئيسية مجموع الخليج وحده بينما لكل دولة صفحة تعرض أرقامها وحدها لأن المشروع لا يرتب الدول ولا يقارن بينها.
+- تعرض الصفحة الرئيسية مجموع الخليج العربي وحده بينما لكل دولة صفحة تعرض أرقامها وحدها لأن المشروع لا يرتب الدول ولا يقارن بينها.
 - لا يُذكر اسم أي نطاق ولا تُنشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص فحص نطاق واحد مباشرة.
 
 ### الفحص المباشر
@@ -61,9 +61,13 @@ npx -y github:SiteQ8/gbaseline check example.com --lang ar
 
 ### حدود القياس
 
-- يجري الفحص الأسبوعي من خوادم GitHub خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً.
-- ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج.
-- ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية وتُستثنى عمداً امتدادات الجهات العسكرية والسفارات والأفراد.
+- يجري الفحص الأسبوعي من خوادم GitHub خارج الخليج العربي لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً.
+- لا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج.
+- لا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية بينما تُستثنى عمداً امتدادات الجهات العسكرية والسفارات والأفراد.
+
+### الاستشهاد بالأرقام
+
+لكل عدد صفحة ثابتة لا تتغير بعد صدوره مثل https://gbaseline.3li.info/issues/1/ ولكل دولة صفحتها داخل العدد ولكل رقم صيغة اقتباس بالعربية والإنجليزية يفتح رابطها الرقم نفسه كما نُشر بينما تجد في صفحة كل عدد مرجعه الكامل ومدخل BibTeX وفي المستودع ملف CITATION.cff للاستشهاد بالمشروع كله.
 
 ---
 
@@ -174,19 +178,21 @@ npm run preflight   # everything above plus the publication gates
 
 ### Limits
 
-- The scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks.
+- The scan runs outside the Arabian Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks.
 - DKIM is not measured, because selectors cannot be listed from outside.
 - Domains registered directly under a country code, or under global extensions such as .com, are not included yet. The military, embassy and personal suffixes are left out on purpose.
 
 ### The site
 
-Each issue is printed as stationery: a card with a measuring scale along its top, set beside NASA night photographs of the Arabian Gulf's cities taken from the International Space Station, then the Gulf's figures as a ledger aligned on the decimal point, the citation slips, the run printed as an itinerary, a reply card for the live check and the back of a postcard as the footer. The home page shows the Gulf as a whole; each state has a page of its own. Display type is El Messiri and text is Alexandria, both drawing Arabic and Latin.
+Each issue is printed like an annual report. Across the top, a mosaic of the six states at night, one NASA photograph from the International Space Station for each; the title hangs on one axis at 42% of the page; the issue is written into a single sentence with its figures; six figures to quote follow, each with its citation in Arabic and English; then a mosaic of what is measured, how an issue is made in four lines that step across the page, and the live check in a field of LED white. One navy field and sodium-lamp amber, the colours of the photographs, and one typeface, Alexandria, for both scripts. The home page shows the Arabian Gulf as a whole; each state, each standard and each issue has a page of its own.
 
-The launch film, about a minute long in Arabic and in English, is recorded from the site itself with the figures of issue 1 and attached to the v0.1.0 release. Its narration, its music and the motion of its opening shot are generated, and its closing card says so.
+Every page is printed to HTML from the bundle and the published data when an issue comes out (`scripts/prerender.mjs`), in Arabic at the root and in English under `/en/`, with its canonical address, both languages linked and a sitemap of all of them, so every page can be read, linked, indexed and cited without script. The browser adds only the sector tabs, the copy buttons, the live check and the motion.
+
+The launch film, about a minute long in Arabic and in English, is recorded from the site itself and attached to the v0.1.0 release. Its narration and its music are generated, and its closing card says so.
 
 ### Citing
 
-Give the issue number and its date. Every figure on the site has a citation slip that copies the exact reference in Arabic or English, and the link in that reference reopens the figure as it was published in that issue, even after later issues come out.
+Every issue keeps a page that does not change after it comes out, such as `https://gbaseline.3li.info/en/issues/1/`, with a page per state inside it. Every figure has a citation in Arabic and English whose link opens that figure as it was published, and every issue page gives its full reference and a BibTeX entry. To cite the project as a whole, use `CITATION.cff`, which GitHub shows as "Cite this repository".
 
 ### Licence
 
