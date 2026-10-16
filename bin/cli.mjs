@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Command line: check one domain fully, or run the weekly pipeline (inventory, scan, publish), or serve MCP.
-import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -9,7 +9,7 @@ import { CHECKS, GROUPS, suffixChain } from '../docs/assets/engine/checks.js';
 import { tr, ui, counted } from '../docs/assets/engine/i18n.js';
 import { observeDomain, pqCapable } from '../src/probe.mjs';
 import { emptyInventory, refresh, serialize, bySuffixLength } from '../src/inventory.mjs';
-import { scan } from '../src/scan.mjs';
+import { scan, mergeScans } from '../src/scan.mjs';
 import { aggregate, appendHistory, historyCsv, CSV_HEAD, csvRows } from '../src/aggregate.mjs';
 import { bundle, project, scope, userAgent, levelText } from '../src/meta.mjs';
 
@@ -82,11 +82,20 @@ async function cmdInventory(a) {
   return inv;
 }
 
+// --shard i/N scans the i-th of N parts of the inventory, so one weekly run can spread over several runners.
+function parseShard(v) {
+  if (!v) return undefined;
+  const m = String(v).match(/^(\d+)\/(\d+)$/);
+  if (!m || Number(m[1]) >= Number(m[2]) || Number(m[2]) < 1) throw new Error(`--shard takes i/N with i below N, not ${v}`);
+  return { index: Number(m[1]), count: Number(m[2]) };
+}
+
 async function cmdScan(a, inv) {
   const inventory = inv || loadInventory(a.file || INVENTORY);
   const total = Object.keys(inventory.domains).length;
   let last = 0;
   const res = await scan(inventory, scope, {
+    shard: parseShard(a.shard),
     concurrency: Number(a.concurrency) || 16,
     limit: Number(a.limit) || undefined,
     only: a.only ? String(a.only).split(',') : undefined,
@@ -106,8 +115,15 @@ function writeText(rel, text) {
   writeFileSync(p, text);
 }
 
+// The rows of one scan, or of every shard of one run: a file, several files separated by commas, or a folder.
+function readScans(spec) {
+  const files = String(spec).split(',').flatMap((f) => (existsSync(f) && statSync(f).isDirectory() ? readdirSync(f).filter((x) => x.endsWith('.json')).sort().map((x) => join(f, x)) : [f]));
+  if (!files.length) throw new Error(`no scan rows found in ${spec}`);
+  return mergeScans(files.map((f) => JSON.parse(readFileSync(f, 'utf8'))));
+}
+
 async function cmdPublish(a, res) {
-  const scanned = res || JSON.parse(readFileSync(a.rows || join(tmpdir(), 'scan-rows.json'), 'utf8'));
+  const scanned = res || readScans(a.rows || join(tmpdir(), 'scan-rows.json'));
   const date = a.date || new Date().toISOString().slice(0, 10);
   const inv = loadInventory(a.file || INVENTORY);
   const scanner = { version: project.version, node: process.versions.node, openssl: process.versions.openssl, pq: pqCapable(), runner: process.env.GITHUB_ACTIONS ? 'github-hosted' : 'local', web: !scanned.rows.every((r) => (r.r.https || [])[1] === 'not-measured') };
@@ -136,8 +152,9 @@ async function cmdWeekly(a) {
 const HELP = `usage:
   check <domain> [--json] [--lang ar|en] [--dns-only]   every check for one domain, from this machine
   inventory [--no-ct]                                    refresh ${INVENTORY} from certificate logs and Tranco
-  scan [--limit N] [--concurrency N] [--skip-web]        scan the inventory, rows to a temporary file
-  publish [--rows file] [--date YYYY-MM-DD]              write the totals, the weekly series and the open data
+  scan [--limit N] [--concurrency N] [--skip-web] [--shard i/N] [--out file]
+                                                         scan the inventory (or one shard of it), rows to a file
+  publish [--rows file,file|folder] [--date YYYY-MM-DD]  write the totals, the weekly series and the open data
   weekly                                                 inventory, scan and publish in one run
   mcp                                                    the MCP server over stdio`;
 

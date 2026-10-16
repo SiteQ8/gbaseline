@@ -37,9 +37,13 @@ for (const d of scope.exclude || []) {
   const e = entityOf(d, bySuffixLength(scope));
   if (!e || e.domain !== d) fail(`excluded ${d} is not a registrable domain under a measured suffix`);
 }
-for (const c of Object.keys(scope.countries)) for (const sector of Object.keys(scope.sectors)) {
-  if (!scope.suffixes.some((s) => s.country === c && s.sector === sector)) fail(`no suffix for ${c} ${sector}`);
-}
+// A state need not have every sector (Kuwait has no health suffix), but every state and every sector is measured somewhere.
+for (const c of Object.keys(scope.countries)) if (!scope.suffixes.some((s) => s.country === c)) fail(`no suffix for ${c}`);
+for (const sector of Object.keys(scope.sectors)) if (!scope.suffixes.some((s) => s.sector === sector)) fail(`no suffix for sector ${sector}`);
+if (new Set(scope.suffixes.map((s) => s.suffix)).size !== scope.suffixes.length) fail('a suffix is listed twice');
+// The suffixes deliberately left out (military, embassies, individuals) are listed so the method page can say so.
+if (!Array.isArray(scope.left_out) || !scope.left_out.every((x) => /^[a-z]+\.[a-z]{2}$/.test(x))) fail('scope.json needs a left_out list of suffixes');
+for (const x of scope.left_out || []) if (scope.suffixes.some((s) => s.suffix === x)) fail(`${x} is both measured and left out`);
 
 for (const g of GROUPS) if (!pairOk(checks.groups[g])) fail(`group ${g} needs wording in both languages`);
 for (const lvl of COMMON_LEVELS) if (!pairOk(checks.common_levels[lvl])) fail(`common level ${lvl} needs wording in both languages`);
@@ -59,6 +63,7 @@ const REQUIRED_UI = ['tagline', 'hero_title_1', 'hero_title_2', 'hero_sub', 'bas
 for (const k of REQUIRED_UI) if (!ui[k]) fail(`ui.json lacks ${k}`);
 for (const c of [...Object.keys(scope.countries), 'GCC']) if (!pairOk(ui[`in_${c}`])) fail(`ui.json lacks in_${c}`);
 for (const s of ['all', ...Object.keys(scope.sectors)]) if (!pairOk(ui[`of_${s}`])) fail(`ui.json lacks of_${s}`);
+for (const s of Object.keys(scope.sectors)) if (!pairOk(ui[`part_${s}`]) || !ui[`part_${s}`].en.includes('{n}') || !ui[`part_${s}`].ar.includes('{n}')) fail(`ui.json lacks part_${s} with {n}`);
 for (const [k, v] of Object.entries(ui)) {
   if (k.startsWith('w_')) {
     if (!Array.isArray(v.en) || v.en.length !== 2 || !Array.isArray(v.ar) || v.ar.length !== 5) fail(`ui.json ${k} needs two English and five Arabic forms`);

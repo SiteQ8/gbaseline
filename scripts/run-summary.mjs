@@ -22,8 +22,12 @@ export function runSummary(summary, bundle) {
     out.push(`| ${placeName(p)} | ${n.discovered} | ${n.live} | ${n.retired} | ${n.broken} |`);
   }
   // Shares for the Gulf as a whole only: like the site, the run never sets the states side by side.
-  out.push('', '### Share passing in the Gulf', '', '| Check | All sectors | Government | Education |', '|---|---:|---:|---:|');
-  for (const c of bundle.order) out.push(`| ${bundle.checks[c.id].short.en} | ${['all', 'government', 'education'].map((g) => share(summary.checks[c.id].GCC[g])).join(' | ')} |`);
+  const sectors = ['all', ...Object.keys(bundle.scope.sectors)];
+  const sectorName = (g) => (g === 'all' ? 'All sectors' : bundle.scope.sectors[g].en);
+  out.push('', '### Share passing in the Gulf', '', `| Check | ${sectors.map(sectorName).join(' | ')} |`, `|---|${sectors.map(() => '---:').join('|')}|`);
+  for (const c of bundle.order) out.push(`| ${bundle.checks[c.id].short.en} | ${sectors.map((g) => share(summary.checks[c.id].GCC[g])).join(' | ')} |`);
+  out.push('', '| Sector | Discovered | Live |', '|---|---:|---:|');
+  for (const g of sectors) { const n = summary.inventory.GCC[g]; out.push(`| ${sectorName(g)} | ${n.discovered} | ${n.live} |`); }
   const q = summary.quality || {};
   const a = q.agreement || {};
   const w = q.web || {};
