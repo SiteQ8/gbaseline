@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { root, textFiles, readJson } from './helpers.mjs';
 import { parseSecurityTxt } from '../docs/assets/engine/records.js';
@@ -72,4 +72,40 @@ test('no published file names a domain', () => {
   }
   assert.ok(!existsSync(join(root, 'docs/data/hall.json')), 'no list of named domains is published');
   assert.ok(!/hall/i.test(app), 'the site has no page that lists domains by name');
+});
+
+// A JPEG comment segment written right after the start of image, keyed like the share card's PNG chunk.
+function jpegComments(buf) {
+  const out = [];
+  for (let i = 2; i + 4 <= buf.length && buf[i] === 0xff;) {
+    const marker = buf[i + 1];
+    if (marker === 0xda) break;
+    const len = buf.readUInt16BE(i + 2);
+    if (marker === 0xfe) out.push(buf.toString('latin1', i + 4, i + 2 + len));
+    i += 2 + len;
+  }
+  return out;
+}
+
+test('every picture on the site is the NASA photograph and says so inside the file', () => {
+  const dir = join(root, 'docs/img');
+  const files = readdirSync(dir).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f));
+  assert.ok(files.length >= 4, 'the page carries real pictures');
+  for (const f of files) {
+    const notes = jpegComments(readFileSync(join(dir, f))).filter((c) => c.startsWith(`${PROVENANCE_KEY}\0`));
+    assert.equal(notes.length, 1, `${f} carries one origin note`);
+    assert.match(notes[0], /\0Origin: photograph of the Gulf at night .* NASA .* public domain/, `${f} names its source and licence`);
+    assert.ok(!/Persian/i.test(notes[0]), `${f}: the origin note names the Gulf as the site does`);
+  }
+  for (const m of app.matchAll(/img\/([a-z0-9-]+\.(?:jpe?g|png|webp|avif))/g)) assert.ok(files.includes(m[1]), `the app refers to img/${m[1]}, which exists`);
+});
+
+test('two typefaces, both under the Open Font License, and nothing that sets the states side by side', () => {
+  const families = new Set([...css.matchAll(/font-family:\s*'([^']+)'/g)].map((m) => m[1]));
+  assert.deepEqual([...families].sort(), ['Alexandria', 'El Messiri']);
+  const ofl = read('docs/fonts/OFL.txt');
+  assert.match(ofl, /El Messiri: Copyright/);
+  assert.match(ofl, /Alexandria: Copyright/);
+  for (const m of html.matchAll(/rel="preload" href="(fonts\/[^"]+)"/g)) assert.ok(existsSync(join(root, 'docs', m[1])), `${m[1]} is preloaded and exists`);
+  assert.ok(!/compare|ranking/i.test(app), 'the site has no comparison of states');
 });

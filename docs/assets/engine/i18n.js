@@ -10,9 +10,10 @@ export function number(n, lang) {
   return lang === 'ar' ? String(Math.round(n)) : Math.round(n).toLocaleString('en-US');
 }
 
+// One decimal, like the open data: 63.4٪ in Arabic and 63.4% in English.
 export function percent(value, lang) {
-  if (value === null || value === undefined) return '';
-  const v = Math.round(value);
+  if (value === null || value === undefined || Number.isNaN(value)) return '';
+  const v = (Math.round(value * 10) / 10).toFixed(1);
   return lang === 'ar' ? `${v}٪` : `${v}%`;
 }
 
