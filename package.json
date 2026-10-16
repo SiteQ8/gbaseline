@@ -1,7 +1,7 @@
 {
   "name": "gbaseline",
   "version": "0.1.0",
-  "description": "An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, with a live check for any domain, open data and an MCP server",
+  "description": "An open weekly measurement of how well the public domains of the six Arabian Gulf states protect email, DNS and the web, with a live check for any domain, open data and an MCP server",
   "type": "module",
   "bin": {
     "gbaseline": "bin/cli.mjs"
@@ -17,7 +17,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
-    "test": "node --test test/engine.test.mjs test/probe.test.mjs test/pipeline.test.mjs test/data.test.mjs test/name.test.mjs test/mcp.test.mjs test/site.test.mjs",
+    "test": "node --test test/engine.test.mjs test/probe.test.mjs test/pipeline.test.mjs test/data.test.mjs test/name.test.mjs test/mcp.test.mjs test/site.test.mjs test/naming.test.mjs",
     "test:ui": "node test/ui.mjs",
     "preflight": "node scripts/preflight.mjs",
     "selftest": "node mcp/server.mjs --selftest",

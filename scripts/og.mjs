@@ -1,5 +1,5 @@
 // Renders docs/og.png, the 1200 by 630 card that link previews show: the site's card with its measuring scale
-// beside the photograph of the Gulf at night, from the site's own fonts and image, then writes its provenance into
+// beside a photograph of the Arabian Gulf coast at night, from the site's own fonts and image, then writes its provenance into
 // the PNG. Needs Playwright: set PW_MODULE and PW_CHROME when they are not on the
 // default paths. --out writes elsewhere, and --ar, --en and --domain override project.json for a trial render.
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -12,7 +12,7 @@ const here = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const WIDTH = 1200;
 export const HEIGHT = 630;
 export const PROVENANCE_KEY = 'impeccable:prompt';
-export const PROVENANCE = "Origin: rendered by scripts/og.mjs from the site's own fonts (El Messiri and Alexandria, SIL Open Font License), its colour tokens and its photograph of the Gulf at night taken from the International Space Station by the NASA Expedition 63 crew on 31 August 2020 (public domain, Wikimedia Commons page 99981618). No generated imagery.";
+export const PROVENANCE = "Origin: rendered by scripts/og.mjs from the site's own fonts (El Messiri and Alexandria, SIL Open Font License), its colour tokens and its photograph of Dammam and the Eastern Province coast of the Arabian Gulf at night, taken from the International Space Station by the NASA Expedition 62 crew on 25 March 2020 (public domain, Wikimedia Commons page 88992012). No generated imagery.";
 
 // A PNG tEXt chunk placed before IEND. Keyword and text are Latin-1, which the provenance line is.
 export function withText(png, key, text) {
@@ -46,7 +46,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 
 export function cardHtml({ nameAr, nameEn, domain, title }, root = here) {
   const font = (f) => `data:font/woff2;base64,${readFileSync(join(root, 'docs/fonts', f)).toString('base64')}`;
-  const photo = `data:image/jpeg;base64,${readFileSync(join(root, 'docs/img/gulf-night-1600.jpg')).toString('base64')}`;
+  const photo = `data:image/jpeg;base64,${readFileSync(join(root, 'docs/img/dammam-night-1600.jpg')).toString('base64')}`;
   const AR = 'U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F';
   const LA = 'U+0000-00FF, U+2000-206F';
   const ticks = Array.from({ length: 29 }, (_, i) => `<i${i % 4 === 0 ? ' class="major"' : ''}></i>`).join('');

@@ -90,7 +90,7 @@ try {
   assert.equal(await page.locator('.split.home .btn').getAttribute('href'), '#/domain');
   assert.match(await page.textContent('.card-foot'), /العدد 2 لأسبوع 19 أكتوبر 2026/);
   assert.equal(await page.locator('.scale i').first().count(), 1, 'the card carries its measuring scale');
-  assert.equal(await page.locator('.night img').getAttribute('src'), 'img/gulf-night-1600.jpg');
+  assert.equal(await page.locator('.night img').getAttribute('src'), 'img/dammam-night-1600.jpg');
   assert.match(await page.textContent('.night figcaption'), /ناسا/, 'the photograph is credited where it is shown');
   // The ledger: the Gulf only, six clauses aligned on the decimal point.
   assert.equal(await page.locator('.figures .row').count(), CLAUSES.length);
