@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "To quote a figure, cite the issue it comes from: every issue page gives its reference in Arabic and English and a BibTeX entry. To cite the project as a whole, use this entry."
+title: "Gulf Cybersecurity Baseline"
+abstract: "An open weekly measurement of how well the public domains of the six Arabian Gulf states protect email, DNS and the web, published as totals anyone can quote, with open data, a live check for any domain and an MCP server."
+type: dataset
+authors:
+  - family-names: AlEnezi
+    given-names: Ali
+    website: "https://3li.info"
+repository-code: "https://github.com/SiteQ8/gbaseline"
+url: "https://gbaseline.3li.info"
+license: MIT
+version: 0.1.0
+date-released: "2026-10-16"
+keywords:
+  - cybersecurity
+  - Arabian Gulf
+  - GCC
+  - DMARC
+  - DNSSEC
+  - HTTPS
+  - TLS
+  - post quantum
+  - open data

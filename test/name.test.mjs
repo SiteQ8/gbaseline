@@ -67,7 +67,8 @@ test('naming writes every file that depends on the name, passes the release buil
     assert.match(html, /<title>مثال · [^<]+<\/title>/);
     assert.match(html, /<link rel="canonical" href="https:\/\/example\.3li\.info\/">/);
     assert.match(html, /<meta property="og:image" content="https:\/\/example\.3li\.info\/og\.png">/);
-    assert.ok(!/\sstyle=|<script(?![^>]*\bsrc=)[^>]*>[^<]/.test(html), 'still no inline styles or scripts');
+    assert.ok(!/\sstyle=|<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>[^<]/.test(html), 'still no inline styles or scripts');
+    assert.match(read('docs/en/index.html'), /<link rel="canonical" href="https:\/\/example\.3li\.info\/en\/">/, 'every page carries the new name');
     const bundle = JSON.parse(read('docs/data/bundle.json'));
     assert.equal(bundle.project.slug, 'example-site', 'the bundle carries the name');
     const before = snapshot(dir);
