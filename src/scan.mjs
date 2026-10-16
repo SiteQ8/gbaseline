@@ -26,6 +26,14 @@ export function merge(first, second) {
   return { ...first, r, agree: first.agree === false ? second.agree : first.agree };
 }
 
+// A stable shard for a domain (FNV-1a), so the weekly run can split the inventory across runners and every
+// domain lands in exactly one shard whatever the order of the inventory.
+export function shardOf(domain, count) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < domain.length; i += 1) { h ^= domain.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h % count;
+}
+
 export async function suffixChains(scope, resolver) {
   const chain = {};
   for (const s of scope.suffixes) chain[s.suffix] = await suffixChain(s.suffix, resolver);
@@ -40,6 +48,7 @@ export async function scan(inventory, scope, options = {}) {
   let jobs = Object.entries(inventory.domains)
     .map(([d, row]) => ({ d, suffix: row.suffix, ...meta.get(row.suffix) }))
     .filter((j) => j.country && !excluded.has(j.d));
+  if (options.shard) jobs = jobs.filter((j) => shardOf(j.d, options.shard.count) === options.shard.index);
   if (options.only) jobs = jobs.filter((j) => options.only.includes(j.d));
   if (options.limit) jobs = jobs.slice(0, options.limit);
   const rows = [];
@@ -85,4 +94,16 @@ export async function scan(inventory, scope, options = {}) {
   }
   rows.sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : 0));
   return { rows, chain, retried, seconds: Math.round((Date.now() - started) / 1000), resolver: { ...resolver.stats } };
+}
+
+// One run spread over several shards, put back together: every domain once, the longest shard as the run's time.
+export function mergeScans(parts) {
+  if (parts.length === 1) return parts[0];
+  const seen = new Set();
+  const rows = [];
+  for (const p of parts) for (const r of p.rows) { if (!seen.has(r.d)) { seen.add(r.d); rows.push(r); } }
+  rows.sort((x, y) => (x.d < y.d ? -1 : x.d > y.d ? 1 : 0));
+  const resolver = {};
+  for (const p of parts) for (const [k, v] of Object.entries(p.resolver || {})) if (typeof v === 'number') resolver[k] = (resolver[k] || 0) + v;
+  return { rows, chain: parts[0].chain, retried: parts.reduce((n, p) => n + (p.retried || 0), 0), seconds: Math.max(...parts.map((p) => p.seconds || 0)), resolver };
 }

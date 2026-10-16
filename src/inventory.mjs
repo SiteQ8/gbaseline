@@ -1,4 +1,5 @@
-// The inventory: every registrable domain under the government and education suffixes of the six Gulf states.
+// The inventory: every registrable domain under the measured suffixes of the six Gulf states (government,
+// education, health, business, non-profit and network).
 // Names come from Certificate Transparency (crt.sh, by its public database first and its JSON interface second)
 // and from the Tranco list of popular sites. A source that fails never shrinks the inventory: names seen once stay,
 // and the weekly scan decides from DNS whether each one still exists.
@@ -26,7 +27,7 @@ export function entityOf(name, suffixes) {
 const sql = (suffix) => `SELECT DISTINCT lower(cai.name_value) FROM certificate_and_identities cai WHERE plainto_tsquery('certwatch', '${suffix}') @@ identities(cai.certificate) AND lower(cai.name_value) LIKE '%.${suffix}';`;
 
 // crt.sh offers a read only PostgreSQL guest login. psql ships on GitHub's Ubuntu runners.
-export function crtPsql(suffix, { timeoutMs = 900000, bin = 'psql' } = {}) {
+export function crtPsql(suffix, { timeoutMs = 480000, bin = 'psql' } = {}) {
   if (!/^[a-z0-9.]+$/.test(suffix)) return Promise.resolve({ ok: false, error: 'bad-suffix', names: [] });
   return new Promise((resolve) => {
     const args = ['-h', 'crt.sh', '-p', '5432', '-U', 'guest', '-d', 'certwatch', '-A', '-t', '-X', '-q', '-c', sql(suffix)];
@@ -46,7 +47,7 @@ export function crtPsql(suffix, { timeoutMs = 900000, bin = 'psql' } = {}) {
   });
 }
 
-export async function crtJson(suffix, { fetchImpl = globalThis.fetch, timeoutMs = 600000 } = {}) {
+export async function crtJson(suffix, { fetchImpl = globalThis.fetch, timeoutMs = 420000 } = {}) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {

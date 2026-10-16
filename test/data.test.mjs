@@ -66,7 +66,10 @@ test('scope and project read in both languages and the suffixes cover every coun
   for (const [k, p] of Object.entries(scope.sectors)) check(p, `sector ${k}`);
   check(project.about, 'project.about');
   check(project.author, 'project.author');
-  for (const c of Object.keys(scope.countries)) for (const s of Object.keys(scope.sectors)) assert.equal(scope.suffixes.filter((x) => x.country === c && x.sector === s).length, 1, `${c} ${s}`);
+  // Every state has government and education suffixes; the other sectors exist where the state's registry offers them.
+  for (const c of Object.keys(scope.countries)) for (const s of ['government', 'education']) assert.ok(scope.suffixes.some((x) => x.country === c && x.sector === s), `${c} ${s}`);
+  for (const s of Object.keys(scope.sectors)) assert.ok(scope.suffixes.some((x) => x.sector === s), `sector ${s} has a suffix`);
+  for (const x of scope.left_out) assert.ok(!scope.suffixes.some((s) => s.suffix === x), `${x} left out`);
   assert.equal(new Set(scope.suffixes.map((s) => s.suffix)).size, scope.suffixes.length, 'no suffix twice');
 });
 
