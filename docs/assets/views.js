@@ -220,17 +220,18 @@ function sectorPanels(k, issue, place, body, slot = null) {
 
 // A long table with its heading held in the margin beside it, and the tabs that change it under the heading, so the
 // reader always sees which place and which sector the rows belong to.
-function ledger(k, id, head, body, { note = null, tabs = false } = {}) {
+function ledger(k, id, head, body, { note = null, tabs = false, after = null } = {}) {
   return h('section', { class: 'text-sec ledger', 'aria-labelledby': `${id}-h` },
     h('div', { class: 'ledger-head' },
       h('h2', { id: `${id}-h`, class: 'big-h', 'data-rise': '' }, head),
       note ? h('p', { class: 'ledger-note', 'data-rise': '' }, note) : null,
-      tabs ? h('div', { class: 'tab-slot', id: `${id}-tabs` }) : null),
+      tabs ? h('div', { class: 'tab-slot', id: `${id}-tabs` }) : null,
+      after ? h('p', { class: 'ledger-note', 'data-rise': '' }, after) : null),
     h('div', { class: 'ledger-body' }, body));
 }
 
 const allTable = (k, issue, place) => ledger(k, 'all', place === 'GCC' ? k.t('all_table_GCC') : k.t('country_table', { place: k.t(`in_${place}`) }),
-  sectorPanels(k, issue, place, (sector) => standardsTable(k, issue, place, sector), 'all-tabs'), { tabs: true });
+  sectorPanels(k, issue, place, (sector) => standardsTable(k, issue, place, sector), 'all-tabs'), { tabs: true, after: k.t('table_how') });
 
 /* ---------- the footer: the repository as the way to reach us ---------- */
 
