@@ -1,5 +1,5 @@
-Amiri: Copyright 2010-2022 The Amiri Project Authors (https://github.com/aliftype/amiri)
-Noto Naskh Arabic: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)
+El Messiri: Copyright 2015 The El Messiri Project Authors (https://github.com/Gue3bara/El-Messiri)
+Alexandria: Copyright 2022 The Alexandria Project Authors (https://github.com/Gue3bara/Alexandria)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

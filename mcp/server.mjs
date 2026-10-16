@@ -5,6 +5,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { CHECKS, GROUPS, suffixChain } from '../docs/assets/engine/checks.js';
 import { createResolver, cleanDomain } from '../docs/assets/engine/dns.js';
+import { CLAUSES, clauseShare } from '../docs/assets/engine/clauses.js';
 import { tr, ui, share, percent, counted, dateLong } from '../docs/assets/engine/i18n.js';
 import { bundle, project, scope, userAgent, levelText } from '../src/meta.mjs';
 import { bySuffixLength } from '../src/inventory.mjs';
@@ -32,10 +33,9 @@ const CHECK = { type: 'string', enum: IDS, description: `One of ${IDS.join(', ')
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 
 export const tools = [
-  { name: T('overview'), title: 'Overview of the latest issue', description: 'What the observatory measures, the latest weekly issue with its date, the headline figures for the Gulf (email impersonation, post quantum readiness, vulnerability disclosure, DNSSEC) with their counts, coverage and where the open data lives. Start here.', inputSchema: { type: 'object', properties: { lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
-  { name: T('figures'), title: 'Every check for a country and sector', description: 'The share of measured domains passing each of the thirteen checks, with the passing and measured counts and what the scan found (the levels), for the Gulf as a whole or one country, all sectors or government or education.', inputSchema: { type: 'object', properties: { place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
-  { name: T('compare'), title: 'One check across the six states', description: 'One check side by side for the Gulf and each of the six states, with counts, for all sectors or one sector.', inputSchema: { type: 'object', properties: { check: CHECK, sector: SECTOR, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
-  { name: T('check_info'), title: 'What a check means and how to fix it', description: 'The question a check answers, why it matters, exactly when it passes, the steps to fix it, an example record and the standards behind it.', inputSchema: { type: 'object', properties: { check: CHECK, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
+  { name: T('overview'), title: 'Overview of the latest issue', description: 'What the baseline measures, the latest weekly issue with its date, the six headline figures for the Gulf as a whole (email impersonation, DNSSEC, HSTS, old TLS versions, post quantum readiness, vulnerability disclosure) with their counts and ready to quote sentences, coverage and where the open data lives. Start here.', inputSchema: { type: 'object', properties: { lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
+  { name: T('figures'), title: 'Every check for the Gulf or one state', description: 'The share of measured domains passing each of the thirteen checks, with the passing and measured counts and what the scan found (the levels), for the Gulf as a whole or for one state on its own, all sectors or government or education. One place per call: the baseline does not rank or compare the states.', inputSchema: { type: 'object', properties: { place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
+  { name: T('check_info'), title: 'What a check means and how to fix it', description: 'The question a check answers, why it matters, exactly when it passes, the steps to fix it, an example record, the standards behind it and the Gulf figure from the latest issue.', inputSchema: { type: 'object', properties: { check: CHECK, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
   { name: T('history'), title: 'Week by week series', description: 'The weekly series of one check for a place and sector: date, issue number, passing, measured and share.', inputSchema: { type: 'object', properties: { check: CHECK, place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
   { name: T('methodology'), title: 'Method, limits and citation', description: 'How the domains are found and measured, what is published and what is not, the limits of the measurement, data quality for the latest issue and how to cite a figure.', inputSchema: { type: 'object', properties: { lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('check_domain'), title: 'Check any domain live', description: 'Runs every check live for one domain from this machine: DNS over HTTPS through two public resolvers, then HTTPS, HSTS, TLS versions, the post quantum hybrid key exchange and security.txt. Takes a few seconds. dns_only skips the website and TLS probes.', inputSchema: { type: 'object', properties: { domain: { type: 'string', description: 'A domain such as example.com. A URL or an email address works too.' }, dns_only: { type: 'boolean', default: false }, lang: LANG, response_format: FORMAT }, required: ['domain'], additionalProperties: false }, annotations: { ...RO, idempotentHint: false, openWorldHint: true } },
@@ -72,20 +72,21 @@ export function makeHandlers(data) {
       const base = { name: tr({ en: project.name_en, ar: project.name_ar }, lang) || null, about: tr(project.about, lang), site: site(), checks: IDS, places: PLACES, suffixes: scope.suffixes.map((s) => s.suffix) };
       if (!data.summary) {
         const out = { ...base, issue: null, note: ui(bundle, 'pending_body', lang) };
-        return result(out, [`# ${base.name || 'Gulf posture observatory'}`, '', base.about, '', out.note].join('\n'), args);
+        return result(out, [`# ${base.name || 'Gulf Cybersecurity Baseline'}`, '', base.about, '', out.note].join('\n'), args);
       }
       const s = data.summary;
       const g = s.inventory.GCC.all;
-      const head = (id, mode) => { const c = s.checks[id].GCC.all; const v = share(c); return { check: id, share: v === null ? null : Math.round((mode === 'fail' ? 100 - v : v) * 10) / 10, count: mode === 'fail' ? c.fail : c.pass, measured: c.pass + c.fail }; };
-      const headlines = { impersonable_email: head('dmarc', 'fail'), post_quantum: head('pq_kex', 'pass'), security_txt: head('security_txt', 'pass'), dnssec: head('dnssec', 'pass') };
-      const out = { ...base, issue: s.issue, date: s.date, live_domains: g.live, discovered: g.discovered, headlines, data: site() ? { latest_csv: `${site()}data/open/latest.csv`, history_csv: `${site()}data/open/history.csv`, summary_json: `${site()}data/summary.json` } : null };
       const vars = { place: ui(bundle, 'in_GCC', lang), sector: ui(bundle, 'of_all', lang) };
+      // The six clauses of the issue, with the sentences the site prints on its citation slips.
+      const clauses = CLAUSES.map((cl) => {
+        const f = clauseShare(s.checks[cl.id].GCC.all, cl.mode);
+        const pct = f.v === null ? null : Math.round(f.v * 10) / 10;
+        return { clause: cl.n, check: cl.id, counts: cl.mode === 'fail' ? 'not_passing' : 'passing', share: pct, count: f.count, measured: f.measured, sentence: f.measured ? ui(bundle, `cite_${cl.id}`, lang, { ...vars, pct: pctText(pct, lang) }) : ui(bundle, 'no_data_sentence', lang), cite: site() ? `${site()}?lang=${lang}#/?i=${s.issue}&c=${cl.n}` : null };
+      });
+      const out = { ...base, issue: s.issue, date: s.date, live_domains: g.live, discovered: g.discovered, clauses, data: site() ? { latest_csv: `${site()}data/open/latest.csv`, history_csv: `${site()}data/open/history.csv`, summary_json: `${site()}data/summary.json` } : null };
       const md = [
-        `# ${J(lang, base.name || 'Gulf posture observatory', ui(bundle, 'issue', lang, { n: s.issue }), dateLong(s.date, lang))}`, '', base.about, '',
-        `- ${ui(bundle, 'lead_dmarc', lang, { ...vars, pct: pctText(headlines.impersonable_email.share, lang) })} ${C(lang, headlines.impersonable_email.count, headlines.impersonable_email.measured)}`,
-        `- ${ui(bundle, 'cite_pq_kex', lang, { ...vars, pct: pctText(headlines.post_quantum.share, lang) })} ${C(lang, headlines.post_quantum.count, headlines.post_quantum.measured)}`,
-        `- ${ui(bundle, 'cite_security_txt', lang, { ...vars, pct: pctText(headlines.security_txt.share, lang) })} ${C(lang, headlines.security_txt.count, headlines.security_txt.measured)}`,
-        `- ${ui(bundle, 'cite_dnssec', lang, { ...vars, pct: pctText(headlines.dnssec.share, lang) })} ${C(lang, headlines.dnssec.count, headlines.dnssec.measured)}`,
+        `# ${J(lang, base.name || 'Gulf Cybersecurity Baseline', ui(bundle, 'issue', lang, { n: s.issue }), dateLong(s.date, lang))}`, '', base.about, '',
+        ...clauses.map((c) => `- ${c.sentence} ${C(lang, c.count, c.measured)}`),
         '', ui(bundle, 'source_line', lang, { date: dateLong(s.date, lang), domains: counted(g.live, bundle.ui.w_live_domain, lang) }),
       ].join('\n');
       return result(out, md, args);
@@ -100,23 +101,14 @@ export function makeHandlers(data) {
       const md = [`# ${J(lang, placeName(place, lang), sectorName(sector, lang), ui(bundle, 'issue', lang, { n: s.issue }))}`, '', ...GROUPS.flatMap((g) => [`## ${tr(bundle.groups[g], lang)}`, ...rows.filter((r) => r.group === g).map((r) => `- ${KV(lang, r.name, pctText(r.share, lang))} ${C(lang, r.pass, r.measured)}`), ''])].join('\n');
       return result(out, md, args);
     },
-    [T('compare')](args) {
-      const lang = pickLang(args);
-      const s = requireSummary(data, lang);
-      const id = pick(args.check, IDS);
-      const sector = pick(args.sector, SECTORS, 'all');
-      const rows = PLACES.map((p) => ({ place: p, name: placeName(p, lang), ...row(s, id, p, sector, lang) }));
-      const out = { issue: s.issue, date: s.date, check: id, sector, places: rows };
-      const md = [`# ${J(lang, tr(bundle.checks[id].title, lang), sectorName(sector, lang))}`, '', ...rows.map((r) => `- ${KV(lang, r.name, pctText(r.share, lang))} ${C(lang, r.pass, r.measured)}`)].join('\n');
-      return result(out, md, args);
-    },
     [T('check_info')](args) {
       const lang = pickLang(args);
       const id = pick(args.check, IDS);
       const c = bundle.checks[id];
       const out = { check: id, group: CHECKS.find((x) => x.id === id).group, title: tr(c.title, lang), question: tr(c.question, lang), why: tr(c.why, lang), passes_when: tr(c.pass, lang), fix: c.fix.map((f) => tr(f, lang)), example: c.example || null, standards: c.refs };
-      if (data.summary) out.gulf = PLACES.map((p) => { const cell = data.summary.checks[id][p].all; const v = share(cell); return { place: p, share: v === null ? null : Math.round(v * 10) / 10, pass: cell.pass, measured: cell.pass + cell.fail }; });
-      const md = [`# ${out.title}`, '', `**${out.question}**`, '', out.why, '', `## ${ui(bundle, 'check_pass', lang)}`, out.passes_when, '', `## ${ui(bundle, 'check_fix', lang)}`, ...out.fix.map((f, i) => `${i + 1}. ${f}`), ...(out.example ? ['', '```', out.example, '```'] : []), '', ...c.refs.map((r) => `- [${r.label}](${r.url})`)].join('\n');
+      if (data.summary) { const cell = data.summary.checks[id].GCC.all; const v = share(cell); out.gulf = { issue: data.summary.issue, date: data.summary.date, share: v === null ? null : Math.round(v * 10) / 10, pass: cell.pass, measured: cell.pass + cell.fail }; }
+      const gulfLine = out.gulf && out.gulf.share !== null ? ['', `${ui(bundle, 'check_gulf', lang)} · ${pctText(out.gulf.share, lang)} ${C(lang, out.gulf.pass, out.gulf.measured)}`] : [];
+      const md = [`# ${out.title}`, '', `**${out.question}**`, ...gulfLine, '', out.why, '', `## ${ui(bundle, 'check_pass', lang)}`, out.passes_when, '', `## ${ui(bundle, 'check_fix', lang)}`, ...out.fix.map((f, i) => `${i + 1}. ${f}`), ...(out.example ? ['', '```', out.example, '```'] : []), '', ...c.refs.map((r) => `- [${r.label}](${r.url})`)].join('\n');
       return result(out, md, args);
     },
     [T('history')](args) {
@@ -175,8 +167,8 @@ export function serve(handlers) {
         reply(id, {
           protocolVersion: SUPPORTED.includes(asked) ? asked : SUPPORTED[0],
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: pkg.name, title: `${project.name_en || 'Gulf posture observatory'} MCP server`, version: pkg.version },
-          instructions: 'Read-only tools over a weekly, passive measurement of every public domain under the government and education suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman: email impersonation protection, DNSSEC, HTTPS and HSTS, TLS versions, post quantum key exchange and security.txt. Cite the issue number and date with any figure. The figures describe public configuration only and are not an audit of any organisation. No tool lists organisations that fail.',
+          serverInfo: { name: pkg.name, title: `${project.name_en || 'Gulf Cybersecurity Baseline'} MCP server`, version: pkg.version },
+          instructions: 'Read-only tools over a weekly, passive measurement of every public domain under the government and education suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman: email impersonation protection, DNSSEC, HTTPS and HSTS, TLS versions, post quantum key exchange and security.txt. Cite the issue number and date with any figure. The figures describe public configuration only and are not an audit of any organisation. No tool lists organisations, and no tool ranks or compares the states: ask for the Gulf as a whole or for one state at a time.',
         });
         return;
       }
@@ -227,17 +219,20 @@ async function selftest() {
   let failn = 0;
   const ok = (cond, label) => { if (cond) pass += 1; else { failn += 1; console.error('FAIL: ' + label); } };
   try {
-    ok(tools.length === 7, 'seven tools');
+    ok(tools.length === 6, 'six tools');
+    ok(!tools.some((x) => /compare/.test(x.name)), 'no tool sets the states side by side');
     ok(!JSON.stringify(h[T('overview')]({}).structuredContent).includes('a.gov.kw'), 'no tool names a measured domain');
     const ov = h[T('overview')]({}).structuredContent;
     ok(ov.live_domains === 3 && ov.discovered === 4, 'overview counts three live of four discovered');
-    ok(ov.headlines.impersonable_email.share === 33.3 && ov.headlines.impersonable_email.count === 1, 'one of three can be impersonated');
+    const dm = ov.clauses.find((c) => c.check === 'dmarc');
+    ok(ov.clauses.length === 6 && dm.share === 33.3 && dm.count === 1 && dm.counts === 'not_passing', 'one of three can be impersonated');
+    ok(/33\.3%/.test(dm.sentence), 'the overview quotes the clause sentence with one decimal');
     const kw = h[T('figures')]({ place: 'KW', sector: 'government', lang: 'ar' }).structuredContent;
     ok(kw.checks.find((c) => c.check === 'dmarc').share === 50 && /[\u0600-\u06FF]/.test(kw.checks[0].name), 'Kuwait government DMARC at half, in Arabic');
-    const cmp = h[T('compare')]({ check: 'dmarc' }).structuredContent;
-    ok(cmp.places.length === 7 && cmp.places.find((p) => p.place === 'OM').measured === 0, 'compare lists seven places and Oman has no live domain');
+    const om = h[T('figures')]({ place: 'OM' }).structuredContent;
+    ok(om.live_domains === 0 && om.checks.every((c) => c.measured === 0), 'Oman alone has no live domain in the synthetic issue');
     const info = h[T('check_info')]({ check: 'pq_kex' }).structuredContent;
-    ok(info.passes_when.includes('X25519MLKEM768') && info.gulf.length === 7, 'post quantum check explains its group');
+    ok(info.passes_when.includes('X25519MLKEM768') && info.gulf && !Array.isArray(info.gulf) && info.gulf.measured === 3, 'post quantum check explains its group and gives the Gulf figure only');
     ok(h[T('history')]({ check: 'dmarc' }).structuredContent.series.length === 1, 'one week of history');
     ok(h[T('methodology')]({ lang: 'ar' }).structuredContent.sections.length === 6, 'six method sections');
     let threw = false; try { await h[T('check_domain')]({ domain: 'not a domain' }); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'invalid domain throws ToolError');
