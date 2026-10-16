@@ -13,4 +13,5 @@ First release.
 - Command line tool for the full check of any domain, and an MCP server with six read only tools.
 - Weekly workflow that runs by itself every Monday and whenever the scope changes: it refreshes the inventory, scans it across six runners, tests what it is about to publish, commits the new issue, archives it as a release with its open data and asks Pages to publish it, with a totals only summary on the job page, and a test workflow for every change.
 - Domains can be left out at their administrators' request through the exclude list in `data/src/scope.json`.
+- The inventory of names is the weekly run's working data: it passes from one run to the next as an artifact and is never committed, so the repository and the site hold totals only.
 - The Arabian Gulf is called by its name in every language the project speaks. A test reads every file, every credit and the metadata inside every picture, and each photograph is chosen only after reading its source page.
