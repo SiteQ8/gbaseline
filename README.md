@@ -6,6 +6,8 @@
 
 الموقع | Site: **https://gbaseline.3li.info**
 
+فيلم الإطلاق | Launch film: [العربية](https://github.com/SiteQ8/gbaseline/releases/download/v0.1.0/gbaseline-film-ar.mp4) · [English](https://github.com/SiteQ8/gbaseline/releases/download/v0.1.0/gbaseline-film-en.mp4)
+
 ---
 
 ## بالعربية
@@ -156,6 +158,8 @@ npm run preflight   # everything above plus the publication gates
 ### The site
 
 Each issue is printed as stationery: a card with a measuring scale along its top, set beside a NASA photograph of the Gulf at night taken from the International Space Station, then the Gulf's figures as a ledger aligned on the decimal point, the citation slips, the run printed as an itinerary, a reply card for the live check and the back of a postcard as the footer. The home page shows the Gulf as a whole; each state has a page of its own. Display type is El Messiri and text is Alexandria, both drawing Arabic and Latin.
+
+The launch film, about a minute long in Arabic and in English, is recorded from the site itself with the figures of issue 1 and attached to the v0.1.0 release. Its narration, its music and the motion of its opening shot are generated, and its closing card says so.
 
 ### Citing
 
