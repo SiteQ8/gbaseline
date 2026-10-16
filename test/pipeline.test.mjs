@@ -133,5 +133,7 @@ test('the run summary on the job page carries totals and source health, never a 
   assert.match(text, /\| Gulf \| 5 \| 3 \| 1 \| 1 \|/);
   assert.match(text, /\| gov\.kw \| 120 \| failed: http-502 \|/);
   assert.match(text, /Tranco list ABC12: 410 domains in scope/);
+  assert.match(text, /### Share passing in the Gulf/);
+  assert.ok(!/\| Check \| Gulf \| Kuwait/.test(text), 'shares are for the Gulf only, never one state beside another');
   assert.ok(!/[a-z]\.(gov|edu|ac)\.[a-z]{2}\b/.test(text), 'no domain is named');
 });

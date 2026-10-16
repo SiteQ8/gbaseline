@@ -4,8 +4,14 @@
 
 Self hosted in `docs/fonts/` under the SIL Open Font License 1.1, whose full text is in `docs/fonts/OFL.txt`.
 
-- **Amiri**, Copyright 2010-2022 The Amiri Project Authors (https://github.com/aliftype/amiri). The Arabic file is subset to the Arabic blocks; the Latin files are unchanged.
-- **Noto Naskh Arabic**, Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic).
+- **El Messiri**, Copyright 2015 The El Messiri Project Authors (https://github.com/Gue3bara/El-Messiri). Weights 400 and 500, the Arabic and Latin files as subset by Fontsource 5.3.0, unchanged.
+- **Alexandria**, Copyright 2022 The Alexandria Project Authors (https://github.com/Gue3bara/Alexandria). Weights 300, 400 and 500, the Arabic and Latin files as subset by Fontsource 5.3.0, unchanged.
+
+## Photographs
+
+Every picture on the site comes from one photograph: the Gulf at night, taken from the International Space Station by the NASA Expedition 63 crew on 31 August 2020 at 21:04:55 UTC. NASA, public domain (https://creativecommons.org/publicdomain/mark/1.0/). Source: Wikimedia Commons, page 99981618 (https://commons.wikimedia.org/w/index.php?curid=99981618), downloaded at 3840 pixels on 16 October 2026.
+
+`docs/img/gulf-night-2400.jpg` and `gulf-night-1600.jpg` are the whole frame resized with a light denoise; `gulf-night-north.jpg`, `gulf-night-coast.jpg` and `gulf-night-stamp.jpg` are crops of it. Each file carries this origin in a JPEG comment. Nothing on the site is generated imagery.
 
 ## Data sources
 

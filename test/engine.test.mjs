@@ -240,7 +240,8 @@ test('Arabic counts agree with their number, percentages keep Western digits', (
   const w = { en: ['domain', 'domains'], ar: ['نطاق واحد', 'نطاقان', 'نطاقات', 'نطاقاً', 'نطاق'] };
   assert.deepEqual([1, 2, 3, 10, 11, 99, 100, 102, 103, 3955].map((n) => counted(n, w, 'ar')), ['نطاق واحد', 'نطاقان', '3 نطاقات', '10 نطاقات', '11 نطاقاً', '99 نطاقاً', '100 نطاق', '102 نطاق', '103 نطاقات', '3955 نطاقاً']);
   assert.equal(counted(3955, w, 'en'), '3,955 domains');
-  assert.equal(percent(61.5, 'ar'), '62٪');
-  assert.equal(percent(7, 'en'), '7%');
+  assert.equal(percent(61.54, 'ar'), '61.5٪', 'one decimal, like the open data');
+  assert.equal(percent(7, 'en'), '7.0%');
+  assert.equal(percent(null, 'en'), '');
   assert.equal(number(12345, 'ar'), '12345');
 });

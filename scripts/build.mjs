@@ -55,7 +55,7 @@ for (const { id } of CHECKS) {
   for (const lvl of Object.keys(c.levels || {})) if (!LEVELS[id].includes(lvl) && !COMMON_LEVELS.includes(lvl)) fail(`check ${id} describes level ${lvl}, which evaluate never returns`);
 }
 
-const REQUIRED_UI = ['tagline', 'lead_dmarc', 'lead_pq_kex', 'lead_security_txt', 'lead_dnssec', 'basis', 'cite_source', 'table_caption', 'source_line', 'domain_intro', 'foot_note', 'state_pass', 'state_fail', 'state_na', 'state_unknown'];
+const REQUIRED_UI = ['tagline', 'hero_title_1', 'hero_title_2', 'hero_sub', 'basis', 'cite_source', 'source_line', 'domain_intro', 'foot_note', 'state_pass', 'state_fail', 'state_na', 'state_unknown'];
 for (const k of REQUIRED_UI) if (!ui[k]) fail(`ui.json lacks ${k}`);
 for (const c of [...Object.keys(scope.countries), 'GCC']) if (!pairOk(ui[`in_${c}`])) fail(`ui.json lacks in_${c}`);
 for (const s of ['all', ...Object.keys(scope.sectors)]) if (!pairOk(ui[`of_${s}`])) fail(`ui.json lacks of_${s}`);
