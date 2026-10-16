@@ -1,8 +1,8 @@
 # Gulf Cybersecurity Baseline | خط الأساس الخليجي للأمن السيبراني
 
-**قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق وبيانات مفتوحة وخادم MCP لمساعدي الذكاء الاصطناعي.**
+**قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق وبيانات مفتوحة وخادم MCP لمساعدي الذكاء الاصطناعي.**
 
-**An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, published as totals anyone can quote, with a live check for any domain, open data and an MCP server for AI assistants.**
+**An open weekly measurement of how well the public domains of the six Arabian Gulf states protect email, DNS and the web, published as totals anyone can quote, with a live check for any domain, open data and an MCP server for AI assistants.**
 
 الموقع | Site: **https://gbaseline.3li.info**
 
@@ -14,7 +14,7 @@
 
 ### لماذا
 
-يستشهد المتحدثون والصحفيون والباحثون والجهات التنظيمية بأرقام عن الأمن السيبراني في الخليج لكن أغلب هذه الأرقام قديمة أو مغلقة أو تغطي بلداً واحداً ومعياراً واحداً لذا يقيس هذا المشروع كل أسبوع كل نطاق تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في الكويت والسعودية والإمارات وقطر والبحرين وعُمان ثمّ ينشر النتائج مجاميعَ مرقّمة بعدد أسبوعي وتاريخ حتى يُستشهد بها بدقة.
+يستشهد المتحدثون والصحفيون والباحثون والجهات التنظيمية بأرقام عن الأمن السيبراني في الخليج العربي لكن أغلب هذه الأرقام قديمة أو مغلقة أو تغطي بلداً واحداً ومعياراً واحداً لذا يقيس هذا المشروع كل أسبوع كل نطاق تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في الكويت والسعودية والإمارات وقطر والبحرين وعُمان ثمّ ينشر النتائج مجاميعَ مرقّمة بعدد أسبوعي وتاريخ حتى يُستشهد بها بدقة.
 
 ### ماذا يقيس
 
@@ -71,7 +71,7 @@ npx -y github:SiteQ8/gbaseline check example.com --lang ar
 
 ### Why
 
-Talks, articles, papers and policy notes about cybersecurity in the Gulf need figures, and most of the figures on hand are old, closed, or cover one country and one control. This project measures every registrable domain under the government, education, health, business, non-profit and network suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman every week, and publishes the results as numbered weekly issues so that any figure can be cited to its issue and date.
+Talks, articles, papers and policy notes about cybersecurity in the Arabian Gulf need figures, and most of the figures on hand are old, closed, or cover one country and one control. This project measures every registrable domain under the government, education, health, business, non-profit and network suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman every week, and publishes the results as numbered weekly issues so that any figure can be cited to its issue and date.
 
 ### What it measures
 
@@ -181,7 +181,7 @@ npm run preflight   # everything above plus the publication gates
 
 ### The site
 
-Each issue is printed as stationery: a card with a measuring scale along its top, set beside a NASA photograph of the Gulf at night taken from the International Space Station, then the Gulf's figures as a ledger aligned on the decimal point, the citation slips, the run printed as an itinerary, a reply card for the live check and the back of a postcard as the footer. The home page shows the Gulf as a whole; each state has a page of its own. Display type is El Messiri and text is Alexandria, both drawing Arabic and Latin.
+Each issue is printed as stationery: a card with a measuring scale along its top, set beside NASA night photographs of the Arabian Gulf's cities taken from the International Space Station, then the Gulf's figures as a ledger aligned on the decimal point, the citation slips, the run printed as an itinerary, a reply card for the live check and the back of a postcard as the footer. The home page shows the Gulf as a whole; each state has a page of its own. Display type is El Messiri and text is Alexandria, both drawing Arabic and Latin.
 
 The launch film, about a minute long in Arabic and in English, is recorded from the site itself with the figures of issue 1 and attached to the v0.1.0 release. Its narration, its music and the motion of its opening shot are generated, and its closing card says so.
 
