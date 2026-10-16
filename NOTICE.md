@@ -13,6 +13,10 @@ Every picture on the site comes from one photograph: the Gulf at night, taken fr
 
 `docs/img/gulf-night-2400.jpg` and `gulf-night-1600.jpg` are the whole frame resized with a light denoise; `gulf-night-north.jpg`, `gulf-night-coast.jpg` and `gulf-night-stamp.jpg` are crops of it. Each file carries this origin in a JPEG comment. Nothing on the site is generated imagery.
 
+## Launch film
+
+The films attached to the v0.1.0 release, `gbaseline-film-ar.mp4` and `gbaseline-film-en.mp4`, are recorded from this site with the figures of issue 1, published on 16 October 2026. Their opening shot moves slowly into the photograph above; that motion is generated from the photograph with Kling 2.5 Turbo through ElevenLabs. The narration in each language is generated with ElevenLabs (Eleven v4) and the music with ElevenLabs Music. The closing card of each film says so. None of this generated material is used on the site.
+
 ## Data sources
 
 - **Certificate Transparency logs**, read through crt.sh (https://crt.sh), to find the names under each suffix.
