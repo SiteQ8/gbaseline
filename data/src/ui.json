@@ -29,7 +29,7 @@
   },
   "pending_body": {
     "en": "The weekly scan has not published its first figures yet, but the checks, the method and the live domain check are ready now.",
-    "ar": "لم ينشر الفحص الأسبوعي أرقامه الأولى بعد لكن الفحوص والمنهجية والفحص المباشر للنطاقات جاهزة الآن."
+    "ar": "لم ينشر الفحص الأسبوعي أرقامه الأولى بعد لكن المعايير والمنهجية والفحص المباشر للنطاقات جاهزة الآن."
   },
   "hero_action": {
     "en": "Check your domain",
@@ -177,7 +177,7 @@
   },
   "no_data_sentence": {
     "en": "No domain could be measured for this yet.",
-    "ar": "لم يُقَس أي نطاق لهذا الفحص بعد."
+    "ar": "لم يُقَس أي نطاق لهذا المعيار بعد."
   },
   "cite": {
     "en": "Cite",
@@ -205,7 +205,7 @@
   },
   "source_line": {
     "en": "Measured in the week of {date} over {domains}. A share leaves out the domains where its check does not apply or could not be measured.",
-    "ar": "قيس في أسبوع {date} على {domains} وتستبعد كل نسبة النطاقات التي لا ينطبق عليها فحصها أو تعذّر قياسه فيها."
+    "ar": "قيس في أسبوع {date} على {domains} وتستبعد كل نسبة النطاقات التي لا ينطبق عليها معيارها أو تعذّر قياسه فيها."
   },
   "row_dmarc": {
     "en": "Can be impersonated in email",
@@ -313,7 +313,7 @@
   },
   "domain_intro": {
     "en": "Your browser checks email and DNS live through two public resolvers, while the website and TLS checks need the command line tool, because a browser cannot read them.",
-    "ar": "يفحص متصفحك البريد ونظام أسماء النطاقات مباشرة عبر محللين عامين أما فحوص المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
+    "ar": "يفحص متصفحك البريد ونظام أسماء النطاقات مباشرة عبر محللين عامين أما معايير المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
   },
   "domain_label": {
     "en": "Domain",
@@ -412,7 +412,7 @@
   "m_publish": [
     {
       "en": "Each issue publishes totals by country, sector and check, the weekly series and the open data. No domain is named, and no list or ranking of organisations is published, while anyone can check a single domain live.",
-      "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والفحص والسلسلة الأسبوعية والبيانات المفتوحة دون ذكر اسم أي نطاق أو نشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
+      "ar": "ينشر كل عدد المجاميع حسب الدولة والقطاع والمعيار والسلسلة الأسبوعية والبيانات المفتوحة دون ذكر اسم أي نطاق أو نشر أي قائمة أو ترتيب للجهات بينما يستطيع أي شخص أن يفحص نطاقاً واحداً مباشرة."
     }
   ],
   "m_limits_h": {
@@ -422,11 +422,11 @@
   "m_limits": [
     {
       "en": "The weekly scan runs outside the Arabian Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Domains registered directly under a country code, or under global extensions such as .com, are not included yet.",
-      "ar": "يجري الفحص الأسبوعي من خارج الخليج العربي لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية."
+      "ar": "يجري الفحص الأسبوعي من خارج الخليج العربي لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من معايير المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية."
     },
     {
       "en": "A share is the passing domains divided by the domains where the check applies and could be measured.",
-      "ar": "تُحسب النسبة بقسمة عدد النطاقات المجتازة على عدد النطاقات التي ينطبق عليها الفحص وأمكن قياسها فيه."
+      "ar": "تُحسب النسبة بقسمة عدد النطاقات المجتازة على عدد النطاقات التي ينطبق عليها المعيار وأمكن قياسها فيه."
     }
   ],
   "m_suffixes": {
@@ -902,5 +902,9 @@
   "all_table_GCC": {
     "en": "Every standard",
     "ar": "المعايير كلها في الخليج العربي"
+  },
+  "table_how": {
+    "ar": "النسبة حصة النطاقات المقيسة التي تجتاز المعيار والعدد بجانبها هو المجتاز من المقيس ولكل معيار صفحة تشرح لماذا يهم وكيف يُعالج.",
+    "en": "Each share is the part of the measured domains that pass the standard, the count beside it says how many passed of how many were measured, and every standard has a page on why it matters and how to fix it."
   }
 }

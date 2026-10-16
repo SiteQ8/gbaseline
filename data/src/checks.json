@@ -199,7 +199,7 @@
       },
       "pass": {
         "en": "Passes when the domain publishes an MTA-STS record and a policy file in enforce mode. Applies only to domains that receive mail.",
-        "ar": "يجتاز النطاق عندما ينشر سجل MTA-STS وملف سياسة بوضع الإلزام ولا ينطبق هذا الفحص إلا على النطاقات التي تستقبل البريد."
+        "ar": "يجتاز النطاق عندما ينشر سجل MTA-STS وملف سياسة بوضع الإلزام ولا ينطبق هذا المعيار إلا على النطاقات التي تستقبل البريد."
       },
       "fix": [
         {
@@ -276,7 +276,7 @@
       },
       "pass": {
         "en": "Passes when a valid TLS-RPT record names at least one reporting address. Applies only to domains that receive mail.",
-        "ar": "يجتاز النطاق عندما ينشر سجل TLS-RPT صالحاً يحدد عنواناً واحداً على الأقل لاستقبال التقارير ولا ينطبق هذا الفحص إلا على النطاقات التي تستقبل البريد."
+        "ar": "يجتاز النطاق عندما ينشر سجل TLS-RPT صالحاً يحدد عنواناً واحداً على الأقل لاستقبال التقارير ولا ينطبق هذا المعيار إلا على النطاقات التي تستقبل البريد."
       },
       "fix": [
         {
