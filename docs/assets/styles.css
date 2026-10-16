@@ -16,7 +16,7 @@
   --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   --step-lead: clamp(1.375rem, 1.1rem + 0.9vw, 2rem);
   --step-head: clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem);
-  --step-title: clamp(2.75rem, 0.6rem + 6.2vw, 6rem);
+  --step-title: clamp(2.75rem, 0.4rem + 5.8vw, 6rem);
   --margin: clamp(16px, 2.8vw, 40px);
   --axis: 42vw;
   --gap: clamp(28px, 4vw, 64px);
@@ -140,7 +140,7 @@ main a:not(.btn):not(.cell):not(.reach-line):hover { text-decoration-color: curr
 .big-h { max-width: 15ch; }
 .figures > .big-h { text-indent: 3vw; }
 .figures-body { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 20px; margin-top: 72px; align-items: end; }
-.aside-photo { grid-column: 1 / 5; grid-row: 1; align-self: end; }
+.aside-photo { grid-column: 1 / 5; grid-row: 1; align-self: start; position: sticky; top: 24px; }
 .aside-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .aside-photo figcaption { margin-top: 10px; font-size: var(--step-small); color: var(--amber-soft); line-height: 1.5; }
 .table-side { grid-column: 6 / 13; grid-row: 1; display: grid; grid-template-columns: 1fr 6fr; column-gap: 20px; align-self: start; }
@@ -253,7 +253,7 @@ details:not([open]) > .slip { display: none; }
 .side { grid-column: 1; grid-row: 1; align-self: start; position: sticky; top: 24px; padding-inline-end: var(--gap); display: grid; gap: 10px; }
 .side-n { font-size: var(--step-title); font-weight: 600; line-height: .95; letter-spacing: -0.04em; text-align: start; }
 .side-cap { max-width: 26ch; color: var(--amber); }
-.side.numbers { position: static; }
+.side.numbers { position: static; margin-top: clamp(32px, 4vw, 48px); }
 .found-sec { margin-top: 36px; }
 .found-sec h2 { margin-bottom: 8px; }
 .found .bar-c { width: 38%; padding-inline: 12px; vertical-align: middle; }
@@ -294,10 +294,11 @@ details:not([open]) > .slip { display: none; }
 /* a long table with its heading and its tabs held in the margin beside it */
 .ledger { display: grid; grid-template-columns: var(--axis) minmax(0, 1fr); align-items: start; }
 .ledger-head { position: sticky; top: 24px; padding-inline-end: var(--gap); }
+.ledger-head .big-h { font-size: min(var(--step-head), 4.5vw); }
 .ledger-head .tablist { margin: 28px 0 0; max-width: 34ch; }
 .ledger-note { margin-top: 22px; max-width: 34ch; color: var(--amber-soft); }
 .ledger-body .after { margin-top: 20px; max-width: 62ch; }
-.ledger-body { min-width: 0; padding-top: 1.1em; }
+.ledger-body { min-width: 0; background: var(--navy-2); padding: clamp(18px, 2.2vw, 34px) clamp(18px, 2.4vw, 38px); }
 
 /* tables live inside the measure and keep their lines */
 table { border-collapse: collapse; width: 100%; font-size: var(--step-body); }
@@ -308,7 +309,10 @@ tbody th { font-weight: 400; }
 td.n, th.n { text-align: end; font-variant-numeric: tabular-nums; white-space: nowrap; }
 tr.group th { padding-top: 26px; font-weight: 600; color: var(--amber); border-bottom-color: color-mix(in srgb, var(--amber) 45%, transparent); }
 .std-table td.share { font-size: var(--step-lead); font-weight: 600; line-height: 1.2; }
-.std-table .bar-c { width: 24%; padding-inline: 14px 18px; vertical-align: middle; }
+.std-table .bar-c { width: 9em; padding-inline: 14px 18px; vertical-align: middle; }
+/* the headings of the figures wrap, so the names keep their room */
+.std-table thead th { line-height: 1.4; }
+.std-table thead th.n { white-space: normal; width: 1%; min-width: 5.5em; }
 .bar { display: block; width: 100%; height: 10px; }
 :lang(ar) .bar { transform: scaleX(-1); }
 .bar .track { fill: color-mix(in srgb, var(--amber) 14%, transparent); }
@@ -357,7 +361,7 @@ li.fail .dot { background: none; }
 /* the standards */
 .text > .body.span { grid-column: 1 / -1; }
 .group-sec { display: grid; grid-template-columns: calc(var(--axis) - var(--margin)) minmax(0, 1fr); align-items: start; }
-.group-sec h2.group-h { position: sticky; top: 24px; font-size: var(--step-head); max-width: none; margin: 0; padding-inline-end: var(--gap); }
+.group-sec h2.group-h { position: sticky; top: 24px; font-size: min(var(--step-head), 4.5vw); max-width: none; margin: 0; padding-inline-end: var(--gap); }
 .group-sec .std-list { margin-top: 0; }
 .std-list { margin-top: 18px; display: grid; }
 .std-list a { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; row-gap: 2px; padding: 16px 0; text-decoration: none; }
@@ -419,8 +423,13 @@ li.fail .dot { background: none; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes drift { from { transform: scale(1.02) translate3d(0, 0, 0); } to { transform: scale(1.1) translate3d(-1.5%, -1%, 0); } }
 
+/* ---------- a narrow desktop: the bars give their room to the names ---------- */
+@media (max-width: 1280px) {
+  .std-table .bar-c { width: 5.5em; padding-inline: 10px 14px; }
+}
+
 /* ---------- tablet ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1099px) {
   :root { --axis: 34vw; }
   .table-side { grid-column: 5 / 13; }
   .aside-photo { grid-column: 1 / 5; }
@@ -429,7 +438,7 @@ li.fail .dot { background: none; }
   .states { grid-template-columns: repeat(2, 1fr); }
   .ledger { display: block; }
   .ledger-head { position: static; padding: 0; }
-  .ledger-body { margin-top: 32px; padding-top: 0; padding-inline-start: calc(var(--axis) - var(--margin)); }
+  .ledger-body { margin-top: 32px; margin-inline-start: calc(var(--axis) - var(--margin)); }
   .group-sec { display: block; }
   .group-sec h2.group-h { position: static; padding: 0; }
   .group-sec .std-list { margin-top: 12px; padding-inline-start: calc(var(--axis) - var(--margin)); }
@@ -464,7 +473,7 @@ li.fail .dot { background: none; }
   .figures-body { display: block; margin-top: 40px; }
   .table-side { display: block; }
   .table-side .word { display: none; }
-  .aside-photo { width: 60%; margin-inline-start: auto; margin-top: 40px; }
+  .aside-photo { width: 60%; margin-inline-start: auto; margin-top: 40px; position: static; }
   .clauses .row { grid-template-columns: 1fr auto; row-gap: 2px; }
   .clauses .what { grid-column: 1 / 3; }
   .clauses .basis { grid-column: 1; }
@@ -491,14 +500,13 @@ li.fail .dot { background: none; }
   .states-sec, .states-sec .lead { margin-inline-start: 0; }
   .states { grid-template-columns: 1fr 1fr; }
   .wide-side { padding-inline-start: 0; margin-top: 32px; }
-  .ledger-body { margin-top: 24px; padding-inline-start: 0; }
+  .ledger-body { margin-top: 24px; margin-inline: calc(-1 * var(--margin)); padding: 16px var(--margin) 18px; }
   .group-sec h2.group-h { font-size: var(--step-lead); }
   .group-sec .std-list { padding-inline-start: 0; }
   .std-list .v { font-size: var(--step-body); }
   .std-table .bar-c { display: none; }
   .std-table td.share { font-size: var(--step-body); }
   .std-table td.n.soft { font-size: var(--step-small); white-space: normal; width: 5.2em; }
-  .std-table th.n { white-space: normal; font-size: var(--step-small); }
   th, td { padding-inline-end: 8px; }
   :lang(ar) th, :lang(ar) td { padding-inline-end: 0; padding-inline-start: 8px; }
   .issues a { grid-template-columns: auto 1fr; }

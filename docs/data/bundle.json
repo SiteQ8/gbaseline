@@ -2134,6 +2134,10 @@
   "all_table_GCC": {
    "en": "Every standard",
    "ar": "المعايير كلها في الخليج العربي"
+  },
+  "table_how": {
+   "ar": "النسبة حصة النطاقات المقيسة التي تجتاز المعيار والعدد بجانبها هو المجتاز من المقيس ولكل معيار صفحة تشرح لماذا يهم وكيف يُعالج.",
+   "en": "Each share is the part of the measured domains that pass the standard, the count beside it says how many passed of how many were measured, and every standard has a page on why it matters and how to fix it."
   }
  }
 }
