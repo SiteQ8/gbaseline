@@ -1,10 +1,10 @@
-# __NAME_EN__ | __NAME_AR__
+# Gulf Cybersecurity Baseline | خط الأساس الخليجي للأمن السيبراني
 
 **قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق وبيانات مفتوحة وخادم MCP لمساعدي الذكاء الاصطناعي.**
 
 **An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, published as totals anyone can quote, with a live check for any domain, open data and an MCP server for AI assistants.**
 
-الموقع | Site: **https://__DOMAIN__**
+الموقع | Site: **https://gbaseline.3li.info**
 
 ---
 
@@ -42,7 +42,7 @@
 يجري المتصفح فحوص نظام أسماء النطاقات مباشرة عبر محللَي Cloudflare وGoogle دون أن يمر أي شيء عبر الموقع. أما الفحص الكامل بما فيه المواقع وTLS فتجريه أداة سطر الأوامر من جهازك.
 
 ```sh
-npx -y github:__REPO__ check example.com --lang ar
+npx -y github:SiteQ8/gbaseline check example.com --lang ar
 ```
 
 ### حدود القياس
@@ -100,9 +100,9 @@ No published file names a domain next to a result. The inventory lists the names
 ### Check any domain
 
 ```sh
-npx -y github:__REPO__ check example.com
-npx -y github:__REPO__ check example.com --lang ar --json
-npx -y github:__REPO__ check example.com --dns-only
+npx -y github:SiteQ8/gbaseline check example.com
+npx -y github:SiteQ8/gbaseline check example.com --lang ar --json
+npx -y github:SiteQ8/gbaseline check example.com --dns-only
 ```
 
 ### MCP server
@@ -110,20 +110,20 @@ npx -y github:__REPO__ check example.com --dns-only
 ```json
 {
   "mcpServers": {
-    "__SLUG__": { "command": "npx", "args": ["-y", "github:__REPO__", "mcp"] }
+    "gbaseline": { "command": "npx", "args": ["-y", "github:SiteQ8/gbaseline", "mcp"] }
   }
 }
 ```
 
 | Tool | What it answers |
 |---|---|
-| `observatory_overview` | The latest issue, its date and the headline figures with their counts |
-| `observatory_figures` | Every check for the Gulf or one country, all sectors or one |
-| `observatory_compare` | One check across the six states |
-| `observatory_check_info` | What a check means, when it passes, how to fix it, the standards |
-| `observatory_history` | The weekly series of one check |
-| `observatory_methodology` | Method, limits, data quality and how to cite |
-| `observatory_check_domain` | A live full check of any domain from your machine |
+| `gbaseline_overview` | The latest issue, its date and the headline figures with their counts |
+| `gbaseline_figures` | Every check for the Gulf or one country, all sectors or one |
+| `gbaseline_compare` | One check across the six states |
+| `gbaseline_check_info` | What a check means, when it passes, how to fix it, the standards |
+| `gbaseline_history` | The weekly series of one check |
+| `gbaseline_methodology` | Method, limits, data quality and how to cite |
+| `gbaseline_check_domain` | A live full check of any domain from your machine |
 
 Every tool is read only, works offline from the published data except the live check, and answers in Arabic or English.
 

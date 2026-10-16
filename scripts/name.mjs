@@ -87,12 +87,17 @@ export function nameHtml(html, values, tagTitle) {
   return out;
 }
 
-export function nameReadme(text, { en, ar, domain, repo, slug }) {
+// The placeholders on the first naming, and the previous values on a renaming, so the script can run again.
+export function nameReadme(text, { en, ar, domain, repo, slug }, previous = {}) {
   const prefix = slug.replace(/-/g, '_');
-  return text
+  let out = text;
+  for (const [old, next] of [[previous.repo, repo], [previous.domain, domain], [previous.en, en], [previous.ar, ar], [previous.slug, slug]]) {
+    if (old && old !== next) out = out.replaceAll(old, next);
+  }
+  return out
     .replaceAll('__NAME_EN__', en).replaceAll('__NAME_AR__', ar).replaceAll('__DOMAIN__', domain)
     .replaceAll('__REPO__', repo).replaceAll('__SLUG__', slug)
-    .replace(/`[a-z][a-z0-9_]*_(overview|figures|compare|check_info|history|methodology|check_domain)`/g, `\`${prefix}_$1\``);
+    .replace(/`[a-z][a-z0-9_-]*_(overview|figures|compare|check_info|history|methodology|check_domain)`/g, `\`${prefix}_$1\``);
 }
 
 export function namePackage(pkg, { slug, domain, repo }) {
@@ -118,11 +123,13 @@ async function main() {
   }
   const { en, ar, slug, domain, repo } = values;
   const project = JSON.parse(readText('data/src/project.json'));
+  const previousRepo = (String(project.repo || '').match(/github\.com\/([^/\s]+\/[^/#?\s]+)/) || [])[1];
+  const previous = { en: project.name_en, ar: project.name_ar, slug: project.slug, domain: project.domain, repo: previousRepo };
   Object.assign(project, { name_en: en, name_ar: ar, slug, domain, repo: `https://github.com/${repo}` });
   if (a.date) project.updated = a.date;
   writeJson('data/src/project.json', project);
   writeJson('package.json', namePackage(JSON.parse(readText('package.json')), values));
-  writeText('README.md', nameReadme(readText('README.md'), values));
+  writeText('README.md', nameReadme(readText('README.md'), values, previous));
   const ui = JSON.parse(readText('data/src/ui.json'));
   const tagTitle = (readText('docs/index.html').match(/<title>(?:[^<]*· )?([^<·]*)<\/title>/) || [])[1] || ui.tagline.ar.replace(/\.$/, '');
   writeText('docs/index.html', nameHtml(readText('docs/index.html'), values, tagTitle.trim()));

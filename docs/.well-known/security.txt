@@ -1,0 +1,5 @@
+Contact: https://github.com/SiteQ8/gbaseline/security/advisories/new
+Expires: 2027-10-15T00:00:00.000Z
+Preferred-Languages: ar, en
+Canonical: https://gbaseline.3li.info/.well-known/security.txt
+Policy: https://github.com/SiteQ8/gbaseline/blob/main/SECURITY.md

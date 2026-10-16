@@ -1,10 +1,18 @@
 {
-  "name": "observatory",
+  "name": "gbaseline",
   "version": "0.1.0",
   "description": "An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, with a live check for any domain, open data and an MCP server",
   "type": "module",
   "bin": {
-    "observatory": "bin/cli.mjs"
+    "gbaseline": "bin/cli.mjs"
+  },
+  "homepage": "https://gbaseline.3li.info",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiteQ8/gbaseline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SiteQ8/gbaseline/issues"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
