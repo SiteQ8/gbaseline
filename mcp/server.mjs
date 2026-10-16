@@ -51,7 +51,7 @@ function result(obj, markdown, args) {
   return { content: [{ type: 'text', text: args.response_format === 'json' ? JSON.stringify(obj, null, 2) : markdown }], structuredContent: obj };
 }
 function requireSummary(data, lang) {
-  if (!data.summary) throw new ToolError(tr({ en: 'No issue has been published yet: the first weekly scan is still running. check_info, methodology and check_domain work now.', ar: 'لم يصدر أي عدد بعد لأن الفحص الأسبوعي الأول ما زال جارياً بينما تعمل أدوات شرح الفحوص والمنهجية وفحص النطاق الآن.' }, lang));
+  if (!data.summary) throw new ToolError(tr({ en: 'No issue has been published yet: the first weekly scan is still running. check_info, methodology and check_domain work now.', ar: 'لم يصدر أي عدد بعد لأن الفحص الأسبوعي الأول ما زال جارياً بينما تعمل أدوات شرح المعايير والمنهجية وفحص النطاق الآن.' }, lang));
   return data.summary;
 }
 function row(summary, id, place, sector, lang) {
