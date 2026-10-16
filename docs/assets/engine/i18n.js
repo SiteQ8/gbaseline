@@ -1,5 +1,6 @@
 // Language helpers shared by the site, the command line and the MCP server.
-// Arabic keeps Western digits and the Arabic percent sign, and its counted nouns follow the number.
+// Arabic keeps Western digits, grouped by thousands as in English, and the Arabic percent sign, and its counted
+// nouns follow the number.
 
 export const tr = (pair, lang) => (pair ? (lang === 'ar' ? pair.ar : pair.en) : '');
 export const fill = (template, vars = {}) => String(template).replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? String(vars[k]) : m));
@@ -7,7 +8,7 @@ export const ui = (bundle, key, lang, vars) => fill(tr(bundle.ui[key], lang), va
 
 export function number(n, lang) {
   if (n === null || n === undefined || Number.isNaN(n)) return '';
-  return lang === 'ar' ? String(Math.round(n)) : Math.round(n).toLocaleString('en-US');
+  return Math.round(n).toLocaleString('en-US');
 }
 
 // One decimal, like the open data: 63.4٪ in Arabic and 63.4% in English.
@@ -24,9 +25,9 @@ export function counted(n, forms, lang) {
   if (n === 1) return one;
   if (n === 2) return two;
   const r = n % 100;
-  if (r >= 3 && r <= 10) return `${n} ${few}`;
-  if (r >= 11 && r <= 99) return `${n} ${many}`;
-  return `${n} ${hundred}`;
+  if (r >= 3 && r <= 10) return `${number(n, 'ar')} ${few}`;
+  if (r >= 11 && r <= 99) return `${number(n, 'ar')} ${many}`;
+  return `${number(n, 'ar')} ${hundred}`;
 }
 
 export function share(cell) {

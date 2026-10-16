@@ -4,20 +4,20 @@
 
 Self hosted in `docs/fonts/` under the SIL Open Font License 1.1, whose full text is in `docs/fonts/OFL.txt`.
 
-- **El Messiri**, Copyright 2015 The El Messiri Project Authors (https://github.com/Gue3bara/El-Messiri). Weights 400 and 500, the Arabic and Latin files as subset by Fontsource 5.3.0, unchanged.
-- **Alexandria**, Copyright 2022 The Alexandria Project Authors (https://github.com/Gue3bara/Alexandria). Weights 300, 400 and 500, the Arabic and Latin files as subset by Fontsource 5.3.0, unchanged.
+- **Alexandria**, Copyright 2022 The Alexandria Project Authors (https://github.com/Gue3bara/Alexandria). Weights 400, 500 and 600, the Arabic and Latin files as subset by Fontsource 5.3.0, unchanged. It sets the whole site in both scripts.
 
 ## Photographs
 
-The photographs are four night views of the Arabian Gulf's cities taken from the International Space Station by NASA crews, all in the public domain (https://creativecommons.org/publicdomain/mark/1.0/). Each was chosen only after reading its source page, whose title, description and categories never use any other name for the Arabian Gulf.
+The photographs are six night views of the Arabian Gulf's cities taken from the International Space Station by NASA crews, one for each state and all in the public domain (https://creativecommons.org/publicdomain/mark/1.0/). Each was chosen only after reading its source page, whose title, description and categories never use any other name for the Arabian Gulf.
 
-- **Dammam and the Eastern Province coast**, Expedition 62, 25 March 2020. Wikimedia Commons page 88992012 (https://commons.wikimedia.org/w/index.php?curid=88992012). `docs/img/dammam-night-2400.jpg` and `dammam-night-1600.jpg` are the whole frame resized with a light denoise.
-- **Kuwait City**, Expedition 64, 9 January 2021, NASA photograph iss064e021961. Wikimedia Commons page 140667044 (https://commons.wikimedia.org/w/index.php?curid=140667044). `docs/img/kuwait-night.jpg` is a crop of the city and its coast.
-- **Qatar**, Expedition 33, 13 October 2012. Wikimedia Commons page 22699352 (https://commons.wikimedia.org/w/index.php?curid=22699352). `docs/img/qatar-night.jpg` is a crop of its lit towns and roads.
-- **Riyadh**, Expedition 72, 28 December 2024, NASA photograph iss072e445326. Wikimedia Commons page 161790758 (https://commons.wikimedia.org/w/index.php?curid=161790758). `docs/img/riyadh-night-stamp.jpg` is a crop of the city centre.
+- **Kuwait City**, Expedition 64, 9 January 2021, NASA photograph iss064e021961. Wikimedia Commons page 140667044 (https://commons.wikimedia.org/w/index.php?curid=140667044). Cropped and resized into `kw-wide.jpg`, `kw-tile.jpg`, `kw-portrait.jpg`.
+- **Riyadh**, Expedition 72, 28 December 2024, NASA photograph iss072e445326. Wikimedia Commons page 161790758 (https://commons.wikimedia.org/w/index.php?curid=161790758). Cropped and resized into `sa-wide.jpg`, `sa-tile.jpg`, `sa-portrait.jpg`.
+- **Dubai**, Expedition 47, 11 March 2016. Wikimedia Commons page 48000179 (https://commons.wikimedia.org/w/index.php?curid=48000179). Cropped and resized into `ae-wide.jpg`, `ae-tile.jpg`, `ae-portrait.jpg`.
+- **Doha**, Expedition 26, 9 December 2010, NASA photograph ISS026-E-9183. Wikimedia Commons page 111470015 (https://commons.wikimedia.org/w/index.php?curid=111470015). Cropped and resized into `qa-wide.jpg`, `qa-tile.jpg`, `qa-portrait.jpg`.
+- **Bahrain**, Expedition 26, 9 December 2010, NASA photograph ISS026-E-9186. Wikimedia Commons page 111470044 (https://commons.wikimedia.org/w/index.php?curid=111470044). Cropped and resized into `bh-wide.jpg`, `bh-tile.jpg`, `bh-portrait.jpg`.
+- **Muscat and Al Seeb**, Expedition 69, 18 July 2023, NASA photograph iss069e032988. Wikimedia Commons page 135376374 (https://commons.wikimedia.org/w/index.php?curid=135376374). Cropped and resized into `om-wide.jpg`, `om-tile.jpg`, `om-portrait.jpg`.
 
-Each was downloaded at 3840 pixels on 16 October 2026, and each file on the site carries its origin in a JPEG comment. The share card `docs/og.png` is rendered from the site's fonts and the photograph of Dammam, and says so in a PNG text chunk. Nothing on the site is generated imagery.
-
+Each was downloaded at 3840 pixels on 16 October 2026, and each file on the site carries its origin in a JPEG comment. The register of the photographs, with their wording in both languages, is `data/src/pictures.json`. The share card `docs/og.png` is rendered from the site's typeface and the six photographs, and says so in a PNG text chunk. Nothing on the site is generated imagery.
 
 ## Launch film
 

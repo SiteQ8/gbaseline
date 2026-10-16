@@ -1129,7 +1129,7 @@
    },
    "short": {
     "en": "security.txt published",
-    "ar": "ملف security.txt منشور"
+    "ar": "security.txt منشور"
    },
    "question": {
     "en": "Can a researcher find out how to report a vulnerability?",
@@ -1236,24 +1236,12 @@
    "ar": "قياس أسبوعي لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع."
   },
   "skip": {
-   "en": "Skip to the figures",
-   "ar": "انتقل إلى الأرقام"
-  },
-  "nav_overview": {
-   "en": "This week",
-   "ar": "هذا الأسبوع"
+   "en": "Skip to the content",
+   "ar": "انتقل إلى المحتوى"
   },
   "nav_countries": {
-   "en": "Countries",
-   "ar": "الدول"
-  },
-  "nav_checks": {
-   "en": "The checks",
-   "ar": "الفحوص"
-  },
-  "nav_domain": {
-   "en": "Check a domain",
-   "ar": "افحص نطاقاً"
+   "en": "The six states",
+   "ar": "الدول الست"
   },
   "nav_method": {
    "en": "Method and data",
@@ -1267,10 +1255,6 @@
    "en": "Issue {n}",
    "ar": "العدد {n}"
   },
-  "week_of": {
-   "en": "Week of {date}",
-   "ar": "أسبوع {date}"
-  },
   "pending_title": {
    "en": "The first issue is being measured",
    "ar": "العدد الأول قيد القياس"
@@ -1279,65 +1263,13 @@
    "en": "The weekly scan has not published its first figures yet, but the checks, the method and the live domain check are ready now.",
    "ar": "لم ينشر الفحص الأسبوعي أرقامه الأولى بعد لكن الفحوص والمنهجية والفحص المباشر للنطاقات جاهزة الآن."
   },
-  "hero_title_1": {
-   "en": "Gulf domains,",
-   "ar": "نطاقات الخليج"
-  },
-  "hero_title_2": {
-   "en": "measured weekly",
-   "ar": "على خط الأساس"
-  },
-  "hero_sub": {
-   "en": "An independent weekly measurement of how well the public domains of the six Arabian Gulf states are protected, published as totals anyone can cite.",
-   "ar": "قياس أسبوعي مستقل لحماية النطاقات العامة في دول الخليج العربي الست تُنشر نتائجه مجاميع يستطيع أي شخص الاستشهاد بها."
-  },
   "hero_action": {
    "en": "Check your domain",
    "ar": "افحص نطاقك"
   },
   "hero_issue": {
-   "en": "Issue {n}, week of {date}",
-   "ar": "العدد {n} لأسبوع {date}"
-  },
-  "photo_caption": {
-   "en": "Dammam and the Eastern Province coast of the Arabian Gulf at night, photographed by NASA from the International Space Station on 25 March 2020",
-   "ar": "الدمام وساحل المنطقة الشرقية على الخليج العربي ليلاً بعدسة ناسا من محطة الفضاء الدولية في 25 مارس 2020"
-  },
-  "photo_alt": {
-   "en": "A night photograph from space of Dammam on the Arabian Gulf coast, its streets traced in amber and white light beside a dark sea",
-   "ar": "صورة ليلية من الفضاء للدمام على ساحل الخليج العربي تظهر شوارعها بأضواء كهرمانية وبيضاء بجوار بحر داكن"
-  },
-  "intro_title": {
-   "en": "A measurement, not an audit",
-   "ar": "قياس لا تدقيق"
-  },
-  "intro_note": {
-   "en": "Every week we read the public settings of the Gulf's government, university, school, healthcare, company and non-profit domains as any visitor on the internet sees them, then publish the totals without naming any organisation.",
-   "ar": "نقرأ كل أسبوع الإعدادات العامة لنطاقات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية في الخليج كما يراها أي زائر على الإنترنت ثمّ ننشر مجاميعها دون أن نذكر اسم أي جهة."
-  },
-  "fact_live": {
-   "en": "{noun} in this issue",
-   "ar": "{noun} في هذا العدد"
-  },
-  "fact_checks": {
-   "en": "{noun} across email, DNS and the web",
-   "ar": "{noun} للبريد ونظام أسماء النطاقات والمواقع"
-  },
-  "fact_states": {
-   "en": "{noun} in one total",
-   "ar": "{noun} في مجموع واحد"
-  },
-  "fact_day": {
-   "en": "Monday",
-   "ar": "الاثنين"
-  },
-  "fact_day_note": {
-   "en": "when each new issue comes out",
-   "ar": "يصدر فيه كل عدد جديد"
-  },
-  "north_caption": {
-   "en": "Kuwait City and its coast at night, photographed by NASA on 9 January 2021",
-   "ar": "مدينة الكويت وساحلها ليلاً بعدسة ناسا في 9 يناير 2021"
+   "en": "Issue {n}, published {date}",
+   "ar": "العدد {n} الصادر في {date}"
   },
   "country_label": {
    "en": "Country",
@@ -1348,16 +1280,16 @@
    "ar": "القطاع"
   },
   "place_GCC": {
-   "en": "The Gulf",
-   "ar": "الخليج"
+   "en": "The Arabian Gulf",
+   "ar": "الخليج العربي"
   },
   "sector_all": {
    "en": "All sectors",
    "ar": "كل القطاعات"
   },
   "in_GCC": {
-   "en": "the Gulf",
-   "ar": "الخليج"
+   "en": "the Arabian Gulf",
+   "ar": "الخليج العربي"
   },
   "in_KW": {
    "en": "Kuwait",
@@ -1435,22 +1367,6 @@
    "en": "{n} network",
    "ar": "{n} للشبكات"
   },
-  "stats_gulf": {
-   "en": "Where the Gulf stands",
-   "ar": "أين يقف الخليج"
-  },
-  "stats_country": {
-   "en": "Where {place} stands",
-   "ar": "أين تقف {place}"
-  },
-  "stats_week": {
-   "en": "this week",
-   "ar": "هذا الأسبوع"
-  },
-  "stats_scope": {
-   "en": "These figures cover {sector} in {place}, issue {n}, week of {date}.",
-   "ar": "تخص هذه الأرقام {sector} في {place} في العدد {n} لأسبوع {date}."
-  },
   "stats_past": {
    "en": "These figures are issue {n}, week of {date}, as quoted, and issue {latest} has come out since.",
    "ar": "تعرض هذه الأرقام العدد {n} لأسبوع {date} كما اقتُبس بينما صدر بعده العدد {latest}."
@@ -1458,30 +1374,6 @@
   "stats_latest": {
    "en": "Show the latest issue",
    "ar": "اعرض العدد الأخير"
-  },
-  "fig_dmarc": {
-   "en": "percent can be impersonated in email",
-   "ar": "في المئة يمكن انتحال أسمائها في البريد الإلكتروني"
-  },
-  "fig_dnssec": {
-   "en": "percent carry DNSSEC signatures that validate",
-   "ar": "في المئة تحمل توقيع DNSSEC يجتاز التحقق"
-  },
-  "fig_hsts": {
-   "en": "percent of their websites hold browsers to HTTPS for a year or more",
-   "ar": "في المئة من مواقعها تُلزم المتصفح بـ HTTPS لمدة سنة أو أكثر"
-  },
-  "fig_legacy_tls": {
-   "en": "percent of their websites still accept TLS 1.0 or 1.1",
-   "ar": "في المئة من مواقعها ما زالت تقبل TLS 1.0 أو 1.1"
-  },
-  "fig_pq_kex": {
-   "en": "percent of their websites accept post quantum key exchange",
-   "ar": "في المئة من مواقعها تقبل تبادل المفاتيح المقاوم للحوسبة الكمية"
-  },
-  "fig_security_txt": {
-   "en": "percent of their websites say how to report a vulnerability",
-   "ar": "في المئة من مواقعها توضح طريقة الإبلاغ عن الثغرات"
   },
   "cite_dmarc": {
    "en": "{pct} of {sector} in {place} can be impersonated in email, because they have no enforced DMARC policy.",
@@ -1511,10 +1403,6 @@
    "en": "{count} of {domains} measured.",
    "ar": "{count} من أصل {domains} ضمن القياس."
   },
-  "prev_issue": {
-   "en": "{pct} in the previous issue",
-   "ar": "{pct} في العدد السابق"
-  },
   "no_data": {
    "en": "No data",
    "ar": "لا بيانات"
@@ -1526,14 +1414,6 @@
   "cite": {
    "en": "Cite",
    "ar": "اقتبس"
-  },
-  "cite_title": {
-   "en": "Citation",
-   "ar": "صيغة الاقتباس"
-  },
-  "copy": {
-   "en": "Copy",
-   "ar": "انسخ"
   },
   "copy_ar": {
    "en": "Copy in Arabic",
@@ -1549,27 +1429,15 @@
   },
   "copied": {
    "en": "Copied",
-   "ar": "نُسخ"
-  },
-  "clause": {
-   "en": "Clause {n}",
-   "ar": "البند {n}"
+   "ar": "تم النسخ"
   },
   "table_check": {
-   "en": "Check",
-   "ar": "الفحص"
+   "en": "Standard",
+   "ar": "المعيار"
   },
   "source_line": {
    "en": "Measured in the week of {date} over {domains}. A share leaves out the domains where its check does not apply or could not be measured.",
    "ar": "قيس في أسبوع {date} على {domains} وتستبعد كل نسبة النطاقات التي لا ينطبق عليها فحصها أو تعذّر قياسه فيها."
-  },
-  "trend_title": {
-   "en": "Week by week",
-   "ar": "أسبوعاً بعد أسبوع"
-  },
-  "trend_source": {
-   "en": "Each figure is the share of {sector} in {place} that pass the check it is listed against.",
-   "ar": "يمثل كل رقم نسبة {sector} في {place} التي تجتاز المعيار المقابل له."
   },
   "row_dmarc": {
    "en": "Can be impersonated in email",
@@ -1595,112 +1463,16 @@
    "en": "security.txt published",
    "ar": "ملف security.txt منشور"
   },
-  "proof_title": {
-   "en": "The suffixes measured",
-   "ar": "الامتدادات المشمولة"
-  },
-  "proof_note": {
-   "en": "Every registrable domain under these suffixes counts once, without its subdomains, while domains registered directly under a country code are not included yet.",
-   "ar": "يُحتسب كل نطاق قابل للتسجيل تحت هذه الامتدادات مرة واحدة دون أسمائه الفرعية بينما لا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة."
-  },
-  "coast_caption": {
-   "en": "Qatar at night, photographed by NASA on 13 October 2012",
-   "ar": "قطر ليلاً بعدسة ناسا في 13 أكتوبر 2012"
-  },
-  "show_title": {
-   "en": "Quote any figure",
-   "ar": "اقتبس أي رقم"
-  },
-  "show_p1": {
-   "en": "as it stands, in Arabic and English, with the issue, the clause and a link that brings the reader back to the same figure.",
-   "ar": "كما هو بنصه العربي والإنجليزي مع رقم العدد والبند ورابط يعيد القارئ إلى الرقم نفسه."
-  },
-  "show_p2": {
-   "en": "A quoted figure stays valid after later issues come out, because its link carries the issue number and shows that issue's figures as published.",
-   "ar": "يبقى الرقم المقتبس صالحاً بعد صدور الأعداد التالية لأن رابطه يحمل رقم العدد ويعرض أرقامه كما نُشرت."
-  },
-  "slip_head": {
-   "en": "Clause {n}, issue {issue}",
-   "ar": "البند {n} من العدد {issue}"
-  },
-  "how_title": {
-   "en": "How an issue is made",
-   "ar": "كيف يُصنع العدد"
-  },
-  "how_note": {
-   "en": "The scanner runs on GitHub's servers every Monday morning and reads what any visitor on the internet can see, so it needs no special access and sends any website only a few ordinary requests.",
-   "ar": "يعمل الماسح على خوادم GitHub صباح كل اثنين ويقرأ ما يراه أي زائر على الإنترنت فلا يحتاج إلى أي صلاحية خاصة ولا يرسل إلى أي موقع إلا طلبات عادية قليلة."
-  },
-  "how_monday": {
-   "en": "Monday {time} UTC",
-   "ar": "الاثنين {time} بالتوقيت العالمي"
-  },
-  "how_run": {
-   "en": "During the run",
-   "ar": "خلال الدورة"
-  },
-  "how_end": {
-   "en": "At the end",
-   "ar": "عند الانتهاء"
-  },
-  "how_names": {
-   "en": "Names gathered from certificate logs and the Tranco list",
-   "ar": "جمع الأسماء من سجلات الشهادات وقائمة Tranco"
-  },
-  "how_retired": {
-   "en": "Names that no longer exist set aside",
-   "ar": "استبعاد الأسماء التي لم تعد موجودة"
-  },
-  "how_dns": {
-   "en": "DNS read through two resolvers",
-   "ar": "قراءة نظام أسماء النطاقات من محللين اثنين"
-  },
-  "how_web": {
-   "en": "Websites and TLS checked",
-   "ar": "فحص المواقع وTLS"
-  },
-  "how_retry": {
-   "en": "Every inconclusive result measured again",
-   "ar": "إعادة قياس كل نتيجة غير حاسمة"
-  },
-  "how_retry_v": {
-   "en": "before the run ends",
-   "ar": "قبل نهاية الدورة"
-  },
-  "how_totals": {
-   "en": "Totals counted, with no name kept",
-   "ar": "حساب المجاميع دون الاحتفاظ بأي اسم"
-  },
-  "how_publish": {
-   "en": "Issue and open data published",
-   "ar": "نشر العدد والبيانات المفتوحة"
-  },
-  "how_publish_v": {
-   "en": "CSV and JSON",
-   "ar": "CSV وJSON"
-  },
-  "how_result": {
-   "en": "Issue {n} in your hands",
-   "ar": "العدد {n} بين يديك"
-  },
-  "how_result_next": {
-   "en": "The first issue in your hands soon",
-   "ar": "العدد الأول بين يديك قريباً"
-  },
-  "cta_side": {
-   "en": "Your browser runs the email and DNS checks in seconds through two public resolvers, while the website and TLS checks need the command line tool.",
-   "ar": "يجري متصفحك فحوص البريد ونظام أسماء النطاقات خلال ثوانٍ عبر محللين عامين بينما تحتاج فحوص المواقع وTLS إلى أداة سطر الأوامر."
-  },
   "countries_title": {
-   "en": "Countries",
-   "ar": "الدول"
+   "en": "The six states",
+   "ar": "الدول الست"
   },
   "countries_intro": {
    "en": "Each state has a page of its own figures, because this measurement neither ranks the states nor compares them.",
    "ar": "لكل دولة صفحة تعرض أرقامها وحدها لأن هذا القياس لا يرتب الدول ولا يقارن بينها."
   },
   "countries_note": {
-   "en": "Each state's page shows the thirteen checks for its domains in this issue, with the DNSSEC status of each of its suffixes.",
+   "en": "Each state's page shows the thirteen standards for its domains in this issue, with the DNSSEC status of each of its suffixes.",
    "ar": "تعرض صفحة كل دولة نسب المعايير الثلاثة عشر لنطاقاتها في هذا العدد مع حالة توقيع DNSSEC لكل امتداد من امتداداتها."
   },
   "country_lede": {
@@ -1712,16 +1484,16 @@
    "ar": "{n} من الأسماء الواردة في سجلات الشهادات لم تعد موجودة في نظام أسماء النطاقات فلم تُحتسب."
   },
   "country_table": {
-   "en": "Every check in {place}",
-   "ar": "الفحوص كلها في {place}"
+   "en": "Every standard in {place}",
+   "ar": "المعايير كلها في {place}"
   },
   "chain_off": {
-   "en": "Domains under {suffix} cannot pass DNSSEC until {suffix} itself is signed.",
-   "ar": "لن تجتاز النطاقات التابعة لـ {suffix} معيار DNSSEC حتى يُوقَّع {suffix} نفسه."
+   "en": "Not signed, so no domain under it can pass DNSSEC until it is.",
+   "ar": "غير موقَّع فلا يجتاز أي نطاق تحته معيار DNSSEC حتى يُوقَّع."
   },
   "chain_on": {
-   "en": "{suffix} is signed, so every domain under it can validate.",
-   "ar": "النطاق {suffix} موقّع لذلك يستطيع كل نطاق تابع له أن يجتاز التحقق."
+   "en": "Signed, so every domain under it can validate.",
+   "ar": "موقَّع فيستطيع كل نطاق تحته أن يجتاز التحقق."
   },
   "chain_yes": {
    "en": "DNSSEC possible",
@@ -1735,17 +1507,9 @@
    "en": "{pass} of {measured}",
    "ar": "{pass} من {measured}"
   },
-  "checks_title": {
-   "en": "The checks",
-   "ar": "الفحوص"
-  },
-  "checks_intro": {
-   "en": "Thirteen checks in four groups, ordered from the foundations to the frontier.",
-   "ar": "ثلاثة عشر فحصاً في أربع مجموعات مرتبة من الأساسيات إلى الأحدث."
-  },
   "check_pass": {
-   "en": "When it passes",
-   "ar": "متى يجتاز"
+   "en": "When a domain passes",
+   "ar": "متى يجتاز النطاق"
   },
   "check_why": {
    "en": "Why it matters",
@@ -1753,35 +1517,35 @@
   },
   "check_fix": {
    "en": "How to fix it",
-   "ar": "طريقة المعالجة"
+   "ar": "كيف تعالجه"
   },
   "check_example": {
-   "en": "Example",
-   "ar": "مثال"
+   "en": "An example record",
+   "ar": "مثال على السجل"
   },
   "check_refs": {
-   "en": "Standards",
-   "ar": "المعايير"
+   "en": "Reference specifications",
+   "ar": "المواصفات المرجعية"
   },
   "check_gulf": {
-   "en": "In the Gulf this week",
-   "ar": "في الخليج هذا الأسبوع"
+   "en": "In the Arabian Gulf this week",
+   "ar": "في الخليج العربي هذا الأسبوع"
   },
   "check_gulf_line": {
-   "en": "percent of the measured domains in the Gulf pass this check",
-   "ar": "في المئة من النطاقات المقيسة في الخليج تجتاز هذا الفحص"
+   "en": "percent of the measured domains in the Arabian Gulf pass this standard",
+   "ar": "في المئة من النطاقات المقيسة في الخليج العربي تجتاز هذا المعيار"
   },
   "check_found": {
-   "en": "What the scan found",
-   "ar": "ما وجده الفحص"
+   "en": "What the measurement found",
+   "ar": "ما وجده القياس"
   },
   "domain_title": {
-   "en": "Check a domain",
-   "ar": "افحص نطاقاً"
+   "en": "Check your domain",
+   "ar": "افحص نطاقك"
   },
   "domain_intro": {
-   "en": "Your browser runs the DNS checks live through two public resolvers, while the website and TLS checks need the command line tool because a browser cannot read them.",
-   "ar": "يجري متصفحك فحوص نظام أسماء النطاقات مباشرة عبر محللين عامين أما فحوص المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
+   "en": "Your browser checks email and DNS live through two public resolvers, while the website and TLS checks need the command line tool, because a browser cannot read them.",
+   "ar": "يفحص متصفحك البريد ونظام أسماء النطاقات مباشرة عبر محللين عامين أما فحوص المواقع وTLS فتحتاج إلى أداة سطر الأوامر لأن المتصفح لا يستطيع قراءتها."
   },
   "domain_label": {
    "en": "Domain",
@@ -1813,7 +1577,7 @@
   },
   "domain_cli": {
    "en": "Run every check, websites and TLS included, from your own machine.",
-   "ar": "شغّل الفحوص كلها بما فيها فحوص المواقع وTLS من جهازك."
+   "ar": "شغّل الفحص كاملاً بما فيه المواقع وTLS من جهازك."
   },
   "domain_privacy": {
    "en": "Nothing you type is sent to this site, because your browser asks the resolvers directly.",
@@ -1855,7 +1619,7 @@
   ],
   "m_sources_h": {
    "en": "Where the names come from",
-   "ar": "مصادر الأسماء"
+   "ar": "من أين تأتي الأسماء"
   },
   "m_sources": [
    {
@@ -1864,8 +1628,8 @@
    }
   ],
   "m_how_h": {
-   "en": "How the checks run",
-   "ar": "طريقة إجراء الفحوص"
+   "en": "How the measurement runs",
+   "ar": "كيف يجري القياس"
   },
   "m_how": [
    {
@@ -1889,8 +1653,8 @@
   },
   "m_limits": [
    {
-    "en": "The weekly scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Domains registered directly under a country code, or under global extensions such as .com, are not included yet.",
-    "ar": "يجري الفحص الأسبوعي من خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية."
+    "en": "The weekly scan runs outside the Arabian Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Domains registered directly under a country code, or under global extensions such as .com, are not included yet.",
+    "ar": "يجري الفحص الأسبوعي من خارج الخليج العربي لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية."
    },
    {
     "en": "A share is the passing domains divided by the domains where the check applies and could be measured.",
@@ -1928,13 +1692,17 @@
    "ar": "السلسلة الأسبوعية بصيغة JSON"
   },
   "m_cite_h": {
-   "en": "How to cite",
-   "ar": "طريقة الاقتباس"
+   "en": "How to cite the figures",
+   "ar": "كيف تستشهد بالأرقام"
   },
   "m_cite": [
    {
     "en": "Give the issue number and its date, so readers can find the exact figures you used.",
     "ar": "اذكر رقم العدد وتاريخه حتى يجد القراء الأرقام نفسها التي استخدمتها."
+   },
+   {
+    "en": "Every figure has a citation in Arabic and English whose link opens the issue it comes from, and every issue has a reference and a BibTeX entry, given below for the latest one.",
+    "ar": "لكل رقم صيغة اقتباس بالعربية والإنجليزية يفتح رابطها العدد الذي جاء منه ولكل عدد مرجع ومدخل BibTeX تجدهما أدناه لأحدث عدد."
    }
   ],
   "m_quality_h": {
@@ -1954,8 +1722,8 @@
    "ar": "استغرق الفحص {minutes} وأجرى {queries}."
   },
   "m_code_h": {
-   "en": "Code and contact",
-   "ar": "الشيفرة والتواصل"
+   "en": "Source code and contact",
+   "ar": "الشيفرة المصدرية والتواصل"
   },
   "m_code": [
    {
@@ -1979,14 +1747,10 @@
   },
   "m_credits": [
    {
-    "en": "The photographs are four night views that NASA crews took from the International Space Station, of Dammam on 25 March 2020, Kuwait City on 9 January 2021, Qatar on 13 October 2012 and Riyadh on 28 December 2024, all in the public domain, while the El Messiri and Alexandria typefaces draw both Arabic and Latin and are used under the SIL Open Font License.",
-    "ar": "الصور أربع لقطات ليلية التقطتها طواقم ناسا من محطة الفضاء الدولية للدمام في 25 مارس 2020 ولمدينة الكويت في 9 يناير 2021 ولقطر في 13 أكتوبر 2012 وللرياض في 28 ديسمبر 2024 وكلها في الملك العام بينما يرسم الخطان El Messiri وAlexandria الحروف العربية واللاتينية ويُستخدمان برخصة SIL للخطوط المفتوحة."
+    "en": "The photographs are six night views of the Arabian Gulf's cities that NASA crews took from the International Space Station, one for each state and all in the public domain, while the Alexandria typeface draws both Arabic and Latin and is used under the SIL Open Font License.",
+    "ar": "الصور ست لقطات ليلية لمدن الخليج العربي التقطتها طواقم ناسا من محطة الفضاء الدولية لقطة لكل دولة وكلها في الملك العام بينما يرسم خط Alexandria الحروف العربية واللاتينية ويُستخدم برخصة SIL للخطوط المفتوحة."
    }
   ],
-  "foot_sign": {
-   "en": "Until the next issue",
-   "ar": "إلى العدد القادم"
-  },
   "foot_note": {
    "en": "An independent open project whose figures describe public configuration only and are not an audit of any organisation.",
    "ar": "مشروع مستقل مفتوح المصدر تصف أرقامه الإعدادات العامة فقط ولا تُعد تدقيقاً لأي جهة."
@@ -2007,21 +1771,9 @@
    "en": "Command line and MCP server",
    "ar": "أداة سطر الأوامر وخادم MCP"
   },
-  "foot_report": {
-   "en": "Report an error",
-   "ar": "أبلغ عن خطأ"
-  },
   "foot_imprint": {
    "en": "Data and code under the MIT licence, photographs by NASA in the public domain",
    "ar": "البيانات والشيفرة برخصة MIT والصور من ناسا في الملك العام"
-  },
-  "stamp_alt": {
-   "en": "Riyadh at night from the International Space Station",
-   "ar": "الرياض ليلاً من محطة الفضاء الدولية"
-  },
-  "noscript": {
-   "en": "This page needs JavaScript to show the figures, and the open data files work without it.",
-   "ar": "تحتاج هذه الصفحة إلى JavaScript لعرض الأرقام بينما تعمل ملفات البيانات المفتوحة دونها."
   },
   "w_domain": {
    "en": [
@@ -2077,15 +1829,15 @@
   },
   "w_check": {
    "en": [
-    "check",
-    "checks"
+    "standard",
+    "standards"
    ],
    "ar": [
-    "فحص واحد",
-    "فحصان",
-    "فحوص",
-    "فحصاً",
-    "فحص"
+    "معيار واحد",
+    "معياران",
+    "معايير",
+    "معياراً",
+    "معيار"
    ]
   },
   "w_state": {
@@ -2126,6 +1878,262 @@
     "موقعاً",
     "موقع"
    ]
+  },
+  "nav_standards": {
+   "en": "What we measure",
+   "ar": "ما نقيسه"
+  },
+  "nav_check": {
+   "en": "Check your domain",
+   "ar": "افحص نطاقك"
+  },
+  "nav_issues": {
+   "en": "Every issue",
+   "ar": "الأعداد كلها"
+  },
+  "issue_full": {
+   "en": "Issue {n}, {date}",
+   "ar": "العدد {n} الصادر في {date}"
+  },
+  "title_1": {
+   "en": "Arabian Gulf,",
+   "ar": "الخليج العربي"
+  },
+  "title_2": {
+   "en": "measured",
+   "ar": "على خط الأساس"
+  },
+  "title_full": {
+   "en": "A weekly measurement of cybersecurity in the Arabian Gulf",
+   "ar": "قياس أسبوعي للأمن السيبراني في الخليج العربي"
+  },
+  "standfirst": {
+   "en": "An open weekly measurement of how well the public domains of the six Arabian Gulf states are protected. This is issue {n}, published on {date}.",
+   "ar": "قياس أسبوعي مفتوح لحماية النطاقات العامة في دول الخليج العربي الست وهذا هو العدد {n} الصادر في {date}."
+  },
+  "lede_h": {
+   "en": "The issue in one sentence",
+   "ar": "العدد في جملة واحدة"
+  },
+  "lede": {
+   "en": "Of {live} {where}, {dmarc} can be spoofed in email and {dnssec} pass DNSSEC validation.",
+   "ar": "من {live} {where} يمكن انتحال {dmarc} منها في البريد ويجتاز {dnssec} منها التحقق من توقيع DNSSEC."
+  },
+  "where_GCC": {
+   "en": "in the Arabian Gulf",
+   "ar": "في الخليج العربي"
+  },
+  "where_state": {
+   "en": "in {place}",
+   "ar": "في {place}"
+  },
+  "clauses_h": {
+   "en": "Six figures to quote",
+   "ar": "ستة أرقام يُستشهد بها"
+  },
+  "clauses_state_h": {
+   "en": "Six figures for {place}",
+   "ar": "ستة أرقام عن {place}"
+  },
+  "clauses_word": {
+   "en": "Clauses",
+   "ar": "البنود"
+  },
+  "measure_h": {
+   "en": "What we measure",
+   "ar": "ما نقيسه"
+  },
+  "measure_count": {
+   "en": "standards in four groups, from the foundations to the frontier",
+   "ar": "معياراً في أربع مجموعات من الأساسيات إلى الأحدث"
+  },
+  "measure_outside": {
+   "en": "We read what any visitor sees from outside, touch no server and need no permission.",
+   "ar": "نقرأ ما يراه أي زائر من الخارج فلا نلمس أي خادم ولا نحتاج إلى أي صلاحية."
+  },
+  "measure_names": {
+   "en": "We name no organisation and rank no state.",
+   "ar": "لا نسمّي أي جهة ولا نرتب الدول."
+  },
+  "measure_suffixes": {
+   "en": "domain suffixes across the six states, from {first} to {last}",
+   "ar": "امتداداً للنطاقات في الدول الست من {first} إلى {last}"
+  },
+  "how_1": {
+   "en": "First we gather the names.",
+   "ar": "أولاً نجمع الأسماء."
+  },
+  "how_1_note": {
+   "en": "From Certificate Transparency logs and the Tranco list, {names} in this issue.",
+   "ar": "من سجلات شفافية الشهادات وقائمة Tranco فبلغت في هذا العدد {names}."
+  },
+  "how_2": {
+   "en": "Then we read what anyone sees.",
+   "ar": "ثم نقرأ ما يراه أي زائر."
+  },
+  "how_2_note": {
+   "en": "{queries} through two public resolvers, and {sites} read from servers outside the Arabian Gulf.",
+   "ar": "أجرينا {queries} عبر محللين عامين وقرأنا {sites} من خوادم خارج الخليج العربي."
+  },
+  "how_3": {
+   "en": "Then we look again.",
+   "ar": "ثم نعيد قياس ما لم يُحسم."
+  },
+  "how_3_note": {
+   "en": "The two resolvers agreed on {agree} of the DMARC answers, and every inconclusive result is measured again before the run ends.",
+   "ar": "اتفق المحللان على {agree} من إجابات DMARC وكل نتيجة غير حاسمة تُقاس مرة ثانية قبل نهاية الدورة."
+  },
+  "how_4": {
+   "en": "On Monday, the issue.",
+   "ar": "وصباح كل اثنين يصدر العدد."
+  },
+  "how_4_note": {
+   "en": "Totals only, with no organisation named, and the open data as CSV and JSON with an archive of every issue.",
+   "ar": "مجاميع فقط دون اسم أي جهة مع البيانات المفتوحة بصيغتي CSV وJSON وأرشيف لكل عدد."
+  },
+  "field_title": {
+   "en": "Type your domain and see where it stands, in seconds.",
+   "ar": "اكتب نطاقك واعرف أين يقف من خط الأساس خلال ثوانٍ."
+  },
+  "foot_monday": {
+   "en": "A new issue comes out every Monday morning.",
+   "ar": "يصدر عدد جديد صباح كل اثنين."
+  },
+  "foot_top": {
+   "en": "Back to the top",
+   "ar": "إلى أعلى الصفحة"
+  },
+  "foot_contact_note": {
+   "en": "To report a mistake, or to ask for a domain to be added or left out, open an issue in the repository.",
+   "ar": "للإبلاغ عن خطأ أو لطلب إضافة نطاق أو استبعاده افتح بلاغاً في المستودع."
+  },
+  "chain_h": {
+   "en": "Can its suffixes be signed?",
+   "ar": "هل يمكن توقيع امتداداتها؟"
+  },
+  "chain_note": {
+   "en": "A domain can only pass DNSSEC when the suffix above it is signed, so this is the first thing to look at.",
+   "ar": "لا يجتاز النطاق معيار DNSSEC إلا إذا كان الامتداد الذي يعلوه موقّعاً لذلك يبدأ النظر من هنا."
+  },
+  "chain_unknown": {
+   "en": "Not measured yet",
+   "ar": "لم يُقَس بعد"
+  },
+  "table_share": {
+   "en": "Share passing",
+   "ar": "نسبة الاجتياز"
+  },
+  "table_basis": {
+   "en": "Passing of measured",
+   "ar": "المجتاز من المقيس"
+  },
+  "table_suffix": {
+   "en": "Suffix",
+   "ar": "الامتداد"
+  },
+  "table_dnssec": {
+   "en": "Signed",
+   "ar": "التوقيع"
+  },
+  "standards_title": {
+   "en": "Thirteen standards",
+   "ar": "ثلاثة عشر معياراً"
+  },
+  "standards_intro": {
+   "en": "Thirteen standards in four groups, from the foundations to the frontier, each with a page on why it matters, when a domain passes and how to fix it.",
+   "ar": "ثلاثة عشر معياراً في أربع مجموعات من الأساسيات إلى الأحدث ولكل معيار صفحة تشرح لماذا يهم ومتى يجتازه النطاق وكيف يُعالج."
+  },
+  "standards_back": {
+   "en": "All thirteen standards",
+   "ar": "المعايير الثلاثة عشر كلها"
+  },
+  "check_gulf_sentence": {
+   "en": "In issue {n}, published on {date}, {pct} of the measured domains in the Arabian Gulf pass this standard.",
+   "ar": "في العدد {n} الصادر في {date} اجتاز هذا المعيار {pct} من النطاقات المقيسة في الخليج العربي."
+  },
+  "result_gulf": {
+   "en": "{pct} of Arabian Gulf domains pass",
+   "ar": "يجتازه {pct} من نطاقات الخليج العربي"
+  },
+  "method_intro": {
+   "en": "A measurement, not an audit: what is measured, where the names come from, what is published and what is not, and how to cite it.",
+   "ar": "قياس لا تدقيق وهنا ما يُقاس ومن أين تأتي الأسماء وما يُنشر وما لا يُنشر وكيف تستشهد به."
+  },
+  "credit_source": {
+   "en": "Source page",
+   "ar": "صفحة المصدر"
+  },
+  "cite_issue": {
+   "en": "{author} ({year}). {name}, issue {n}, {date}. {url}",
+   "ar": "{author} ({year}) {name} العدد {n} الصادر في {date} {url}"
+  },
+  "copy_bib": {
+   "en": "Copy BibTeX",
+   "ar": "انسخ مدخل BibTeX"
+  },
+  "cite_issue_h": {
+   "en": "How to cite this issue",
+   "ar": "كيف تستشهد بهذا العدد"
+  },
+  "issues_title": {
+   "en": "Every issue",
+   "ar": "الأعداد كلها"
+  },
+  "issues_intro": {
+   "en": "Every issue keeps a page that does not change after it comes out, so a figure quoted from it stays valid, and its open data is archived with it.",
+   "ar": "لكل عدد صفحة لا تتغير بعد صدوره حتى يبقى كل رقم مقتبس منه صالحاً وتُحفظ بياناته المفتوحة معه."
+  },
+  "issues_releases": {
+   "en": "Every issue's data on GitHub",
+   "ar": "بيانات كل الأعداد على GitHub"
+  },
+  "latest_word": {
+   "en": "Latest",
+   "ar": "الأحدث"
+  },
+  "issue_places": {
+   "en": "The Arabian Gulf and each state",
+   "ar": "الخليج العربي وكل دولة"
+  },
+  "issue_standfirst": {
+   "en": "Published on {date}, measuring {live} in the six Arabian Gulf states.",
+   "ar": "صدر في {date} وقيس فيه {live} في دول الخليج العربي الست."
+  },
+  "issue_standfirst_state": {
+   "en": "Published on {date}, with the figures for {place}.",
+   "ar": "صدر في {date} وهذه أرقام {place} فيه."
+  },
+  "issue_release": {
+   "en": "Issue {n} as a release, with its data",
+   "ar": "العدد {n} في أرشيف الإصدارات مع بياناته"
+  },
+  "nf_title": {
+   "en": "This page does not exist",
+   "ar": "هذه الصفحة غير موجودة"
+  },
+  "nf_body": {
+   "en": "Its address may have changed, so start from the home page or from the list of issues.",
+   "ar": "ربما تغيّر عنوانها فابدأ من الصفحة الرئيسية أو من قائمة الأعداد."
+  },
+  "nf_home": {
+   "en": "The home page",
+   "ar": "الصفحة الرئيسية"
+  },
+  "contents_label": {
+   "en": "On this page",
+   "ar": "في هذه الصفحة"
+  },
+  "others_label": {
+   "en": "The other states",
+   "ar": "الدول الأخرى"
+  },
+  "photo_detail": {
+   "en": "A closer look at the photograph at the top of the page.",
+   "ar": "نظرة أقرب على الصورة في أعلى الصفحة."
+  },
+  "all_table_GCC": {
+   "en": "Every standard",
+   "ar": "المعايير كلها في الخليج العربي"
   }
  }
 }
