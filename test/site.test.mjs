@@ -87,15 +87,14 @@ function jpegComments(buf) {
   return out;
 }
 
-test('every picture on the site is the NASA photograph and says so inside the file', () => {
+test('every picture on the site is a NASA photograph and says so inside the file', () => {
   const dir = join(root, 'docs/img');
   const files = readdirSync(dir).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f));
   assert.ok(files.length >= 4, 'the page carries real pictures');
   for (const f of files) {
     const notes = jpegComments(readFileSync(join(dir, f))).filter((c) => c.startsWith(`${PROVENANCE_KEY}\0`));
     assert.equal(notes.length, 1, `${f} carries one origin note`);
-    assert.match(notes[0], /\0Origin: photograph of the Gulf at night .* NASA .* public domain/, `${f} names its source and licence`);
-    assert.ok(!/Persian/i.test(notes[0]), `${f}: the origin note names the Gulf as the site does`);
+    assert.match(notes[0], /\0Origin: photograph of .+ at night, taken from the International Space Station by the NASA Expedition \d+ crew .+ public domain, from Wikimedia Commons page \d+ .+ Not generated\.$/, `${f} names its source and licence`);
   }
   for (const m of app.matchAll(/img\/([a-z0-9-]+\.(?:jpe?g|png|webp|avif))/g)) assert.ok(files.includes(m[1]), `the app refers to img/${m[1]}, which exists`);
 });

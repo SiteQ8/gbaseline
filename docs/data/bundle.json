@@ -14,8 +14,8 @@
   },
   "author_url": "https://3li.info",
   "about": {
-   "en": "An open weekly measurement of how well the public domains of the six Gulf states protect email, DNS and the web, published as totals anyone can quote with a live check for any single domain.",
-   "ar": "قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق."
+   "en": "An open weekly measurement of how well the public domains of the six Arabian Gulf states protect email, DNS and the web, published as totals anyone can quote with a live check for any single domain.",
+   "ar": "قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق."
   }
  },
  "scope": {
@@ -1232,8 +1232,8 @@
  },
  "ui": {
   "tagline": {
-   "en": "How well the public domains of the six Gulf states protect email, DNS and the web, measured every week.",
-   "ar": "قياس أسبوعي لمدى حماية النطاقات العامة في دول الخليج الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع."
+   "en": "How well the public domains of the six Arabian Gulf states protect email, DNS and the web, measured every week.",
+   "ar": "قياس أسبوعي لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع."
   },
   "skip": {
    "en": "Skip to the figures",
@@ -1288,8 +1288,8 @@
    "ar": "على خط الأساس"
   },
   "hero_sub": {
-   "en": "An independent weekly measurement of how well the public domains of the six Gulf states are protected, published as totals anyone can cite.",
-   "ar": "قياس أسبوعي مستقل لحماية النطاقات العامة في دول الخليج الست تُنشر نتائجه مجاميع يستطيع أي شخص الاستشهاد بها."
+   "en": "An independent weekly measurement of how well the public domains of the six Arabian Gulf states are protected, published as totals anyone can cite.",
+   "ar": "قياس أسبوعي مستقل لحماية النطاقات العامة في دول الخليج العربي الست تُنشر نتائجه مجاميع يستطيع أي شخص الاستشهاد بها."
   },
   "hero_action": {
    "en": "Check your domain",
@@ -1300,12 +1300,12 @@
    "ar": "العدد {n} لأسبوع {date}"
   },
   "photo_caption": {
-   "en": "The Gulf at night from the International Space Station on 31 August 2020, photographed by NASA",
-   "ar": "الخليج ليلاً من محطة الفضاء الدولية في 31 أغسطس 2020 بعدسة ناسا"
+   "en": "Dammam and the Eastern Province coast of the Arabian Gulf at night, photographed by NASA from the International Space Station on 25 March 2020",
+   "ar": "الدمام وساحل المنطقة الشرقية على الخليج العربي ليلاً بعدسة ناسا من محطة الفضاء الدولية في 25 مارس 2020"
   },
   "photo_alt": {
-   "en": "A night photograph of the Gulf from space, with city lights along its coasts around a dark sea",
-   "ar": "صورة ليلية للخليج من الفضاء تظهر فيها أضواء المدن على سواحله حول بحر داكن"
+   "en": "A night photograph from space of Dammam on the Arabian Gulf coast, its streets traced in amber and white light beside a dark sea",
+   "ar": "صورة ليلية من الفضاء للدمام على ساحل الخليج العربي تظهر شوارعها بأضواء كهرمانية وبيضاء بجوار بحر داكن"
   },
   "intro_title": {
    "en": "A measurement, not an audit",
@@ -1336,8 +1336,8 @@
    "ar": "يصدر فيه كل عدد جديد"
   },
   "north_caption": {
-   "en": "The north and centre of the Gulf, from the same photograph",
-   "ar": "شمال الخليج ووسطه من الصورة نفسها"
+   "en": "Kuwait City and its coast at night, photographed by NASA on 9 January 2021",
+   "ar": "مدينة الكويت وساحلها ليلاً بعدسة ناسا في 9 يناير 2021"
   },
   "country_label": {
    "en": "Country",
@@ -1604,8 +1604,8 @@
    "ar": "يُحتسب كل نطاق قابل للتسجيل تحت هذه الامتدادات مرة واحدة دون أسمائه الفرعية بينما لا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة."
   },
   "coast_caption": {
-   "en": "The southern coast of the Gulf at night, from the same photograph",
-   "ar": "الساحل الجنوبي للخليج ليلاً من الصورة نفسها"
+   "en": "Qatar at night, photographed by NASA on 13 October 2012",
+   "ar": "قطر ليلاً بعدسة ناسا في 13 أكتوبر 2012"
   },
   "show_title": {
    "en": "Quote any figure",
@@ -1849,8 +1849,8 @@
   },
   "m_scope": [
    {
-    "en": "Every registrable domain under the government, education, health, business, non-profit and network suffixes of the six Gulf states is measured, each counted once as an organisation rather than every host beneath it. The military, embassy and personal suffixes are left out.",
-    "ar": "يُقاس كل نطاق قابل للتسجيل تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في دول الخليج الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته بينما تُستثنى امتدادات الجهات العسكرية والسفارات والأفراد."
+    "en": "Every registrable domain under the government, education, health, business, non-profit and network suffixes of the six Arabian Gulf states is measured, each counted once as an organisation rather than every host beneath it. The military, embassy and personal suffixes are left out.",
+    "ar": "يُقاس كل نطاق قابل للتسجيل تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في دول الخليج العربي الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته بينما تُستثنى امتدادات الجهات العسكرية والسفارات والأفراد."
    }
   ],
   "m_sources_h": {
@@ -1979,8 +1979,8 @@
   },
   "m_credits": [
    {
-    "en": "Every photograph comes from one picture of the Gulf at night that the NASA crew took from the International Space Station on 31 August 2020, in the public domain, while the El Messiri and Alexandria typefaces draw both Arabic and Latin and are used under the SIL Open Font License.",
-    "ar": "الصور كلها من صورة واحدة التقطها طاقم ناسا للخليج ليلاً من محطة الفضاء الدولية في 31 أغسطس 2020 وهي في الملك العام بينما يرسم الخطان El Messiri وAlexandria الحروف العربية واللاتينية ويُستخدمان برخصة SIL للخطوط المفتوحة."
+    "en": "The photographs are four night views that NASA crews took from the International Space Station, of Dammam on 25 March 2020, Kuwait City on 9 January 2021, Qatar on 13 October 2012 and Riyadh on 28 December 2024, all in the public domain, while the El Messiri and Alexandria typefaces draw both Arabic and Latin and are used under the SIL Open Font License.",
+    "ar": "الصور أربع لقطات ليلية التقطتها طواقم ناسا من محطة الفضاء الدولية للدمام في 25 مارس 2020 ولمدينة الكويت في 9 يناير 2021 ولقطر في 13 أكتوبر 2012 وللرياض في 28 ديسمبر 2024 وكلها في الملك العام بينما يرسم الخطان El Messiri وAlexandria الحروف العربية واللاتينية ويُستخدمان برخصة SIL للخطوط المفتوحة."
    }
   ],
   "foot_sign": {
@@ -2016,8 +2016,8 @@
    "ar": "البيانات والشيفرة برخصة MIT والصور من ناسا في الملك العام"
   },
   "stamp_alt": {
-   "en": "The eastern coast of the Gulf at night",
-   "ar": "ساحل الخليج الشرقي ليلاً"
+   "en": "Riyadh at night from the International Space Station",
+   "ar": "الرياض ليلاً من محطة الفضاء الدولية"
   },
   "noscript": {
    "en": "This page needs JavaScript to show the figures, and the open data files work without it.",

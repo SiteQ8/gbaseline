@@ -9,13 +9,19 @@ Self hosted in `docs/fonts/` under the SIL Open Font License 1.1, whose full tex
 
 ## Photographs
 
-Every picture on the site comes from one photograph: the Gulf at night, taken from the International Space Station by the NASA Expedition 63 crew on 31 August 2020 at 21:04:55 UTC. NASA, public domain (https://creativecommons.org/publicdomain/mark/1.0/). Source: Wikimedia Commons, page 99981618 (https://commons.wikimedia.org/w/index.php?curid=99981618), downloaded at 3840 pixels on 16 October 2026.
+The photographs are four night views of the Arabian Gulf's cities taken from the International Space Station by NASA crews, all in the public domain (https://creativecommons.org/publicdomain/mark/1.0/). Each was chosen only after reading its source page, whose title, description and categories never use any other name for the Arabian Gulf.
 
-`docs/img/gulf-night-2400.jpg` and `gulf-night-1600.jpg` are the whole frame resized with a light denoise; `gulf-night-north.jpg`, `gulf-night-coast.jpg` and `gulf-night-stamp.jpg` are crops of it. Each file carries this origin in a JPEG comment. Nothing on the site is generated imagery.
+- **Dammam and the Eastern Province coast**, Expedition 62, 25 March 2020. Wikimedia Commons page 88992012 (https://commons.wikimedia.org/w/index.php?curid=88992012). `docs/img/dammam-night-2400.jpg` and `dammam-night-1600.jpg` are the whole frame resized with a light denoise.
+- **Kuwait City**, Expedition 64, 9 January 2021, NASA photograph iss064e021961. Wikimedia Commons page 140667044 (https://commons.wikimedia.org/w/index.php?curid=140667044). `docs/img/kuwait-night.jpg` is a crop of the city and its coast.
+- **Qatar**, Expedition 33, 13 October 2012. Wikimedia Commons page 22699352 (https://commons.wikimedia.org/w/index.php?curid=22699352). `docs/img/qatar-night.jpg` is a crop of its lit towns and roads.
+- **Riyadh**, Expedition 72, 28 December 2024, NASA photograph iss072e445326. Wikimedia Commons page 161790758 (https://commons.wikimedia.org/w/index.php?curid=161790758). `docs/img/riyadh-night-stamp.jpg` is a crop of the city centre.
+
+Each was downloaded at 3840 pixels on 16 October 2026, and each file on the site carries its origin in a JPEG comment. The share card `docs/og.png` is rendered from the site's fonts and the photograph of Dammam, and says so in a PNG text chunk. Nothing on the site is generated imagery.
+
 
 ## Launch film
 
-The films attached to the v0.1.0 release, `gbaseline-film-ar.mp4` and `gbaseline-film-en.mp4`, are recorded from this site with the figures of issue 1, published on 16 October 2026. Their opening shot moves slowly into the photograph above; that motion is generated from the photograph with Kling 2.5 Turbo through ElevenLabs. The narration in each language is generated with ElevenLabs (Eleven v4) and the music with ElevenLabs Music. The closing card of each film says so. None of this generated material is used on the site.
+The films attached to the v0.1.0 release, `gbaseline-film-ar.mp4` and `gbaseline-film-en.mp4`, are recorded from this site with the figures of issue 1, published on 16 October 2026. Their opening shot holds still on one of the photographs above. The narration in each language is generated with ElevenLabs (Eleven v4) and the music with ElevenLabs Music. The closing card of each film says so. None of this generated material is used on the site.
 
 ## Data sources
 
