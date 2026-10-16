@@ -1,4 +1,4 @@
-// The site, printed as stationery: this week's card beside the photograph of the Gulf at night, the ledger of
+// The site, printed as stationery: this week's card beside a photograph of the Arabian Gulf coast at night, the ledger of
 // Gulf figures, the citation slips, the itinerary of a run, the reply card for the live check and the back of the
 // card. Each state has its own page; no view sets states side by side. Built from the bundle and the published
 // data with DOM nodes only: no markup strings, no inline styles.
@@ -104,7 +104,7 @@ function scale() {
 
 function night(focus, caption = true) {
   const img = h('img', {
-    src: 'img/gulf-night-1600.jpg', srcset: 'img/gulf-night-1600.jpg 1600w, img/gulf-night-2400.jpg 2400w',
+    src: 'img/dammam-night-1600.jpg', srcset: 'img/dammam-night-1600.jpg 1600w, img/dammam-night-2400.jpg 2400w',
     sizes: '(max-width: 900px) 100vw, 92vw', width: 2400, height: 1600, alt: t('photo_alt'), fetchpriority: 'high',
   });
   if (focus) setVar(img, '--focus', focus);
@@ -143,7 +143,7 @@ function back() {
         h('p', {}, t('foot_note')),
         h('p', {}, t('foot_author', { author: '' }), h('a', { class: 'link', href: B.project.author_url }, P(B.project.author)))),
       h('div', { class: 'pc-addr', 'data-rise': '' },
-        h('figure', { class: 'stamp' }, h('img', { src: 'img/gulf-night-stamp.jpg', width: 264, height: 352, alt: t('stamp_alt'), loading: 'lazy' })),
+        h('figure', { class: 'stamp' }, h('img', { src: 'img/riyadh-night-stamp.jpg', width: 264, height: 352, alt: t('stamp_alt'), loading: 'lazy' })),
         h('ul', { class: 'addr' },
           h('li', {}, h('a', { class: 'link', href: repo }, t('foot_code'))),
           h('li', {}, h('a', { class: 'link', href: '#/method?to=data' }, t('foot_data'))),
@@ -337,7 +337,7 @@ function intro() {
       h('div', { class: 'facts' }, facts.map(([v, k], i) => setVar(h('p', { class: 'fact', 'data-rise': '' }, h('span', { class: 'v' }, v), h('span', { class: 'k' }, k)), '--i', i + 2))),
       h('p', { class: 'plate-note soft', 'data-rise': '' }, t('foot_note')),
       h('figure', { class: 'plate', 'data-rise': '' },
-        h('img', { src: 'img/gulf-night-north.jpg', width: 1120, height: 840, alt: t('north_caption'), loading: 'lazy' }),
+        h('img', { src: 'img/kuwait-night.jpg', width: 1120, height: 840, alt: t('north_caption'), loading: 'lazy' }),
         h('figcaption', {}, t('north_caption')))));
 }
 
@@ -359,7 +359,7 @@ function proof() {
     h('div', { class: 'proof-card', 'data-rise': '' },
       h('h2', { id: 'proof-h' }, t('proof_title')),
       h('figure', { class: 'tipped' },
-        h('img', { src: 'img/gulf-night-coast.jpg', width: 1280, height: 720, alt: t('coast_caption'), loading: 'lazy' }),
+        h('img', { src: 'img/qatar-night.jpg', width: 1280, height: 720, alt: t('coast_caption'), loading: 'lazy' }),
         h('figcaption', {}, t('coast_caption'))),
       h('ul', { class: 'guests' }, lines),
       h('p', { class: 'proof-note' }, t('proof_note'))));
@@ -378,7 +378,7 @@ function showcase() {
       f.measured ? copyButtons(cl, ref(cl, f.v), text) : null), '--i', i);
   });
   return h('section', { class: 'showcase', 'aria-labelledby': 'show-h', 'data-section': '' },
-    h('img', { src: 'img/gulf-night-1600.jpg', srcset: 'img/gulf-night-1600.jpg 1600w, img/gulf-night-2400.jpg 2400w', sizes: '100vw', width: 2400, height: 1600, alt: '', loading: 'lazy' }),
+    h('img', { src: 'img/dammam-night-1600.jpg', srcset: 'img/dammam-night-1600.jpg 1600w, img/dammam-night-2400.jpg 2400w', sizes: '100vw', width: 2400, height: 1600, alt: '', loading: 'lazy' }),
     h('div', { class: 'say', 'data-rise': '' },
       h('div', {}, h('h2', { id: 'show-h' }, t('show_title')), ' ', h('span', { class: 'p1' }, t('show_p1'))),
       h('p', {}, t('show_p2'))),
