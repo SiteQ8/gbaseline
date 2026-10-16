@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { entityOf, bySuffixLength, absorb, emptyInventory, serialize, refresh } from '../src/inventory.mjs';
-import { scan, compact, expand, needsRetry, merge } from '../src/scan.mjs';
+import { scan, compact, expand, needsRetry, merge, shardOf, mergeScans } from '../src/scan.mjs';
 import { aggregate, appendHistory, historyCsv, csvRows, CSV_HEAD, percent } from '../src/aggregate.mjs';
 import { runSummary } from '../scripts/run-summary.mjs';
 import { CHECKS } from '../docs/assets/engine/checks.js';
@@ -136,4 +136,21 @@ test('the run summary on the job page carries totals and source health, never a 
   assert.match(text, /### Share passing in the Gulf/);
   assert.ok(!/\| Check \| Gulf \| Kuwait/.test(text), 'shares are for the Gulf only, never one state beside another');
   assert.ok(!/[a-z]\.(gov|edu|ac)\.[a-z]{2}\b/.test(text), 'no domain is named');
+});
+
+test('a run split into shards covers every domain once and joins back into one scan', async () => {
+  const names = Array.from({ length: 300 }, (_, i) => `name${i}.${['gov.kw', 'com.sa', 'org.ae', 'med.om'][i % 4]}`);
+  const shards = names.map((d) => shardOf(d, 6));
+  assert.ok(shards.every((s) => s >= 0 && s < 6), 'every domain lands in a shard');
+  assert.deepEqual(names.map((d) => shardOf(d, 6)), shards, 'the same shard every time');
+  assert.ok(new Set(shards).size === 6, 'every shard gets work');
+  const row = (d) => ({ d, c: 'KW', s: 'government', suffix: 'gov.kw', dns: 'live', agree: true, r: compact({}) });
+  const a = { rows: [row('b.gov.kw'), row('a.gov.kw')], chain: { 'gov.kw': true }, retried: 1, seconds: 300, resolver: { queries: 10 } };
+  const b = { rows: [row('c.gov.kw'), row('a.gov.kw')], chain: { 'gov.kw': true }, retried: 2, seconds: 500, resolver: { queries: 15 } };
+  const m = mergeScans([a, b]);
+  assert.deepEqual(m.rows.map((r) => r.d), ['a.gov.kw', 'b.gov.kw', 'c.gov.kw'], 'each domain once, in order');
+  assert.equal(m.seconds, 500, 'the run lasts as long as its longest shard');
+  assert.equal(m.retried, 3);
+  assert.equal(m.resolver.queries, 25, 'queries add up');
+  assert.equal(mergeScans([a]), a, 'one part is returned as it is');
 });

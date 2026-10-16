@@ -14,7 +14,7 @@
 
 ### لماذا
 
-يستشهد المتحدثون والصحفيون والباحثون والجهات التنظيمية بأرقام عن الأمن السيبراني في الخليج لكن أغلب هذه الأرقام قديمة أو مغلقة أو تغطي بلداً واحداً وفحصاً واحداً. لذا يقيس هذا المشروع كل أسبوع كل نطاق تحت لواحق الجهات الحكومية والتعليم في الكويت والسعودية والإمارات وقطر والبحرين وعُمان ثمّ ينشر النتائج مجاميعَ مرقّمة بعدد أسبوعي وتاريخ حتى يُستشهد بها بدقة.
+يستشهد المتحدثون والصحفيون والباحثون والجهات التنظيمية بأرقام عن الأمن السيبراني في الخليج لكن أغلب هذه الأرقام قديمة أو مغلقة أو تغطي بلداً واحداً ومعياراً واحداً لذا يقيس هذا المشروع كل أسبوع كل نطاق تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في الكويت والسعودية والإمارات وقطر والبحرين وعُمان ثمّ ينشر النتائج مجاميعَ مرقّمة بعدد أسبوعي وتاريخ حتى يُستشهد بها بدقة.
 
 ### ماذا يقيس
 
@@ -34,6 +34,17 @@
 | المواقع | تبادل المفاتيح المقاوم للحوسبة الكمية | يقبل الخادم المجموعة الهجينة X25519MLKEM768 |
 | الإبلاغ عن الثغرات | ملف security.txt | جهة تواصل وتاريخ انتهاء لم يحن |
 
+### الامتدادات المشمولة
+
+| القطاع | الكويت | السعودية | الإمارات | قطر | البحرين | عُمان |
+|---|---|---|---|---|---|---|
+| الجهات الحكومية | gov.kw | gov.sa | gov.ae | gov.qa | gov.bh | gov.om |
+| الجامعات والمدارس | edu.kw | edu.sa · sch.sa | ac.ae · sch.ae | edu.qa · sch.qa | edu.bh | edu.om |
+| القطاع الصحي | | med.sa | | | | med.om |
+| الشركات | com.kw | com.sa | co.ae | com.qa | com.bh | com.om · co.om |
+| المنظمات غير الربحية | org.kw | org.sa | org.ae | org.qa | org.bh | org.om |
+| الشبكات | net.kw | net.sa | net.ae | net.qa | net.bh | net.om |
+
 ### ما يُنشر وما لا يُنشر
 
 - تُنشر المجاميع حسب الدولة والقطاع والفحص مع البسط والمقام ومستويات النتائج والسلسلة الأسبوعية.
@@ -52,7 +63,7 @@ npx -y github:SiteQ8/gbaseline check example.com --lang ar
 
 - يجري الفحص الأسبوعي من خوادم GitHub خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً.
 - ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج.
-- وتقع بعض نطاقات الجهات الحكومية خارج هذه اللواحق ولم تُضمّن بعد.
+- ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية وتُستثنى عمداً امتدادات الجهات العسكرية والسفارات والأفراد.
 
 ---
 
@@ -60,7 +71,7 @@ npx -y github:SiteQ8/gbaseline check example.com --lang ar
 
 ### Why
 
-Talks, articles, papers and policy notes about cybersecurity in the Gulf need figures, and most of the figures on hand are old, closed, or cover one country and one control. This project measures every registrable domain under the government and education suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman every week, and publishes the results as numbered weekly issues so that any figure can be cited to its issue and date.
+Talks, articles, papers and policy notes about cybersecurity in the Gulf need figures, and most of the figures on hand are old, closed, or cover one country and one control. This project measures every registrable domain under the government, education, health, business, non-profit and network suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman every week, and publishes the results as numbered weekly issues so that any figure can be cited to its issue and date.
 
 ### What it measures
 
@@ -79,6 +90,19 @@ Talks, articles, papers and policy notes about cybersecurity in the Gulf need fi
 | Websites | Old TLS switched off (RFC 8996) | TLS 1.0 and 1.1 both refused |
 | Websites | Post quantum key exchange | a handshake offering only X25519MLKEM768 completes |
 | Vulnerability disclosure | security.txt (RFC 9116) | Contact present and one Expires date still ahead |
+
+### Suffixes measured
+
+| Sector | Kuwait | Saudi Arabia | UAE | Qatar | Bahrain | Oman |
+|---|---|---|---|---|---|---|
+| Government | gov.kw | gov.sa | gov.ae | gov.qa | gov.bh | gov.om |
+| Universities and schools | edu.kw | edu.sa · sch.sa | ac.ae · sch.ae | edu.qa · sch.qa | edu.bh | edu.om |
+| Healthcare | | med.sa | | | | med.om |
+| Companies | com.kw | com.sa | co.ae | com.qa | com.bh | com.om · co.om |
+| Non-profit | org.kw | org.sa | org.ae | org.qa | org.bh | org.om |
+| Network | net.kw | net.sa | net.ae | net.qa | net.bh | net.om |
+
+Left out on purpose: mil.ae, mil.qa, emb.kw, ind.kw, name.qa, pro.om, pub.sa and museum.om.
 
 ### How the numbers are made
 
@@ -138,7 +162,7 @@ node bin/cli.mjs publish            # write the totals, the weekly series and th
 node bin/cli.mjs weekly             # all three
 ```
 
-The weekly workflow in `.github/workflows/weekly.yml` runs the same three steps every Monday and commits the published files.
+The weekly workflow in `.github/workflows/weekly.yml` runs by itself every Monday, and again whenever the scope or the workflow changes on `main`: it refreshes the inventory, scans it across six runners at once (`scan --shard i/6`), publishes and tests the totals, commits them, archives the issue as a release named `issue-N` with its CSV and JSON attached, and asks Pages to publish it. No step is done by hand.
 
 ### Develop
 
@@ -153,7 +177,7 @@ npm run preflight   # everything above plus the publication gates
 
 - The scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks.
 - DKIM is not measured, because selectors cannot be listed from outside.
-- Some government namespaces sit outside these suffixes (for example names directly under a country code) and are not included yet.
+- Domains registered directly under a country code, or under global extensions such as .com, are not included yet. The military, embassy and personal suffixes are left out on purpose.
 
 ### The site
 

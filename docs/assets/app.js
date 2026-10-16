@@ -38,7 +38,11 @@ const noun = (n, key) => words(n, key).replace(/^[\d,]+\s+/, '');
 const num = (n) => number(n, S.lang);
 const pctText = (v) => (v === null ? t('no_data') : percent(v, S.lang));
 const COUNTRIES = () => Object.keys(B.scope.countries);
-const SECTORS = () => ['all', ...Object.keys(B.scope.sectors)];
+// The sectors a place has in this issue: a state lists only the sectors its registry offers and the issue measured.
+const SECTORS = (place = 'GCC') => ['all', ...Object.keys(B.scope.sectors).filter((s) => {
+  const inv = D.summary && D.summary.inventory[place];
+  return inv ? Boolean(inv[s] && inv[s].discovered) : B.scope.suffixes.some((x) => x.sector === s && (place === 'GCC' || x.country === place));
+})];
 const placeName = (p) => (p === 'GCC' ? t('place_GCC') : P(B.scope.countries[p]));
 const sectorName = (s) => (s === 'all' ? t('sector_all') : P(B.scope.sectors[s]));
 const levelText = (id, level) => P((B.checks[id].levels || {})[level] || B.common_levels[level] || { en: level, ar: level });
@@ -225,7 +229,7 @@ function issueFor(r) {
 
 function ledgerSection(r, place, base) {
   const issue = issueFor(r);
-  const sector = SECTORS().includes(r.query.get('s')) ? r.query.get('s') : (place === 'GCC' ? S.sector : 'all');
+  const sector = SECTORS(place).includes(r.query.get('s')) ? r.query.get('s') : (place === 'GCC' && SECTORS(place).includes(S.sector) ? S.sector : 'all');
   const go = (v) => {
     if (place === 'GCC') { S.sector = v; save(); }
     const q = new URLSearchParams(r.query);
@@ -240,7 +244,7 @@ function ledgerSection(r, place, base) {
   };
   const tabs = h('fieldset', { class: 'tabs' },
     h('legend', {}, t('sector_label')),
-    SECTORS().map((o) => h('label', {}, h('input', { type: 'radio', name: `sector-${place}`, value: o, checked: o === sector, onchange: () => go(o) }), h('span', {}, sectorName(o)))));
+    SECTORS(place).map((o) => h('label', {}, h('input', { type: 'radio', name: `sector-${place}`, value: o, checked: o === sector, onchange: () => go(o) }), h('span', {}, sectorName(o)))));
   const latestHref = () => { const q = new URLSearchParams(r.query); q.delete('i'); q.delete('c'); const qs = q.toString(); return `${base}${qs ? `?${qs}` : ''}`; };
   const past = issue.past ? h('div', { class: 'past', role: 'note' },
     h('p', {}, t('stats_past', { n: issue.n, date: dateLong(issue.date, S.lang), latest: issue.latest })),
@@ -469,12 +473,19 @@ function viewCountry(code, r) {
   const inv = s.inventory[code];
   const content = [
     h('h1', {}, placeName(code)),
-    h('p', { class: 'lead' }, t('country_lede', { domains: words(inv.all.live, 'w_live_domain'), gov: num(inv.government.live), edu: num(inv.education.live) })),
+    h('p', { class: 'lead' }, t('country_lede', { domains: words(inv.all.live, 'w_live_domain'), parts: sectorParts(inv) })),
     inv.all.retired ? h('p', {}, t('country_retired', { n: num(inv.all.retired) })) : null,
     h('ul', { class: 'levels' }, notes),
     h('p', {}, t('countries_intro')),
   ];
   return pageFrame('countries', content, { focus: '45% 60%', after: [ledgerSection(r, code, `#/countries/${code}`), countryTable(code)] });
+}
+
+// How a state's live domains split across its sectors, in the page's language: "263 للجهات الحكومية و120 للجامعات والمدارس".
+function sectorParts(inv) {
+  const parts = Object.keys(B.scope.sectors).filter((s) => inv[s] && inv[s].live).map((s) => t(`part_${s}`, { n: num(inv[s].live) }));
+  if (S.lang === 'ar') return parts.join(' و');
+  return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}` : parts.join('');
 }
 
 // Every check for one state and nothing else: no column for any other place.
