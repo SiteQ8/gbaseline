@@ -21,6 +21,8 @@ jobs:
           check-latest: true
       - name: The bundle matches its sources
         run: node scripts/build.mjs --check
+      - name: The printed pages match the data
+        run: node scripts/prerender.mjs --check
       - name: Engine, probes, pipeline, data, naming, MCP and site
         run: npm test
       - name: MCP selftest

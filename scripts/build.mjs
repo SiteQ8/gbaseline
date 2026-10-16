@@ -59,8 +59,17 @@ for (const { id } of CHECKS) {
   for (const lvl of Object.keys(c.levels || {})) if (!LEVELS[id].includes(lvl) && !COMMON_LEVELS.includes(lvl)) fail(`check ${id} describes level ${lvl}, which evaluate never returns`);
 }
 
-const REQUIRED_UI = ['tagline', 'hero_title_1', 'hero_title_2', 'hero_sub', 'basis', 'cite_source', 'source_line', 'domain_intro', 'foot_note', 'state_pass', 'state_fail', 'state_na', 'state_unknown'];
+const REQUIRED_UI = ['tagline', 'title_1', 'title_2', 'standfirst', 'lede', 'basis', 'cite_source', 'cite_issue', 'source_line', 'domain_intro', 'foot_note', 'state_pass', 'state_fail', 'state_na', 'state_unknown'];
 for (const k of REQUIRED_UI) if (!ui[k]) fail(`ui.json lacks ${k}`);
+// One night photograph per state, each with its source page, its date and its wording in both languages.
+const pictures = src('pictures.json').pictures || [];
+for (const c of Object.keys(scope.countries)) if (pictures.filter((p) => p.state === c).length !== 1) fail(`pictures.json needs exactly one photograph of ${c}`);
+for (const p of pictures) {
+  if (!Number.isInteger(p.commons) || p.commons <= 0) fail(`picture of ${p.state} needs its Commons page id`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(p.date || '')) fail(`picture of ${p.state} needs its date`);
+  for (const k of ['alt', 'caption', 'credit']) if (!pairOk(p[k])) fail(`picture of ${p.state} needs ${k} in both languages`);
+  for (const size of ['wide', 'tile', 'portrait']) if (!p.files || !p.files[size] || !p.files[size].file) fail(`picture of ${p.state} lacks its ${size} file`);
+}
 for (const c of [...Object.keys(scope.countries), 'GCC']) if (!pairOk(ui[`in_${c}`])) fail(`ui.json lacks in_${c}`);
 for (const s of ['all', ...Object.keys(scope.sectors)]) if (!pairOk(ui[`of_${s}`])) fail(`ui.json lacks of_${s}`);
 for (const s of Object.keys(scope.sectors)) if (!pairOk(ui[`part_${s}`]) || !ui[`part_${s}`].en.includes('{n}') || !ui[`part_${s}`].ar.includes('{n}')) fail(`ui.json lacks part_${s} with {n}`);

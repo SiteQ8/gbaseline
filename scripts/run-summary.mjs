@@ -10,7 +10,7 @@ const file = join(root, 'docs/data/summary.json');
 
 export function runSummary(summary, bundle) {
   const places = ['GCC', ...Object.keys(bundle.scope.countries)];
-  const placeName = (p) => (p === 'GCC' ? 'Gulf' : bundle.scope.countries[p].en);
+  const placeName = (p) => (p === 'GCC' ? 'Arabian Gulf' : bundle.scope.countries[p].en);
   const share = (x) => {
     const v = percent(x);
     return v === null ? 'n/a' : `${v.toFixed(1)}% (${x.pass} of ${x.pass + x.fail})`;
@@ -21,10 +21,10 @@ export function runSummary(summary, bundle) {
     const n = summary.inventory[p].all;
     out.push(`| ${placeName(p)} | ${n.discovered} | ${n.live} | ${n.retired} | ${n.broken} |`);
   }
-  // Shares for the Gulf as a whole only: like the site, the run never sets the states side by side.
+  // Shares for the Arabian Gulf as a whole only: like the site, the run never sets the states side by side.
   const sectors = ['all', ...Object.keys(bundle.scope.sectors)];
   const sectorName = (g) => (g === 'all' ? 'All sectors' : bundle.scope.sectors[g].en);
-  out.push('', '### Share passing in the Gulf', '', `| Check | ${sectors.map(sectorName).join(' | ')} |`, `|---|${sectors.map(() => '---:').join('|')}|`);
+  out.push('', '### Share passing in the Arabian Gulf', '', `| Check | ${sectors.map(sectorName).join(' | ')} |`, `|---|${sectors.map(() => '---:').join('|')}|`);
   for (const c of bundle.order) out.push(`| ${bundle.checks[c.id].short.en} | ${sectors.map((g) => share(summary.checks[c.id].GCC[g])).join(' | ')} |`);
   out.push('', '| Sector | Discovered | Live |', '|---|---:|---:|');
   for (const g of sectors) { const n = summary.inventory.GCC[g]; out.push(`| ${sectorName(g)} | ${n.discovered} | ${n.live} |`); }

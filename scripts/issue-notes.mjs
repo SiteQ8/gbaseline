@@ -1,5 +1,5 @@
 // The notes of the release each weekly issue is archived as: the issue, its date, how many domains it measured
-// and the Gulf's six headline figures in Arabic and English, each with the link that reopens it. No domain is named.
+// and the Arabian Gulf's six headline figures in Arabic and English, each with the link to its page. No domain is named.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -16,12 +16,12 @@ export function issueNotes(summary, bundle) {
   const lines = (lang) => CLAUSES.map((cl) => {
     const f = clauseShare(summary.checks[cl.id].GCC.all, cl.mode);
     const sentence = ui(`cite_${cl.id}`, lang, { pct: f.v === null ? ui('no_data', lang) : percent(f.v, lang), sector: ui('of_all', lang), place: ui('in_GCC', lang) });
-    return `- ${sentence} ${base}?lang=${lang}#/?i=${summary.issue}&c=${cl.n}`;
+    return `- ${sentence}\n  ${base}${lang === 'ar' ? '' : 'en/'}issues/${summary.issue}/#c${cl.n}`;
   });
   const ar = [
-    `## ${p.name_ar}، العدد ${summary.issue}`,
+    `## ${p.name_ar} العدد ${summary.issue}`,
     '',
-    `صدر العدد ${summary.issue} لأسبوع ${dateLong(summary.date, 'ar')} بعد قياس ${counted(live, bundle.ui.w_live_domain, 'ar')} في دول الخليج الست.`,
+    `صدر العدد ${summary.issue} في ${dateLong(summary.date, 'ar')} بعد قياس ${counted(live, bundle.ui.w_live_domain, 'ar')} في دول الخليج العربي الست.`,
     '',
     ...lines('ar'),
     '',
@@ -30,7 +30,7 @@ export function issueNotes(summary, bundle) {
   const en = [
     `## ${p.name_en}, issue ${summary.issue}`,
     '',
-    `Issue ${summary.issue}, week of ${dateLong(summary.date, 'en')}, measured ${counted(live, bundle.ui.w_live_domain, 'en')} across the six Gulf states.`,
+    `Issue ${summary.issue}, published on ${dateLong(summary.date, 'en')}, measured ${counted(live, bundle.ui.w_live_domain, 'en')} across the six Arabian Gulf states.`,
     '',
     ...lines('en'),
     '',

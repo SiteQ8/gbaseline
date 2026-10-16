@@ -1,6 +1,6 @@
-// The files the published site needs once it has a name and a domain: CNAME, robots.txt, sitemap.xml and
-// .well-known/security.txt. Run on its own it refreshes them: the sitemap takes the latest issue date, and
-// security.txt is renewed for a year whenever fewer than 180 days remain before it expires.
+// The files the published site needs once it has a name and a domain: CNAME, robots.txt and .well-known/security.txt.
+// Run on its own it refreshes them: security.txt is renewed for a year whenever fewer than 180 days remain before it
+// expires. The sitemap lists every printed page, so scripts/prerender.mjs writes it.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -35,26 +35,6 @@ export function expiryFor(currentText, now = new Date()) {
   return next.toISOString();
 }
 
-export function sitemap(domain, lastmod) {
-  const base = `https://${domain}/`;
-  const alternates = [['ar', base], ['en', `${base}?lang=en`]];
-  const entry = (loc) => [
-    '  <url>',
-    `    <loc>${loc}</loc>`,
-    `    <lastmod>${lastmod}</lastmod>`,
-    '    <changefreq>weekly</changefreq>',
-    ...alternates.map(([lang, href]) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${href}"/>`),
-    '  </url>',
-  ].join('\n');
-  return [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-    ...alternates.map(([, href]) => entry(href)),
-    '</urlset>',
-    '',
-  ].join('\n');
-}
-
 export function robots(domain) {
   return `User-agent: *\nAllow: /\nSitemap: https://${domain}/sitemap.xml\n`;
 }
@@ -78,7 +58,6 @@ export function writeSiteFiles(root = here, now = new Date()) {
   const files = {
     'docs/CNAME': `${project.domain}\n`,
     'docs/robots.txt': robots(project.domain),
-    'docs/sitemap.xml': sitemap(project.domain, lastmod),
     'docs/.well-known/security.txt': securityTxt(project, expires),
   };
   const changed = Object.entries(files).filter(([rel, text]) => write(root, rel, text)).map(([rel]) => rel);

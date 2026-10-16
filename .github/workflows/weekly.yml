@@ -1,8 +1,9 @@
 name: Weekly issue
 
 # Every Monday, and whenever the scope or this file changes on main: refresh the inventory from the certificate logs
-# and Tranco, scan every domain across several runners, publish the totals, test what is about to be published,
-# commit it, archive the issue as a release with its open data, and ask Pages to publish it. Nothing is done by hand.
+# and Tranco, scan every domain across several runners, publish the totals, print every page of the site with them,
+# test what is about to be published, commit it, archive the issue as a release with its open data, and ask Pages to
+# publish it. Nothing is done by hand.
 # The inventory of names is the run's working data: it passes from one run to the next as an artifact and is never
 # committed, so the repository holds totals only.
 on:
@@ -124,6 +125,9 @@ jobs:
       - name: Refresh the site files
         run: node scripts/site-files.mjs
 
+      - name: Print every page with the new figures
+        run: node scripts/prerender.mjs
+
       - name: Test what is about to be published
         run: |
           node scripts/build.mjs --check
@@ -134,9 +138,7 @@ jobs:
         run: |
           git config user.name "SiteQ8"
           git config user.email "311682+SiteQ8@users.noreply.github.com"
-          for f in docs/data docs/CNAME docs/robots.txt docs/sitemap.xml docs/.well-known; do
-            if [ -e "$f" ]; then git add -A "$f"; fi
-          done
+          git add -A docs
           if git diff --cached --quiet; then echo "Nothing changed."; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           subject=$(node -p "const s = JSON.parse(require('fs').readFileSync('docs/data/summary.json', 'utf8')); 'Issue ' + s.issue + ', week of ' + s.date")
           git commit -q -m "$subject"

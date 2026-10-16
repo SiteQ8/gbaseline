@@ -26,8 +26,9 @@ test('the project names the Arabian Gulf in both languages where it introduces i
   const project = JSON.parse(readFileSync(join(root, 'data/src/project.json'), 'utf8'));
   assert.match(project.about.ar, /الخليج العربي/);
   assert.match(project.about.en, /Arabian Gulf/);
-  const html = readFileSync(join(root, 'docs/index.html'), 'utf8');
-  assert.match(html.match(/<meta name="description" content="([^"]*)">/)[1], /الخليج العربي[\s\S]*Arabian Gulf/);
+  const description = (p) => readFileSync(join(root, p), 'utf8').match(/<meta name="description" content="([^"]*)">/)[1];
+  assert.match(description('docs/index.html'), /الخليج العربي/);
+  assert.match(description('docs/en/index.html'), /Arabian Gulf/);
   const readme = readFileSync(join(root, 'README.md'), 'utf8');
   assert.match(readme, /Arabian Gulf/);
   assert.match(readme, /الخليج العربي/);

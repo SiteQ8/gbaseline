@@ -1,7 +1,7 @@
 // Gives the project the name and domain Ali chooses, and writes everything that depends on them:
 //   node scripts/name.mjs --en "English name" --ar "الاسم" --slug slug --domain sub.example.org [--repo Owner/Repo] [--no-og]
-// project.json and package.json, the README placeholders and MCP tool names, the title, canonical and share tags of
-// docs/index.html, CNAME, robots.txt, sitemap.xml, .well-known/security.txt, the share card and the bundle.
+// project.json and package.json, the README placeholders and MCP tool names, the bundle, every printed page with its
+// title, canonical and share tags, the sitemap, CNAME, robots.txt, .well-known/security.txt and the share card.
 // Running it again with the same values changes nothing.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -13,8 +13,6 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ARABIC = /[؀-ۿ]/;
 const HOST = /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/;
 export const TOKENS = ['__NAME_EN__', '__NAME_AR__', '__DOMAIN__', '__REPO__', '__SLUG__'];
-const SHARE_START = '<!-- share:start -->';
-const SHARE_END = '<!-- share:end -->';
 
 function args(argv) {
   const out = {};
@@ -39,52 +37,6 @@ export function validate(a) {
   if (!HOST.test(domain)) problems.push('--domain needs a host name such as sub.example.org');
   if (!/^[A-Za-z0-9-]+\/[A-Za-z0-9._-]+$/.test(repo)) problems.push('--repo needs Owner/Repo');
   return { problems, values: { en, ar, slug, domain, repo } };
-}
-
-const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-
-export function shareBlock({ en, ar, domain }, description) {
-  const base = `https://${domain}/`;
-  const title = `${ar} | ${en}`;
-  return [
-    SHARE_START,
-    `<link rel="canonical" href="${base}">`,
-    `<link rel="alternate" hreflang="ar" href="${base}">`,
-    `<link rel="alternate" hreflang="en" href="${base}?lang=en">`,
-    `<link rel="alternate" hreflang="x-default" href="${base}">`,
-    '<meta property="og:type" content="website">',
-    `<meta property="og:site_name" content="${attr(title)}">`,
-    `<meta property="og:title" content="${attr(title)}">`,
-    `<meta property="og:description" content="${attr(description)}">`,
-    `<meta property="og:url" content="${base}">`,
-    `<meta property="og:image" content="${base}og.png">`,
-    '<meta property="og:image:width" content="1200">',
-    '<meta property="og:image:height" content="630">',
-    `<meta property="og:image:alt" content="${attr(title)}">`,
-    '<meta property="og:locale" content="ar_AR">',
-    '<meta property="og:locale:alternate" content="en_US">',
-    '<meta name="twitter:card" content="summary_large_image">',
-    `<meta name="twitter:title" content="${attr(title)}">`,
-    `<meta name="twitter:description" content="${attr(description)}">`,
-    `<meta name="twitter:image" content="${base}og.png">`,
-    SHARE_END,
-  ].join('\n');
-}
-
-export function nameHtml(html, values, tagTitle) {
-  const description = (html.match(/<meta name="description" content="([^"]*)">/) || [])[1];
-  if (!description) throw new Error('docs/index.html has no description meta');
-  const plain = description.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
-  const block = shareBlock(values, plain);
-  let out = html.replace(/<title>[^<]*<\/title>/, `<title>${attr(values.ar)} · ${tagTitle}</title>`);
-  const start = out.indexOf(SHARE_START);
-  if (start >= 0) {
-    const end = out.indexOf(SHARE_END, start);
-    out = out.slice(0, start) + block + out.slice(end + SHARE_END.length);
-  } else {
-    out = out.replace(/(<meta name="description" content="[^"]*">)/, `$1\n${block}`);
-  }
-  return out;
 }
 
 // The placeholders on the first naming, and the previous values on a renaming, so the script can run again.
@@ -130,11 +82,10 @@ async function main() {
   writeJson('data/src/project.json', project);
   writeJson('package.json', namePackage(JSON.parse(readText('package.json')), values));
   writeText('README.md', nameReadme(readText('README.md'), values, previous));
-  const ui = JSON.parse(readText('data/src/ui.json'));
-  const tagTitle = (readText('docs/index.html').match(/<title>(?:[^<]*· )?([^<·]*)<\/title>/) || [])[1] || ui.tagline.ar.replace(/\.$/, '');
-  writeText('docs/index.html', nameHtml(readText('docs/index.html'), values, tagTitle.trim()));
   const built = spawnSync(process.execPath, [join(root, 'scripts/build.mjs'), '--release'], { cwd: root, encoding: 'utf8' });
   if (built.status !== 0) { console.error(built.stdout + built.stderr); process.exit(1); }
+  const printed = spawnSync(process.execPath, [join(root, 'scripts/prerender.mjs'), '--root', root], { cwd: root, encoding: 'utf8' });
+  if (printed.status !== 0) { console.error(printed.stdout + printed.stderr); process.exit(1); }
   const site = writeSiteFiles(root);
   console.log(`name: ${ar} | ${en}, ${domain}, github.com/${repo}`);
   console.log(`site files: ${site.changed.length ? site.changed.join(', ') : 'unchanged'}`);

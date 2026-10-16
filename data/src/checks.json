@@ -809,7 +809,7 @@
       },
       "short": {
         "en": "security.txt published",
-        "ar": "ملف security.txt منشور"
+        "ar": "security.txt منشور"
       },
       "question": {
         "en": "Can a researcher find out how to report a vulnerability?",
