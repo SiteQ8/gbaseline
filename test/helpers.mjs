@@ -1,4 +1,5 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join, extname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
@@ -52,16 +53,27 @@ export function pairs(value, path = '$', out = []) {
 const TEXT = new Set(['.js', '.mjs', '.json', '.md', '.html', '.css', '.txt', '.xml', '.svg', '.yml', '.csv', '']);
 const SKIP = new Set(['.git', 'node_modules', '.impeccable', '.taste-skill']);
 const SKIP_FILES = new Set(['PRODUCT.md', 'DESIGN.md']);
-export function textFiles(dir = root) {
+
+// The files of the project: what git tracks or would add, so the working data of a run (the inventory of names and
+// the scanned rows, both ignored) is never read as the project's own text. Outside a git checkout, every file.
+export function repoFiles() {
+  const git = spawnSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8' });
+  if (git.status === 0 && git.stdout) return [...new Set(git.stdout.split('\0').filter(Boolean))].filter((f) => existsSync(join(root, f)) && !f.split('/').some((part) => SKIP.has(part)) && !SKIP_FILES.has(f));
   const out = [];
-  for (const name of readdirSync(dir)) {
-    if (SKIP.has(name) || SKIP_FILES.has(name)) continue;
-    const p = join(dir, name);
-    const st = statSync(p);
-    if (st.isDirectory()) out.push(...textFiles(p));
-    else if (TEXT.has(extname(name)) || ['LICENSE', 'CNAME', '.gitignore', '.nojekyll'].includes(name)) out.push(relative(root, p));
-  }
+  const walk = (dir) => {
+    for (const name of readdirSync(dir)) {
+      if (SKIP.has(name) || SKIP_FILES.has(name)) continue;
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) walk(p);
+      else out.push(relative(root, p));
+    }
+  };
+  walk(root);
   return out;
+}
+
+export function textFiles() {
+  return repoFiles().filter((f) => { const name = f.split('/').pop(); return TEXT.has(extname(name)) || ['LICENSE', 'CNAME', '.gitignore', '.nojekyll'].includes(name); });
 }
 
 // An offline resolver: answers come from a table keyed "name TYPE", optionally per provider.

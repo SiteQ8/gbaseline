@@ -3,6 +3,8 @@ name: Weekly issue
 # Every Monday, and whenever the scope or this file changes on main: refresh the inventory from the certificate logs
 # and Tranco, scan every domain across several runners, publish the totals, test what is about to be published,
 # commit it, archive the issue as a release with its open data, and ask Pages to publish it. Nothing is done by hand.
+# The inventory of names is the run's working data: it passes from one run to the next as an artifact and is never
+# committed, so the repository holds totals only.
 on:
   schedule:
     - cron: '17 2 * * 1'
@@ -14,6 +16,7 @@ on:
 permissions:
   contents: write
   pages: write
+  actions: read
 
 concurrency:
   group: weekly-issue
@@ -34,6 +37,17 @@ jobs:
       - name: Make sure psql is present for the certificate logs
         run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
 
+      - name: Start from the last run's inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          id=$(gh run list --repo "${{ github.repository }}" --workflow weekly.yml --status success --limit 1 --json databaseId --jq '.[0].databaseId' || true)
+          if [ -n "$id" ] && gh run download "$id" --repo "${{ github.repository }}" --name inventory --dir data/inventory; then
+            echo "Starting from the inventory of run $id."
+          else
+            echo "No earlier inventory to start from: the certificate logs and Tranco rebuild it."
+          fi
+
       - name: Refresh the inventory
         run: node bin/cli.mjs inventory
 
@@ -41,7 +55,7 @@ jobs:
         with:
           name: inventory
           path: data/inventory/domains.json
-          retention-days: 7
+          retention-days: 90
 
   scan:
     needs: inventory
@@ -120,7 +134,7 @@ jobs:
         run: |
           git config user.name "SiteQ8"
           git config user.email "311682+SiteQ8@users.noreply.github.com"
-          for f in docs/data data/inventory docs/CNAME docs/robots.txt docs/sitemap.xml docs/.well-known; do
+          for f in docs/data docs/CNAME docs/robots.txt docs/sitemap.xml docs/.well-known; do
             if [ -e "$f" ]; then git add -A "$f"; fi
           done
           if git diff --cached --quiet; then echo "Nothing changed."; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi

@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { root, textFiles, readJson } from './helpers.mjs';
 import { parseSecurityTxt } from '../docs/assets/engine/records.js';
 import { readText, PROVENANCE_KEY } from '../scripts/og.mjs';
@@ -68,9 +69,10 @@ test('no published file names a domain', () => {
   for (const f of ['docs/data/summary.json', 'docs/data/history.json', 'docs/data/open/latest.csv', 'docs/data/open/history.csv']) {
     if (!existsSync(join(root, f))) continue;
     const s = read(f);
-    assert.ok(!/"d"\s*:/.test(s) && !/[a-z0-9-]\.(gov|edu|ac)\.(kw|sa|ae|qa|bh|om)\b/.test(s), `${f} carries totals only`);
+    assert.ok(!/"d"\s*:/.test(s) && !/[a-z0-9-]\.(gov|edu|ac|sch|med|com|co|org|net)\.(kw|sa|ae|qa|bh|om)\b/.test(s), `${f} carries totals only`);
   }
   assert.ok(!existsSync(join(root, 'docs/data/hall.json')), 'no list of named domains is published');
+  assert.ok(!spawnSync('git', ['ls-files', 'data/inventory'], { cwd: root, encoding: 'utf8' }).stdout.trim(), 'the inventory of names is never committed');
   assert.ok(!/hall/i.test(app), 'the site has no page that lists domains by name');
 });
 
