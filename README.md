@@ -120,9 +120,8 @@ Left out on purpose: mil.ae, mil.qa, emb.kw, ind.kw, name.qa, pro.om, pub.sa and
 | `docs/data/history.json` | The weekly series |
 | `docs/data/open/latest.csv` | This issue as CSV |
 | `docs/data/open/history.csv` | Every issue as CSV |
-| `data/inventory/domains.json` | The measured names, where each came from and when it was first seen |
 
-No published file names a domain next to a result. The inventory lists the names that are measured, as found in public certificate logs, and nothing about how any of them did.
+No published file names a domain. The inventory of names is rebuilt every week from the public certificate logs and the Tranco list, and passes from one run to the next as the run's working data: it is never committed or published.
 
 ### Check any domain
 
@@ -156,7 +155,7 @@ Every tool is read only, works offline from the published data except the live c
 ### Run it yourself
 
 ```sh
-node bin/cli.mjs inventory          # refresh data/inventory/domains.json
+node bin/cli.mjs inventory          # build the inventory of names in data/inventory/ (never committed)
 node bin/cli.mjs scan --limit 50    # scan, rows to a temporary file
 node bin/cli.mjs publish            # write the totals, the weekly series and the open data
 node bin/cli.mjs weekly             # all three
