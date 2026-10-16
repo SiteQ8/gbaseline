@@ -9,7 +9,7 @@ import { parseSecurityTxt } from '../docs/assets/engine/records.js';
 import { validate, TOKENS } from '../scripts/name.mjs';
 import { expiryFor, RENEW_DAYS } from '../scripts/site-files.mjs';
 
-const SKIP = new Set(['.git', 'node_modules', '.impeccable']);
+const SKIP = new Set(['.git', 'node_modules', '.impeccable', '.taste-skill']);
 const sample = ['--en', 'Example', '--ar', 'مثال', '--slug', 'example-site', '--domain', 'Example.3li.info', '--repo', 'SiteQ8/Example', '--no-og'];
 
 function snapshot(dir) {

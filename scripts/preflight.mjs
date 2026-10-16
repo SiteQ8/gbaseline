@@ -25,7 +25,7 @@ const secret = /gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9
 const token = /__(NAME_EN|NAME_AR|DOMAIN|REPO|SLUG)__/;
 function walk(dir) {
   for (const name of readdirSync(dir)) {
-    if (['node_modules', '.git', '.impeccable'].includes(name) || ['PRODUCT.md', 'DESIGN.md'].includes(name)) continue;
+    if (['node_modules', '.git', '.impeccable', '.taste-skill'].includes(name) || ['PRODUCT.md', 'DESIGN.md'].includes(name)) continue;
     const p = join(dir, name);
     if (statSync(p).isDirectory()) { walk(p); continue; }
     if (!TEXT.has(extname(name)) && name !== 'CNAME') continue;

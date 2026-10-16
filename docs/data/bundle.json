@@ -1,12 +1,12 @@
 {
  "schema": "bundle/1",
  "project": {
-  "name_en": "",
-  "name_ar": "",
-  "slug": "",
+  "name_en": "Gulf Cybersecurity Baseline",
+  "name_ar": "خط الأساس الخليجي للأمن السيبراني",
+  "slug": "gbaseline",
   "version": "0.1.0",
-  "domain": "",
-  "repo": "",
+  "domain": "gbaseline.3li.info",
+  "repo": "https://github.com/SiteQ8/gbaseline",
   "updated": "2026-10-15",
   "author": {
    "en": "Ali AlEnezi",

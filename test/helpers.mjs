@@ -50,7 +50,7 @@ export function pairs(value, path = '$', out = []) {
 }
 
 const TEXT = new Set(['.js', '.mjs', '.json', '.md', '.html', '.css', '.txt', '.xml', '.svg', '.yml', '.csv', '']);
-const SKIP = new Set(['.git', 'node_modules', '.impeccable']);
+const SKIP = new Set(['.git', 'node_modules', '.impeccable', '.taste-skill']);
 const SKIP_FILES = new Set(['PRODUCT.md', 'DESIGN.md']);
 export function textFiles(dir = root) {
   const out = [];
