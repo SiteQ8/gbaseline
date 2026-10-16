@@ -108,11 +108,11 @@ try {
   assert.match(await slip.locator('blockquote[lang="en"]').textContent(), /Source: .*, issue 2, clause 1, week of 19 October 2026, http/);
   assert.match(await slip.locator('blockquote[lang="ar"] bdi').textContent(), /\?lang=ar#\/\?i=2&c=1$/, 'the Arabic citation links to clause 1 of issue 2 in Arabic, isolated from the right to left text');
   assert.match(await slip.locator('blockquote[lang="en"] bdi').textContent(), /\?lang=en#\/\?i=2&c=1$/);
-  assert.match(await slip.locator('blockquote[lang="ar"] .q').textContent(), /^50\.0٪ من نطاقات الحكومة والتعليم في الخليج يمكن انتحال أسمائها/);
+  assert.match(await slip.locator('blockquote[lang="ar"] .q').textContent(), /^50\.0٪ من النطاقات المقيسة في الخليج يمكن انتحال أسمائها/);
   // The showcase slips copy the full citation.
   await page.locator('.slips .slip').first().locator('button').first().click();
   const copied = await page.evaluate(() => navigator.clipboard.readText());
-  assert.match(copied, /^50\.0٪ من نطاقات الحكومة والتعليم في الخليج .*\nالمصدر .* على https?:\/\/\S+\?lang=ar#\/\?i=2&c=1$/s, 'the slip copies the sentence and its source');
+  assert.match(copied, /^50\.0٪ من النطاقات المقيسة في الخليج .*\nالمصدر .* على https?:\/\/\S+\?lang=ar#\/\?i=2&c=1$/s, 'the slip copies the sentence and its source');
   // Sector: government only, kept in the address.
   await page.click('label:has(input[value="government"])');
   assert.match(page.url(), /s=government/);

@@ -48,11 +48,27 @@
   "sectors": {
    "government": {
     "en": "Government",
-    "ar": "الجهات الحكومية"
+    "ar": "الحكومة"
    },
    "education": {
     "en": "Education",
     "ar": "التعليم"
+   },
+   "health": {
+    "en": "Health",
+    "ar": "الصحة"
+   },
+   "business": {
+    "en": "Business",
+    "ar": "الشركات"
+   },
+   "nonprofit": {
+    "en": "Non-profit",
+    "ar": "القطاع غير الربحي"
+   },
+   "network": {
+    "en": "Network",
+    "ar": "الشبكات"
    }
   },
   "suffixes": [
@@ -67,6 +83,21 @@
     "sector": "education"
    },
    {
+    "suffix": "com.kw",
+    "country": "KW",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.kw",
+    "country": "KW",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.kw",
+    "country": "KW",
+    "sector": "network"
+   },
+   {
     "suffix": "gov.sa",
     "country": "SA",
     "sector": "government"
@@ -75,6 +106,31 @@
     "suffix": "edu.sa",
     "country": "SA",
     "sector": "education"
+   },
+   {
+    "suffix": "sch.sa",
+    "country": "SA",
+    "sector": "education"
+   },
+   {
+    "suffix": "med.sa",
+    "country": "SA",
+    "sector": "health"
+   },
+   {
+    "suffix": "com.sa",
+    "country": "SA",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.sa",
+    "country": "SA",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.sa",
+    "country": "SA",
+    "sector": "network"
    },
    {
     "suffix": "gov.ae",
@@ -87,6 +143,26 @@
     "sector": "education"
    },
    {
+    "suffix": "sch.ae",
+    "country": "AE",
+    "sector": "education"
+   },
+   {
+    "suffix": "co.ae",
+    "country": "AE",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.ae",
+    "country": "AE",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.ae",
+    "country": "AE",
+    "sector": "network"
+   },
+   {
     "suffix": "gov.qa",
     "country": "QA",
     "sector": "government"
@@ -95,6 +171,26 @@
     "suffix": "edu.qa",
     "country": "QA",
     "sector": "education"
+   },
+   {
+    "suffix": "sch.qa",
+    "country": "QA",
+    "sector": "education"
+   },
+   {
+    "suffix": "com.qa",
+    "country": "QA",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.qa",
+    "country": "QA",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.qa",
+    "country": "QA",
+    "sector": "network"
    },
    {
     "suffix": "gov.bh",
@@ -107,6 +203,21 @@
     "sector": "education"
    },
    {
+    "suffix": "com.bh",
+    "country": "BH",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.bh",
+    "country": "BH",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.bh",
+    "country": "BH",
+    "sector": "network"
+   },
+   {
     "suffix": "gov.om",
     "country": "OM",
     "sector": "government"
@@ -115,7 +226,42 @@
     "suffix": "edu.om",
     "country": "OM",
     "sector": "education"
+   },
+   {
+    "suffix": "med.om",
+    "country": "OM",
+    "sector": "health"
+   },
+   {
+    "suffix": "com.om",
+    "country": "OM",
+    "sector": "business"
+   },
+   {
+    "suffix": "co.om",
+    "country": "OM",
+    "sector": "business"
+   },
+   {
+    "suffix": "org.om",
+    "country": "OM",
+    "sector": "nonprofit"
+   },
+   {
+    "suffix": "net.om",
+    "country": "OM",
+    "sector": "network"
    }
+  ],
+  "left_out": [
+   "mil.ae",
+   "mil.qa",
+   "emb.kw",
+   "ind.kw",
+   "name.qa",
+   "pro.om",
+   "pub.sa",
+   "museum.om"
   ],
   "exclude": []
  },
@@ -1166,8 +1312,8 @@
    "ar": "قياس لا تدقيق"
   },
   "intro_note": {
-   "en": "Every week we read the public settings of the Gulf's government and education domains as any visitor on the internet sees them, then publish the totals without naming any organisation.",
-   "ar": "نقرأ كل أسبوع الإعدادات العامة لنطاقات الجهات الحكومية والتعليم في الخليج كما يراها أي زائر على الإنترنت ثمّ ننشر مجاميعها دون أن نذكر اسم أي جهة."
+   "en": "Every week we read the public settings of the Gulf's government, university, school, healthcare, company and non-profit domains as any visitor on the internet sees them, then publish the totals without naming any organisation.",
+   "ar": "نقرأ كل أسبوع الإعدادات العامة لنطاقات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية في الخليج كما يراها أي زائر على الإنترنت ثمّ ننشر مجاميعها دون أن نذكر اسم أي جهة."
   },
   "fact_live": {
    "en": "{noun} in this issue",
@@ -1238,16 +1384,56 @@
    "ar": "عُمان"
   },
   "of_all": {
-   "en": "government and education",
-   "ar": "الحكومة والتعليم"
+   "en": "the measured domains",
+   "ar": "النطاقات المقيسة"
   },
   "of_government": {
-   "en": "government",
-   "ar": "الجهات الحكومية"
+   "en": "government domains",
+   "ar": "نطاقات الجهات الحكومية"
   },
   "of_education": {
-   "en": "education",
-   "ar": "التعليم"
+   "en": "university and school domains",
+   "ar": "نطاقات الجامعات والمدارس"
+  },
+  "of_health": {
+   "en": "healthcare domains",
+   "ar": "نطاقات القطاع الصحي"
+  },
+  "of_business": {
+   "en": "company domains",
+   "ar": "نطاقات الشركات"
+  },
+  "of_nonprofit": {
+   "en": "non-profit domains",
+   "ar": "نطاقات المنظمات غير الربحية"
+  },
+  "of_network": {
+   "en": "network domains",
+   "ar": "نطاقات الشبكات"
+  },
+  "part_government": {
+   "en": "{n} government",
+   "ar": "{n} للجهات الحكومية"
+  },
+  "part_education": {
+   "en": "{n} universities and schools",
+   "ar": "{n} للجامعات والمدارس"
+  },
+  "part_health": {
+   "en": "{n} healthcare",
+   "ar": "{n} للقطاع الصحي"
+  },
+  "part_business": {
+   "en": "{n} companies",
+   "ar": "{n} للشركات"
+  },
+  "part_nonprofit": {
+   "en": "{n} non-profit",
+   "ar": "{n} للمنظمات غير الربحية"
+  },
+  "part_network": {
+   "en": "{n} network",
+   "ar": "{n} للشبكات"
   },
   "stats_gulf": {
    "en": "Where the Gulf stands",
@@ -1262,8 +1448,8 @@
    "ar": "هذا الأسبوع"
   },
   "stats_scope": {
-   "en": "These figures cover {sector} domains in {place}, issue {n}, week of {date}.",
-   "ar": "تخص هذه الأرقام نطاقات {sector} في {place} في العدد {n} لأسبوع {date}."
+   "en": "These figures cover {sector} in {place}, issue {n}, week of {date}.",
+   "ar": "تخص هذه الأرقام {sector} في {place} في العدد {n} لأسبوع {date}."
   },
   "stats_past": {
    "en": "These figures are issue {n}, week of {date}, as quoted, and issue {latest} has come out since.",
@@ -1298,28 +1484,28 @@
    "ar": "في المئة من مواقعها توضح طريقة الإبلاغ عن الثغرات"
   },
   "cite_dmarc": {
-   "en": "{pct} of {sector} domains in {place} can be impersonated in email, because they have no enforced DMARC policy.",
-   "ar": "{pct} من نطاقات {sector} في {place} يمكن انتحال أسمائها في البريد الإلكتروني لأنها بلا سياسة DMARC مُلزمة."
+   "en": "{pct} of {sector} in {place} can be impersonated in email, because they have no enforced DMARC policy.",
+   "ar": "{pct} من {sector} في {place} يمكن انتحال أسمائها في البريد الإلكتروني لأنها بلا سياسة DMARC مُلزمة."
   },
   "cite_dnssec": {
-   "en": "{pct} of {sector} domains in {place} carry DNSSEC signatures that validate.",
-   "ar": "{pct} من نطاقات {sector} في {place} تحمل توقيع DNSSEC يجتاز التحقق."
+   "en": "{pct} of {sector} in {place} carry DNSSEC signatures that validate.",
+   "ar": "{pct} من {sector} في {place} تحمل توقيع DNSSEC يجتاز التحقق."
   },
   "cite_hsts": {
-   "en": "{pct} of the websites of {sector} domains in {place} hold browsers to HTTPS for a year or more.",
-   "ar": "{pct} من مواقع نطاقات {sector} في {place} تُلزم المتصفح بـ HTTPS لمدة سنة أو أكثر."
+   "en": "{pct} of the websites of {sector} in {place} hold browsers to HTTPS for a year or more.",
+   "ar": "{pct} من مواقع {sector} في {place} تُلزم المتصفح بـ HTTPS لمدة سنة أو أكثر."
   },
   "cite_legacy_tls": {
-   "en": "{pct} of the websites of {sector} domains in {place} still accept TLS 1.0 or 1.1.",
-   "ar": "{pct} من مواقع نطاقات {sector} في {place} ما زالت تقبل TLS 1.0 أو 1.1."
+   "en": "{pct} of the websites of {sector} in {place} still accept TLS 1.0 or 1.1.",
+   "ar": "{pct} من مواقع {sector} في {place} ما زالت تقبل TLS 1.0 أو 1.1."
   },
   "cite_pq_kex": {
-   "en": "{pct} of the websites of {sector} domains in {place} accept post quantum key exchange.",
-   "ar": "{pct} من مواقع نطاقات {sector} في {place} تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
+   "en": "{pct} of the websites of {sector} in {place} accept post quantum key exchange.",
+   "ar": "{pct} من مواقع {sector} في {place} تقبل تبادل المفاتيح المقاوم للحوسبة الكمية."
   },
   "cite_security_txt": {
-   "en": "{pct} of the websites of {sector} domains in {place} say how to report a vulnerability.",
-   "ar": "{pct} من مواقع نطاقات {sector} في {place} توضح طريقة الإبلاغ عن الثغرات."
+   "en": "{pct} of the websites of {sector} in {place} say how to report a vulnerability.",
+   "ar": "{pct} من مواقع {sector} في {place} توضح طريقة الإبلاغ عن الثغرات."
   },
   "basis": {
    "en": "{count} of {domains} measured.",
@@ -1382,8 +1568,8 @@
    "ar": "أسبوعاً بعد أسبوع"
   },
   "trend_source": {
-   "en": "Each figure is the share of measured {sector} domains in {place} that pass the check it is listed against.",
-   "ar": "يمثل كل رقم نسبة نطاقات {sector} المقيسة في {place} التي تجتاز الفحص المقابل له."
+   "en": "Each figure is the share of {sector} in {place} that pass the check it is listed against.",
+   "ar": "يمثل كل رقم نسبة {sector} في {place} التي تجتاز المعيار المقابل له."
   },
   "row_dmarc": {
    "en": "Can be impersonated in email",
@@ -1411,11 +1597,11 @@
   },
   "proof_title": {
    "en": "The suffixes measured",
-   "ar": "اللواحق المشمولة"
+   "ar": "الامتدادات المشمولة"
   },
   "proof_note": {
-   "en": "Every registrable domain under these suffixes counts once, without its subdomains, while some government domains sit outside them and are not included yet.",
-   "ar": "يُحتسب كل نطاق قابل للتسجيل تحت هذه اللواحق مرة واحدة دون أسمائه الفرعية بينما تقع بعض نطاقات الجهات الحكومية خارجها ولم تُضمّن بعد."
+   "en": "Every registrable domain under these suffixes counts once, without its subdomains, while domains registered directly under a country code are not included yet.",
+   "ar": "يُحتسب كل نطاق قابل للتسجيل تحت هذه الامتدادات مرة واحدة دون أسمائه الفرعية بينما لا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة."
   },
   "coast_caption": {
    "en": "The southern coast of the Gulf at night, from the same photograph",
@@ -1514,12 +1700,12 @@
    "ar": "لكل دولة صفحة تعرض أرقامها وحدها لأن هذا القياس لا يرتب الدول ولا يقارن بينها."
   },
   "countries_note": {
-   "en": "Each state's page shows the thirteen checks for its government and education domains in this issue, with the DNSSEC status of each of its suffixes.",
-   "ar": "تعرض صفحة كل دولة نسب الفحوص الثلاثة عشر لنطاقاتها الحكومية والتعليمية في هذا العدد مع حالة توقيع DNSSEC لكل لاحقة من لواحقها."
+   "en": "Each state's page shows the thirteen checks for its domains in this issue, with the DNSSEC status of each of its suffixes.",
+   "ar": "تعرض صفحة كل دولة نسب المعايير الثلاثة عشر لنطاقاتها في هذا العدد مع حالة توقيع DNSSEC لكل امتداد من امتداداتها."
   },
   "country_lede": {
-   "en": "{domains} measured in this issue, {gov} government and {edu} education.",
-   "ar": "قيس في هذا العدد {domains} منها {gov} للجهات الحكومية و{edu} للتعليم."
+   "en": "{domains} measured in this issue: {parts}.",
+   "ar": "قيس في هذا العدد {domains} منها {parts}."
   },
   "country_retired": {
    "en": "{n} names seen in certificate logs no longer exist in DNS and are not counted.",
@@ -1531,7 +1717,7 @@
   },
   "chain_off": {
    "en": "Domains under {suffix} cannot pass DNSSEC until {suffix} itself is signed.",
-   "ar": "لن تجتاز النطاقات التابعة لـ {suffix} فحص DNSSEC حتى يُوقَّع {suffix} نفسه."
+   "ar": "لن تجتاز النطاقات التابعة لـ {suffix} معيار DNSSEC حتى يُوقَّع {suffix} نفسه."
   },
   "chain_on": {
    "en": "{suffix} is signed, so every domain under it can validate.",
@@ -1663,8 +1849,8 @@
   },
   "m_scope": [
    {
-    "en": "Every registrable domain under the government and education suffixes of the six Gulf states is measured. Each domain counts once, as an organisation, rather than every host beneath it.",
-    "ar": "يُقاس كل نطاق قابل للتسجيل تحت لواحق الجهات الحكومية والتعليم في دول الخليج الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته."
+    "en": "Every registrable domain under the government, education, health, business, non-profit and network suffixes of the six Gulf states is measured, each counted once as an organisation rather than every host beneath it. The military, embassy and personal suffixes are left out.",
+    "ar": "يُقاس كل نطاق قابل للتسجيل تحت امتدادات الجهات الحكومية والجامعات والمدارس والقطاع الصحي والشركات والمنظمات غير الربحية والشبكات في دول الخليج الست ويُحتسب كل نطاق مرة واحدة بوصفه جهة واحدة دون كل اسم فرعي تحته بينما تُستثنى امتدادات الجهات العسكرية والسفارات والأفراد."
    }
   ],
   "m_sources_h": {
@@ -1703,8 +1889,8 @@
   },
   "m_limits": [
    {
-    "en": "The weekly scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Some government namespaces sit outside these suffixes and are not included yet.",
-    "ar": "يجري الفحص الأسبوعي من خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج وتقع بعض نطاقات الجهات الحكومية خارج هذه اللواحق ولم تُضمّن بعد."
+    "en": "The weekly scan runs outside the Gulf, so a site that blocks foreign traffic is counted as unreachable and left out of the web checks, never counted as failing. DKIM is not measured, because its selectors cannot be listed from outside. Domains registered directly under a country code, or under global extensions such as .com, are not included yet.",
+    "ar": "يجري الفحص الأسبوعي من خارج الخليج لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً ولا يُقاس DKIM لأن محدداته لا يمكن حصرها من الخارج ولا تُشمل بعد النطاقات المسجلة مباشرة تحت رمز الدولة أو تحت الامتدادات العالمية."
    },
    {
     "en": "A share is the passing domains divided by the domains where the check applies and could be measured.",
@@ -1713,7 +1899,7 @@
   ],
   "m_suffixes": {
    "en": "Suffixes in this issue",
-   "ar": "اللواحق المشمولة في هذا العدد"
+   "ar": "الامتدادات المشمولة في هذا العدد"
   },
   "m_data_h": {
    "en": "Open data",

@@ -1,14 +1,15 @@
 name: Weekly issue
 
-# Every Monday: refresh the inventory from the certificate logs and Tranco, scan every domain, publish the totals,
-# test what is about to be published, then commit it. A push that changes this file runs it once as well.
+# Every Monday, and whenever the scope or this file changes on main: refresh the inventory from the certificate logs
+# and Tranco, scan every domain across several runners, publish the totals, test what is about to be published,
+# commit it, archive the issue as a release with its open data, and ask Pages to publish it. Nothing is done by hand.
 on:
   schedule:
     - cron: '17 2 * * 1'
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/weekly.yml']
+    paths: ['.github/workflows/weekly.yml', 'data/src/scope.json']
 
 permissions:
   contents: write
@@ -19,9 +20,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  issue:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - name: Make sure psql is present for the certificate logs
+        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+
+      - name: Refresh the inventory
+        run: node bin/cli.mjs inventory
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inventory
+          path: data/inventory/domains.json
+          retention-days: 7
+
+  scan:
+    needs: inventory
     runs-on: ubuntu-latest
     timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v4
 
@@ -38,11 +67,45 @@ jobs:
             if (!(a > 3 || (a === 3 && b >= 5))) { console.error('OpenSSL 3.5 or later is needed for X25519MLKEM768'); process.exit(1); }
           "
 
-      - name: Make sure psql is present for the certificate logs
-        run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
+      - uses: actions/download-artifact@v4
+        with:
+          name: inventory
+          path: data/inventory
 
-      - name: Inventory, scan and publish
-        run: node bin/cli.mjs weekly --concurrency 24
+      - name: Scan this shard
+        run: node bin/cli.mjs scan --shard ${{ matrix.shard }}/6 --concurrency 24 --out rows-${{ matrix.shard }}.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rows-${{ matrix.shard }}
+          path: rows-${{ matrix.shard }}.json
+          retention-days: 3
+
+  publish:
+    needs: scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: inventory
+          path: data/inventory
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: rows-*
+          path: rows
+          merge-multiple: true
+
+      - name: Publish the totals
+        run: node bin/cli.mjs publish --rows rows
 
       - name: Refresh the site files
         run: node scripts/site-files.mjs
@@ -53,20 +116,40 @@ jobs:
           npm test
 
       - name: Commit the issue
+        id: commit
         run: |
           git config user.name "SiteQ8"
           git config user.email "311682+SiteQ8@users.noreply.github.com"
           for f in docs/data data/inventory docs/CNAME docs/robots.txt docs/sitemap.xml docs/.well-known; do
             if [ -e "$f" ]; then git add -A "$f"; fi
           done
-          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          if git diff --cached --quiet; then echo "Nothing changed."; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           subject=$(node -p "const s = JSON.parse(require('fs').readFileSync('docs/data/summary.json', 'utf8')); 'Issue ' + s.issue + ', week of ' + s.date")
           git commit -q -m "$subject"
           git pull -q --rebase origin main
           git push -q origin HEAD:main
+          echo "committed=true" >> "$GITHUB_OUTPUT"
           echo "Committed: $subject"
 
+      - name: Archive the issue as a release with its open data
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/issue-notes.mjs > issue-notes.md
+          n=$(node -p "JSON.parse(require('fs').readFileSync('docs/data/summary.json', 'utf8')).issue")
+          d=$(node -p "JSON.parse(require('fs').readFileSync('docs/data/summary.json', 'utf8')).date")
+          tag="issue-$n"
+          files="docs/data/open/latest.csv docs/data/summary.json"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --notes-file issue-notes.md --title "Issue $n, week of $d"
+            gh release upload "$tag" $files --clobber
+          else
+            gh release create "$tag" $files --target "$(git rev-parse HEAD)" --title "Issue $n, week of $d" --notes-file issue-notes.md --latest=false
+          fi
+
       - name: Ask Pages to publish the new issue
+        if: steps.commit.outputs.committed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
