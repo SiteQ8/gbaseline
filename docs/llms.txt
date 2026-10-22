@@ -1,0 +1,29 @@
+# Gulf Cybersecurity Baseline | خط الأساس الخليجي للأمن السيبراني
+
+> An open weekly measurement of how well the public domains of the six Arabian Gulf states protect email, DNS and the web, published as totals anyone can quote with a live check for any single domain.
+
+An open, independent, weekly measurement of how the public domains of the six Arabian Gulf states (Kuwait, Saudi Arabia, UAE, Qatar, Bahrain and Oman) protect email, DNS and the web, under 36 domain suffixes in six sectors, against 13 standards. Published every Monday as totals by state, sector and standard. No domain is named next to a result and the states are never ranked. Arabic first, English under /en/.
+Latest: issue 2, week of 2026-10-19, 11,917 live domains measured.
+
+## Pages
+- [Home, the Arabian Gulf as a whole](https://gbaseline.3li.info/) and [in English](https://gbaseline.3li.info/en/)
+- [Every issue](https://gbaseline.3li.info/issues/): one page per issue, with a page for each state
+- [The six states](https://gbaseline.3li.info/countries/)
+- [The thirteen standards](https://gbaseline.3li.info/standards/): each with why it matters, how a domain passes and how to fix it
+- [Method and data](https://gbaseline.3li.info/method/)
+- [Check a domain](https://gbaseline.3li.info/check/)
+- [The launch film](https://gbaseline.3li.info/film/)
+
+## Data
+- [latest.csv](https://gbaseline.3li.info/data/open/latest.csv): every total of the latest issue
+- [history.csv](https://gbaseline.3li.info/data/open/history.csv): every issue so far
+- [summary.json](https://gbaseline.3li.info/data/summary.json) and [history.json](https://gbaseline.3li.info/data/history.json)
+- Atom feed of issues: Arabic at https://gbaseline.3li.info/feed.xml, English at https://gbaseline.3li.info/en/feed.xml
+- Source, command line tool and MCP server: https://github.com/SiteQ8/gbaseline
+
+## How to cite
+Every figure on the site has a citation in Arabic and in English with the issue number, the clause number and a link that opens the same figure. Cite the site as Ali AlEnezi (2026). Gulf Cybersecurity Baseline, issue N. https://gbaseline.3li.info/issues/N/
+
+## بالعربية
+قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق. مشروع مستقل مفتوح المصدر تصف أرقامه الإعدادات العامة فقط ولا تُعد تدقيقاً لأي جهة. يصدر عدد جديد صباح كل اثنين.
+الصفحات: الرئيسية https://gbaseline.3li.info/ والأعداد https://gbaseline.3li.info/issues/ والدول الست https://gbaseline.3li.info/countries/ والمعايير https://gbaseline.3li.info/standards/ والمنهجية والبيانات https://gbaseline.3li.info/method/ وفحص نطاق https://gbaseline.3li.info/check/ وفيلم الإطلاق https://gbaseline.3li.info/film/

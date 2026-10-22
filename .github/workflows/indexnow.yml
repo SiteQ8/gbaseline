@@ -1,0 +1,34 @@
+name: Tell search engines
+
+# After every publish, the weekly issue included, every address in the sitemap is sent to IndexNow, which Bing,
+# Yandex, Naver and Seznam read, so a new issue is found within hours instead of waiting to be crawled. Google
+# reads the sitemap itself. The key is public by design: the file at the root of the site proves the site asked.
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**']
+  workflow_run:
+    workflows: ['Weekly issue']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Send every address in the sitemap
+        run: |
+          key=$(ls docs | grep -E '^[0-9a-f]{32}\.txt$' | head -1 | sed 's/\.txt$//')
+          host=$(cat docs/CNAME)
+          urls=$(grep -o '<loc>[^<]*</loc>' docs/sitemap.xml | sed 's/<\/\?loc>//g' | python3 -c 'import json,sys; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))')
+          body=$(python3 -c "import json,sys; print(json.dumps({'host': '$host', 'key': '$key', 'keyLocation': 'https://$host/$key.txt', 'urlList': json.loads(sys.argv[1])}))" "$urls")
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST 'https://api.indexnow.org/indexnow' -H 'Content-Type: application/json; charset=utf-8' --data "$body")
+          echo "IndexNow answered $code for $(echo "$urls" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))') addresses"
+          case "$code" in 200|202) ;; *) exit 1;; esac

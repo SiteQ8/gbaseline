@@ -414,6 +414,7 @@ li.fail .dot { background: none; }
 /* the launch film */
 .film-v { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--deep); }
 .film .downloads { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: 0 var(--s-5); }
+.watch .film-box { max-width: 960px; }
 .film h2, .film-about { max-width: 24ch; }
 .text > .body.span .film + .film, .text > .body.span .film + section { margin-top: var(--section); }
 
