@@ -77,14 +77,45 @@ test('every page can be found: canonical, both languages, the sitemap and the da
     }
   }
   for (const p of ['index.html', 'en/index.html']) {
-    const ld = JSON.parse(read(`docs/${p}`).match(/<script type="application\/ld\+json">([^<]+)<\/script>/)[1]);
-    assert.equal(ld['@type'], 'Dataset');
+    const ld = [...read(`docs/${p}`).matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)].map((m) => JSON.parse(m[1])).find((o) => o['@type'] === 'Dataset');
+    assert.ok(ld, `${p}: the dataset is on the home page`);
     for (const k of ['name', 'alternateName', 'description', 'license', 'creator', 'spatialCoverage', 'variableMeasured', 'distribution']) assert.ok(ld[k], `${p}: the dataset has ${k}`);
     assert.equal(ld.spatialCoverage.length, 6, 'the six states');
     for (const d of ld.distribution) assert.ok(existsSync(join(root, 'docs', new URL(d.contentUrl).pathname)), `${d.contentUrl} exists`);
   }
   assert.ok(existsSync(join(root, 'docs/404.html')), 'a page for addresses that do not exist');
   assert.match(read('docs/404.html'), /<meta name="robots" content="noindex">/);
+});
+
+test('the site can be followed and read by machines: the feed, the structured data and llms.txt', { skip: !project.domain && 'no name yet' }, () => {
+  const data = loadData(root);
+  const latest = data.D.summary ? data.D.summary.issue : 0;
+  for (const lang of ['ar', 'en']) {
+    const feed = read(lang === 'ar' ? 'docs/feed.xml' : 'docs/en/feed.xml');
+    assert.match(feed, /^<\?xml version="1.0" encoding="utf-8"\?>\n<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, `${lang}: an Atom feed`);
+    assert.equal((feed.match(/<entry>/g) || []).length, latest, `${lang}: one entry per issue`);
+    if (latest) assert.ok(feed.includes(`<id>https://${project.domain}${lang === 'ar' ? '/' : '/en/'}issues/${latest}/</id>`), `${lang}: the latest issue leads the feed`);
+    assert.ok(!/[<>]/.test(feed.replace(/<[^>]+>/g, '').replace(/&(lt|gt|amp|quot);/g, '')), `${lang}: the feed is well formed`);
+    const page = read(lang === 'ar' ? 'docs/index.html' : 'docs/en/index.html');
+    assert.ok(page.includes(`<link rel="alternate" type="application/atom+xml" title="${ui.feed_title[lang]}" href="${lang === 'ar' ? '/' : '/en/'}feed.xml">`), `${lang}: the home page announces the feed`);
+  }
+  const ld = (file) => [...read(file).matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+  assert.deepEqual(ld('docs/index.html').map((o) => o['@type']), ['WebSite', 'Dataset'], 'the home page carries the site and the dataset');
+  assert.deepEqual(ld('docs/standards/dmarc/index.html').map((o) => o['@type']), ['WebSite', 'BreadcrumbList', 'TechArticle']);
+  assert.deepEqual(ld('docs/film/index.html').map((o) => o['@type']), ['WebSite', 'BreadcrumbList', 'VideoObject', 'VideoObject']);
+  if (latest) {
+    const issue = ld(`docs/issues/${latest}/index.html`);
+    assert.deepEqual(issue.map((o) => o['@type']), ['WebSite', 'BreadcrumbList', 'Dataset']);
+    assert.equal(issue[2].version, String(latest));
+    assert.ok(issue[2].distribution.some((d) => d.contentUrl.endsWith(`/releases/download/issue-${latest}/latest.csv`)), 'the issue dataset points at its archived data');
+  }
+  const crumbs = ld('docs/en/countries/kw/index.html')[1].itemListElement.map((x) => x.item);
+  assert.deepEqual(crumbs, [`https://${project.domain}/en/`, `https://${project.domain}/en/countries/`, `https://${project.domain}/en/countries/kw/`], 'the path to a state page');
+  assert.match(read('docs/sitemap.xml'), /<video:video>[\s\S]*<video:content_loc>https:\/\/[^<]+\/film\/gbaseline-film-ar\.mp4<\/video:content_loc>/, 'the sitemap carries the film');
+  const txt = read('docs/llms.txt');
+  assert.ok(txt.startsWith(`# ${project.name_en} | ${project.name_ar}`), 'llms.txt opens with the name');
+  for (const path of ['/data/open/latest.csv', '/standards/', '/issues/', '/feed.xml', '/en/feed.xml']) assert.ok(txt.includes(`https://${project.domain}${path}`), `llms.txt links ${path}`);
+  assert.ok(!/[\u2013\u2014]/.test(txt), 'no dashes');
 });
 
 test('the published folder is complete', () => {

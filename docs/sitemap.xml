@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://gbaseline.3li.info/</loc>
     <lastmod>2026-10-19</lastmod>
@@ -290,15 +290,51 @@
   </url>
   <url>
     <loc>https://gbaseline.3li.info/film/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/film/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/film/"/>
+    <video:video>
+      <video:thumbnail_loc>https://gbaseline.3li.info/film/gbaseline-film-ar.jpg</video:thumbnail_loc>
+      <video:title>خط الأساس الخليجي للأمن السيبراني: فيلم الإطلاق (بالعربية)</video:title>
+      <video:description>دقيقة واحدة بالعربية وبالإنجليزية تعرض ما يقيسه خط الأساس كل أسبوع وكيف يُقتبس رقم منه وقد سُجّلت من صفحات الموقع نفسها.</video:description>
+      <video:content_loc>https://gbaseline.3li.info/film/gbaseline-film-ar.mp4</video:content_loc>
+      <video:duration>62</video:duration>
+      <video:publication_date>2026-10-22</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://gbaseline.3li.info/film/gbaseline-film-en.jpg</video:thumbnail_loc>
+      <video:title>خط الأساس الخليجي للأمن السيبراني: فيلم الإطلاق (بالإنجليزية)</video:title>
+      <video:description>دقيقة واحدة بالعربية وبالإنجليزية تعرض ما يقيسه خط الأساس كل أسبوع وكيف يُقتبس رقم منه وقد سُجّلت من صفحات الموقع نفسها.</video:description>
+      <video:content_loc>https://gbaseline.3li.info/film/gbaseline-film-en.mp4</video:content_loc>
+      <video:duration>59</video:duration>
+      <video:publication_date>2026-10-22</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
   <url>
     <loc>https://gbaseline.3li.info/en/film/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/film/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/film/"/>
+    <video:video>
+      <video:thumbnail_loc>https://gbaseline.3li.info/film/gbaseline-film-ar.jpg</video:thumbnail_loc>
+      <video:title>Gulf Cybersecurity Baseline: The launch film (In Arabic)</video:title>
+      <video:description>One minute, in Arabic and in English, on what the baseline measures every week and how a figure is quoted from it, recorded from the pages of the site itself.</video:description>
+      <video:content_loc>https://gbaseline.3li.info/film/gbaseline-film-ar.mp4</video:content_loc>
+      <video:duration>62</video:duration>
+      <video:publication_date>2026-10-22</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://gbaseline.3li.info/film/gbaseline-film-en.jpg</video:thumbnail_loc>
+      <video:title>Gulf Cybersecurity Baseline: The launch film (In English)</video:title>
+      <video:description>One minute, in Arabic and in English, on what the baseline measures every week and how a figure is quoted from it, recorded from the pages of the site itself.</video:description>
+      <video:content_loc>https://gbaseline.3li.info/film/gbaseline-film-en.mp4</video:content_loc>
+      <video:duration>59</video:duration>
+      <video:publication_date>2026-10-22</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
   <url>
     <loc>https://gbaseline.3li.info/issues/</loc>

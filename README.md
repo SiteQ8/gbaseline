@@ -124,6 +124,8 @@ Left out on purpose: mil.ae, mil.qa, emb.kw, ind.kw, name.qa, pro.om, pub.sa and
 | `docs/data/history.json` | The weekly series |
 | `docs/data/open/latest.csv` | This issue as CSV |
 | `docs/data/open/history.csv` | Every issue as CSV |
+| `docs/feed.xml`, `docs/en/feed.xml` | An Atom feed of the issues with the six figures of each, in Arabic and in English |
+| `docs/llms.txt` | What the site is, where its data and tools are and how to cite it, for language models and agents |
 
 No published file names a domain. The inventory of names is rebuilt every week from the public certificate logs and the Tranco list, and passes from one run to the next as the run's working data: it is never committed or published.
 

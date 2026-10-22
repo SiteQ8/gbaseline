@@ -318,7 +318,7 @@ function measureSection(k) {
   return ledger(k, 'measure', k.t('measure_h'), [
     h('ul', { class: 'facts' },
       figRow('li', { 'data-rise': '' }, k.num(CHECKS.length), h('a', { href: k.href('standards/') }, k.t('measure_count')), groups),
-      figRow('li', { 'data-rise': '' }, k.num(sfx.length), k.t('measure_suffixes', { first: sfx[0].suffix, last: sfx[sfx.length - 1].suffix }))),
+      figRow('li', { 'data-rise': '' }, k.num(sfx.length), k.t('measure_suffixes', { states: listed(k, Object.keys(k.B.scope.countries).map((cc) => k.place(cc))), first: sfx[0].suffix, last: sfx[sfx.length - 1].suffix }))),
     h('p', { class: 'lead', 'data-rise': '' }, k.t('measure_outside')),
     h('p', { class: 'lead', 'data-rise': '' }, k.t('measure_names')),
   ], { aside: h('figure', { class: 'aside-photo', 'data-rise': '' }, img(k, p, 'tile'), h('figcaption', {}, k.P(p.caption))), panel: false, cls: 'measure' });
@@ -374,6 +374,10 @@ function viewHome(k) {
     issue ? clausesSection(k, issue, 'GCC', { photo: pictureOf(k, Object.keys(k.B.scope.countries)[(s.issue + 1) % 6]) }) : null,
     measureSection(k),
     s ? stairs(k) : null,
+    ledger(k, 'watch', k.t('film_title'), [
+      h('div', { class: 'film-box' }, filmVideo(k, k.lang)),
+      h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href('film/') }, k.t('film_more'))),
+    ], { note: k.t('film_note'), panel: false, cls: 'watch' }),
     fieldSection(k),
   ];
   return { title: k.t('title_full'), description: k.P(k.B.project.about), main };
@@ -385,7 +389,7 @@ function textPage(k, active, { lines, standfirst, action, top, side, span = fals
   // The parts of a section rise one after another: its heading, then its text, then what it holds. A part whose own
   // children already rise one by one is left to them.
   const rises = (n) => Boolean(n && n.kids && n.kids.some((c) => c && c.props && ('data-rise' in c.props || rises(c))));
-  const mark = (n) => (n && typeof n === 'object' && n.tag && !rises(n) ? { ...n, props: { ...n.props, 'data-rise': '' } } : n);
+  const mark = (n) => (n && typeof n === 'object' && n.tag && !rises(n) && !('data-still' in n.props) ? { ...n, props: { ...n.props, 'data-rise': '' } } : n);
   const rise = (n) => (n && n.tag === 'section' ? { ...n, kids: n.kids.map(mark) } : mark(n));
   return [
     h('div', { class: 'masthead slim' }, header(k, active), top || strip(k)),
@@ -399,10 +403,14 @@ function contents(k, items) {
   return { label: k.t('contents_label'), body: h('ol', { class: 'toc' }, items.map(([id, label]) => h('li', {}, h('a', { href: `#${id}` }, label)))) };
 }
 
-function sectorParts(k, inv) {
-  const parts = Object.keys(k.B.scope.sectors).filter((s) => inv[s] && inv[s].live).map((s) => k.t(`part_${s}`, { n: k.num(inv[s].live) }));
+// A list of things in prose, joined the way the language joins them.
+export function listed(k, parts) {
   if (k.lang === 'ar') return parts.join(' و');
   return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}` : parts.join('');
+}
+
+function sectorParts(k, inv) {
+  return listed(k, Object.keys(k.B.scope.sectors).filter((s) => inv[s] && inv[s].live).map((s) => k.t(`part_${s}`, { n: k.num(inv[s].live) })));
 }
 
 function viewCountries(k) {
@@ -712,16 +720,25 @@ function viewIssue(k, n, place) {
 
 // The two films with their captions, the one in the page's language first, then how the film was made and the
 // files to download. The films are served from the site itself.
+// The launch film: when it was finished and how long each language runs, for the page and for search engines.
+export const FILM = { date: '2026-10-22', seconds: { ar: 62, en: 59 } };
+export const filmFile = (lang, ext) => `/film/gbaseline-film-${lang}.${ext}`;
+
+// The film in one language, with its captions, its poster and a line for a browser that plays no video.
+function filmVideo(k, lang) {
+  return h('video', { class: 'film-v', controls: true, playsinline: true, preload: 'metadata', poster: filmFile(lang, 'jpg'), width: 1920, height: 1080, lang },
+    h('source', { src: filmFile(lang, 'mp4'), type: 'video/mp4' }),
+    h('track', { kind: 'captions', srclang: lang, src: filmFile(lang, 'vtt'), label: lang === 'ar' ? 'العربية' : 'English', default: lang === k.lang }),
+    k.t('film_fallback'));
+}
+
 function viewFilm(k) {
   const order = k.lang === 'ar' ? ['ar', 'en'] : ['en', 'ar'];
   const film = (lang) => {
     const base = `/film/gbaseline-film-${lang}`;
     return h('section', { class: 'film', 'aria-labelledby': `film-${lang}-h` },
       h('h2', { id: `film-${lang}-h` }, k.t(lang === 'ar' ? 'film_ar' : 'film_en')),
-      h('video', { class: 'film-v', controls: true, playsinline: true, preload: 'metadata', poster: `${base}.jpg`, width: 1920, height: 1080, lang },
-        h('source', { src: `${base}.mp4`, type: 'video/mp4' }),
-        h('track', { kind: 'captions', srclang: lang, src: `${base}.vtt`, label: lang === 'ar' ? 'العربية' : 'English', default: lang === k.lang }),
-        k.t('film_fallback')),
+      h('div', { class: 'film-box', 'data-still': '' }, filmVideo(k, lang)),
       h('ul', { class: 'downloads' },
         h('li', {}, h('a', { href: `${base}.mp4`, download: '' }, k.t('film_dl_mp4'))),
         h('li', {}, h('a', { href: `${base}.vtt`, download: '' }, k.t('film_dl_vtt'))),
