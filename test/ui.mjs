@@ -150,7 +150,7 @@ try {
   assert.equal((await page.textContent('#c1 .v')).trim(), '41.7٪', 'issue 1 had five of twelve domains open to impersonation');
   assert.ok(await page.locator('#c1.stamped details[open]').count(), 'the cited clause is marked and open');
   // Every other page renders, in Arabic, with the same three sections and the action.
-  for (const [path, expect] of [['countries/', /الكويت/], ['countries/sa/', /ستة أرقام عن السعودية/], ['standards/', /الحماية من انتحال البريد/], ['standards/pq-kex/', /X25519MLKEM768/], ['method/', /من أين تأتي الأسماء/], ['issues/', /العدد 2/], ['issues/2/kw/', /الكويت/], ['check/', /افحص نطاقك/]]) {
+  for (const [path, expect] of [['countries/', /الكويت/], ['countries/sa/', /ستة أرقام عن السعودية/], ['standards/', /الحماية من انتحال البريد/], ['standards/pq-kex/', /X25519MLKEM768/], ['method/', /من أين تأتي الأسماء/], ['issues/', /العدد 2/], ['issues/2/kw/', /الكويت/], ['check/', /افحص نطاقك/], ['film/', /كيف صُنع/]]) {
     await go(page, path);
     assert.match(await page.textContent('main'), expect, path);
     assert.ok(!STRAY.test(await pageText(page)), `${path}: no stray null, undefined or NaN`);
@@ -213,7 +213,7 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/ui-desktop-en.png`, fullPage: true });
   // A phone: no sideways scroll on any page, the mosaic comes before the title.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'issues/2/', 'en/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/']) {
+  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'en/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/']) {
     await go(phone, path);
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${path || 'home'}: no sideways scroll on a phone (overflow ${overflow}px)`);
