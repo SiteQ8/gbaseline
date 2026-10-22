@@ -1952,8 +1952,8 @@
    "ar": "لا نسمّي أي جهة ولا نرتب الدول."
   },
   "measure_suffixes": {
-   "en": "domain suffixes across the six states, from {first} to {last}",
-   "ar": "امتداداً للنطاقات في الدول الست من {first} إلى {last}"
+   "en": "domain suffixes across {states}, from {first} to {last}",
+   "ar": "امتداداً للنطاقات في {states} من {first} إلى {last}"
   },
   "how_1": {
    "en": "First we gather the names.",
@@ -2180,6 +2180,26 @@
     "ar": "الصوت في اللغتين والموسيقى مولّدان بأدوات ElevenLabs وتذكر البطاقة الختامية ذلك بينما لا يستخدم الموقع نفسه أي مادة مولّدة.",
     "en": "The voice in both languages and the music are generated with ElevenLabs, as the closing card says, while the site itself uses no generated material."
    }
-  ]
+  ],
+  "film_more": {
+   "ar": "الفيلم بالإنجليزية وملفات التحميل في صفحته",
+   "en": "The film in Arabic and the files to download, on its page"
+  },
+  "film_note": {
+   "ar": "دقيقة واحدة تعرض ما يقيسه خط الأساس وكيف يُقتبس رقم منه وقد سُجّلت من صفحات الموقع نفسها.",
+   "en": "One minute on what the baseline measures and how a figure is quoted from it, recorded from the pages of the site itself."
+  },
+  "feed_title": {
+   "ar": "أعداد خط الأساس الخليجي للأمن السيبراني",
+   "en": "Issues of the Gulf Cybersecurity Baseline"
+  },
+  "feed_intro": {
+   "ar": "عدد جديد كل اثنين بالأرقام الستة للخليج العربي ورابط صفحته.",
+   "en": "A new issue every Monday with the six figures for the Arabian Gulf and the link to its page."
+  },
+  "nav_home": {
+   "ar": "الرئيسية",
+   "en": "Home"
+  }
  }
 }
