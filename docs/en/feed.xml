@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Issues of the Gulf Cybersecurity Baseline</title>
+  <subtitle>A new issue every Monday with the six figures for the Arabian Gulf and the link to its page.</subtitle>
+  <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/"/>
+  <link rel="self" type="application/atom+xml" href="https://gbaseline.3li.info/en/feed.xml"/>
+  <id>https://gbaseline.3li.info/en/</id>
+  <updated>2026-10-19T02:17:00Z</updated>
+  <author><name>Ali AlEnezi</name><uri>https://3li.info</uri></author>
+  <rights>Gulf Cybersecurity Baseline · MIT</rights>
+  <entry>
+    <title>Issue 2, 19 October 2026</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/issues/2/"/>
+    <id>https://gbaseline.3li.info/en/issues/2/</id>
+    <published>2026-10-19T02:17:00Z</published>
+    <updated>2026-10-19T02:17:00Z</updated>
+    <summary>Published on 19 October 2026, measuring 11,917 live domains in the six Arabian Gulf states.</summary>
+    <content type="html">&lt;ol&gt;&lt;li&gt;81.1% of the measured domains in the Arabian Gulf can be impersonated in email, because they have no enforced DMARC policy.&lt;/li&gt;&lt;li&gt;3.2% of the measured domains in the Arabian Gulf carry DNSSEC signatures that validate.&lt;/li&gt;&lt;li&gt;18.6% of the websites of the measured domains in the Arabian Gulf hold browsers to HTTPS for a year or more.&lt;/li&gt;&lt;li&gt;32.2% of the websites of the measured domains in the Arabian Gulf still accept TLS 1.0 or 1.1.&lt;/li&gt;&lt;li&gt;52.2% of the websites of the measured domains in the Arabian Gulf accept post quantum key exchange.&lt;/li&gt;&lt;li&gt;2.1% of the websites of the measured domains in the Arabian Gulf say how to report a vulnerability.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;a href=&quot;https://gbaseline.3li.info/en/issues/2/&quot;&gt;How to cite this issue&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Issue 1, 16 October 2026</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/issues/1/"/>
+    <id>https://gbaseline.3li.info/en/issues/1/</id>
+    <published>2026-10-16T02:17:00Z</published>
+    <updated>2026-10-16T02:17:00Z</updated>
+    <summary>Published on 16 October 2026, measuring 11,919 live domains in the six Arabian Gulf states.</summary>
+    <content type="html">&lt;ol&gt;&lt;li&gt;81.2% of the measured domains in the Arabian Gulf can be impersonated in email, because they have no enforced DMARC policy.&lt;/li&gt;&lt;li&gt;3.2% of the measured domains in the Arabian Gulf carry DNSSEC signatures that validate.&lt;/li&gt;&lt;li&gt;18.9% of the websites of the measured domains in the Arabian Gulf hold browsers to HTTPS for a year or more.&lt;/li&gt;&lt;li&gt;32.4% of the websites of the measured domains in the Arabian Gulf still accept TLS 1.0 or 1.1.&lt;/li&gt;&lt;li&gt;52.0% of the websites of the measured domains in the Arabian Gulf accept post quantum key exchange.&lt;/li&gt;&lt;li&gt;2.1% of the websites of the measured domains in the Arabian Gulf say how to report a vulnerability.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;a href=&quot;https://gbaseline.3li.info/en/issues/1/&quot;&gt;How to cite this issue&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+</feed>
