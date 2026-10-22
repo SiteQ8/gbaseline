@@ -6,7 +6,7 @@
 
 الموقع | Site: **https://gbaseline.3li.info**
 
-فيلم الإطلاق | Launch film: [العربية](https://github.com/SiteQ8/gbaseline/releases/download/v0.1.0/gbaseline-film-ar.mp4) · [English](https://github.com/SiteQ8/gbaseline/releases/download/v0.1.0/gbaseline-film-en.mp4)
+فيلم الإطلاق | Launch film: [العربية](https://gbaseline.3li.info/film/) · [English](https://gbaseline.3li.info/en/film/)
 
 ---
 
@@ -188,7 +188,7 @@ Each issue is printed like an annual report. Across the top, a mosaic of the six
 
 Every page is printed to HTML from the bundle and the published data when an issue comes out (`scripts/prerender.mjs`), in Arabic at the root and in English under `/en/`, with its canonical address, both languages linked and a sitemap of all of them, so every page can be read, linked, indexed and cited without script. The browser adds only the sector tabs, the copy buttons, the live check and the motion.
 
-The launch film, about a minute long in Arabic and in English, is recorded from the site itself and attached to the v0.1.0 release. Its narration and its music are generated, and its closing card says so.
+The launch film, about a minute long in Arabic and in English, is recorded from the site itself and has a page of its own on the site, with captions and the files to download. Its narration and its music are generated, and its closing card says so.
 
 ### Citing
 

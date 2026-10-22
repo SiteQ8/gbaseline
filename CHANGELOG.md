@@ -11,6 +11,7 @@ First release.
 - The home page shows the Gulf as a whole and each state has a page of its own figures. Nothing on the site, in the MCP server or in the run summary sets the states side by side or ranks them.
 - Shares carry one decimal everywhere, like the open data, and counts are grouped by thousands in both languages.
 - Issue 1, published on 16 October 2026, measures 11,919 live domains under the 36 suffixes.
+- The launch film, a minute in Arabic and a minute in English, recorded from the site's own pages, with captions and downloads on a page of its own.
 - Command line tool for the full check of any domain, and an MCP server with six read only tools.
 - Weekly workflow that runs by itself every Monday and whenever the scope changes: it refreshes the inventory, scans it across six runners, tests what it is about to publish, commits the new issue, archives it as a release with its open data and asks Pages to publish it, with a totals only summary on the job page, and a test workflow for every change.
 - Domains can be left out at their administrators' request through the exclude list in `data/src/scope.json`.
