@@ -21,7 +21,7 @@ Each was downloaded at 3840 pixels on 16 October 2026, and each file on the site
 
 ## Launch film
 
-The films attached to the v0.1.0 release, `gbaseline-film-ar.mp4` and `gbaseline-film-en.mp4`, are recorded from this site with the figures of issue 1, published on 16 October 2026. Their opening holds each of the six photographs above still in turn, under its own caption, and nothing in a picture is generated or set in motion. The narration in each language is generated with ElevenLabs (Eleven v4) and the music with ElevenLabs Music. The closing card of each film says so and lists the six photographs. None of this generated material is used on the site.
+The films on the site's film page, `docs/film/gbaseline-film-ar.mp4` and `docs/film/gbaseline-film-en.mp4`, are recorded from this site with the figures of issue 2, published on 19 October 2026. Their opening holds each of the six photographs above still in turn, under its own caption, and nothing in a picture is generated or set in motion. The narration in each language is generated with ElevenLabs (Eleven v4) and the music with ElevenLabs Music. The closing card of each film says so and lists the six photographs. None of this generated material is used on the site.
 
 ## Data sources
 

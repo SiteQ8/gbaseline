@@ -21,7 +21,7 @@ export function routes(B, D) {
   for (const c of cc) out.push({ page: 'country', cc: c, rel: `countries/${c.toLowerCase()}/` });
   out.push({ page: 'standards', rel: 'standards/' });
   for (const c of CHECKS) out.push({ page: 'standard', id: c.id, rel: `standards/${SLUGS[c.id]}/` });
-  out.push({ page: 'check', rel: 'check/' }, { page: 'method', rel: 'method/' }, { page: 'issues', rel: 'issues/' });
+  out.push({ page: 'check', rel: 'check/' }, { page: 'method', rel: 'method/' }, { page: 'film', rel: 'film/' }, { page: 'issues', rel: 'issues/' });
   for (let n = 1; n <= issueCount(D); n += 1) {
     out.push({ page: 'issue', n, place: 'GCC', rel: `issues/${n}/` });
     for (const c of cc) out.push({ page: 'issue', n, place: c, rel: `issues/${n}/${c.toLowerCase()}/` });
@@ -264,6 +264,7 @@ function footer(k) {
         s ? h('p', {}, h('a', { href: k.href(issueRel(s.issue, 'GCC')) }, k.t('hero_issue', { n: s.issue, date: k.date(s.date) }))) : null),
       h('ul', { class: 'links' },
         h('li', {}, h('a', { href: k.href('issues/') }, k.t('nav_issues'))),
+        h('li', {}, h('a', { href: k.href('film/') }, k.t('film_title'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#data` }, k.t('foot_data'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#cli` }, k.t('foot_tools'))),
         h('li', {}, h('a', { href: repo }, k.t('foot_code'))),
@@ -707,6 +708,32 @@ function viewIssue(k, n, place) {
   return { title, description: standfirst, main };
 }
 
+/* ---------- the launch film ---------- */
+
+// The two films with their captions, the one in the page's language first, then how the film was made and the
+// files to download. The films are served from the site itself.
+function viewFilm(k) {
+  const order = k.lang === 'ar' ? ['ar', 'en'] : ['en', 'ar'];
+  const film = (lang) => {
+    const base = `/film/gbaseline-film-${lang}`;
+    return h('section', { class: 'film', 'aria-labelledby': `film-${lang}-h` },
+      h('h2', { id: `film-${lang}-h` }, k.t(lang === 'ar' ? 'film_ar' : 'film_en')),
+      h('video', { class: 'film-v', controls: true, playsinline: true, preload: 'metadata', poster: `${base}.jpg`, width: 1920, height: 1080, lang },
+        h('source', { src: `${base}.mp4`, type: 'video/mp4' }),
+        h('track', { kind: 'captions', srclang: lang, src: `${base}.vtt`, label: lang === 'ar' ? 'العربية' : 'English', default: lang === k.lang }),
+        k.t('film_fallback')),
+      h('ul', { class: 'downloads' },
+        h('li', {}, h('a', { href: `${base}.mp4`, download: '' }, k.t('film_dl_mp4'))),
+        h('li', {}, h('a', { href: `${base}.vtt`, download: '' }, k.t('film_dl_vtt'))),
+        h('li', {}, h('a', { href: `${base}.srt`, download: '' }, k.t('film_dl_srt')))));
+  };
+  const body = [
+    ...order.map(film),
+    h('section', { 'aria-labelledby': 'film-about-h' }, h('h2', { id: 'film-about-h' }, k.t('film_about_h')), k.B.ui.film_about.map((x) => h('p', {}, tr(x, k.lang)))),
+  ];
+  return { title: k.t('film_title'), description: k.t('film_intro'), main: textPage(k, null, { lines: [k.t('film_title')], standfirst: k.t('film_intro'), span: true }, body) };
+}
+
 /* ---------- not found ---------- */
 
 function viewNotFound(k) {
@@ -729,6 +756,7 @@ export function page(ctx) {
   else if (r.page === 'method') v = viewMethod(k);
   else if (r.page === 'issues') v = viewIssues(k);
   else if (r.page === 'issue') v = viewIssue(k, r.n, r.place);
+  else if (r.page === 'film') v = viewFilm(k);
   else v = viewNotFound(k);
   const body = h('div', { class: `site p-${r.page}`, id: 'top' },
     h('a', { class: 'skip', href: '#main' }, k.t('skip')),
