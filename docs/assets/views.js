@@ -191,19 +191,30 @@ function slip(k, cl, ref) {
 export const clauseId = (n, sector) => (sector === 'all' ? `c${n}` : `c${n}-${sector}`);
 export const issueRel = (n, place) => `issues/${n}/${place === 'GCC' ? '' : `${place.toLowerCase()}/`}`;
 
+// One row for every figure on the site: the figure first on the edge the page reads from, what it measures beside
+// it, and under that the line with its count or its links. The figure is isolated left to right inside a block that
+// keeps the direction of the page, so an Arabic figure stands on the same edge as its words.
+function figRow(tag, props, fig, label, detail = null) {
+  // The spaces between the parts are not drawn, but a screen reader or a copy reads them, so a count never runs into
+  // the figure before it.
+  const spaced = (parts) => [parts].flat().filter(Boolean).flatMap((x, i) => (i ? [' ', x] : [x]));
+  return h(tag, { ...props, class: `fig-row ${props.class || ''}`.trim() },
+    h('span', { class: 'fig v' }, ltr(fig)), ' ',
+    h('span', { class: 'fig-label what' }, label),
+    detail ? [' ', h('span', { class: 'fig-detail' }, spaced(detail))] : null);
+}
+
 function clauseList(k, issue, place, sector) {
   return h('ol', { class: 'clauses' }, CLAUSES.map((cl) => {
     const f = clauseShare(issue.cell(cl.id, place, sector), cl.mode);
     const id = clauseId(cl.n, sector);
-    const row = [
-      h('span', { class: 'what' }, k.t(`row_${cl.id}`)),
-      h('span', { class: 'basis' }, f.measured ? k.t('of_count', { pass: k.num(f.count), measured: k.num(f.measured) }) : ''),
-      h('span', { class: 'v', dir: 'ltr' }, f.measured ? k.pct(f.v) : k.t('no_data')),
-    ];
-    if (!f.measured) return h('li', { id, class: 'none', 'data-rise': '' }, h('div', { class: 'row' }, row));
+    if (!f.measured) return h('li', { id, class: 'none', 'data-rise': '' }, figRow('div', { class: 'row' }, k.t('no_data'), k.t(`row_${cl.id}`)));
     return h('li', { id, 'data-rise': '' },
       h('details', { class: 'cite' },
-        h('summary', { class: 'row' }, row, h('span', { class: 'cite-w' }, k.t('cite'))),
+        figRow('summary', { class: 'row' }, k.pct(f.v), k.t(`row_${cl.id}`), [
+          h('span', { class: 'basis' }, k.t('of_count', { pass: k.num(f.count), measured: k.num(f.measured) })),
+          h('span', { class: 'cite-w' }, k.t('cite')),
+        ]),
         slip(k, cl, { issue: issue.n, date: issue.date, place, sector, v: f.v })));
   }));
 }
@@ -218,16 +229,19 @@ function sectorPanels(k, issue, place, body, slot = null) {
       body(s))));
 }
 
-// A long table with its heading held in the margin beside it, and the tabs that change it under the heading, so the
-// reader always sees which place and which sector the rows belong to.
-function ledger(k, id, head, body, { note = null, tabs = false, after = null } = {}) {
-  return h('section', { class: 'text-sec ledger', 'aria-labelledby': `${id}-h` },
+// Every section of the site has the same two parts: its heading, with a note and the tabs that change it, held on
+// the edge the page reads from; and its body from the axis. A picture that belongs to the section stands under the
+// heading on a wide screen and after the body on a phone. On a phone everything hangs from the one margin.
+function ledger(k, id, head, body, { note = null, tabs = false, after = null, aside = null, panel = true, cls = '', tag = 'section', label = null } = {}) {
+  const classes = ['text-sec', 'ledger', cls, aside ? 'has-aside' : '', panel ? 'panelled' : ''].filter(Boolean).join(' ');
+  return h(tag, { class: classes, id, 'aria-labelledby': label ? null : `${id}-h`, 'aria-label': label },
     h('div', { class: 'ledger-head' },
       h('h2', { id: `${id}-h`, class: 'big-h', 'data-rise': '' }, head),
       note ? h('p', { class: 'ledger-note', 'data-rise': '' }, note) : null,
       tabs ? h('div', { class: 'tab-slot', id: `${id}-tabs` }) : null,
       after ? h('p', { class: 'ledger-note', 'data-rise': '' }, after) : null),
-    h('div', { class: 'ledger-body' }, body));
+    h('div', { class: 'ledger-body' }, body),
+    aside ? h('div', { class: 'ledger-aside' }, aside) : null);
 }
 
 const allTable = (k, issue, place) => ledger(k, 'all', place === 'GCC' ? k.t('all_table_GCC') : k.t('country_table', { place: k.t(`in_${place}`) }),
@@ -240,22 +254,24 @@ function footer(k) {
   const repoText = repo.replace(/^https:\/\/(www\.)?/, '');
   const [owner, name] = repoText.replace(/^github\.com\//, '').split('/');
   const s = k.D.summary;
+  // The same two edges as the page: what the project is on the edge it reads from, where to go next from the axis,
+  // then the address to write to across both, then the imprint.
   return h('footer', { class: 'foot', id: 'foot' },
     h('div', { class: 'foot-top' },
       h('div', { class: 'notes' },
         h('p', {}, k.t('foot_note')),
         h('p', {}, k.t('foot_monday')),
         s ? h('p', {}, h('a', { href: k.href(issueRel(s.issue, 'GCC')) }, k.t('hero_issue', { n: s.issue, date: k.date(s.date) }))) : null),
-      h('a', { class: 'up', href: '#top' }, k.t('foot_top'))),
-    h('div', { class: 'reach' },
-      h('p', { class: 'reach-note' }, k.t('foot_contact_note')),
-      h('a', { class: 'reach-line', href: `${repo}/issues`, dir: 'ltr' }, h('span', {}, `github.com/${owner}/`), h('span', {}, name))),
-    h('div', { class: 'meta' },
       h('ul', { class: 'links' },
         h('li', {}, h('a', { href: k.href('issues/') }, k.t('nav_issues'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#data` }, k.t('foot_data'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#cli` }, k.t('foot_tools'))),
-        h('li', {}, h('a', { href: repo }, k.t('foot_code')))),
+        h('li', {}, h('a', { href: repo }, k.t('foot_code'))),
+        h('li', {}, h('a', { class: 'up', href: '#top' }, k.t('foot_top'))))),
+    h('div', { class: 'reach' },
+      h('p', { class: 'reach-note' }, k.t('foot_contact_note')),
+      h('a', { class: 'reach-line', href: `${repo}/issues`, dir: 'ltr' }, h('span', {}, `github.com/${owner}/`), h('span', {}, name))),
+    h('div', { class: 'meta' },
       h('p', { class: 'credits' }, k.t('foot_imprint')),
       h('p', { class: 'by' }, k.t('foot_author', { author: k.P(k.B.project.author) }))));
 }
@@ -276,33 +292,35 @@ function lede(k, issue, place) {
     h('p', { class: 'statement', 'data-rise': '' }, rich(k, 'lede', vars, ['live', 'dmarc', 'dnssec'])));
 }
 
+// The six figures: the heading, the issue and the sector tabs on the edge the page reads from, the rows from the
+// axis, and the photograph under the heading.
 function clausesSection(k, issue, place, { photo, detail = false } = {}) {
   const head = place === 'GCC' ? k.t('clauses_h') : k.t('clauses_state_h', { place: k.t(`in_${place}`) });
-  const live = issue.live(place, 'all');
-  return h('section', { class: 'figures', id: 'figures', 'aria-labelledby': 'figures-h' },
-    h('h2', { id: 'figures-h', class: 'big-h', 'data-rise': '' }, head),
-    h('div', { class: 'figures-body' },
-      photo ? h('figure', { class: 'aside-photo', 'data-rise': '' }, img(k, photo, 'portrait'), h('figcaption', {}, detail ? k.t('photo_detail') : k.P(photo.caption))) : null,
-      h('div', { class: 'table-side' },
-        h('p', { class: 'word', 'data-rise': '' }, k.t('clauses_word')),
-        h('p', { class: 'scope', 'data-rise': '' }, k.t('issue_full', { n: issue.n, date: k.date(issue.date) })),
-        sectorPanels(k, issue, place, (s) => clauseList(k, issue, place, s)),
-        live !== null ? h('p', { class: 'source' }, k.t('source_line', { date: k.date(issue.date), domains: k.words(live, 'w_live_domain') })) : null)));
+  const aside = photo ? h('figure', { class: 'aside-photo', 'data-rise': '' }, img(k, photo, 'portrait'), h('figcaption', {}, detail ? k.t('photo_detail') : k.P(photo.caption))) : null;
+  // Each sector closes with its own count of domains, so the line under the rows always matches them.
+  const source = (s) => {
+    const live = issue.live(place, s);
+    return live !== null ? h('p', { class: 'source after' }, k.t('source_line', { date: k.date(issue.date), domains: k.words(live, 'w_live_domain') })) : null;
+  };
+  return ledger(k, 'figures', head,
+    sectorPanels(k, issue, place, (s) => [clauseList(k, issue, place, s), source(s)], 'figures-tabs'),
+    { note: k.t('issue_full', { n: issue.n, date: k.date(issue.date) }), tabs: true, aside, cls: 'figures' });
 }
 
+// What we measure, in the same rows as the figures: the thirteen standards with their four groups under them, the
+// suffixes, then the two things the measure never does.
 function measureSection(k) {
   const s = k.D.summary;
-  const groups = GROUPS.map((g) => h('li', {}, h('a', { href: `${k.href('standards/')}#${g}` }, k.P(k.B.groups[g]))));
+  const groups = GROUPS.map((g) => h('a', { href: `${k.href('standards/')}#${g}` }, k.P(k.B.groups[g])));
   const p = pictureOf(k, Object.keys(k.B.scope.countries)[((s ? s.issue : 1) + 2) % 6]);
-  return h('section', { class: 'measure', 'aria-labelledby': 'measure-h' },
-    h('div', { class: 'tiles' },
-      h('div', { class: 'tile t-head', 'data-rise': '' }, h('h2', { id: 'measure-h' }, k.t('measure_h'))),
-      h('div', { class: 'tile t-photo', 'data-rise': '' }, img(k, p, 'tile')),
-      h('div', { class: 'tile t-count', 'data-rise': '' }, h('p', { class: 'n', dir: 'ltr' }, k.num(CHECKS.length)), h('p', {}, h('a', { href: k.href('standards/') }, k.t('measure_count')))),
-      h('div', { class: 'tile t-list', 'data-rise': '' }, h('ul', {}, groups)),
-      h('div', { class: 'tile t-outside', 'data-rise': '' }, h('p', {}, k.t('measure_outside'))),
-      h('div', { class: 'tile t-names', 'data-rise': '' }, h('p', {}, k.t('measure_names'))),
-      h('div', { class: 'tile t-sfx', 'data-rise': '' }, h('p', { class: 'n', dir: 'ltr' }, k.num(k.B.scope.suffixes.length)), h('p', {}, k.t('measure_suffixes', { first: k.B.scope.suffixes[0].suffix, last: k.B.scope.suffixes[k.B.scope.suffixes.length - 1].suffix })))));
+  const sfx = k.B.scope.suffixes;
+  return ledger(k, 'measure', k.t('measure_h'), [
+    h('ul', { class: 'facts' },
+      figRow('li', { 'data-rise': '' }, k.num(CHECKS.length), h('a', { href: k.href('standards/') }, k.t('measure_count')), groups),
+      figRow('li', { 'data-rise': '' }, k.num(sfx.length), k.t('measure_suffixes', { first: sfx[0].suffix, last: sfx[sfx.length - 1].suffix }))),
+    h('p', { class: 'lead', 'data-rise': '' }, k.t('measure_outside')),
+    h('p', { class: 'lead', 'data-rise': '' }, k.t('measure_names')),
+  ], { aside: h('figure', { class: 'aside-photo', 'data-rise': '' }, img(k, p, 'tile'), h('figcaption', {}, k.P(p.caption))), panel: false, cls: 'measure' });
 }
 
 // Agreement is shown rounded down, so 99.95 reads as 99.9 and never as a perfect 100.0.
@@ -393,7 +411,7 @@ function viewCountries(k) {
     return h('li', { 'data-rise': '' }, h('a', { href: k.href(`countries/${cc.toLowerCase()}/`) },
       img(k, p, 'tile'),
       h('span', { class: 'who' }, k.place(cc)),
-      h('span', { class: 'sfx', dir: 'ltr' }, k.B.scope.suffixes.filter((x) => x.country === cc).map((x) => x.suffix).join(' · '))));
+      h('span', { class: 'sfx' }, ltr(k.B.scope.suffixes.filter((x) => x.country === cc).map((x) => x.suffix).join(' · ')))));
   }));
   const main = [
     h('div', { class: 'masthead' }, header(k, 'countries'), mosaic(k, k.D.summary ? k.D.summary.issue : null, { linked: true })),
@@ -408,7 +426,7 @@ function chainList(k, cc) {
   return h('ul', { class: 'chain' }, k.B.scope.suffixes.filter((x) => x.country === cc).map((x) => {
     const on = s ? s.chain[x.suffix] : undefined;
     return h('li', { class: on === true ? 'on' : on === false ? 'off' : 'unknown' },
-      h('span', { class: 'sfx', dir: 'ltr' }, x.suffix),
+      h('span', { class: 'sfx' }, ltr(x.suffix)),
       h('span', {}, on === undefined ? k.t('chain_unknown') : k.t(on ? 'chain_on' : 'chain_off', { suffix: x.suffix })));
   }));
 }
@@ -421,25 +439,27 @@ function bar(v) {
     h('rect', { class: 'fill', width: String(w), height: '10' }));
 }
 
+// Every standard for one place and sector, in the row of the figures: the share first, the standard beside it with
+// how many passed of how many were measured under its name, and the share drawn as a bar where there is room.
 function standardsTable(k, issue, place, sector) {
   return h('table', { class: 'std-table', 'data-rise': '' },
-    h('thead', {}, h('tr', {}, h('th', { scope: 'col' }, k.t('table_check')), h('th', { scope: 'col', class: 'n' }, k.t('table_share')), h('td', { class: 'bar-c', 'aria-hidden': 'true' }), h('th', { scope: 'col', class: 'n' }, k.t('table_basis')))),
+    h('thead', {}, h('tr', {}, h('th', { scope: 'col', class: 'n' }, k.t('table_share')), h('th', { scope: 'col' }, k.t('table_check')), h('td', { class: 'bar-c', 'aria-hidden': 'true' }))),
     GROUPS.map((g) => h('tbody', {},
-      h('tr', { class: 'group' }, h('th', { colspan: 4, scope: 'colgroup' }, k.P(k.B.groups[g]))),
+      h('tr', { class: 'group' }, h('th', { colspan: 3, scope: 'colgroup' }, k.P(k.B.groups[g]))),
       CHECKS.filter((c) => c.group === g).map((c) => {
         const [pass, measured] = issue.cell(c.id, place, sector);
         return h('tr', {},
-          h('th', { scope: 'row' }, h('a', { href: k.href(`standards/${SLUGS[c.id]}/`) }, k.P(k.B.checks[c.id].short))),
-          h('td', { class: 'n share', dir: 'ltr' }, measured ? k.pct((pass / measured) * 100) : k.t('no_data')),
-          h('td', { class: 'bar-c' }, measured ? bar((pass / measured) * 100) : null),
-          h('td', { class: 'n soft' }, measured ? k.t('of_count', { pass: k.num(pass), measured: k.num(measured) }) : ''));
+          h('td', { class: 'n share' }, ltr(measured ? k.pct((pass / measured) * 100) : k.t('no_data'))),
+          h('th', { scope: 'row' }, h('a', { href: k.href(`standards/${SLUGS[c.id]}/`) }, k.P(k.B.checks[c.id].short)),
+            measured ? h('span', { class: 'basis' }, k.t('of_count', { pass: k.num(pass), measured: k.num(measured) })) : null),
+          h('td', { class: 'bar-c' }, measured ? bar((pass / measured) * 100) : null));
       }))));
 }
 
 function others(k, cc, rel) {
-  return h('nav', { class: 'others', 'aria-label': k.t('others_label') },
-    h('h2', { class: 'others-h' }, k.t('others_label')),
-    h('ul', {}, Object.keys(k.B.scope.countries).filter((x) => x !== cc).map((x) => h('li', { 'data-rise': '' }, h('a', { class: 'cell', href: k.href(rel(x)) }, img(k, pictureOf(k, x), 'tile'), h('span', {}, k.place(x)))))));
+  return ledger(k, 'others', k.t('others_label'),
+    h('ul', { class: 'others-list' }, Object.keys(k.B.scope.countries).filter((x) => x !== cc).map((x) => h('li', { 'data-rise': '' }, h('a', { class: 'cell', href: k.href(rel(x)) }, img(k, pictureOf(k, x), 'tile'), h('span', {}, k.place(x)))))),
+    { panel: false, cls: 'others', tag: 'nav', label: k.t('others_label') });
 }
 
 function viewCountry(k, cc) {
@@ -472,10 +492,10 @@ function viewStandards(k) {
     h('ul', { class: 'std-list' }, CHECKS.filter((c) => c.group === g).map((c) => {
       const cell = s ? s.checks[c.id].GCC.all : null;
       const m = cell ? cell.pass + cell.fail : 0;
-      return h('li', { 'data-rise': '' }, h('a', { href: k.href(`standards/${SLUGS[c.id]}/`) },
-        h('span', { class: 'name' }, k.P(k.B.checks[c.id].title)),
-        h('span', { class: 'q' }, k.P(k.B.checks[c.id].question)),
-        s ? h('span', { class: 'v', dir: 'ltr' }, m ? k.pct((cell.pass / m) * 100) : k.t('no_data')) : null));
+      return h('li', { 'data-rise': '' }, figRow('a', { href: k.href(`standards/${SLUGS[c.id]}/`) },
+        s ? (m ? k.pct((cell.pass / m) * 100) : k.t('no_data')) : '',
+        k.P(k.B.checks[c.id].title),
+        k.P(k.B.checks[c.id].question)));
     }))));
   return { title: k.t('standards_title'), description: k.t('standards_intro'), main: textPage(k, 'standards', { lines: [k.t('standards_title')], standfirst: k.t('standards_intro'), span: true }, body) };
 }
@@ -497,18 +517,18 @@ function viewStandard(k, id) {
   const side = s ? {
     label: k.t('check_gulf'),
     body: [
-      h('p', { class: 'side-n', dir: 'ltr' }, v === null ? '' : (Math.round(v * 10) / 10).toFixed(1)),
+      h('p', { class: 'side-n' }, v === null ? '' : ltr((Math.round(v * 10) / 10).toFixed(1))),
       h('p', { class: 'side-cap' }, v === null ? k.t('no_data_sentence') : k.t('check_gulf_line')),
       v === null ? null : h('p', { class: 'small soft' }, k.t('basis', { count: k.num(cell.pass), domains: k.words(m, 'w_domain') })),
       sectors.length > 1 ? h('ul', { class: 'side-sectors' }, sectors.filter((x) => x !== 'all').map((x) => {
         const cx = s.checks[id].GCC[x];
-        return h('li', {}, h('span', {}, k.sectorName(x)), h('span', { class: 'v', dir: 'ltr' }, k.pct((cx.pass / (cx.pass + cx.fail)) * 100)));
+        return figRow('li', {}, k.pct((cx.pass / (cx.pass + cx.fail)) * 100), k.sectorName(x));
       })) : null,
       levels.length ? h('section', { class: 'found-sec', 'aria-labelledby': 'found-h' }, h('h2', { id: 'found-h' }, k.t('check_found')),
         h('table', { class: 'found', 'data-rise': '' }, h('tbody', {}, levels.map(([lvl, n]) => h('tr', { class: markOf(id, lvl, k.B) },
-          h('th', { scope: 'row' }, h('span', { class: 'dot', 'aria-hidden': 'true' }), levelText(k, id, lvl)),
-          h('td', { class: 'bar-c' }, bar((n / found) * 100)),
-          h('td', { class: 'n' }, k.num(n))))))) : null,
+          h('td', { class: 'n' }, ltr(k.num(n))),
+          h('th', { scope: 'row' }, h('span', { class: 'lv' }, h('span', { class: 'dot', 'aria-hidden': 'true' }), levelText(k, id, lvl))),
+          h('td', { class: 'bar-c' }, bar((n / found) * 100))))))) : null,
       h('p', { class: 'small soft source' }, h('a', { href: k.href(issueRel(s.issue, 'GCC')) }, k.t('issue_full', { n: s.issue, date: k.date(s.date) }))),
     ],
   } : null;
@@ -649,9 +669,8 @@ function viewIssues(k) {
     const live = is.live('GCC', 'all');
     rows.push(h('li', { 'data-rise': '' }, h('a', { href: k.href(issueRel(i, 'GCC')) },
       h('span', { class: 'n' }, k.t('issue', { n: i })),
-      h('span', { class: 'd' }, k.date(is.date)),
-      live !== null ? h('span', { class: 'l' }, k.words(live, 'w_live_domain')) : null,
-      i === n ? h('span', { class: 'latest' }, k.t('latest_word')) : null)));
+      i === n ? h('span', { class: 'latest' }, k.t('latest_word')) : null,
+      h('span', { class: 'd' }, k.date(is.date), live !== null ? [' · ', h('span', { class: 'l' }, k.words(live, 'w_live_domain'))] : null))));
   }
   const body = [h('ol', { class: 'issues' }, rows), h('p', {}, h('a', { href: `${k.B.project.repo}/releases` }, k.t('issues_releases')))];
   return { title: k.t('issues_title'), description: k.t('issues_intro'), main: textPage(k, 'issues', { lines: [k.t('issues_title')], standfirst: k.t('issues_intro') }, body) };
@@ -675,14 +694,13 @@ function viewIssue(k, n, place) {
     h('div', { class: 'text' }, body),
     clausesSection(k, issue, place, { photo: pictureOf(k, place === 'GCC' ? states[(n + 1) % states.length] : place), detail: place !== 'GCC' }),
     allTable(k, issue, place),
-    h('section', { class: 'text-sec', id: 'cite', 'aria-labelledby': 'cite-h' },
-      h('h2', { id: 'cite-h', class: 'big-h', 'data-rise': '' }, k.t('cite_issue_h')),
-      h('div', { class: 'wide-side', 'data-rise': '' }, citeBlock(k, issue)),
-      h('div', { class: 'wide-side', 'data-rise': '' },
-        h('ul', { class: 'downloads' },
-          h('li', {}, h('a', { href: `${k.B.project.repo}/releases/tag/issue-${n}` }, k.t('issue_release', { n }))),
-          issue.latest ? h('li', {}, h('a', { href: '/data/open/latest.csv', download: '' }, k.t('dl_latest_csv'))) : null,
-          h('li', {}, h('a', { href: '/data/open/history.csv', download: '' }, k.t('dl_history_csv')))))),
+    ledger(k, 'cite', k.t('cite_issue_h'), [
+      h('div', { 'data-rise': '' }, citeBlock(k, issue)),
+      h('ul', { class: 'downloads after', 'data-rise': '' },
+        h('li', {}, h('a', { href: `${k.B.project.repo}/releases/tag/issue-${n}` }, k.t('issue_release', { n }))),
+        issue.latest ? h('li', {}, h('a', { href: '/data/open/latest.csv', download: '' }, k.t('dl_latest_csv'))) : null,
+        h('li', {}, h('a', { href: '/data/open/history.csv', download: '' }, k.t('dl_history_csv')))),
+    ], { panel: false, cls: 'cite-sec' }),
     place === 'GCC' ? null : others(k, place, (x) => issueRel(n, x)),
   ];
   const title = place === 'GCC' ? k.t('issue_full', { n, date: k.date(issue.date) }) : `${k.t('issue', { n })} · ${k.place(place)}`;

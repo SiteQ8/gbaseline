@@ -161,13 +161,15 @@ try {
   await go(page, 'countries/sa/');
   const saText = await page.textContent('.figures');
   for (const c of codes.filter((x) => x !== 'SA')) assert.ok(!saText.includes(scope.countries[c].ar), `the Saudi figures never name ${scope.countries[c].en}`);
-  assert.equal(await page.locator('.std-table').first().locator('thead th').first().textContent(), ui.table_check.ar);
-  assert.equal(await page.locator('.std-table').first().locator('thead th').count(), 3, 'the state table has the standard, its share and its counts, no other place');
+  assert.deepEqual(await page.locator('.std-table').first().locator('thead th').allTextContents(), [ui.table_share.ar, ui.table_check.ar], 'the state table reads like the figures: the share first, then the standard');
+  assert.match(await page.locator('.std-table tbody tr:not(.group) th .basis').first().textContent(), /^\d[\d,]* من \d/, 'how many passed of how many sits under the name of the standard, and no other place is named');
   // The long table keeps its heading and its sector tabs beside it; its bars are drawn for the eye only.
   assert.ok(await page.locator('#all-tabs [role="tab"]').count() >= 2, 'the tabs of the long table sit under its heading');
   await page.click('#all-tabs [role="tab"][data-sector="government"]');
-  assert.ok(await page.locator('.ledger .panel[data-sector="government"]').isVisible());
-  assert.equal(await page.locator('.ledger .panel[data-sector="all"]').isVisible(), false, 'one sector of the long table at a time');
+  assert.ok(await page.locator('#all .panel[data-sector="government"]').isVisible());
+  assert.equal(await page.locator('#all .panel[data-sector="all"]').isVisible(), false, 'one sector of the long table at a time');
+  assert.ok(await page.locator('#figures .panel[data-sector="government"]').isVisible(), 'the six figures above follow the sector chosen under the table');
+  assert.equal(await page.locator('#figures-tabs [aria-selected="true"]').getAttribute('data-sector'), 'government', 'both lists of tabs show the same choice');
   assert.equal(await page.locator('.std-table svg.bar').first().getAttribute('aria-hidden'), 'true');
   // A standard: what the measurement found sits beside the explanation, in the same column as its share.
   await go(page, 'standards/dmarc/');
@@ -220,6 +222,21 @@ try {
     assert.equal(cut, 0, `${path || 'home'}: every table fits the width of a phone`);
   }
   await go(phone, '');
+  // Nothing in a row of figures is sent to the far edge: the figure stands on the edge the page reads from, its words
+  // beside it, and the count and the citation under the words on the same line.
+  const rows = await phone.evaluate(() => [...document.querySelectorAll('.panel:not([hidden]) .clauses .fig-row')].map((r) => {
+    const box = (sel) => r.querySelector(sel).getBoundingClientRect();
+    return { row: r.getBoundingClientRect(), fig: box('.fig'), label: box('.fig-label'), basis: box('.basis'), cite: box('.cite-w') };
+  }));
+  assert.equal(rows.length, CLAUSES.length);
+  for (const [i, x] of rows.entries()) {
+    assert.ok(Math.abs(x.fig.right - x.row.right) <= 1, `row ${i + 1}: the figure stands on the right edge`);
+    assert.ok(x.label.right < x.fig.left + 1, `row ${i + 1}: the words sit beside the figure`);
+    assert.ok(Math.abs(x.basis.right - x.label.right) <= 1, `row ${i + 1}: the count starts under the words`);
+    assert.ok(Math.abs(x.cite.top - x.basis.top) <= 2 && x.cite.right <= x.basis.left, `row ${i + 1}: the citation follows the count on its line`);
+  }
+  const cells = await phone.evaluate(() => [...document.querySelectorAll('#figures-tabs [role="tab"]')].map((b) => Math.round(b.getBoundingClientRect().width)));
+  assert.ok(cells.length >= 2 && Math.max(...cells) - Math.min(...cells) <= 1, `the sector tabs are cells of one width (${cells.join(', ')})`);
   const [band, title] = await Promise.all(['.mosaic', '.cover h1'].map((s) => phone.locator(s).boundingBox()));
   assert.ok(band.y < title.y, 'on a phone the mosaic comes first');
   if (shots) await phone.screenshot({ path: `${shots}/ui-mobile-ar.png`, fullPage: true });
