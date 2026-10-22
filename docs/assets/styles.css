@@ -411,6 +411,12 @@ li.fail .dot { background: none; }
 .res .gulf { grid-column: 2; font-size: var(--step-small); color: var(--amber-soft); }
 .res li.fail .lvl { color: var(--led); }
 
+/* the launch film */
+.film-v { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--deep); }
+.film .downloads { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: 0 var(--s-5); }
+.film h2, .film-about { max-width: 24ch; }
+.text > .body.span .film + .film, .text > .body.span .film + section { margin-top: var(--section); }
+
 /* issues */
 .issues { display: grid; }
 .issues a { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-1) var(--s-4); padding: var(--s-4) 0; text-decoration: none; }

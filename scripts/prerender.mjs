@@ -144,7 +144,7 @@ export function renderSite(data) {
 }
 
 // The folders the printer owns, so pages of states, standards or issues that no longer exist are removed.
-const OWNED = ['en', 'countries', 'standards', 'check', 'method', 'issues'];
+const OWNED = ['en', 'countries', 'standards', 'check', 'method', 'film', 'issues'];
 
 function listOwned(dir) {
   const out = [];

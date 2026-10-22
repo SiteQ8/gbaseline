@@ -898,5 +898,55 @@
   "table_how": {
     "ar": "النسبة حصة النطاقات المقيسة التي تجتاز المعيار والعدد تحت اسمه هو المجتاز من المقيس ولكل معيار صفحة تشرح لماذا يهم وكيف يُعالج.",
     "en": "Each share is the part of the measured domains that pass the standard, the count under its name says how many passed of how many were measured, and every standard has a page on why it matters and how to fix it."
-  }
+  },
+  "film_title": {
+    "ar": "فيلم الإطلاق",
+    "en": "The launch film"
+  },
+  "film_intro": {
+    "ar": "دقيقة واحدة بالعربية وبالإنجليزية تعرض ما يقيسه خط الأساس كل أسبوع وكيف يُقتبس رقم منه وقد سُجّلت من صفحات الموقع نفسها.",
+    "en": "One minute, in Arabic and in English, on what the baseline measures every week and how a figure is quoted from it, recorded from the pages of the site itself."
+  },
+  "film_ar": {
+    "ar": "بالعربية",
+    "en": "In Arabic"
+  },
+  "film_en": {
+    "ar": "بالإنجليزية",
+    "en": "In English"
+  },
+  "film_fallback": {
+    "ar": "متصفحك لا يشغّل الفيديو هنا فحمّل الملف من الروابط التالية.",
+    "en": "Your browser does not play video here, so download the file from the links below."
+  },
+  "film_dl_mp4": {
+    "ar": "الفيلم (MP4)",
+    "en": "The film (MP4)"
+  },
+  "film_dl_vtt": {
+    "ar": "الترجمة (WebVTT)",
+    "en": "Captions (WebVTT)"
+  },
+  "film_dl_srt": {
+    "ar": "الترجمة (SRT)",
+    "en": "Captions (SRT)"
+  },
+  "film_about_h": {
+    "ar": "كيف صُنع",
+    "en": "How it was made"
+  },
+  "film_about": [
+    {
+      "ar": "سُجّل الفيلم من صفحات الموقع نفسها لقطة لقطة بأرقام العدد 2 الصادر في 19 أكتوبر 2026 فكل رقم فيه رقم منشور يمكن اقتباسه من صفحته.",
+      "en": "The film is recorded frame by frame from the pages of the site itself, with the figures of issue 2, published on 19 October 2026, so every figure in it is a published figure that can be quoted from its page."
+    },
+    {
+      "ar": "الصور الست في افتتاحيته صور ناسا من محطة الفضاء الدولية وهي في الملك العام وتُعرض ثابتة كما هي دون أي حركة مولّدة.",
+      "en": "The six photographs in its opening are NASA photographs from the International Space Station, in the public domain, held still as they are with no generated motion."
+    },
+    {
+      "ar": "الصوت في اللغتين والموسيقى مولّدان بأدوات ElevenLabs وتذكر البطاقة الختامية ذلك بينما لا يستخدم الموقع نفسه أي مادة مولّدة.",
+      "en": "The voice in both languages and the music are generated with ElevenLabs, as the closing card says, while the site itself uses no generated material."
+    }
+  ]
 }
