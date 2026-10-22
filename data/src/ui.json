@@ -703,10 +703,6 @@
     "en": "Six figures for {place}",
     "ar": "ستة أرقام عن {place}"
   },
-  "clauses_word": {
-    "en": "Clauses",
-    "ar": "البنود"
-  },
   "measure_h": {
     "en": "What we measure",
     "ar": "ما نقيسه"
@@ -790,10 +786,6 @@
   "table_share": {
     "en": "Share passing",
     "ar": "نسبة الاجتياز"
-  },
-  "table_basis": {
-    "en": "Passing of measured",
-    "ar": "المجتاز من المقيس"
   },
   "table_suffix": {
     "en": "Suffix",
@@ -904,7 +896,7 @@
     "ar": "المعايير كلها في الخليج العربي"
   },
   "table_how": {
-    "ar": "النسبة حصة النطاقات المقيسة التي تجتاز المعيار والعدد بجانبها هو المجتاز من المقيس ولكل معيار صفحة تشرح لماذا يهم وكيف يُعالج.",
-    "en": "Each share is the part of the measured domains that pass the standard, the count beside it says how many passed of how many were measured, and every standard has a page on why it matters and how to fix it."
+    "ar": "النسبة حصة النطاقات المقيسة التي تجتاز المعيار والعدد تحت اسمه هو المجتاز من المقيس ولكل معيار صفحة تشرح لماذا يهم وكيف يُعالج.",
+    "en": "Each share is the part of the measured domains that pass the standard, the count under its name says how many passed of how many were measured, and every standard has a page on why it matters and how to fix it."
   }
 }

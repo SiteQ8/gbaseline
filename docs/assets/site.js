@@ -39,10 +39,19 @@ function legacy() {
   return false;
 }
 
-// Tabs over the sector panels: one panel shows, the others wait, and the address remembers the choice.
+// Tabs over the sector panels: one panel shows, the others wait, and the address remembers the choice. Every list
+// of tabs on a page follows the same choice, so the figures and the table below them always show the same sector.
 function tabs() {
   const want = new URLSearchParams(location.search).get('s');
   const target = location.hash ? doc.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+  const boxes = [];
+  const choose = (sector, from, focus) => {
+    for (const x of boxes) if (x.has(sector)) x.select(sector, { focus: focus && x === from });
+    const url = new URL(location.href);
+    if (sector === 'all') url.searchParams.delete('s'); else url.searchParams.set('s', sector);
+    url.hash = '';
+    history.replaceState(null, '', url);
+  };
   doc.querySelectorAll('[data-tabs]').forEach((box, bi) => {
     const panels = [...box.children].filter((n) => n.classList.contains('panel'));
     if (panels.length < 2) { box.classList.add('single'); return; }
@@ -69,7 +78,7 @@ function tabs() {
     const slot = box.dataset.slot ? doc.getElementById(box.dataset.slot) : null;
     (slot || box).prepend(list);
     box.classList.add('tabbed');
-    const select = (sector, { focus = false, remember = false } = {}) => {
+    const select = (sector, { focus = false } = {}) => {
       for (const b of buttons) {
         const on = b.dataset.sector === sector;
         b.setAttribute('aria-selected', String(on));
@@ -77,16 +86,12 @@ function tabs() {
         doc.getElementById(b.getAttribute('aria-controls')).hidden = !on;
         if (on && focus) b.focus();
       }
-      if (remember) {
-        const url = new URL(location.href);
-        if (sector === 'all') url.searchParams.delete('s'); else url.searchParams.set('s', sector);
-        url.hash = '';
-        history.replaceState(null, '', url);
-      }
     };
+    const self = { select, has: (sector) => buttons.some((b) => b.dataset.sector === sector) };
+    boxes.push(self);
     list.addEventListener('click', (e) => {
       const b = e.target.closest('[role="tab"]');
-      if (b) select(b.dataset.sector, { remember: true });
+      if (b) choose(b.dataset.sector, self, false);
     });
     list.addEventListener('keydown', (e) => {
       const i = buttons.indexOf(doc.activeElement);
@@ -100,12 +105,14 @@ function tabs() {
       else if (e.key === 'End') j = buttons.length - 1;
       if (j === null) return;
       e.preventDefault();
-      select(buttons[j].dataset.sector, { focus: true, remember: true });
+      choose(buttons[j].dataset.sector, self, true);
     });
-    const holding = target && box.contains(target) ? target.closest('.panel').dataset.sector : null;
-    const first = holding || (buttons.some((b) => b.dataset.sector === want) ? want : 'all');
-    select(buttons.some((b) => b.dataset.sector === first) ? first : buttons[0].dataset.sector);
+    self.first = buttons[0].dataset.sector;
   });
+  // The page opens on the sector of the cited row, or the one in the address, in every list at once.
+  const held = target && target.closest('.panel[data-sector]') ? target.closest('.panel').dataset.sector : null;
+  const first = held || want || 'all';
+  for (const x of boxes) x.select(x.has(first) ? first : x.has('all') ? 'all' : x.first);
 }
 
 // A cited row opens with its citation showing.
