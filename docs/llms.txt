@@ -5,7 +5,7 @@
 An open, independent, weekly measurement of how the public domains of the six Arabian Gulf states (Kuwait, Saudi Arabia, UAE, Qatar, Bahrain and Oman) protect email, DNS and the web, under 36 domain suffixes in six sectors, against 13 standards. Published every Monday as totals by state, sector and standard. No domain is named next to a result and the states are never ranked. Arabic first, English under /en/.
 Latest: issue 2, week of 2026-10-19, 11,917 live domains measured.
 
-The readiness index: whenever CISA catalogues an exploited vulnerability in software a website announces from outside (PHP, Apache, nginx, IIS, WordPress and the like), the first page of every live domain is read within a day and the share announcing an affected version is published, for the Gulf and for each state, with the share of announced software past its support (endoflife.date). Repeated after every issue, so the series shows how fast patches arrive. Latest census: 2026-10-23, 9,840 first pages read, 17 exploited vulnerabilities followed.
+The readiness index: whenever CISA catalogues an exploited vulnerability in software a website announces from outside (PHP, Apache, nginx, IIS, WordPress and the like), the first page of every live domain is read within a day and the share announcing an affected version is published, for the Gulf and for each state, with the share of announced software past its support (endoflife.date). Repeated after every issue, so the series shows how fast patches arrive. Latest census: 2026-10-23, 10,101 first pages read, 17 exploited vulnerabilities followed.
 
 ## Pages
 - [Home, the Arabian Gulf as a whole](https://gbaseline.3li.info/) and [in English](https://gbaseline.3li.info/en/)
