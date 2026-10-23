@@ -968,5 +968,9 @@
   "nav_home": {
     "ar": "الرئيسية",
     "en": "Home"
+  },
+  "clause_standard": {
+    "ar": "المعيار",
+    "en": "Standard"
   }
 }
