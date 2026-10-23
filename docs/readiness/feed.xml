@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ar">
+  <title>خط الأساس الخليجي للأمن السيبراني: الاستعدادية</title>
+  <subtitle>كلما أُدرجت ثغرة مستغلة في برمجية يراها الزائر من الخارج تُقرأ الصفحة الأولى لكل نطاق حي خلال يوم فنعرف كم من المواقع ما زال يعلن إصداراً مصاباً ثمّ يُعاد القياس بعد كل عدد لنرى كم تسرع الترقيعات.</subtitle>
+  <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/"/>
+  <link rel="self" type="application/atom+xml" href="https://gbaseline.3li.info/readiness/feed.xml"/>
+  <id>https://gbaseline.3li.info/readiness/</id>
+  <updated>2026-10-23T05:41:00Z</updated>
+  <author><name>علي العنزي</name><uri>https://3li.info</uri></author>
+  <entry>
+    <title>CVE-2024-38475 · خادم Apache · 56.9٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2024-38475/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2024-38475/</id>
+    <published>2025-05-01T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>56.9٪ من مواقع الخليج العربي التي تعلن إصدار خادم Apache كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2024-38475. Apache HTTP Server Improper Escaping of Output Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2024-4577 · PHP · 0.4٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2024-4577/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2024-4577/</id>
+    <published>2024-06-12T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.4٪ من مواقع الخليج العربي التي تعلن إصدار PHP كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2024-4577. PHP-CGI OS Command Injection Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2014-0160 · OpenSSL · 0.0٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2014-0160/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2014-0160/</id>
+    <published>2022-05-04T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.0٪ من مواقع الخليج العربي التي تعلن إصدار OpenSSL كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2014-0160. OpenSSL Information Disclosure Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2012-1823 · PHP · 0.3٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2012-1823/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2012-1823/</id>
+    <published>2022-03-25T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.3٪ من مواقع الخليج العربي التي تعلن إصدار PHP كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2012-1823. PHP-CGI Query String Parameter Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2020-13671 · Drupal · 0.0٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2020-13671/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2020-13671/</id>
+    <published>2022-01-18T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.0٪ من مواقع الخليج العربي التي تعلن إصدار Drupal كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2020-13671. Drupal core Un-restricted Upload of File</summary>
+  </entry>
+  <entry>
+    <title>CVE-2021-42013 · خادم Apache · 0.0٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2021-42013/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2021-42013/</id>
+    <published>2021-11-03T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.0٪ من مواقع الخليج العربي التي تعلن إصدار خادم Apache كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2021-42013. Apache HTTP Server Path Traversal Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2021-41773 · خادم Apache · 0.0٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2021-41773/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2021-41773/</id>
+    <published>2021-11-03T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.0٪ من مواقع الخليج العربي التي تعلن إصدار خادم Apache كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2021-41773. Apache HTTP Server Path Traversal Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2019-0211 · خادم Apache · 8.1٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2019-0211/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2019-0211/</id>
+    <published>2021-11-03T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>8.1٪ من مواقع الخليج العربي التي تعلن إصدار خادم Apache كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2019-0211. Apache HTTP Server Privilege Escalation Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2018-7600 · Drupal · 0.0٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2018-7600/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2018-7600/</id>
+    <published>2021-11-03T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.0٪ من مواقع الخليج العربي التي تعلن إصدار Drupal كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2018-7600. Drupal Core Remote Code Execution Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2017-7269 · Microsoft IIS · 0.4٪</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/readiness/cve-2017-7269/"/>
+    <id>https://gbaseline.3li.info/readiness/cve-2017-7269/</id>
+    <published>2021-11-03T05:41:00Z</published>
+    <updated>2026-10-23T05:41:00Z</updated>
+    <summary>0.4٪ من مواقع الخليج العربي التي تعلن إصدار Microsoft IIS كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2017-7269. Microsoft Windows Server Buffer Overflow Vulnerability</summary>
+  </entry>
+</feed>
