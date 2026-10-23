@@ -1002,12 +1002,12 @@
     "en": "Exploited vulnerabilities"
   },
   "kev_note": {
-    "ar": "كل ثغرة أدرجتها CISA في كتالوج الثغرات المستغلة خلال السنة الماضية وتصيب برمجية تُعلن من الخارج ومعها نسبة المواقع التي تعلن إصداراً مصاباً من بين المواقع التي تعلن إصدارها.",
-    "en": "Every vulnerability CISA added to its catalogue of exploited vulnerabilities in the past year that affects software announced from outside, with the share of sites announcing an affected version among the sites that announce a version."
+    "ar": "كل ثغرة أدرجتها CISA في كتالوج الثغرات المستغلة وتصيب برمجية تُعلن من الخارج من الأحدث إلى الأقدم ومعها نسبة المواقع التي تعلن إصداراً مصاباً من بين المواقع التي تعلن إصدارها.",
+    "en": "Every vulnerability CISA has added to its catalogue of exploited vulnerabilities that affects software announced from outside, newest first, with the share of sites announcing an affected version among the sites that announce a version."
   },
   "kev_none": {
-    "ar": "لم تُدرج خلال السنة الماضية ثغرة مستغلة في برمجية يمكن رؤية إصدارها من الخارج.",
-    "en": "No exploited vulnerability in software whose version can be seen from outside was catalogued in the past year."
+    "ar": "لا يحوي الكتالوج ثغرة مستغلة في برمجية يمكن رؤية إصدارها من الخارج.",
+    "en": "The catalogue holds no exploited vulnerability in software whose version can be seen from outside."
   },
   "kev_row_basis": {
     "ar": "{exposed} من {announced} يعلن إصداره",
