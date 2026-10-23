@@ -75,33 +75,36 @@ const fakeFetch = (log = []) => async (url) => {
 };
 
 test('the references are refreshed from their publishers and what was known is kept', async () => {
-  const kept = relevantKev(catalogue, { today: TODAY });
-  assert.deepEqual(kept.map((k) => k.cve), ['CVE-2026-1001'], 'a vulnerability in software that cannot be seen from outside is left out, and an old one too');
-  assert.deepEqual(relevantKev(catalogue, { today: TODAY, known: ['CVE-2024-0001'] }).map((k) => k.cve), ['CVE-2026-1001', 'CVE-2024-0001'], 'an entry already followed keeps its series');
+  const kept = relevantKev(catalogue, { today: TODAY, windowDays: 365 });
+  assert.deepEqual(kept.map((k) => k.cve), ['CVE-2026-1001'], 'a vulnerability in software that cannot be seen from outside is left out, and one older than the window too');
+  assert.deepEqual(relevantKev(catalogue, { today: TODAY, windowDays: 365, known: ['CVE-2024-0001'] }).map((k) => k.cve), ['CVE-2026-1001', 'CVE-2024-0001'], 'an entry already followed keeps its series');
+  assert.deepEqual(relevantKev(catalogue, { today: TODAY }).map((k) => k.cve), ['CVE-2026-1001', 'CVE-2024-0001'], 'by default the whole catalogue is followed, newest first');
   assert.deepEqual(kept[0].notes, ['https://www.php.net/advisory', 'https://nvd.nist.gov/vuln/detail/CVE-2026-1001']);
   const log = [];
   const refs = await fetchReferences({ today: TODAY, fetchImpl: fakeFetch(log), nvdKey: 'test' });
-  assert.equal(refs.kev.length, 1);
+  assert.equal(refs.kev.length, 2, 'both entries for visible software, the newest first');
+  assert.equal(refs.kev[0].cve, 'CVE-2026-1001');
   assert.equal(refs.kev[0].ranges.length, 2, 'the versions NVD names');
+  assert.deepEqual([refs.kev[1].ranges, refs.kev[1].nvdError], [[], 'empty'], 'an entry NVD knows nothing about yet waits without ranges');
   assert.equal(refs.cycles.php.length, 5);
   assert.equal(refs.sources.kev.version, '2026.10.23');
   assert.equal(refs.sources.eol.products, 1, 'the cycles of one product could be read in this fixture');
   // A second run asks NVD nothing for a vulnerability whose ranges are known.
   const log2 = [];
   const again = await fetchReferences({ today: TODAY, previous: { kev: refs.kev, cycles: refs.cycles, sources: refs.sources }, fetchImpl: fakeFetch(log2), nvdKey: 'test' });
-  assert.ok(!log2.some((u) => u.includes('nvd.nist.gov')), 'no second question to NVD');
+  assert.deepEqual(log2.filter((u) => u.includes('nvd.nist.gov')).map((u) => decodeURIComponent(u.split('cveId=')[1])), ['CVE-2024-0001'], 'NVD is asked again only for the entry still without ranges');
   assert.equal(again.kev[0].ranges.length, 2);
   // When the catalogue cannot be read, what was followed stays.
   const down = await fetchReferences({ today: TODAY, previous: { kev: refs.kev, cycles: refs.cycles, sources: refs.sources }, fetchImpl: async () => ({ ok: false, status: 503 }) });
-  assert.equal(down.kev.length, 1);
+  assert.equal(down.kev.length, 2);
   assert.equal(down.sources.kev.error, 'http-503');
   assert.equal(down.cycles.php.length, 5, 'the cycles known before are kept');
   // The watch: what the catalogue holds that the last document does not follow.
   const w = await newKev({ today: TODAY, fetchImpl: fakeFetch() });
-  assert.deepEqual(w.entries.map((e) => e.cve), ['CVE-2026-1001']);
+  assert.deepEqual(w.entries.map((e) => e.cve), ['CVE-2026-1001', 'CVE-2024-0001']);
   assert.equal(w.count, 3);
   assert.deepEqual((await newKev({ today: TODAY, previous: { kev: refs.kev }, fetchImpl: fakeFetch() })).entries, [], 'nothing new once followed');
-  assert.deepEqual((await newKev({ today: TODAY, previous: { kev: [], unmatched: [{ cve: 'CVE-2026-1001' }] }, fetchImpl: fakeFetch() })).entries, [], 'an entry waiting for its ranges is not new either');
+  assert.deepEqual((await newKev({ today: TODAY, previous: { kev: [refs.kev[0]], unmatched: [{ cve: 'CVE-2024-0001' }] }, fetchImpl: fakeFetch() })).entries, [], 'an entry waiting for its ranges is not new either');
   assert.equal((await newKev({ today: TODAY, fetchImpl: async () => ({ ok: false, status: 503 }) })).error, 'http-503');
 });
 
