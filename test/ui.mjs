@@ -9,6 +9,7 @@ import { readFileSync, mkdtempSync, cpSync, rmSync, writeFileSync, mkdirSync } f
 import { tmpdir } from 'node:os';
 import assert from 'node:assert/strict';
 import { aggregate, appendHistory } from '../src/aggregate.mjs';
+import { aggregateReadiness } from '../src/readiness.mjs';
 import { compact } from '../src/scan.mjs';
 import { CHECKS } from '../docs/assets/engine/checks.js';
 import { CLAUSES } from '../docs/assets/engine/clauses.js';
@@ -41,6 +42,23 @@ summary.issue = 2;
 const before = aggregate(rows.map((r) => (r.d === 'weak0.edu.kw' ? { ...r, r: compact(good) } : r)), scope, { date: '2026-10-12', chain: {} }).summary;
 const history = appendHistory(appendHistory([], before), summary);
 
+// A synthetic readiness census over the same states: every site announces something, one exploited vulnerability
+// in PHP is followed, and an earlier census the week before gives the series a first point.
+const sw = (p, f = []) => ({ p, f });
+const crows = [];
+codes.forEach((c, i) => {
+  crows.push({ d: `good${i}.gov.${c.toLowerCase()}`, c, s: 'government', dns: 'live', web: 'ok', sw: sw([['apache', '2.4.41'], ['php', i % 2 ? '8.1.2' : '8.3.1']]) });
+  crows.push({ d: `weak${i}.edu.${c.toLowerCase()}`, c, s: 'education', dns: 'live', web: 'ok', sw: sw([['nginx', '1.18.0'], ['php', '7.4.3'], ['wordpress', '6.4.2']]) });
+  crows.push({ d: `quiet${i}.edu.${c.toLowerCase()}`, c, s: 'education', dns: 'live', web: 'ok', sw: sw([], ['cloudflare']) });
+});
+const refs = {
+  kev: [{ cve: 'CVE-2026-1001', product: 'php', vendor: 'PHP Group', productName: 'PHP', name: 'PHP-CGI OS Command Injection Vulnerability', description: 'x', added: '2026-10-20', due: '2026-11-10', ransomware: 'Known', notes: ['https://www.php.net/ChangeLog-8.php'], ranges: [{ product: 'php', start: '8.1.0', startIncluded: true, end: '8.1.31', endIncluded: false }] }],
+  cycles: { php: [{ cycle: '8.3', eol: '2027-12-31', latest: '8.3.26', support: '2025-12-31' }, { cycle: '8.1', eol: '2025-12-31', latest: '8.1.33', support: '2023-11-25' }, { cycle: '7.4', eol: '2022-11-28', latest: '7.4.33', support: '2021-11-28' }], apache: [{ cycle: '2.4', eol: false, latest: '2.4.65', support: true }], nginx: [{ cycle: '1.18', eol: '2021-04-20', latest: '1.18.0', support: false }], wordpress: [{ cycle: '6.4', eol: true, latest: '6.4.7', support: false }] },
+  sources: { kev: { url: 'x', fetched: '2026-10-23T05:10:00.000Z', version: '2026.10.22', count: 1480 }, nvd: { url: 'x', fetched: '2026-10-23T05:11:00.000Z', asked: 1 }, eol: { url: 'x', fetched: '2026-10-23T05:12:00.000Z', products: 4 } },
+};
+const firstCensus = aggregateReadiness(crows, scope, refs, { date: '2026-10-21', run: 'census', seconds: 600 });
+const readiness = aggregateReadiness(crows.filter((r) => !r.d.startsWith('good1')), scope, refs, { date: '2026-10-23', run: 'watch', previous: firstCensus, seconds: 540 });
+
 // The site printed from this issue into a folder of its own, beside the real assets.
 function printSite(D) {
   const dir = mkdtempSync(join(tmpdir(), 'gbaseline-ui-'));
@@ -51,11 +69,12 @@ function printSite(D) {
     writeFileSync(join(dir, 'data/summary.json'), JSON.stringify(D.summary));
     writeFileSync(join(dir, 'data/history.json'), JSON.stringify(D.history));
   }
+  if (D.readiness) writeFileSync(join(dir, 'data/readiness.json'), JSON.stringify(D.readiness));
   writeSite(renderSite({ B, D, pictures }), dir);
   return dir;
 }
-const site = printSite({ summary, history });
-const empty = printSite({ summary: null, history: [] });
+const site = printSite({ summary, history, readiness });
+const empty = printSite({ summary: null, history: [], readiness: null });
 
 const serve = (dir, port) => spawn('python3', ['-m', 'http.server', String(port), '--bind', '127.0.0.1', '--directory', dir], { stdio: 'ignore' });
 const servers = [serve(site, PORT), serve(empty, PORT + 1)];
@@ -150,14 +169,38 @@ try {
   assert.equal((await page.textContent('#c1 .v')).trim(), '41.7٪', 'issue 1 had five of twelve domains open to impersonation');
   assert.ok(await page.locator('#c1.stamped details[open]').count(), 'the cited clause is marked and open');
   // Every other page renders, in Arabic, with the same three sections and the action.
-  for (const [path, expect] of [['countries/', /الكويت/], ['countries/sa/', /ستة أرقام عن السعودية/], ['standards/', /الحماية من انتحال البريد/], ['standards/pq-kex/', /X25519MLKEM768/], ['method/', /من أين تأتي الأسماء/], ['issues/', /العدد 2/], ['issues/2/kw/', /الكويت/], ['check/', /افحص نطاقك/], ['film/', /كيف صُنع/]]) {
+  for (const [path, expect] of [['countries/', /الكويت/], ['countries/sa/', /ستة أرقام عن السعودية/], ['standards/', /الحماية من انتحال البريد/], ['standards/pq-kex/', /X25519MLKEM768/], ['method/', /من أين تأتي الأسماء/], ['issues/', /العدد 2/], ['issues/2/kw/', /الكويت/], ['check/', /افحص نطاقك/], ['film/', /كيف صُنع/], ['readiness/', /الثغرات المستغلة/], ['readiness/kw/', /الكويت/]]) {
     await go(page, path);
     assert.match(await page.textContent('main'), expect, path);
     assert.ok(!STRAY.test(await pageText(page)), `${path}: no stray null, undefined or NaN`);
     assert.ok(!NOT_JOINED.test(await pageText(page)), `${path}: no Arabic sentence is cut by a period before its connective`);
-    assert.equal(await page.locator('.top .tab a').count(), 3, `${path}: three sections in the header`);
+    assert.equal(await page.locator('.top .tab a').count(), 4, `${path}: four sections in the header`);
     assert.equal(await page.locator('.top .act').getAttribute('href'), '/check/');
   }
+  // The readiness index: the exploited vulnerability with its exposure, the software past its support, what the
+  // sites announce, each in the row of the figures, the Gulf and each state on its own page, no domain named.
+  await go(page, 'readiness/');
+  assert.match(await page.textContent('.lede'), /قيس في 23 أكتوبر 2026 .* فأجاب 17 موقعاً/);
+  assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '18.2٪', 'two of the eleven sites announcing a PHP version announce an affected one');
+  assert.equal((await page.textContent('#cve-2026-1001 .basis')).trim(), '2 من 11 يعلن إصداره');
+  assert.match(await page.textContent('#cve-2026-1001'), /كانت 25\.0٪ في 21 أكتوبر 2026/, 'the row says where the share moved from');
+  assert.match(await page.textContent('#cve-2026-1001'), /تُستخدم في حملات فدية/);
+  assert.equal(await page.locator('#cve-2026-1001 a[href^="https://nvd.nist.gov/vuln/detail/CVE-2026-1001"]').count(), 1);
+  assert.match(await page.textContent('#eol'), /7\.4/, 'the cycle past its support is named');
+  assert.match(await page.textContent('#announce'), /تعلن خادمها/);
+  const readyText = await page.textContent('main');
+  assert.ok(!/gov\.kw|edu\.sa|good0|weak0/.test(readyText), 'the readiness page names no domain');
+  assert.ok(!STRAY.test(await pageText(page)), 'readiness: no stray null');
+  assert.ok(!NOT_JOINED.test(await pageText(page)), 'readiness: no Arabic sentence is cut by a period before its connective');
+  const readyLatin = ((await pageText(page, ['.lang'])).match(/[A-Za-z][A-Za-z0-9.\-/:+&]*/g) || []).filter((w) => !/^[A-Z0-9]/.test(w) && !w.includes('.') && !/^https?:/.test(w));
+  assert.deepEqual(readyLatin, [], 'no lowercase English inside the Arabic readiness page');
+  await go(page, 'readiness/kw/');
+  assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '0.0٪', 'the Kuwaiti site announcing a PHP version is not affected after the first census');
+  assert.equal(await page.locator('nav.others a').count(), codes.length - 1, 'a state leads to the other five');
+  assert.equal(await page.locator('main .places a[aria-current="page"]').textContent(), scope.countries.KW.ar);
+  await go(page, '');
+  assert.match(await page.textContent('#ready'), /CVE-2026-1001/, 'the home page carries the newest exploited vulnerability');
+  assert.equal(await page.locator('#ready a[href="/readiness/"]').count(), 1);
   await go(page, 'countries/sa/');
   const saText = await page.textContent('.figures');
   for (const c of codes.filter((x) => x !== 'SA')) assert.ok(!saText.includes(scope.countries[c].ar), `the Saudi figures never name ${scope.countries[c].en}`);
@@ -213,7 +256,7 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/ui-desktop-en.png`, fullPage: true });
   // A phone: no sideways scroll on any page, the mosaic comes before the title.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'en/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/']) {
+  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'en/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
     await go(phone, path);
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${path || 'home'}: no sideways scroll on a phone (overflow ${overflow}px)`);
@@ -245,10 +288,12 @@ try {
   await go(before1, '', PORT + 1);
   assert.match(await before1.textContent('main'), /العدد الأول قيد القياس/);
   assert.ok(!STRAY.test(await pageText(before1)), 'no stray null before the first issue');
-  for (const path of ['countries/kw/', 'standards/dmarc/', 'method/', 'en/']) {
+  for (const path of ['countries/kw/', 'standards/dmarc/', 'method/', 'readiness/', 'readiness/kw/', 'en/', 'en/readiness/']) {
     await go(before1, path, PORT + 1);
     assert.ok(!STRAY.test(await pageText(before1)), `${path}: no stray null before the first issue`);
   }
+  await go(before1, 'readiness/', PORT + 1);
+  assert.match(await before1.textContent('main'), /أول قياس للاستعدادية يجري الآن/, 'before the first census the readiness page says so');
   assert.deepEqual(errors.filter((e) => !/404/.test(e)), [], 'no console errors');
   console.log('ui: all checks passed');
 } finally {

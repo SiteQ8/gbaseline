@@ -28,6 +28,9 @@ The films on the site's film page, `docs/film/gbaseline-film-ar.mp4` and `docs/f
 - **Certificate Transparency logs**, read through crt.sh (https://crt.sh), to find the names under each suffix.
 - **The Tranco list** of popular sites (https://tranco-list.eu), as a second source of names. Le Pochat, V., Van Goethem, T., Tajalizadehkhoob, S., Korczyński, M., and Joosen, W. (2019). Tranco: A Research-Oriented Top Sites Ranking Hardened Against Manipulation. Network and Distributed System Security Symposium.
 - **Public DNS over HTTPS resolvers** run by Cloudflare (https://cloudflare-dns.com) and Google (https://dns.google), for every DNS answer.
+- **The Known Exploited Vulnerabilities catalogue** of the Cybersecurity and Infrastructure Security Agency, CISA (https://www.cisa.gov/known-exploited-vulnerabilities-catalog), read through its JSON feed, for the exploited vulnerabilities the readiness index follows. The catalogue is in the public domain as a work of the United States government.
+- **The National Vulnerability Database**, NVD, of the National Institute of Standards and Technology (https://nvd.nist.gov), read through its API, for the versions each vulnerability affects. This product uses the NVD API but is not endorsed or certified by the NVD.
+- **endoflife.date** (https://endoflife.date, https://github.com/endoflife-date/endoflife.date), read through its API, for the support cycles of each product. Its data is under the MIT licence.
 
 ## Standards
 

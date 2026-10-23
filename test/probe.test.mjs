@@ -44,6 +44,9 @@ test('web probes against real local servers: chains, names, HSTS, redirects, sec
     assert.equal(o.nothing.state, 'none', 'nothing listening means no website');
     assert.deepEqual([o.classicTls.tls13, o.classicTls.pq], [false, false]);
     assert.deepEqual([o.legacyTls.tls10, o.legacyTls.tls11], [true, true]);
+    assert.deepEqual([o.announcing.state, o.announcing.scheme, o.announcing.software.products, o.announcing.software.generator], ['ok', 'https', [{ id: 'nginx', version: '1.18.0' }, { id: 'php', version: '8.1.2' }, { id: 'wordpress', version: '6.4.2' }], 'WordPress 6.4.2'], 'what a first page announces is read from its headers and its markup');
+    assert.deepEqual([o.plainAnnouncing.scheme, o.plainAnnouncing.software.products], ['http', [{ id: 'apache', version: '2.4.41' }, { id: 'wordpress', version: null }]], 'plain HTTP is read only when HTTPS answers nothing');
+    assert.equal(o.silent.state, 'none');
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
