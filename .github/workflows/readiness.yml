@@ -20,6 +20,7 @@ permissions:
   contents: write
   pages: write
   actions: read
+  issues: write
 
 concurrency:
   group: readiness-index
@@ -144,6 +145,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
+
+      - name: Announce each newly measured exploited vulnerability as an issue
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create readiness-alert --color f3b562 --description "A new exploited vulnerability measured across the Arabian Gulf" --force >/dev/null
+          gh issue list --label readiness-alert --state all --limit 500 --json title --jq '.[].title' > "$RUNNER_TEMP/alert-titles.txt"
+          node scripts/alert.mjs --plan "$RUNNER_TEMP/alert-titles.txt" --out "$RUNNER_TEMP/alerts"
+          for t in "$RUNNER_TEMP"/alerts/*.title; do
+            [ -e "$t" ] || continue
+            gh issue create --title "$(cat "$t")" --body-file "${t%.title}.md" --label readiness-alert
+          done
 
       - name: Totals for this run
         run: |
