@@ -2570,6 +2570,18 @@
   "readiness_report_link": {
    "ar": "تقرير الاستعدادية للطباعة والإرسال",
    "en": "The readiness report, to print and send"
+  },
+  "readiness_follow_h": {
+   "ar": "تابع التنبيهات",
+   "en": "Follow the alerts"
+  },
+  "readiness_follow": {
+   "ar": "حين يقيس المؤشر الخليج العربي أول مرة على ثغرة مستغلة حديثة يُفتح بلاغ في المستودع بالرقم والرابط فيصلك إشعار من GitHub إن تابعت بلاغاته ويمكنك كذلك متابعة خلاصة Atom.",
+   "en": "When the index first measures the Arabian Gulf against a recent exploited vulnerability, an issue opens in the repository with the figure and the link, so GitHub tells you if you watch its issues, and the Atom feed carries it too."
+  },
+  "readiness_follow_issues": {
+   "ar": "تنبيهات الاستعدادية على GitHub",
+   "en": "Readiness alerts on GitHub"
   }
  }
 }
