@@ -8,7 +8,8 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { page, routes, pathOf, LANGS, issueCount, issueOf, kit, FILM, filmFile, listed } from '../docs/assets/views.js';
+import { page, routes, pathOf, LANGS, issueCount, issueOf, kit, FILM, filmFile, listed, kevMeasured, kevRel } from '../docs/assets/views.js';
+import { PRODUCTS } from '../docs/assets/engine/software.js';
 import { CLAUSES, clauseShare } from '../docs/assets/engine/clauses.js';
 import { toHtml } from '../docs/assets/vnode.js';
 import { CHECKS } from '../docs/assets/engine/checks.js';
@@ -122,6 +123,7 @@ export function structured(data, route, lang, v) {
   if (route.page === 'issues' || route.page === 'issue') trail.push([k.t('nav_issues'), 'issues/']);
   if (route.page === 'issue') { trail.push([k.t('issue', { n: route.n }), `issues/${route.n}/`]); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
   if (route.page === 'readiness') { trail.push([k.t('nav_readiness'), 'readiness/']); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
+  if (route.page === 'kev') trail.push([k.t('nav_readiness'), 'readiness/'], [route.cve, route.rel]);
   if (['check', 'method', 'film'].includes(route.page)) trail.push([v.title, route.rel]);
   if (trail.length > 1) out.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map(([label, rel], i) => ({ '@type': 'ListItem', position: i + 1, name: label, item: url(rel) })) });
   if (route.page === 'home') out.push(dataset(B, D, lang));
@@ -227,7 +229,7 @@ export function sitemap(B, D) {
   const entries = routes(B, D).flatMap((r) => LANGS.map((lang) => [
     '  <url>',
     `    <loc>${site}${pathOf(lang, r.rel)}</loc>`,
-    `    <lastmod>${r.page === 'issue' ? D.history[r.n - 1]?.date || lastmod : r.page === 'film' ? FILM.date : r.page === 'readiness' && D.readiness ? D.readiness.date : lastmod}</lastmod>`,
+    `    <lastmod>${r.page === 'issue' ? D.history[r.n - 1]?.date || lastmod : r.page === 'film' ? FILM.date : (r.page === 'readiness' || r.page === 'kev') && D.readiness ? D.readiness.date : lastmod}</lastmod>`,
     ...LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${site}${pathOf(l, r.rel)}"/>`),
     ...(r.page === 'film' ? video(lang) : []),
     '  </url>',
@@ -317,6 +319,7 @@ export function llms(data) {
     `- [summary.json](${site}/data/summary.json) and [history.json](${site}/data/history.json)`,
     `- [readiness.json](${site}/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used`,
     `- Atom feed of issues: Arabic at ${site}/feed.xml, English at ${site}/en/feed.xml`,
+    `- Atom feed of the readiness index, one entry per exploited vulnerability with its own citable page: ${site}/readiness/feed.xml and ${site}/en/readiness/feed.xml`,
     `- Source, command line tool and MCP server: ${B.project.repo}`,
     '',
     '## How to cite',
@@ -326,6 +329,47 @@ export function llms(data) {
     `${tr(B.project.about, 'ar')} ${ka.t('foot_note')} ${ka.t('foot_monday')}`,
     `${ka.t('readiness_intro')}`,
     `الصفحات: الرئيسية ${site}/ والأعداد ${site}/issues/ والاستعدادية ${site}/readiness/ والدول الست ${site}/countries/ والمعايير ${site}/standards/ والمنهجية والبيانات ${site}/method/ وفحص نطاق ${site}/check/ وفيلم الإطلاق ${site}/film/`,
+    '',
+  ].join('\n');
+}
+
+// A feed of the readiness index: one entry per exploited vulnerability the Gulf is measured against, with its
+// exposure in a sentence and the link to its page, updated with every census.
+export function readinessFeed(data, lang) {
+  const { B, D } = data;
+  const R = D.readiness;
+  const site = `https://${B.project.domain}`;
+  const k = kit({ ...data, lang, route: { page: 'readiness', rel: 'readiness/' } });
+  const name = lang === 'ar' ? B.project.name_ar : B.project.name_en;
+  const at = (d) => `${d}T05:41:00Z`;
+  const entries = kevMeasured(D).map((e) => {
+    const x = R.places.GCC.kev[e.cve];
+    const product = tr(PRODUCTS[e.product] || { en: e.product, ar: e.product }, lang);
+    const url = `${site}${pathOf(lang, kevRel(e.cve))}`;
+    const line = k.t('kev_cite', { pct: k.pct((x.exposed / x.announced) * 100), place: k.t('in_GCC'), product, cve: e.cve });
+    return [
+      '  <entry>',
+      `    <title>${esc(`${e.cve} · ${product} · ${k.pct((x.exposed / x.announced) * 100)}`)}</title>`,
+      `    <link rel="alternate" type="text/html" href="${url}"/>`,
+      `    <id>${url}</id>`,
+      `    <published>${at(e.added)}</published>`,
+      `    <updated>${at(R.date)}</updated>`,
+      `    <summary>${esc(`${line}. ${e.name}`)}</summary>`,
+      '  </entry>',
+    ].join('\n');
+  });
+  return [
+    '<?xml version="1.0" encoding="utf-8"?>',
+    `<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${lang}">`,
+    `  <title>${esc(`${name}: ${k.t('readiness_title')}`)}</title>`,
+    `  <subtitle>${esc(k.t('readiness_intro'))}</subtitle>`,
+    `  <link rel="alternate" type="text/html" href="${site}${pathOf(lang, 'readiness/')}"/>`,
+    `  <link rel="self" type="application/atom+xml" href="${site}${pathOf(lang, 'readiness/feed.xml')}"/>`,
+    `  <id>${site}${pathOf(lang, 'readiness/')}</id>`,
+    `  <updated>${at(R.date)}</updated>`,
+    `  <author><name>${esc(tr(B.project.author, lang))}</name><uri>${B.project.author_url}</uri></author>`,
+    ...entries,
+    '</feed>',
     '',
   ].join('\n');
 }
@@ -340,6 +384,7 @@ export function renderSite(data) {
   files['sitemap.xml'] = sitemap(data.B, data.D);
   for (const lang of LANGS) files[`${pathOf(lang, 'feed.xml').slice(1)}`] = feed(data, lang);
   files['llms.txt'] = llms(data);
+  if (data.D.readiness) for (const lang of LANGS) files[`${pathOf(lang, 'readiness/feed.xml').slice(1)}`] = readinessFeed(data, lang);
   return files;
 }
 
