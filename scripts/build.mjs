@@ -81,6 +81,19 @@ for (const [k, v] of Object.entries(ui)) {
   } else if (!pairOk(v)) fail(`ui.json ${k} needs both languages`);
 }
 
+// The CIS Controls safeguards the measurement gives outside evidence for, each tied to checks the engine runs or to
+// a figure of the readiness index.
+const cis = src('cis.json');
+const READINESS_EVIDENCE = ['supported', 'patched', 'unexposed'];
+for (const [c, t] of Object.entries(cis.controls || {})) if (!pairOk(t)) fail(`cis.json control ${c} needs its title in both languages`);
+for (const g of cis.safeguards || []) {
+  if (!/^\d+\.\d+$/.test(g.id) || !cis.controls[g.control] || !g.id.startsWith(`${g.control}.`)) fail(`cis.json safeguard ${g.id} needs its control`);
+  if (!pairOk(g.title)) fail(`cis.json safeguard ${g.id} needs its title in both languages`);
+  if (!Array.isArray(g.ig) || !g.ig.length || !g.ig.every((x) => [1, 2, 3].includes(x))) fail(`cis.json safeguard ${g.id} needs its Implementation Groups`);
+  if (!Array.isArray(g.evidence) || !g.evidence.length) fail(`cis.json safeguard ${g.id} needs evidence`);
+  for (const e of g.evidence || []) if (!(e.check && ids.includes(e.check)) && !READINESS_EVIDENCE.includes(e.readiness)) fail(`cis.json safeguard ${g.id} has evidence the measurement does not produce`);
+}
+
 const bundle = {
   schema: 'bundle/1',
   project,
@@ -89,6 +102,7 @@ const bundle = {
   groups: checks.groups,
   checks: checks.checks,
   common_levels: checks.common_levels,
+  cis,
   ui,
 };
 

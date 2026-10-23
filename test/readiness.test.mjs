@@ -145,7 +145,8 @@ test('the census is counted into totals for the Gulf and for each state, with no
   assert.deepEqual(doc.places.KW.kev['CVE-2026-1001'], { exposed: 1, announced: 2 });
   assert.deepEqual(doc.places.KW.products.php.versions, {}, 'versions are listed for the Gulf only');
   assert.equal(doc.places.QA.live, 0);
-  assert.deepEqual(doc.history, [{ date: TODAY, run: 'census', sites: 5, live: 6, kev: { 'CVE-2026-1001': [1, 3] }, eol: { apache: [0, 1], php: [2, 3], nginx: [0, 1], wordpress: [0, 1], iis: [0, 1] } }]);
+  assert.deepEqual(doc.history, [{ date: TODAY, run: 'census', sites: 5, live: 6, kev: { 'CVE-2026-1001': [1, 3] }, eol: { apache: [0, 1], php: [2, 3], nginx: [0, 1], wordpress: [0, 1], iis: [0, 1] }, site: { support: [2, 4], patch: [3, 4], kev: [1, 3] } }]);
+  assert.deepEqual(g.site, { support: [2, 4], patch: [3, 4], kev: [1, 3] }, 'whole sites: two of four past support, three of four behind their cycle, one of three exposed');
   assert.ok(!JSON.stringify(doc).includes('gov.kw'), 'no domain name is published');
   // The series grows, one entry per day, and a day measured twice keeps the later count.
   const next = aggregateReadiness(rows.slice(0, 2), scope, refs, { date: '2026-10-30', previous: doc });

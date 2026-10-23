@@ -12,6 +12,7 @@ The readiness index: whenever CISA catalogues an exploited vulnerability in soft
 - [Every issue](https://gbaseline.3li.info/issues/): one page per issue, with a page for each state
 - [Readiness](https://gbaseline.3li.info/readiness/): exploited vulnerabilities and end of life software against what the sites announce, with a page for each state
 - [The six states](https://gbaseline.3li.info/countries/)
+- [CIS Controls](https://gbaseline.3li.info/cis/): what can be seen from outside for CIS Controls v8.1 safeguards 9.5, 3.10, 16.2, 2.2, 7.4 and 7.7, for the Gulf and on each state's page; visible evidence, not an assessment
 - [The thirteen standards](https://gbaseline.3li.info/standards/): each with why it matters, how a domain passes and how to fix it
 - [Method and data](https://gbaseline.3li.info/method/)
 - [Check a domain](https://gbaseline.3li.info/check/)

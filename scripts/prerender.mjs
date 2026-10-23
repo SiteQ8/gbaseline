@@ -124,7 +124,7 @@ export function structured(data, route, lang, v) {
   if (route.page === 'issue') { trail.push([k.t('issue', { n: route.n }), `issues/${route.n}/`]); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
   if (route.page === 'readiness') { trail.push([k.t('nav_readiness'), 'readiness/']); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
   if (route.page === 'kev') trail.push([k.t('nav_readiness'), 'readiness/'], [route.cve, route.rel]);
-  if (['check', 'method', 'film'].includes(route.page)) trail.push([v.title, route.rel]);
+  if (['check', 'method', 'film', 'cis'].includes(route.page)) trail.push([v.title, route.rel]);
   if (trail.length > 1) out.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map(([label, rel], i) => ({ '@type': 'ListItem', position: i + 1, name: label, item: url(rel) })) });
   if (route.page === 'home') out.push(dataset(B, D, lang));
   if (route.page === 'readiness' && route.place === 'GCC' && D.readiness) out.push(readinessDataset(B, D, lang, k));
@@ -308,6 +308,7 @@ export function llms(data) {
     `- [Every issue](${site}/issues/): one page per issue, with a page for each state`,
     `- [Readiness](${site}/readiness/): exploited vulnerabilities and end of life software against what the sites announce, with a page for each state`,
     `- [The six states](${site}/countries/)`,
+    `- [CIS Controls](${site}/cis/): what can be seen from outside for CIS Controls v8.1 safeguards 9.5, 3.10, 16.2, 2.2, 7.4 and 7.7, for the Gulf and on each state's page; visible evidence, not an assessment`,
     `- [The thirteen standards](${site}/standards/): each with why it matters, how a domain passes and how to fix it`,
     `- [Method and data](${site}/method/)`,
     `- [Check a domain](${site}/check/)`,
@@ -389,7 +390,7 @@ export function renderSite(data) {
 }
 
 // The folders the printer owns, so pages of states, standards or issues that no longer exist are removed.
-const OWNED = ['en', 'countries', 'readiness', 'standards', 'check', 'method', 'film', 'issues'];
+const OWNED = ['en', 'countries', 'readiness', 'cis', 'standards', 'check', 'method', 'film', 'issues'];
 
 function listOwned(dir) {
   const out = [];
