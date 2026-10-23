@@ -6,6 +6,7 @@ import https from 'node:https';
 import tls from 'node:tls';
 import { parseHsts, parseSecurityTxt, parseMtaStsPolicy } from '../docs/assets/engine/records.js';
 import { observeDns, evaluate } from '../docs/assets/engine/checks.js';
+import { identify } from '../docs/assets/engine/software.js';
 
 export const PQ_GROUP = 'X25519MLKEM768';
 const CHAIN_GAPS = new Set(['UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY', 'UNABLE_TO_GET_ISSUER_CERT']);
@@ -20,7 +21,7 @@ export function pqCapable() {
 }
 
 // One request, no redirects followed, the body read up to maxBytes. TLS facts are captured from the socket.
-export function request(url, { timeout = 10000, maxBytes = 32768, agent = 'observatory', body = false, port } = {}) {
+export function request(url, { timeout = 10000, maxBytes = 32768, agent = 'observatory', body = false, html = false, port } = {}) {
   return new Promise((resolve) => {
     let u;
     try { u = new URL(url); } catch { resolve({ error: 'bad-url' }); return; }
@@ -35,7 +36,7 @@ export function request(url, { timeout = 10000, maxBytes = 32768, agent = 'obser
       servername: u.hostname,
       rejectUnauthorized: false,
       agent: false,
-      headers: { 'user-agent': agent, accept: body ? 'text/plain, */*;q=0.5' : 'text/html, */*;q=0.5', connection: 'close' },
+      headers: { 'user-agent': agent, accept: body && !html ? 'text/plain, */*;q=0.5' : 'text/html, */*;q=0.5', connection: 'close' },
       timeout,
     }, (res) => {
       const sock = res.socket;
@@ -46,7 +47,7 @@ export function request(url, { timeout = 10000, maxBytes = 32768, agent = 'obser
         protocol: sock.getProtocol(),
       } : null;
       const out = { status: res.statusCode, headers: res.headers, tls: tlsInfo, text: '' };
-      if (!body) { res.destroy(); finish(out); return; }
+      if (!body && !html) { res.destroy(); finish(out); return; }
       const chunks = [];
       let size = 0;
       res.on('data', (c) => { size += c.length; if (size <= maxBytes) chunks.push(c); else { res.destroy(); } });
@@ -219,6 +220,47 @@ export async function observeWeb(domain, hosts, opts = {}) {
     tls: tlsFacts.reachable ? tlsFacts : { tls13: false, pq: null, tls10: null, tls11: null },
     securityTxt: sec,
   };
+}
+
+// What the first page a visitor receives says about the software behind it, read from the headers and the page
+// itself: HTTPS first, following redirects that stay inside the domain, and plain HTTP only when HTTPS answers
+// nothing at all. One ordinary request per hop, the page read up to 64 KB, nothing else asked of the site.
+export async function observeSoftware(domain, hosts, opts = {}) {
+  const candidates = [];
+  if (hosts.apex && hosts.apex.v4 + hosts.apex.v6 > 0) candidates.push(domain);
+  if (hosts.www && hosts.www.v4 + hosts.www.v6 > 0) candidates.push(`www.${domain}`);
+  if (!candidates.length) return { state: 'none' };
+  const o = { timeout: opts.timeout || 10000, agent: opts.agent || 'observatory', html: true, maxBytes: 65536 };
+  const sp = opts.httpsPort ? `:${opts.httpsPort}` : '';
+  const hp = opts.httpPort ? `:${opts.httpPort}` : '';
+  const errors = [];
+  const follow = async (url) => {
+    let res = await request(url, o);
+    for (let hop = 0; hop < 5 && !res.error && res.status >= 300 && res.status < 400 && res.headers.location; hop += 1) {
+      const next = locationOf(res, url);
+      if (!next || !inFamily(next.hostname, domain)) break;
+      const r2 = await request(next.href, o);
+      if (r2.error) break;
+      url = next.href;
+      res = r2;
+    }
+    return res;
+  };
+  for (const scheme of ['https', 'http']) {
+    for (const host of candidates) {
+      const res = await follow(`${scheme}://${host}${scheme === 'https' ? sp : hp}/`);
+      if (res.error) { errors.push(res.error); continue; }
+      const h = res.headers || {};
+      return {
+        state: 'ok',
+        scheme,
+        status: res.status,
+        software: identify({ server: h.server, powered: h['x-powered-by'], aspnet: h['x-aspnet-version'], generator: h['x-generator'], html: res.text }),
+      };
+    }
+  }
+  if (errors.length && errors.every((e) => REFUSED.has(e))) return { state: 'none', reason: 'nothing-listening' };
+  return { state: 'unreachable', errors };
 }
 
 // Everything the observatory measures for one domain, then the verdicts.

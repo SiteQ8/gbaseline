@@ -10,6 +10,9 @@ import { tr, ui, counted } from '../docs/assets/engine/i18n.js';
 import { observeDomain, pqCapable } from '../src/probe.mjs';
 import { emptyInventory, refresh, serialize, bySuffixLength } from '../src/inventory.mjs';
 import { scan, mergeScans } from '../src/scan.mjs';
+import { census, mergeCensus } from '../src/census.mjs';
+import { fetchReferences, newKev } from '../src/references.mjs';
+import { aggregateReadiness } from '../src/readiness.mjs';
 import { aggregate, appendHistory, historyCsv, CSV_HEAD, csvRows } from '../src/aggregate.mjs';
 import { bundle, project, scope, userAgent, levelText } from '../src/meta.mjs';
 
@@ -143,6 +146,61 @@ async function cmdPublish(a, res) {
   return summary;
 }
 
+// The census: what every live domain's first page announces, one shard or all, rows to a file.
+async function cmdCensus(a) {
+  const inventory = loadInventory(a.file || INVENTORY);
+  const total = Object.keys(inventory.domains).length;
+  let last = 0;
+  const res = await census(inventory, scope, {
+    shard: parseShard(a.shard),
+    concurrency: Number(a.concurrency) || 16,
+    limit: Number(a.limit) || undefined,
+    only: a.only ? String(a.only).split(',') : undefined,
+    agent: userAgent(),
+    onProgress: (n, t) => { if (n - last >= 250 || n === t) { last = n; console.log(`census: ${n}/${t}`); } },
+  });
+  const out = a.out || join(tmpdir(), 'census-rows.json');
+  writeFileSync(out, JSON.stringify(res));
+  const seen = res.rows.filter((r) => r.web === 'ok').length;
+  console.log(`census: ${res.rows.length} of ${total} domains in ${res.seconds}s, ${seen} first pages read, rows in ${out}`);
+  return res;
+}
+
+function readCensus(spec) {
+  const files = String(spec).split(',').flatMap((f) => (existsSync(f) && statSync(f).isDirectory() ? readdirSync(f).filter((x) => x.endsWith('.json')).sort().map((x) => join(f, x)) : [f]));
+  if (!files.length) throw new Error(`no census rows found in ${spec}`);
+  return mergeCensus(files.map((f) => JSON.parse(readFileSync(f, 'utf8'))));
+}
+
+// The readiness index: the references refreshed from their publishers, the census rows counted against them,
+// and docs/data/readiness.json written with its series.
+async function cmdReadiness(a) {
+  const rows = readCensus(a.rows || join(tmpdir(), 'census-rows.json'));
+  const date = a.date || new Date().toISOString().slice(0, 10);
+  const path = join(root, 'docs/data/readiness.json');
+  const previous = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+  const refs = a['no-fetch'] && previous ? { kev: previous.kev, cycles: previous.cycles, sources: previous.sources } : await fetchReferences({ today: date, previous, log: (m) => console.log(m) });
+  const doc = aggregateReadiness(rows.rows, scope, refs, { date, run: a.run || 'census', previous, seconds: rows.seconds });
+  writeText('docs/data/readiness.json', JSON.stringify(doc, null, 1) + '\n');
+  const g = doc.places.GCC;
+  console.log(`readiness: ${date}, ${g.sites} first pages read of ${g.live} live domains, ${doc.kev.length} exploited vulnerabilities followed, ${Object.keys(g.products).length} products announced`);
+  return doc;
+}
+
+// The watch: whether the catalogue holds an exploited vulnerability, in software the measurement can see, that the
+// last readiness document does not follow yet. Prints the answer and writes it to GITHUB_OUTPUT when there is one.
+async function cmdWatch(a) {
+  const path = join(root, 'docs/data/readiness.json');
+  const previous = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+  const today = a.date || new Date().toISOString().slice(0, 10);
+  const r = await newKev({ today, previous });
+  if (r.error) console.log(`watch: the catalogue could not be read (${r.error})`);
+  else console.log(`watch: ${r.entries.length} new of ${r.count} in catalogue ${r.version}${r.entries.length ? ': ' + r.entries.map((e) => `${e.cve} (${e.product})`).join(', ') : ''}${previous ? '' : ', and no census yet'}`);
+  const go = Boolean(r.entries.length) || !previous;
+  if (process.env.GITHUB_OUTPUT) writeFileSync(process.env.GITHUB_OUTPUT, `census=${go}\nnew=${r.entries.map((e) => e.cve).join(' ')}\n`, { flag: 'a' });
+  return r;
+}
+
 async function cmdWeekly(a) {
   const inv = a['skip-inventory'] ? loadInventory(a.file || INVENTORY) : await cmdInventory({ ...a, 'no-ct': a['no-ct'] });
   const res = await cmdScan(a, inv);
@@ -156,6 +214,10 @@ const HELP = `usage:
                                                          scan the inventory (or one shard of it), rows to a file
   publish [--rows file,file|folder] [--date YYYY-MM-DD]  write the totals, the weekly series and the open data
   weekly                                                 inventory, scan and publish in one run
+  census [--shard i/N] [--concurrency N] [--out file]    what every live domain's first page announces, rows to a file
+  readiness [--rows file,file|folder] [--date YYYY-MM-DD] [--no-fetch]
+                                                         count the census against the exploited vulnerabilities and the support cycles
+  watch                                                  whether the catalogue holds a new exploited vulnerability the index should measure
   mcp                                                    the MCP server over stdio`;
 
 const a = args(process.argv.slice(2));
@@ -166,6 +228,9 @@ try {
   else if (cmd === 'scan') await cmdScan(a);
   else if (cmd === 'publish') await cmdPublish(a);
   else if (cmd === 'weekly') await cmdWeekly(a);
+  else if (cmd === 'census') await cmdCensus(a);
+  else if (cmd === 'readiness') await cmdReadiness(a);
+  else if (cmd === 'watch') await cmdWatch(a);
   else if (cmd === 'mcp') await import('../mcp/server.mjs');
   else if (cmd === 'version' || a.version) console.log(project.version);
   else { console.log(HELP); if (cmd && cmd !== 'help') process.exit(2); }

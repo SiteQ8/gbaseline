@@ -59,6 +59,10 @@
 npx -y github:SiteQ8/gbaseline check example.com --lang ar
 ```
 
+### مؤشر الاستعدادية
+
+كلما أدرجت CISA في كتالوج الثغرات المستغلة ثغرة في برمجية يراها الزائر من الخارج مثل PHP أو Apache أو nginx أو IIS أو WordPress تُقرأ الصفحة الأولى لكل نطاق حي خلال يوم فيُنشر كم من المواقع يعلن إصداراً مصاباً من بين المواقع التي تعلن إصدارها للخليج العربي ولكل دولة ومعه نسبة البرمجيات المعلنة التي انتهى دعم إصدارها وفق endoflife.date ثمّ يُعاد القياس بعد كل عدد أسبوعي لتظهر سرعة وصول الترقيعات في سلسلة واحدة. لا يُطلب من الموقع إلا صفحته الأولى كما يطلبها أي متصفح ولا يُقاس إلا ما يكتبه الموقع عن نفسه في ترويساته أو وسم المولّد فيه لذلك فالأرقام حد أدنى ولا يُذكر اسم أي نطاق. الصفحة على https://gbaseline.3li.info/readiness/ والملف على https://gbaseline.3li.info/data/readiness.json والمصادر كتالوج CISA وقاعدة NVD وendoflife.date.
+
 ### حدود القياس
 
 - يجري الفحص الأسبوعي من خوادم GitHub خارج الخليج العربي لذلك يُعد الموقع الذي يحجب الزيارات الأجنبية غير قابل للوصول ويُستبعد من فحوص المواقع دون أن يُحسب راسباً.
@@ -116,12 +120,19 @@ Left out on purpose: mil.ae, mil.qa, emb.kw, ind.kw, name.qa, pro.om, pub.sa and
 4. **Second pass.** Everything inconclusive is observed again at the end of the run with a fresh cache.
 5. **Totals.** A share is passing domains divided by the domains where the check applies and could be measured. Domains that no longer exist are dropped; domains that cannot be reached from the scanner are counted apart, never as failing.
 
+### The readiness index
+
+Whenever CISA adds to its [Known Exploited Vulnerabilities catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) an entry for software a website announces from outside (PHP, Apache HTTP Server, nginx, IIS, LiteSpeed, Tomcat, OpenSSL, WordPress, Drupal, Joomla, TYPO3, Next.js and the like), the first page of every live domain in the inventory is read within a day, and the share of sites announcing an affected version, among the sites that announce a version of that product, is published for the Gulf and for each state. The same census runs after every weekly issue, so the series shows how fast the patches arrive. Alongside it: the share of announced software whose version is past its support on [endoflife.date](https://endoflife.date/), and what the first pages announce at all (a server, a version, a content system, a front such as Cloudflare that hides the server).
+
+Each site is asked for its first page once, as any browser would ask, and only what the site writes about itself is read: the `Server`, `X-Powered-By` and `X-AspNet-Version` headers and the `generator` tag in the first 64 kilobytes. The affected version ranges come from [NVD](https://nvd.nist.gov/) and the support cycles from endoflife.date, refreshed with every census. The figures are a floor: a site that announces no version is never counted as affected. No domain is named and the states are never ranked. The page is at https://gbaseline.3li.info/readiness/, the data at `docs/data/readiness.json`, and `.github/workflows/readiness.yml` runs it: a daily watch of the catalogue, a census across three runners when there is something new or after each issue (`census --shard i/3`), then `readiness`, which counts the rows against the references and prints the pages.
+
 ### Published files
 
 | File | What it holds |
 |---|---|
 | `docs/data/summary.json` | This issue: totals and levels by country, sector and check, inventory counts, DNSSEC availability per suffix, data quality |
 | `docs/data/history.json` | The weekly series |
+| `docs/data/readiness.json` | The readiness index: what the sites announce, the exploited vulnerabilities followed with the exposure of the Gulf and each state, the support cycles used, the sources and the series |
 | `docs/data/open/latest.csv` | This issue as CSV |
 | `docs/data/open/history.csv` | Every issue as CSV |
 | `docs/feed.xml`, `docs/en/feed.xml` | An Atom feed of the issues with the six figures of each, in Arabic and in English |
@@ -153,6 +164,7 @@ npx -y github:SiteQ8/gbaseline check example.com --dns-only
 | `gbaseline_figures` | Every check for the Gulf as a whole or for one state on its own, all sectors or one |
 | `gbaseline_check_info` | What a check means, when it passes, how to fix it, the standards and the Gulf figure |
 | `gbaseline_history` | The weekly series of one check |
+| `gbaseline_readiness` | The readiness index for the Gulf or one state: exploited vulnerabilities with the share of sites announcing an affected version, software past its support, what the sites announce, and the series |
 | `gbaseline_methodology` | Method, limits, data quality and how to cite |
 | `gbaseline_check_domain` | A live full check of any domain from your machine |
 
@@ -165,6 +177,9 @@ node bin/cli.mjs inventory          # build the inventory of names in data/inven
 node bin/cli.mjs scan --limit 50    # scan, rows to a temporary file
 node bin/cli.mjs publish            # write the totals, the weekly series and the open data
 node bin/cli.mjs weekly             # all three
+node bin/cli.mjs census --limit 50  # what the first page of each live domain announces, rows to a temporary file
+node bin/cli.mjs readiness          # count the census against the exploited vulnerabilities and the support cycles
+node bin/cli.mjs watch              # whether the catalogue holds a new exploited vulnerability the index should measure
 ```
 
 The weekly workflow in `.github/workflows/weekly.yml` runs by itself every Monday, and again whenever the scope or the workflow changes on `main`: it refreshes the inventory, scans it across six runners at once (`scan --shard i/6`), publishes and tests the totals, commits them, archives the issue as a release named `issue-N` with its CSV and JSON attached, and asks Pages to publish it. No step is done by hand.

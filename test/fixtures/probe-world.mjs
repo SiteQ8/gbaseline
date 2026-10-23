@@ -5,7 +5,7 @@ import http from 'node:http';
 import tls from 'node:tls';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { observeWeb, probeTls } from '../../src/probe.mjs';
+import { observeWeb, probeTls, observeSoftware } from '../../src/probe.mjs';
 
 const dir = process.argv[2];
 const f = (n) => readFileSync(join(dir, n));
@@ -47,5 +47,21 @@ const legacy = await listen(tls.createServer({ ...leaf, minVersion: 'TLSv1', max
 servers.push(classic, legacy);
 out.classicTls = await probeTls('localhost', { port: port(classic), timeout: 3000 });
 out.legacyTls = await probeTls('localhost', { port: port(legacy), timeout: 3000 });
+// What a first page announces: an HTTPS site that names its server, platform and content system, one that
+// redirects to its www host before answering, and a plain HTTP site reached only when HTTPS answers nothing.
+const announcing = https.createServer({ ...leaf, minVersion: 'TLSv1.2' }, (req, res) => {
+  if (req.headers.host && req.headers.host.startsWith('localhost:') && req.url === '/' && !req.headers['x-followed']) {
+    res.writeHead(200, { server: 'nginx/1.18.0', 'x-powered-by': 'PHP/8.1.2-1ubuntu2.14', 'content-type': 'text/html' });
+    res.end('<!doctype html><html><head><meta name="generator" content="WordPress 6.4.2"></head><body>home</body></html>');
+    return;
+  }
+  res.writeHead(404); res.end();
+});
+servers.push(await listen(announcing));
+out.announcing = await observeSoftware('localhost', hosts, { timeout: 3000, httpsPort: port(announcing), agent: 'test' });
+const plainAnnouncing = http.createServer((req, res) => { res.writeHead(200, { server: 'Apache/2.4.41 (Ubuntu)', 'content-type': 'text/html' }); res.end('<html><body><a href="/wp-content/x.css">x</a></body></html>'); });
+servers.push(await listen(plainAnnouncing));
+out.plainAnnouncing = await observeSoftware('localhost', hosts, { timeout: 3000, httpsPort: await free(), httpPort: port(plainAnnouncing), agent: 'test' });
+out.silent = await observeSoftware('localhost', hosts, { timeout: 3000, httpsPort: await free(), httpPort: await free(), agent: 'test' });
 for (const s of servers) s.close();
 console.log(JSON.stringify(out));

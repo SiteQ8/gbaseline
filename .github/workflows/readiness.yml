@@ -1,0 +1,156 @@
+name: Readiness index
+
+# Every morning: read the CISA catalogue of exploited vulnerabilities and, when it holds a new entry for software a
+# website announces from outside (PHP, Apache, nginx, IIS, WordPress and the like), read the first page of every
+# live domain within the day and publish how many announce an affected version, for the Gulf and for each state.
+# The same census runs after every weekly issue, so the series shows how fast the patches arrive, and on request.
+# The inventory of names comes from the last weekly run's artifact; only totals are committed.
+on:
+  schedule:
+    - cron: '41 5 * * *'
+  workflow_run:
+    workflows: ['Weekly issue']
+    types: [completed]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/readiness.yml']
+
+permissions:
+  contents: write
+  pages: write
+  actions: read
+
+concurrency:
+  group: readiness-index
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      census: ${{ steps.watch.outputs.census }}
+      new: ${{ steps.watch.outputs.new }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - name: Is there a new exploited vulnerability to measure
+        id: watch
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            node bin/cli.mjs watch
+          else
+            node bin/cli.mjs watch || true
+            echo "census=true" >> "$GITHUB_OUTPUT"
+            echo "A census runs on every ${{ github.event_name }}."
+          fi
+
+  census:
+    needs: watch
+    if: needs.watch.outputs.census == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - name: Take the inventory of the last weekly run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          id=$(gh run list --repo "${{ github.repository }}" --workflow weekly.yml --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          test -n "$id" || { echo "No weekly run to take the inventory from."; exit 1; }
+          gh run download "$id" --repo "${{ github.repository }}" --name inventory --dir data/inventory
+          echo "Inventory of run $id."
+
+      - name: Read the first page of every live domain in this shard
+        run: node bin/cli.mjs census --shard ${{ matrix.shard }}/3 --concurrency 24 --out census-${{ matrix.shard }}.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: census-${{ matrix.shard }}
+          path: census-${{ matrix.shard }}.json
+          retention-days: 3
+
+  publish:
+    needs: [watch, census]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          check-latest: true
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: census-*
+          path: census
+          merge-multiple: true
+
+      - name: Count the census against the catalogue and the support cycles
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        run: node bin/cli.mjs readiness --rows census --run ${{ github.event_name == 'workflow_run' && 'issue' || github.event_name == 'schedule' && 'watch' || 'manual' }}
+
+      - name: Refresh the site files
+        run: node scripts/site-files.mjs
+
+      - name: Print every page with the new figures
+        run: node scripts/prerender.mjs
+
+      - name: Test what is about to be published
+        run: |
+          node scripts/build.mjs --check
+          npm test
+
+      - name: Commit the census
+        id: commit
+        run: |
+          git config user.name "SiteQ8"
+          git config user.email "311682+SiteQ8@users.noreply.github.com"
+          git add -A docs
+          if git diff --cached --quiet; then echo "Nothing changed."; echo "committed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          subject=$(node -p "const r = JSON.parse(require('fs').readFileSync('docs/data/readiness.json', 'utf8')); 'Readiness census of ' + r.date + ', ' + r.places.GCC.sites + ' first pages read'")
+          git commit -q -m "$subject"
+          git pull -q --rebase origin main
+          git push -q origin HEAD:main
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+          echo "Committed: $subject"
+
+      - name: Ask Pages to publish the census
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent
+
+      - name: Totals for this run
+        run: |
+          node -e "
+            const r = JSON.parse(require('fs').readFileSync('docs/data/readiness.json', 'utf8'));
+            const g = r.places.GCC;
+            const lines = ['## Readiness census of ' + r.date, '', g.sites + ' first pages read of ' + g.live + ' live domains in ' + Math.round((r.census.seconds || 0) / 60) + ' minutes.', '', '| Exploited vulnerability | Announcing an affected version | Of sites announcing a version |', '| --- | --- | --- |'];
+            for (const k of r.kev) { const x = g.kev[k.cve] || { exposed: 0, announced: 0 }; lines.push('| ' + k.cve + ' (' + k.product + ') | ' + x.exposed + ' | ' + x.announced + ' |'); }
+            lines.push('', '| Product | Sites | Announcing a version | Past support |', '| --- | --- | --- | --- |');
+            for (const [id, x] of Object.entries(g.products).sort((a, b) => b[1].sites - a[1].sites)) lines.push('| ' + id + ' | ' + x.sites + ' | ' + x.versioned + ' | ' + x.eol + ' |');
+            if (r.unmatched.length) lines.push('', r.unmatched.length + ' catalogued for visible software without affected versions yet: ' + r.unmatched.map((u) => u.cve + ' (' + u.reason + ')').join(', '));
+            console.log(lines.join('\n'));
+          " >> "$GITHUB_STEP_SUMMARY"

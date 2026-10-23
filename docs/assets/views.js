@@ -5,6 +5,7 @@
 import { h, frag } from './vnode.js';
 import { CHECKS, GROUPS, PASS_LEVELS, NA_LEVELS } from './engine/checks.js';
 import { CLAUSES, clauseShare } from './engine/clauses.js';
+import { PRODUCTS } from './engine/software.js';
 import { tr, fill, number, percent, counted, dateLong } from './engine/i18n.js';
 
 export const LANGS = ['ar', 'en'];
@@ -14,11 +15,14 @@ export const RUN_TIME = '02:17';
 // The address of a page in a language: Arabic at the root, English under /en/.
 export const pathOf = (lang, rel = '') => `${lang === 'ar' ? '/' : '/en/'}${rel}`;
 
-// Every page the site prints, in the order of the sitemap. Each issue keeps a page for the Gulf and one per state.
+// Every page the site prints, in the order of the sitemap. Each issue keeps a page for the Gulf and one per state,
+// and so does the readiness index.
 export function routes(B, D) {
   const cc = Object.keys(B.scope.countries);
   const out = [{ page: 'home', rel: '' }, { page: 'countries', rel: 'countries/' }];
   for (const c of cc) out.push({ page: 'country', cc: c, rel: `countries/${c.toLowerCase()}/` });
+  out.push({ page: 'readiness', place: 'GCC', rel: readinessRel('GCC') });
+  for (const c of cc) out.push({ page: 'readiness', place: c, rel: readinessRel(c) });
   out.push({ page: 'standards', rel: 'standards/' });
   for (const c of CHECKS) out.push({ page: 'standard', id: c.id, rel: `standards/${SLUGS[c.id]}/` });
   out.push({ page: 'check', rel: 'check/' }, { page: 'method', rel: 'method/' }, { page: 'film', rel: 'film/' }, { page: 'issues', rel: 'issues/' });
@@ -104,7 +108,7 @@ function nameLines(k, lang = k.lang) {
   return [w.slice(0, cut).join(' '), w.slice(cut).join(' ')];
 }
 
-const NAV = [['standards', 'standards/', 'nav_standards'], ['countries', 'countries/', 'nav_countries'], ['method', 'method/', 'nav_method']];
+const NAV = [['standards', 'standards/', 'nav_standards'], ['countries', 'countries/', 'nav_countries'], ['readiness', 'readiness/', 'nav_readiness'], ['method', 'method/', 'nav_method']];
 
 function header(k, active) {
   const [a, b] = nameLines(k);
@@ -265,6 +269,7 @@ function footer(k) {
         s ? h('p', {}, h('a', { href: k.href(issueRel(s.issue, 'GCC')) }, k.t('hero_issue', { n: s.issue, date: k.date(s.date) }))) : null),
       h('ul', { class: 'links' },
         h('li', {}, h('a', { href: k.href('issues/') }, k.t('nav_issues'))),
+        h('li', {}, h('a', { href: k.href('readiness/') }, k.t('nav_readiness'))),
         h('li', {}, h('a', { href: k.href('film/') }, k.t('film_title'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#data` }, k.t('foot_data'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#cli` }, k.t('foot_tools'))),
@@ -373,6 +378,7 @@ function viewHome(k) {
     cover(k, { lines: [k.t('title_1'), k.t('title_2')], standfirst, action }),
     issue ? lede(k, issue, 'GCC') : h('section', { class: 'lede' }, h('h2', {}, k.t('pending_title'))),
     issue ? clausesSection(k, issue, 'GCC', { photo: pictureOf(k, Object.keys(k.B.scope.countries)[(s.issue + 1) % 6]) }) : null,
+    readinessSection(k),
     measureSection(k),
     s ? stairs(k) : null,
     ledger(k, 'watch', k.t('film_title'), [
@@ -717,6 +723,178 @@ function viewIssue(k, n, place) {
   return { title, description: standfirst, main };
 }
 
+/* ---------- readiness: what the sites announce, held against the exploited vulnerabilities and the support cycles ---------- */
+
+export const readinessRel = (place) => `readiness/${place === 'GCC' ? '' : `${place.toLowerCase()}/`}`;
+
+// The exposure of a place to one catalogued vulnerability: of the sites announcing a version of its product, the
+// share announcing an affected one. Null when no site announces a version, so nothing is read into silence.
+const exposureOf = (p, cve) => {
+  const x = p && p.kev && p.kev[cve];
+  return x && x.announced ? { share: (x.exposed / x.announced) * 100, exposed: x.exposed, announced: x.announced } : null;
+};
+
+// The first time a vulnerability's exposure was measured before this census, for the Gulf, so a row can say how far
+// the share has moved since.
+function firstExposure(R, cve) {
+  for (const e of R.history || []) {
+    if (e.date >= R.date) continue;
+    const x = e.kev && e.kev[cve];
+    if (x && x[1]) return { date: e.date, share: (x[0] / x[1]) * 100 };
+  }
+  return null;
+}
+
+// The link to the maker's own advisory among the catalogue's notes, when it gives one.
+const vendorNote = (e) => (e.notes || []).find((u) => !/nvd\.nist\.gov|cisa\.gov/.test(u)) || null;
+
+const productName = (k, id) => ltr(k.P(PRODUCTS[id] || { en: id, ar: id }));
+const cveId = (cve) => h('bdi', { class: 'cve', dir: 'ltr' }, cve);
+const basis = (text) => h('span', { class: 'basis' }, text);
+
+// Parts listed in prose, as vnodes: the way the language joins them, with each part kept whole.
+function listedNodes(k, parts) {
+  if (k.lang === 'ar') return parts.flatMap((p, i) => (i ? [' و', p] : [p]));
+  return parts.flatMap((p, i) => (i === 0 ? [p] : i === parts.length - 1 ? [' and ', p] : [', ', p]));
+}
+
+// Every exploited vulnerability followed, newest first: the exposure of the place to it, the product and the entry,
+// then its count, when it was catalogued, where it moved from and the three places to read more.
+function kevList(k, R, place) {
+  const p = R.places[place];
+  if (!R.kev.length) return h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none'));
+  return h('ol', { class: 'rows kev-list' }, R.kev.map((e) => {
+    const x = exposureOf(p, e.cve);
+    const was = place === 'GCC' && x ? firstExposure(R, e.cve) : null;
+    const vendor = vendorNote(e);
+    return figRow('li', { id: e.cve.toLowerCase(), 'data-rise': '' }, x ? k.pct(x.share) : k.t('no_data'),
+      [productName(k, e.product), ' ', cveId(e.cve)],
+      [
+        h('span', { class: 'kev-name', dir: 'ltr', lang: 'en' }, e.name),
+        basis(x ? k.t('kev_row_basis', { exposed: k.num(x.exposed), announced: k.num(x.announced) }) : k.t('kev_none_announce')),
+        was ? h('span', {}, k.t('kev_was', { pct: k.pct(was.share), date: k.date(was.date) })) : null,
+        h('span', {}, k.t('kev_added', { date: k.date(e.added) })),
+        e.ransomware === 'Known' ? h('span', { class: 'flag' }, k.t('kev_ransomware')) : null,
+        h('a', { href: `https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=${encodeURIComponent(e.cve)}`, rel: 'noopener' }, k.t('kev_src_cisa')),
+        h('a', { href: `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(e.cve)}`, rel: 'noopener' }, k.t('kev_src_nvd')),
+        vendor ? h('a', { href: vendor, rel: 'noopener' }, k.t('kev_src_vendor')) : null,
+      ]);
+  }));
+}
+
+// The products whose makers publish support cycles, most announced first: the share of their announcing sites on a
+// version past its support, the count under it and the cycles seen most.
+function eolItems(p) {
+  return Object.entries(p.products).filter(([id, x]) => PRODUCTS[id] && PRODUCTS[id].eol && x.versioned).sort((a, b) => b[1].versioned - a[1].versioned || b[1].eol - a[1].eol);
+}
+
+function eolList(k, p) {
+  const items = eolItems(p);
+  if (!items.length) return h('p', { class: 'lead', 'data-rise': '' }, k.t('eol_none'));
+  return h('ul', { class: 'rows eol-list' }, items.map(([id, x]) => {
+    const cycles = Object.entries(x.cycles || {}).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? 1 : -1)).slice(0, 3).map(([c]) => ltr(c));
+    return figRow('li', { 'data-rise': '' }, k.pct((x.eol / x.versioned) * 100), productName(k, id), [
+      basis(k.t('eol_row_basis', { eol: k.num(x.eol), versioned: k.num(x.versioned) })),
+      cycles.length ? h('span', {}, rich(k, 'eol_cycles', { cycles: listedNodes(k, cycles) }, [])) : null,
+    ]);
+  }));
+}
+
+// What the first pages announce: four shares of the sites read, then the products announced most.
+function announceList(k, p) {
+  const a = p.announce;
+  const row = (key, n) => figRow('li', { 'data-rise': '' }, k.pct(p.sites ? (n / p.sites) * 100 : null), k.t(key), [basis(k.t('announce_of', { n: k.num(n), sites: k.num(p.sites) }))]);
+  return h('ul', { class: 'rows announce-list' }, row('announce_server', a.server), row('announce_version', a.version), row('announce_cms', a.cms), row('announce_front', a.front));
+}
+
+function productList(k, p) {
+  const items = Object.entries(p.products).sort((a, b) => b[1].sites - a[1].sites || b[1].versioned - a[1].versioned).slice(0, 8);
+  if (!items.length) return h('p', { class: 'lead', 'data-rise': '' }, k.t('eol_none'));
+  return h('ul', { class: 'rows product-list' }, items.map(([id, x]) => figRow('li', { 'data-rise': '' }, k.pct(p.sites ? (x.sites / p.sites) * 100 : null), productName(k, id), [basis(k.t('products_row', { sites: k.words(x.sites, 'w_site'), versioned: k.num(x.versioned) }))])));
+}
+
+// The three publishers the index measures against, each with the day it was last read.
+function sourcesList(k, R) {
+  const src = (R && R.sources) || {};
+  const read = (s) => (s && s.fetched ? k.t('src_read', { date: k.date(String(s.fetched).slice(0, 10)) }) : null);
+  const items = [
+    ['src_kev', 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog', src.kev],
+    ['src_nvd', 'https://nvd.nist.gov/vuln', src.nvd],
+    ['src_eol', 'https://endoflife.date/', src.eol],
+  ];
+  return h('ul', { class: 'refs sources' }, items.map(([key, url, s]) => h('li', { 'data-rise': '' }, h('a', { href: url, rel: 'noopener' }, k.t(key)), read(s) ? [' ', h('span', { class: 'small soft' }, read(s))] : null)));
+}
+
+function howSection(k, R) {
+  return ledger(k, 'how', k.t('readiness_how_h'), [
+    k.B.ui.readiness_how.map((x) => h('p', { class: 'how-p', 'data-rise': '' }, tr(x, k.lang))),
+    h('h3', { class: 'sub-h', 'data-rise': '' }, k.t('readiness_sources_h')),
+    sourcesList(k, R),
+  ], { panel: false, cls: 'how' });
+}
+
+const measuredLine = (k, R, place) => k.t('readiness_measured', { date: k.date(R.date), place: k.t(`in_${place}`), sites: k.words(R.places[place].sites, 'w_site') });
+
+// The readiness page of the Gulf or of one state: the places, the census in one sentence, then the exploited
+// vulnerabilities, the software past its support, what the sites announce and how it is measured. Before the first
+// census the page says so and keeps the method.
+function viewReadiness(k, place) {
+  const R = k.D.readiness;
+  const states = Object.keys(k.B.scope.countries);
+  const p = R ? R.places[place] : null;
+  const places = h('nav', { class: 'places', 'aria-label': k.t('issue_places'), 'data-rise': '' }, h('ul', {}, ['GCC', ...states].map((x) => h('li', {}, h('a', { href: k.href(readinessRel(x)), 'aria-current': x === place ? 'page' : null }, k.place(x))))));
+  const measured = p ? measuredLine(k, R, place) : null;
+  const standfirst = k.t('readiness_intro');
+  const lines = place === 'GCC' ? [k.t('readiness_title')] : [k.t('readiness_title'), k.place(place)];
+  const photo = pictureOf(k, place === 'GCC' ? states[(R ? R.history.length : 0) % states.length] : place);
+  const main = [
+    h('div', { class: 'masthead slim' }, header(k, 'readiness'), place === 'GCC' ? strip(k) : band(k, place)),
+    cover(k, { lines, standfirst, kind: 'page' }),
+    h('div', { class: 'text places-only' }, h('div', { class: 'body span' }, places)),
+    h('section', { class: 'lede', 'aria-labelledby': 'census-h' },
+      h('h2', { id: 'census-h', class: 'sr' }, k.t('readiness_title')),
+      h('p', { class: 'statement', 'data-rise': '' }, p ? rich(k, 'readiness_measured', { date: k.date(R.date), place: k.t(`in_${place}`), sites: k.words(p.sites, 'w_site') }, ['sites']) : k.t('readiness_pending'))),
+    R ? ledger(k, 'kev', k.t('kev_h'), [
+      kevList(k, R, place),
+      R.unmatched && R.unmatched.length ? h('p', { class: 'after small soft', 'data-rise': '' }, k.t('kev_unmatched', { n: k.num(R.unmatched.length) })) : null,
+    ], { note: k.t('kev_note'), cls: 'kev' }) : null,
+    R ? ledger(k, 'eol', k.t('eol_h'), eolList(k, p), { note: k.t('eol_note'), cls: 'eol' }) : null,
+    R ? ledger(k, 'announce', k.t('announce_h'), announceList(k, p), {
+      note: k.t('announce_note'), cls: 'announce',
+      aside: h('figure', { class: 'aside-photo', 'data-rise': '' }, img(k, photo, 'portrait'), h('figcaption', {}, place === 'GCC' ? k.P(photo.caption) : k.t('photo_detail'))),
+    }) : null,
+    R ? ledger(k, 'products', k.t('products_h'), productList(k, p), { cls: 'products' }) : null,
+    howSection(k, R),
+    place === 'GCC' ? null : others(k, place, (x) => readinessRel(x)),
+  ];
+  const title = place === 'GCC' ? k.t('readiness_title') : k.t('readiness_state_title', { place: k.t(`in_${place}`) });
+  return { title, description: place === 'GCC' ? standfirst : `${standfirst} ${measured || k.t('readiness_pending')}`, main };
+}
+
+// The readiness on the home page: the newest exploited vulnerability the Gulf's sites announce a version for and
+// the product most often past its support, each in the row of the figures, then the way to the whole page.
+function readinessSection(k) {
+  const R = k.D.readiness;
+  const p = R ? R.places.GCC : null;
+  const top = R ? R.kev.map((e) => ({ e, x: exposureOf(p, e.cve) })).find((r) => r.x) : null;
+  const eol = p ? eolItems(p).sort((a, b) => b[1].eol - a[1].eol || b[1].versioned - a[1].versioned)[0] : null;
+  const more = h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href('readiness/') }, k.t('readiness_more')));
+  const body = R ? [
+    top || eol ? h('ul', { class: 'facts ready' },
+      top ? figRow('li', { 'data-rise': '' }, k.pct(top.x.share), h('a', { href: `${k.href('readiness/')}#${top.e.cve.toLowerCase()}` }, productName(k, top.e.product), ' ', cveId(top.e.cve)), [
+        h('span', { class: 'kev-name', dir: 'ltr', lang: 'en' }, top.e.name),
+        basis(k.t('kev_row_basis', { exposed: k.num(top.x.exposed), announced: k.num(top.x.announced) })),
+        h('span', {}, k.t('kev_added', { date: k.date(top.e.added) })),
+      ]) : null,
+      eol ? figRow('li', { 'data-rise': '' }, k.pct((eol[1].eol / eol[1].versioned) * 100), h('a', { href: `${k.href('readiness/')}#eol` }, rich(k, 'eol_home_label', { product: productName(k, eol[0]) }, [])), [
+        basis(k.t('eol_row_basis', { eol: k.num(eol[1].eol), versioned: k.num(eol[1].versioned) })),
+      ]) : null) : h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none')),
+    h('p', { class: 'source after', 'data-rise': '' }, measuredLine(k, R, 'GCC')),
+    more,
+  ] : [h('p', { class: 'lead', 'data-rise': '' }, k.t('readiness_pending')), more];
+  return ledger(k, 'ready', k.t('readiness_title'), body, { note: k.t('readiness_home_note'), panel: false, cls: 'ready' });
+}
+
 /* ---------- the launch film ---------- */
 
 // The two films with their captions, the one in the page's language first, then how the film was made and the
@@ -775,6 +953,7 @@ export function page(ctx) {
   else if (r.page === 'issues') v = viewIssues(k);
   else if (r.page === 'issue') v = viewIssue(k, r.n, r.place);
   else if (r.page === 'film') v = viewFilm(k);
+  else if (r.page === 'readiness') v = viewReadiness(k, r.place);
   else v = viewNotFound(k);
   const body = h('div', { class: `site p-${r.page}`, id: 'top' },
     h('a', { class: 'skip', href: '#main' }, k.t('skip')),
