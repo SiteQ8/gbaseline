@@ -49,6 +49,11 @@ test('a version is placed in its support cycle and matched against the ranges a 
   assert.equal(ranges.length, 3, 'only the vulnerable ranges of products the measurement can see');
   assert.deepEqual(['8.1.2', '8.1.29', '7.4.3', '8.3.1', '8.3.0'].map((v) => affected(v, ranges)), [true, false, true, false, true]);
   assert.equal(affected(null, ranges), false);
+  // A major alone stands for every version under it: affected when all are, clear when none is, undecided otherwise.
+  assert.deepEqual(['7', '8.1', '8.3', '9', '8.0.30'].map((v) => affected(v, ranges)), [true, null, null, false, false], 'Drupal 7 style majors against the PHP ranges');
+  const drupal = [{ product: 'drupal', start: '7.0', startIncluded: true, end: '7.74', endIncluded: false }, { product: 'drupal', start: '9.0.0', startIncluded: true, end: '9.0.8', endIncluded: false }];
+  assert.deepEqual(['7', '9', '10', '9.0.3', '9.5.11', '6'].map((v) => affected(v, drupal)), [null, null, false, true, false, false]);
+  assert.deepEqual(['6.0', '6', '7.5', '6.0.1'].map((v) => affected(v, [{ product: 'iis', exact: '6.0' }])), [true, null, false, false], 'an exact version against a family');
   assert.deepEqual([
     kevProduct({ vendorProject: 'PHP Group', product: 'PHP' }), kevProduct({ vendorProject: 'Apache', product: 'HTTP Server' }),
     kevProduct({ vendorProject: 'WordPress', product: 'Ultimate Member Plugin' }), kevProduct({ vendorProject: 'Microsoft', product: 'Internet Information Services (IIS)' }),

@@ -45,8 +45,11 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
         if (p === places.GCC) x.versions[version] = (x.versions[version] || 0) + 1;
         for (const k of kev) {
           if (k.product !== id) continue;
+          // A site whose announced version cannot be held against the ranges (a major alone) is not counted.
+          const hit = affected(version, k.ranges);
+          if (hit === null) continue;
           p.kev[k.cve].announced += 1;
-          if (affected(version, k.ranges)) p.kev[k.cve].exposed += 1;
+          if (hit) p.kev[k.cve].exposed += 1;
         }
       }
     }

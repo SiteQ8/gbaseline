@@ -52,7 +52,10 @@ codes.forEach((c, i) => {
   crows.push({ d: `quiet${i}.edu.${c.toLowerCase()}`, c, s: 'education', dns: 'live', web: 'ok', sw: sw([], ['cloudflare']) });
 });
 const refs = {
-  kev: [{ cve: 'CVE-2026-1001', product: 'php', vendor: 'PHP Group', productName: 'PHP', name: 'PHP-CGI OS Command Injection Vulnerability', description: 'x', added: '2026-10-20', due: '2026-11-10', ransomware: 'Known', notes: ['https://www.php.net/ChangeLog-8.php'], ranges: [{ product: 'php', start: '8.1.0', startIncluded: true, end: '8.1.31', endIncluded: false }] }],
+  kev: [
+    { cve: 'CVE-2026-1001', product: 'php', vendor: 'PHP Group', productName: 'PHP', name: 'PHP-CGI OS Command Injection Vulnerability', description: 'x', added: '2026-10-20', due: '2026-11-10', ransomware: 'Known', notes: ['https://www.php.net/ChangeLog-8.php'], ranges: [{ product: 'php', start: '8.1.0', startIncluded: true, end: '8.1.31', endIncluded: false }] },
+    { cve: 'CVE-2026-2002', product: 'tomcat', vendor: 'Apache', productName: 'Tomcat', name: 'Apache Tomcat Path Equivalence Vulnerability', description: 'x', added: '2026-04-01', due: '2026-04-22', ransomware: 'Unknown', notes: [], ranges: [{ product: 'tomcat', start: '9.0.0', startIncluded: true, end: '9.0.99', endIncluded: false }] },
+  ],
   cycles: { php: [{ cycle: '8.3', eol: '2027-12-31', latest: '8.3.26', support: '2025-12-31' }, { cycle: '8.1', eol: '2025-12-31', latest: '8.1.33', support: '2023-11-25' }, { cycle: '7.4', eol: '2022-11-28', latest: '7.4.33', support: '2021-11-28' }], apache: [{ cycle: '2.4', eol: false, latest: '2.4.65', support: true }], nginx: [{ cycle: '1.18', eol: '2021-04-20', latest: '1.18.0', support: false }], wordpress: [{ cycle: '6.4', eol: true, latest: '6.4.7', support: false }] },
   sources: { kev: { url: 'x', fetched: '2026-10-23T05:10:00.000Z', version: '2026.10.22', count: 1480 }, nvd: { url: 'x', fetched: '2026-10-23T05:11:00.000Z', asked: 1 }, eol: { url: 'x', fetched: '2026-10-23T05:12:00.000Z', products: 4 } },
 };
@@ -182,7 +185,9 @@ try {
   await go(page, 'readiness/');
   assert.match(await page.textContent('.lede'), /قيس في 23 أكتوبر 2026 .* فأجاب 17 موقعاً/);
   assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '18.2٪', 'two of the eleven sites announcing a PHP version announce an affected one');
-  assert.equal((await page.textContent('#cve-2026-1001 .basis')).trim(), '2 من 11 يعلن إصداره');
+  assert.equal((await page.textContent('#cve-2026-1001 .basis')).trim(), '2 من 11 يعلن إصداره كاملاً');
+  assert.equal(await page.locator('#kev .kev-list li').count(), 1, 'only the measured entries are rows');
+  assert.match(await page.textContent('#kev'), /و1 أخرى في Apache Tomcat لا يعلن أي موقع إصدارها كاملاً/, 'the entry no site can be held against is named in one line');
   assert.match(await page.textContent('#cve-2026-1001'), /كانت 25\.0٪ في 21 أكتوبر 2026/, 'the row says where the share moved from');
   assert.match(await page.textContent('#cve-2026-1001'), /تُستخدم في حملات فدية/);
   assert.equal(await page.locator('#cve-2026-1001 a[href^="https://nvd.nist.gov/vuln/detail/CVE-2026-1001"]').count(), 1);
