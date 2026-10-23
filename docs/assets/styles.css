@@ -595,3 +595,65 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
   body, .foot { background: #fff; color: #000; }
   .sectors .panel { display: block !important; }
 }
+
+/* ---------- the readiness report: sheets of A4 on the navy field, printed as they are seen ---------- */
+.report-top { min-height: 64px; }
+.report-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-4) var(--s-6); max-width: 210mm; margin: var(--s-8) auto 0; padding: 0 var(--margin); }
+.report-bar p { color: var(--amber-soft); max-width: 46ch; }
+.report-bar ul { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
+.sheets { display: grid; grid-template-columns: minmax(0, 210mm); gap: var(--s-6); justify-content: center; padding: var(--s-6) var(--margin) var(--section); }
+.sheet { --ink: #0f1928; --soft: #4b5568; --rule: #d8dce3; width: 100%; min-width: 0; min-height: 297mm; padding: 16mm 15mm 14mm; background: #fff; color: var(--ink); display: flex; flex-direction: column; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.sheet .bdi, .sheet bdi { direction: ltr; }
+.cover-sheet { background: var(--navy); color: var(--amber); }
+.r-name { font-size: var(--step-small); font-weight: 600; }
+.r-title { margin-top: 12mm; font-size: clamp(2.6rem, 8vw, 4.6rem); line-height: 1; letter-spacing: -0.02em; }
+:lang(ar) .r-title { line-height: 1.35; letter-spacing: 0; }
+.r-kicker { margin-top: var(--s-4); font-size: var(--step-lead); line-height: 1.35; font-weight: 500; max-width: 26ch; }
+.r-date { margin-top: var(--s-5); color: var(--led); font-weight: 500; }
+.r-intro { margin-top: var(--s-4); max-width: 52ch; color: var(--amber-soft); line-height: 1.6; }
+.r-h { margin-top: 9mm; font-size: var(--step-small); font-weight: 600; color: var(--led); }
+.r-keys { display: grid; gap: var(--s-4); margin-top: var(--s-3); }
+.r-keys .fig { font-size: 2.1rem; min-width: 4.6ch; line-height: 1.1; }
+.r-keys .fig-label { font-weight: 500; line-height: 1.45; max-width: 44ch; }
+.r-keys .fig-detail { color: var(--amber-soft); }
+.r-photo { margin-top: auto; padding-top: 10mm; }
+.r-photo img { width: 100%; aspect-ratio: 21 / 6; object-fit: cover; }
+.r-photo figcaption { margin-top: var(--s-2); font-size: 0.75rem; color: var(--amber-soft); }
+.sheet-head { display: flex; justify-content: space-between; gap: var(--s-4); font-size: 0.75rem; color: var(--soft); padding-bottom: var(--s-2); border-bottom: 1px solid var(--rule); }
+.sheet-n { font-weight: 600; color: var(--ink); }
+.r-h2 { margin-top: 10mm; font-size: 1.6rem; line-height: 1.2; color: var(--ink); }
+:lang(ar) .r-h2 { line-height: 1.5; }
+.r-note { margin-top: var(--s-2); max-width: 70ch; font-size: 0.875rem; line-height: 1.6; color: var(--soft); }
+.r-p { margin-top: var(--s-3); max-width: 72ch; font-size: 0.95rem; line-height: 1.65; }
+.r-table { margin-top: var(--s-4); font-size: 0.875rem; }
+.r-table th, .r-table td { border-bottom-color: var(--rule); padding-top: 9px; padding-bottom: 9px; color: var(--ink); }
+.r-table thead th { color: var(--soft); font-size: 0.75rem; }
+.r-table td.share { width: 1%; text-align: start; font-size: 1.05rem; font-weight: 600; white-space: nowrap; }
+.r-table td.share .bar { width: 64px; height: 6px; margin-top: 4px; }
+.r-table .bar .track { fill: #e6e8ec; }
+.r-table .bar .fill { fill: #c98a2e; }
+.r-table tbody th { font-weight: 500; }
+.r-cve { display: block; font-weight: 600; }
+.r-sub { display: block; font-size: 0.75rem; color: var(--soft); }
+[dir='rtl'] .r-sub { text-align: right; }
+.r-table .flag { display: inline-block; margin-top: 4px; font-size: 0.7rem; }
+.r-sources { margin-top: var(--s-3); display: grid; gap: var(--s-2); font-size: 0.875rem; }
+.sheet .cite-issue { margin-top: var(--s-3); max-width: none; }
+.sheet .cite-issue blockquote { background: #f2f3f6; color: var(--ink); font-size: 0.875rem; }
+.sheet .textbtn { color: var(--ink); }
+.r-imprint { margin-top: auto; padding-top: 8mm; font-size: 0.75rem; color: var(--soft); }
+@media screen and (max-width: 760px) {
+  .sheet { min-height: 0; padding: var(--s-6) var(--s-4); }
+  .r-title { margin-top: var(--s-7); }
+  .r-table td.share .bar { display: none; }
+  .r-table th:nth-child(4), .r-table td:nth-child(4) { display: none; }
+  .r-keys .fig { font-size: 1.6rem; }
+}
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body, .p-report main { background: #fff !important; }
+  .p-report .report-top, .p-report .report-bar, .p-report .foot, .p-report .skip, .p-report .copies { display: none !important; }
+  .p-report .sheets { display: block; padding: 0; }
+  .p-report .sheet { width: 210mm; height: 297mm; min-height: 0; overflow: hidden; break-after: page; }
+  .p-report .sheet:last-child { break-after: auto; }
+}
