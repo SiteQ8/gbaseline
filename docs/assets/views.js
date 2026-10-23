@@ -23,6 +23,7 @@ export function routes(B, D) {
   for (const c of cc) out.push({ page: 'country', cc: c, rel: `countries/${c.toLowerCase()}/` });
   out.push({ page: 'readiness', place: 'GCC', rel: readinessRel('GCC') });
   for (const c of cc) out.push({ page: 'readiness', place: c, rel: readinessRel(c) });
+  if (D && D.readiness) out.push({ page: 'report', rel: REPORT_REL });
   for (const e of kevMeasured(D)) out.push({ page: 'kev', cve: e.cve, rel: kevRel(e.cve) });
   out.push({ page: 'standards', rel: 'standards/' });
   for (const c of CHECKS) out.push({ page: 'standard', id: c.id, rel: `standards/${SLUGS[c.id]}/` });
@@ -728,6 +729,8 @@ function viewIssue(k, n, place) {
 
 export const readinessRel = (place) => `readiness/${place === 'GCC' ? '' : `${place.toLowerCase()}/`}`;
 export const kevRel = (cve) => `readiness/${cve.toLowerCase()}/`;
+export const REPORT_REL = 'readiness/report/';
+export const reportPdf = (lang) => `/${REPORT_REL}gbaseline-readiness-${lang}.pdf`;
 
 // The vulnerabilities the Gulf can be measured against: each has a page of its own that can be cited.
 export function kevMeasured(D) {
@@ -959,6 +962,120 @@ function viewKev(k, cve) {
   return { title: `${e.cve} · ${product}`, description: `${standfirst} ${k.t('kev_cite', { pct: k.pct(x.share), place: k.t('in_GCC'), product, cve })}.`, main };
 }
 
+/* ---------- the readiness report: the same figures as sheets of A4, to print, to send and to keep as PDF ---------- */
+
+// The figures the report leads with: how many sites answered, the vulnerability most sites are exposed to, the
+// software most often past its support, and how many sites announce a version at all.
+export function reportKeys(R) {
+  const g = R.places.GCC;
+  const kev = R.kev.map((e) => ({ e, x: exposureOf(g, e.cve) })).filter((r) => r.x && r.x.exposed).sort((a, b) => b.x.exposed - a.x.exposed || b.x.share - a.x.share)[0] || null;
+  const eol = eolItems(g).filter(([, x]) => x.eol).sort((a, b) => b[1].eol - a[1].eol)[0] || null;
+  return { g, kev, eol };
+}
+
+function sheet(cls, ...kids) {
+  return h('article', { class: `sheet ${cls}` }, ...kids);
+}
+
+function sheetHead(k, R, n) {
+  return h('header', { class: 'sheet-head' },
+    h('span', {}, k.lang === 'ar' ? k.B.project.name_ar : k.B.project.name_en),
+    h('span', {}, `${k.t('report_title')} · ${k.date(R.date)}`),
+    h('span', { class: 'sheet-n' }, ltr(String(n))));
+}
+
+function viewReport(k) {
+  const R = k.D.readiness;
+  const { g, kev, eol } = reportKeys(R);
+  const name = k.lang === 'ar' ? k.B.project.name_ar : k.B.project.name_en;
+  const states = Object.keys(k.B.scope.countries);
+  const photo = pictureOf(k, states[(R.history.length + 2) % states.length]);
+  const measured = R.kev.filter((e) => exposureOf(g, e.cve));
+  const silent = R.kev.filter((e) => !exposureOf(g, e.cve));
+  const key = (fig, label, detail) => figRow('li', {}, fig, label, detail ? [basis(detail)] : null);
+  const cover = sheet('cover-sheet',
+    h('p', { class: 'r-name' }, name),
+    h('h1', { class: 'r-title' }, k.t('report_title')),
+    h('p', { class: 'r-kicker' }, k.t('report_kicker')),
+    h('p', { class: 'r-date' }, k.t('report_census', { date: k.date(R.date) })),
+    h('p', { class: 'r-intro' }, k.t('report_intro')),
+    h('h2', { class: 'r-h' }, k.t('report_key_h')),
+    h('ul', { class: 'r-keys' },
+      key(k.pct((g.sites / g.live) * 100), k.t('report_key_sites'), ltr(`${k.num(g.sites)} / ${k.num(g.live)}`)),
+      kev ? key(k.pct(kev.x.share), rich(k, 'report_key_kev', { product: productName(k, kev.e.product), cve: cveId(kev.e.cve) }, []), k.t('kev_row_basis', { exposed: k.num(kev.x.exposed), announced: k.num(kev.x.announced) })) : null,
+      eol ? key(k.pct((eol[1].eol / eol[1].versioned) * 100), rich(k, 'report_key_eol', { product: productName(k, eol[0]) }, []), k.t('eol_row_basis', { eol: k.num(eol[1].eol), versioned: k.num(eol[1].versioned) })) : null,
+      key(k.pct((g.announce.version / g.sites) * 100), k.t('report_key_version'), k.t('announce_of', { n: k.num(g.announce.version), sites: k.num(g.sites) }))),
+    h('figure', { class: 'r-photo' }, img(k, photo, 'wide', { eager: true }), h('figcaption', {}, k.P(photo.caption))));
+  const kevSheet = sheet('',
+    sheetHead(k, R, 2),
+    h('h2', { class: 'r-h2' }, k.t('report_kev_h')),
+    h('p', { class: 'r-note' }, k.t('kev_note')),
+    h('table', { class: 'r-table' },
+      h('thead', {}, h('tr', {}, h('th', { scope: 'col', class: 'n' }, k.t('report_col_share')), h('th', { scope: 'col' }, k.t('report_col_cve')), h('th', { scope: 'col', class: 'n' }, k.t('report_col_count')), h('th', { scope: 'col', class: 'n' }, k.t('report_col_added')))),
+      h('tbody', {}, measured.map((e) => {
+        const x = exposureOf(g, e.cve);
+        return h('tr', {},
+          h('td', { class: 'n share' }, ltr(k.pct(x.share)), bar(x.share)),
+          h('th', { scope: 'row' }, h('span', { class: 'r-cve' }, productName(k, e.product), ' ', cveId(e.cve)), h('span', { class: 'r-sub', dir: 'ltr', lang: 'en' }, e.name), e.ransomware === 'Known' ? h('span', { class: 'flag' }, k.t('kev_ransomware')) : null),
+          h('td', { class: 'n' }, ltr(`${k.num(x.exposed)} / ${k.num(x.announced)}`)),
+          h('td', { class: 'n' }, k.date(e.added)));
+      }))),
+    silent.length ? h('p', { class: 'r-note' }, rich(k, 'kev_silent', { n: k.num(silent.length), products: listedNodes(k, [...new Set(silent.map((e) => e.product))].map((id) => productName(k, id))) }, [])) : null);
+  const eolRows = eolItems(g);
+  const a = g.announce;
+  const softSheet = sheet('',
+    sheetHead(k, R, 3),
+    h('h2', { class: 'r-h2' }, k.t('report_eol_h')),
+    h('p', { class: 'r-note' }, k.t('eol_note')),
+    h('table', { class: 'r-table' },
+      h('thead', {}, h('tr', {}, h('th', { scope: 'col', class: 'n' }, k.t('report_col_share')), h('th', { scope: 'col' }, k.t('report_col_product')), h('th', { scope: 'col', class: 'n' }, k.t('report_col_eol')), h('th', { scope: 'col' }, k.t('report_col_cycles')))),
+      h('tbody', {}, eolRows.map(([id, x]) => h('tr', {},
+        h('td', { class: 'n share' }, ltr(k.pct((x.eol / x.versioned) * 100)), bar((x.eol / x.versioned) * 100)),
+        h('th', { scope: 'row' }, productName(k, id)),
+        h('td', { class: 'n' }, ltr(`${k.num(x.eol)} / ${k.num(x.versioned)}`)),
+        h('td', {}, ltr(Object.entries(x.cycles || {}).sort((p0, p1) => p1[1] - p0[1]).slice(0, 3).map(([c]) => c).join('  ·  '))))))),
+    h('h2', { class: 'r-h2' }, k.t('report_announce_h')),
+    h('p', { class: 'r-note' }, k.t('announce_note')),
+    h('table', { class: 'r-table' },
+      h('tbody', {}, [['announce_server', a.server], ['announce_version', a.version], ['announce_cms', a.cms], ['announce_front', a.front]].map(([key0, n]) => h('tr', {},
+        h('td', { class: 'n share' }, ltr(k.pct((n / g.sites) * 100)), bar((n / g.sites) * 100)),
+        h('th', { scope: 'row' }, k.t(key0)),
+        h('td', { class: 'n' }, ltr(`${k.num(n)} / ${k.num(g.sites)}`)))))));
+  const year = R.date.slice(0, 4);
+  const cite = (lang) => k.tl('report_cite', lang, { author: tr(k.B.project.author, lang), year, name: lang === 'ar' ? k.B.project.name_ar : k.B.project.name_en, date: dateLong(R.date, lang), url: k.abs(REPORT_REL, lang) });
+  const src = (R.sources || {});
+  const read = (x) => (x && x.fetched ? ` · ${k.t('src_read', { date: k.date(String(x.fetched).slice(0, 10)) })}` : '');
+  const methodSheet = sheet('',
+    sheetHead(k, R, 4),
+    h('h2', { class: 'r-h2' }, k.t('report_method_h')),
+    k.B.ui.readiness_how.map((x) => h('p', { class: 'r-p' }, tr(x, k.lang))),
+    h('p', { class: 'r-p' }, k.t('report_states')),
+    h('h2', { class: 'r-h2' }, k.t('readiness_sources_h')),
+    h('ul', { class: 'r-sources' },
+      h('li', {}, k.t('src_kev'), read(src.kev), ' ', ltr('cisa.gov/known-exploited-vulnerabilities-catalog')),
+      h('li', {}, k.t('src_nvd'), read(src.nvd), ' ', ltr('nvd.nist.gov')),
+      h('li', {}, k.t('src_eol'), read(src.eol), ' ', ltr('endoflife.date'))),
+    h('h2', { class: 'r-h2' }, k.t('report_cite_h')),
+    h('div', { class: 'cite-issue' },
+      (k.lang === 'ar' ? ['ar', 'en'] : ['en', 'ar']).map((lang) => h('blockquote', { lang, dir: lang === 'ar' ? 'rtl' : 'ltr', 'data-quote': lang }, h('p', {}, cite(lang)))),
+      h('p', { class: 'copies' },
+        (k.lang === 'ar' ? ['ar', 'en'] : ['en', 'ar']).map((lang) => h('button', { type: 'button', class: 'textbtn', 'data-copy': lang, hidden: true }, k.t(lang === 'ar' ? 'copy_ar' : 'copy_en'))),
+        h('span', { class: 'done', 'aria-live': 'polite', 'data-copied': k.t('copied') }))),
+    h('p', { class: 'r-imprint' }, k.t('foot_imprint'), ' ', k.t('foot_author', { author: k.P(k.B.project.author) })));
+  const bar0 = h('div', { class: 'report-bar' },
+    h('p', {}, k.t('report_page_note')),
+    h('ul', {},
+      h('li', {}, h('a', { class: 'btn', href: reportPdf(k.lang), download: '' }, k.t('report_pdf'))),
+      h('li', {}, h('a', { href: reportPdf(k.other), download: '', hreflang: k.other }, k.t('report_pdf_other'))),
+      h('li', {}, h('button', { type: 'button', class: 'textbtn', 'data-print': '', hidden: true }, k.t('report_print')))));
+  const main = [
+    h('div', { class: 'masthead report-top' }, header(k, 'readiness')),
+    bar0,
+    h('div', { class: 'sheets' }, cover, kevSheet, softSheet, methodSheet),
+  ];
+  return { title: `${k.t('report_title')} · ${k.date(R.date)}`, description: k.t('report_intro'), main };
+}
+
 // The readiness on the home page: the newest exploited vulnerability the Gulf's sites announce a version for and
 // the product most often past its support, each in the row of the figures, then the way to the whole page.
 function readinessSection(k) {
@@ -980,6 +1097,7 @@ function readinessSection(k) {
     h('p', { class: 'source after', 'data-rise': '' }, measuredLine(k, R, 'GCC')),
     more,
   ] : [h('p', { class: 'lead', 'data-rise': '' }, k.t('readiness_pending')), more];
+  body.push(h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href(REPORT_REL) }, k.t('readiness_report_link'))));
   return ledger(k, 'ready', k.t('readiness_title'), body, { note: k.t('readiness_home_note'), panel: false, cls: 'ready' });
 }
 
@@ -1043,6 +1161,7 @@ export function page(ctx) {
   else if (r.page === 'film') v = viewFilm(k);
   else if (r.page === 'readiness') v = viewReadiness(k, r.place);
   else if (r.page === 'kev') v = viewKev(k, r.cve);
+  else if (r.page === 'report') v = viewReport(k);
   else v = viewNotFound(k);
   const body = h('div', { class: `site p-${r.page}`, id: 'top' },
     h('a', { class: 'skip', href: '#main' }, k.t('skip')),

@@ -2335,7 +2335,7 @@
   },
   "readiness_how": [
    {
-    "ar": "تُطلب الصفحة الأولى لكل نطاق حي طلباً واحداً عادياً كما يفعل أي متصفح وتُقرأ ترويساتها Server وX-Powered-By ووسم المولّد في أول 64 كيلوبايت منها ولا يُطلب من الموقع شيء آخر.",
+    "ar": "تُطلب الصفحة الأولى لكل نطاق حي طلباً واحداً عادياً كما يفعل أي متصفح وتُقرأ ترويساتها Server وكذلك ترويسة X-Powered-By ووسم المولّد في أول 64 كيلوبايت منها ولا يُطلب من الموقع شيء آخر.",
     "en": "The first page of every live domain is requested once, as any browser would, and its Server and X-Powered-By headers and the generator tag in its first 64 kilobytes are read, and nothing else is asked of the site."
    },
    {
@@ -2347,8 +2347,8 @@
     "en": "It is measured after every weekly issue and within a day of a new entry for visible software, no domain is named and the states are never ranked."
    },
    {
-    "ar": "قد يعلن الموقع إصداراً أقدم من شيفرته حين تنقل توزيعة نظامه الترقيعات إلى الإصدار القديم كما تفعل Red Hat وDebian وقد لا يعلن إلا رقم الإصدار الرئيسي فلا يُحسب حينها إلا إذا كانت كل إصداراته مصابة أو كلها سليمة لذلك تقيس النسبة ما يعلنه الموقع لا ما يعمل فيه بالضبط.",
-    "en": "A site can announce a version older than its code when its distribution backports the fixes, as Red Hat and Debian do, and it can announce only its major, in which case it is counted only when every version under it is affected or none is, so the share measures what a site announces, not exactly what runs inside it."
+    "ar": "قد يعلن الموقع إصداراً أقدم من شيفرته حين تنقل توزيعة نظامه الترقيعات إلى الإصدار القديم كما تفعل Red Hat وتوزيعة Debian وقد لا يعلن إلا رقم الإصدار الرئيسي فلا يُحسب حينها إلا إذا كانت كل إصداراته مصابة أو كلها سليمة لذلك تقيس النسبة ما يعلنه الموقع لا ما يعمل فيه بالضبط.",
+    "en": "A site can announce a version older than its code when its distribution backports the fixes, as Red Hat and Debian do, and it can announce only its major, in which case it is counted only when every version under it is affected or none is, so the share measures what a site announces, not exactly what runs inside it."
    }
   ],
   "readiness_sources_h": {
@@ -2458,6 +2458,118 @@
   "readiness_feed_note": {
    "ar": "خلاصة Atom بالثغرات المتابعة",
    "en": "Atom feed of the vulnerabilities followed"
+  },
+  "report_title": {
+   "ar": "تقرير الاستعدادية",
+   "en": "Readiness report"
+  },
+  "report_kicker": {
+   "ar": "الخليج العربي في مواجهة الثغرات المستغلة",
+   "en": "The Arabian Gulf against exploited vulnerabilities"
+  },
+  "report_intro": {
+   "ar": "ما تعلنه المواقع العامة في الدول الست عن برمجياتها مقيساً على كتالوج CISA للثغرات المستغلة وعلى دورات الدعم التي ينشرها صانعو البرمجيات.",
+   "en": "What the public websites of the six states announce about their software, held against CISA's catalogue of exploited vulnerabilities and against the support cycles their makers publish."
+  },
+  "report_census": {
+   "ar": "قياس {date}",
+   "en": "Census of {date}"
+  },
+  "report_key_h": {
+   "ar": "الأرقام الرئيسية",
+   "en": "Key figures"
+  },
+  "report_key_sites": {
+   "ar": "من النطاقات الحية أجابت صفحتها الأولى",
+   "en": "of live domains answered with their first page"
+  },
+  "report_key_kev": {
+   "ar": "من المواقع التي تعلن إصدار {product} كاملاً تعلن إصداراً مصاباً بالثغرة {cve}",
+   "en": "of the sites announcing a full {product} version announce one affected by {cve}"
+  },
+  "report_key_eol": {
+   "ar": "من المواقع التي تعلن إصدار {product} تعمل على إصدار انتهى دعمه",
+   "en": "of the sites announcing a {product} version run one past its support"
+  },
+  "report_key_version": {
+   "ar": "من المواقع المقروءة تعلن إصدار برمجية واحدة على الأقل",
+   "en": "of the sites read announce the version of at least one piece of software"
+  },
+  "report_kev_h": {
+   "ar": "الثغرات المستغلة",
+   "en": "Exploited vulnerabilities"
+  },
+  "report_col_cve": {
+   "ar": "الثغرة",
+   "en": "Vulnerability"
+  },
+  "report_col_added": {
+   "ar": "أُدرجت",
+   "en": "Catalogued"
+  },
+  "report_col_count": {
+   "ar": "مصاب من معلن",
+   "en": "Affected of announcing"
+  },
+  "report_col_share": {
+   "ar": "النسبة",
+   "en": "Share"
+  },
+  "report_col_product": {
+   "ar": "البرمجية",
+   "en": "Software"
+  },
+  "report_col_cycles": {
+   "ar": "الدورات الأكثر شيوعاً",
+   "en": "Most common cycles"
+  },
+  "report_col_eol": {
+   "ar": "انتهى دعمه من معلن",
+   "en": "Past support of announcing"
+  },
+  "report_eol_h": {
+   "ar": "برمجيات انتهى دعمها",
+   "en": "Software past its support"
+  },
+  "report_announce_h": {
+   "ar": "ما تعلنه المواقع",
+   "en": "What sites announce"
+  },
+  "report_method_h": {
+   "ar": "المنهجية والحدود",
+   "en": "Method and limits"
+  },
+  "report_states": {
+   "ar": "لكل دولة أرقامها في صفحتها على الموقع دون مقارنة بغيرها ولا يُذكر اسم أي نطاق.",
+   "en": "Each state has its own figures on its own page of the site, never set beside another, and no domain is named."
+  },
+  "report_cite_h": {
+   "ar": "الاستشهاد",
+   "en": "How to cite"
+  },
+  "report_cite": {
+   "ar": "{author} ({year}) {name} تقرير الاستعدادية لقياس {date} على {url}",
+   "en": "{author} ({year}). {name}, readiness report, census of {date}. {url}"
+  },
+  "report_pdf": {
+   "ar": "تنزيل التقرير بصيغة PDF",
+   "en": "Download the report as PDF"
+  },
+  "report_pdf_other": {
+   "ar": "التقرير بالإنجليزية PDF",
+   "en": "The report in Arabic, PDF"
+  },
+  "report_print": {
+   "ar": "اطبع هذه الصفحة",
+   "en": "Print this page"
+  },
+  "report_page_note": {
+   "ar": "يُعاد إصدار التقرير مع كل قياس وهذه نسخته الأحدث.",
+   "en": "The report is issued again with every census, and this is its latest edition."
+  },
+  "readiness_report_link": {
+   "ar": "تقرير الاستعدادية للطباعة والإرسال",
+   "en": "The readiness report, to print and send"
   }
  }
 }

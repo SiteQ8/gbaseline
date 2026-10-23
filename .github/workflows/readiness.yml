@@ -116,6 +116,9 @@ jobs:
       - name: Print every page with the new figures
         run: node scripts/prerender.mjs
 
+      - name: Print the readiness report to PDF in both languages
+        run: node scripts/report-pdf.mjs
+
       - name: Test what is about to be published
         run: |
           node scripts/build.mjs --check

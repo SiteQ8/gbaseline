@@ -214,6 +214,17 @@ try {
   assert.ok(!STRAY.test(await pageText(page)), 'vulnerability page: no stray null');
   assert.ok(!NOT_JOINED.test(await pageText(page)), 'vulnerability page: no Arabic sentence cut by a period before its connective');
   assert.equal(await page.locator('main a[href="/readiness/cve-2026-2002/"]').count(), 0, 'a vulnerability no site can be held against has no page');
+  // The report: four sheets of A4 with the Gulf's figures, the citation, and the PDFs beside it.
+  await go(page, 'readiness/report/');
+  assert.equal(await page.locator('.sheet').count(), 4, 'a cover and three sheets');
+  assert.match(await page.textContent('.cover-sheet'), /تقرير الاستعدادية/);
+  assert.match(await page.textContent('.r-keys'), /18\.2٪/, 'the cover leads with the vulnerability most sites are exposed to');
+  assert.equal(await page.locator('.report-bar a[href="/readiness/report/gbaseline-readiness-ar.pdf"]').count(), 1);
+  assert.ok(!STRAY.test(await pageText(page)), 'report: no stray null');
+  assert.ok(!NOT_JOINED.test(await pageText(page)), 'report: no Arabic sentence cut by a period before its connective');
+  await page.emulateMedia({ media: 'print' });
+  assert.equal(await page.locator('.report-bar').isVisible(), false, 'nothing but the sheets is printed');
+  await page.emulateMedia({ media: 'screen' });
   await go(page, 'readiness/kw/');
   assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '0.0٪', 'the Kuwaiti site announcing a PHP version is not affected after the first census');
   assert.equal(await page.locator('nav.others a').count(), codes.length - 1, 'a state leads to the other five');
@@ -276,7 +287,7 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/ui-desktop-en.png`, fullPage: true });
   // A phone: no sideways scroll on any page, the mosaic comes before the title.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'readiness/cve-2026-1001/', 'en/', 'en/readiness/cve-2026-1001/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
+  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'readiness/cve-2026-1001/', 'readiness/report/', 'en/', 'en/readiness/report/', 'en/readiness/cve-2026-1001/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
     await go(phone, path);
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${path || 'home'}: no sideways scroll on a phone (overflow ${overflow}px)`);
