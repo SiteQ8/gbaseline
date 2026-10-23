@@ -763,15 +763,21 @@ function listedNodes(k, parts) {
 function kevList(k, R, place) {
   const p = R.places[place];
   if (!R.kev.length) return h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none'));
-  return h('ol', { class: 'rows kev-list' }, R.kev.map((e) => {
+  // The entries no site can be held against (no site announces a full version of their software) are named in
+  // one line after the rows, so the list holds only what was measured.
+  const measured = R.kev.filter((e) => exposureOf(p, e.cve));
+  const silent = R.kev.filter((e) => !exposureOf(p, e.cve));
+  const silentLine = silent.length ? h('p', { class: 'after small soft', 'data-rise': '' }, rich(k, 'kev_silent', { n: k.num(silent.length), products: listedNodes(k, [...new Set(silent.map((e) => e.product))].map((id) => productName(k, id))) }, [])) : null;
+  if (!measured.length) return [h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none_announce')), silentLine];
+  return [h('ol', { class: 'rows kev-list' }, measured.map((e) => {
     const x = exposureOf(p, e.cve);
-    const was = place === 'GCC' && x ? firstExposure(R, e.cve) : null;
+    const was = place === 'GCC' ? firstExposure(R, e.cve) : null;
     const vendor = vendorNote(e);
-    return figRow('li', { id: e.cve.toLowerCase(), 'data-rise': '' }, x ? k.pct(x.share) : k.t('no_data'),
+    return figRow('li', { id: e.cve.toLowerCase(), 'data-rise': '' }, k.pct(x.share),
       [productName(k, e.product), ' ', cveId(e.cve)],
       [
         h('span', { class: 'kev-name', dir: 'ltr', lang: 'en' }, e.name),
-        basis(x ? k.t('kev_row_basis', { exposed: k.num(x.exposed), announced: k.num(x.announced) }) : k.t('kev_none_announce')),
+        basis(k.t('kev_row_basis', { exposed: k.num(x.exposed), announced: k.num(x.announced) })),
         was ? h('span', {}, k.t('kev_was', { pct: k.pct(was.share), date: k.date(was.date) })) : null,
         h('span', {}, k.t('kev_added', { date: k.date(e.added) })),
         e.ransomware === 'Known' ? h('span', { class: 'flag' }, k.t('kev_ransomware')) : null,
@@ -779,7 +785,7 @@ function kevList(k, R, place) {
         h('a', { href: `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(e.cve)}`, rel: 'noopener' }, k.t('kev_src_nvd')),
         vendor ? h('a', { href: vendor, rel: 'noopener' }, k.t('kev_src_vendor')) : null,
       ]);
-  }));
+  })), silentLine];
 }
 
 // The products whose makers publish support cycles, most announced first: the share of their announcing sites on a
