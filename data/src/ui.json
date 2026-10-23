@@ -972,5 +972,187 @@
   "clause_standard": {
     "ar": "المعيار",
     "en": "Standard"
+  },
+  "readiness_title": {
+    "ar": "الاستعدادية",
+    "en": "Readiness"
+  },
+  "readiness_state_title": {
+    "ar": "الاستعدادية في {place}",
+    "en": "Readiness in {place}"
+  },
+  "readiness_intro": {
+    "ar": "كلما أُدرجت ثغرة مستغلة في برمجية يراها الزائر من الخارج تُقرأ الصفحة الأولى لكل نطاق حي خلال يوم فنعرف كم من المواقع ما زال يعلن إصداراً مصاباً ثمّ يُعاد القياس بعد كل عدد لنرى كم تسرع الترقيعات.",
+    "en": "Whenever an exploited vulnerability in software visible from outside is catalogued, the first page of every live domain is read within a day, so we know how many sites still announce an affected version, and the measurement is repeated after every issue to see how fast the patches arrive."
+  },
+  "readiness_pending": {
+    "ar": "أول قياس للاستعدادية يجري الآن ويظهر هنا خلال يوم.",
+    "en": "The first readiness measurement is running now and appears here within a day."
+  },
+  "readiness_measured": {
+    "ar": "قيس في {date} بقراءة الصفحة الأولى لكل نطاق حي في {place} فأجاب {sites}.",
+    "en": "Measured on {date} by reading the first page of every live domain in {place}, and {sites} answered."
+  },
+  "readiness_places": {
+    "ar": "الاستعدادية حسب الدولة",
+    "en": "Readiness by state"
+  },
+  "kev_h": {
+    "ar": "الثغرات المستغلة",
+    "en": "Exploited vulnerabilities"
+  },
+  "kev_note": {
+    "ar": "كل ثغرة أدرجتها CISA في كتالوج الثغرات المستغلة خلال السنة الماضية وتصيب برمجية تُعلن من الخارج ومعها نسبة المواقع التي تعلن إصداراً مصاباً من بين المواقع التي تعلن إصدارها.",
+    "en": "Every vulnerability CISA added to its catalogue of exploited vulnerabilities in the past year that affects software announced from outside, with the share of sites announcing an affected version among the sites that announce a version."
+  },
+  "kev_none": {
+    "ar": "لم تُدرج خلال السنة الماضية ثغرة مستغلة في برمجية يمكن رؤية إصدارها من الخارج.",
+    "en": "No exploited vulnerability in software whose version can be seen from outside was catalogued in the past year."
+  },
+  "kev_row_basis": {
+    "ar": "{exposed} من {announced} يعلن إصداره",
+    "en": "{exposed} of {announced} announcing a version"
+  },
+  "kev_none_announce": {
+    "ar": "لا موقع يعلن إصداره",
+    "en": "No site announces its version"
+  },
+  "kev_added": {
+    "ar": "أُدرجت في {date}",
+    "en": "Catalogued on {date}"
+  },
+  "kev_was": {
+    "ar": "كانت {pct} في {date}",
+    "en": "Was {pct} on {date}"
+  },
+  "kev_src_cisa": {
+    "ar": "كتالوج CISA",
+    "en": "CISA catalogue"
+  },
+  "kev_src_nvd": {
+    "ar": "قاعدة NVD",
+    "en": "NVD"
+  },
+  "kev_src_vendor": {
+    "ar": "بيان المنتج",
+    "en": "Vendor advisory"
+  },
+  "kev_ransomware": {
+    "ar": "تُستخدم في حملات فدية",
+    "en": "Used in ransomware campaigns"
+  },
+  "kev_unmatched": {
+    "ar": "{n} أخرى أُدرجت لبرمجيات مرئية ولم تُحدَّد إصداراتها المصابة بعد",
+    "en": "{n} more catalogued for visible software whose affected versions are not yet specified"
+  },
+  "eol_h": {
+    "ar": "برمجيات انتهى دعمها",
+    "en": "Software past its support"
+  },
+  "eol_note": {
+    "ar": "من بين المواقع التي تعلن إصدار برمجيتها نسبة ما يعمل على إصدار أنهى صانعه دعمه وفق endoflife.date فلم يعد يتلقى ترقيعات أمنية.",
+    "en": "Among the sites that announce the version of their software, the share running a version its maker no longer supports according to endoflife.date, so it receives no security patches."
+  },
+  "eol_row_basis": {
+    "ar": "{eol} من {versioned} يعلن إصداره",
+    "en": "{eol} of {versioned} announcing a version"
+  },
+  "eol_cycles": {
+    "ar": "الأكثر شيوعاً {cycles}",
+    "en": "Most common {cycles}"
+  },
+  "announce_h": {
+    "ar": "ما تعلنه المواقع",
+    "en": "What sites announce"
+  },
+  "announce_note": {
+    "ar": "لا يُقاس إلا ما يكتبه الموقع عن نفسه في ترويسات صفحته الأولى أو في وسم المولّد فيها لذلك فالأرقام حد أدنى والمواقع خلف وسيط مثل Cloudflare لا تعلن خادمها.",
+    "en": "Only what a site writes about itself in the headers of its first page or in its generator tag is measured, so the figures are a floor, and sites behind a front such as Cloudflare do not announce their server."
+  },
+  "announce_server": {
+    "ar": "تعلن خادمها",
+    "en": "Announce their server"
+  },
+  "announce_version": {
+    "ar": "تعلن إصدار برمجية",
+    "en": "Announce a software version"
+  },
+  "announce_front": {
+    "ar": "خلف وسيط يخفي الخادم",
+    "en": "Behind a front that hides the server"
+  },
+  "announce_cms": {
+    "ar": "تعلن نظام محتواها",
+    "en": "Announce their content system"
+  },
+  "announce_of": {
+    "ar": "{n} من {sites} قُرئت صفحتها الأولى",
+    "en": "{n} of {sites} whose first page was read"
+  },
+  "products_h": {
+    "ar": "الأكثر إعلاناً",
+    "en": "Most announced"
+  },
+  "products_row": {
+    "ar": "{sites} و{versioned} منها يعلن إصداره",
+    "en": "{sites}, {versioned} of them announcing a version"
+  },
+  "readiness_how_h": {
+    "ar": "كيف يُقاس",
+    "en": "How it is measured"
+  },
+  "readiness_how": [
+    {
+      "ar": "تُطلب الصفحة الأولى لكل نطاق حي طلباً واحداً عادياً كما يفعل أي متصفح وتُقرأ ترويساتها Server وX-Powered-By ووسم المولّد في أول 64 كيلوبايت منها ولا يُطلب من الموقع شيء آخر.",
+      "en": "The first page of every live domain is requested once, as any browser would, and its Server and X-Powered-By headers and the generator tag in its first 64 kilobytes are read, and nothing else is asked of the site."
+    },
+    {
+      "ar": "الثغرات تؤخذ من كتالوج CISA للثغرات المستغلة ونطاق الإصدارات المصابة من NVD ودورات الدعم من endoflife.date وتُحدَّث كلها مع كل قياس.",
+      "en": "The vulnerabilities come from CISA's catalogue of exploited vulnerabilities, the affected version ranges from NVD and the support cycles from endoflife.date, and all three are refreshed with every measurement."
+    },
+    {
+      "ar": "يُقاس بعد كل عدد أسبوعي وخلال يوم من إدراج ثغرة جديدة في برمجية مرئية ولا يُذكر اسم أي نطاق ولا تُرتب الدول.",
+      "en": "It is measured after every weekly issue and within a day of a new entry for visible software, no domain is named and the states are never ranked."
+    }
+  ],
+  "readiness_sources_h": {
+    "ar": "المصادر",
+    "en": "Sources"
+  },
+  "src_kev": {
+    "ar": "كتالوج CISA للثغرات المستغلة",
+    "en": "CISA Known Exploited Vulnerabilities catalogue"
+  },
+  "src_nvd": {
+    "ar": "قاعدة NVD الوطنية للثغرات",
+    "en": "NVD, the National Vulnerability Database"
+  },
+  "src_eol": {
+    "ar": "دورات الدعم على endoflife.date",
+    "en": "Support cycles on endoflife.date"
+  },
+  "src_read": {
+    "ar": "قُرئ في {date}",
+    "en": "Read on {date}"
+  },
+  "readiness_home_note": {
+    "ar": "كم من مواقع الخليج العربي ما زال يعلن إصداراً مصاباً بثغرة مستغلة أو انتهى دعمه.",
+    "en": "How many of the Arabian Gulf's sites still announce a version hit by an exploited vulnerability or past its support."
+  },
+  "readiness_more": {
+    "ar": "صفحة الاستعدادية كاملة",
+    "en": "The full readiness page"
+  },
+  "nav_readiness": {
+    "ar": "الاستعدادية",
+    "en": "Readiness"
+  },
+  "eol_none": {
+    "ar": "لا موقع يعلن إصدار برمجية لصانعها دورات دعم منشورة.",
+    "en": "No site announces a version of software whose maker publishes support cycles."
+  },
+  "eol_home_label": {
+    "ar": "{product} على إصدار انتهى دعمه",
+    "en": "{product} on a version past its support"
   }
 }

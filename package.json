@@ -17,7 +17,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
-    "test": "node --test test/engine.test.mjs test/probe.test.mjs test/pipeline.test.mjs test/data.test.mjs test/name.test.mjs test/mcp.test.mjs test/site.test.mjs test/naming.test.mjs",
+    "test": "node --test test/engine.test.mjs test/probe.test.mjs test/pipeline.test.mjs test/data.test.mjs test/name.test.mjs test/mcp.test.mjs test/site.test.mjs test/naming.test.mjs test/readiness.test.mjs",
     "test:ui": "node test/ui.mjs",
     "preflight": "node scripts/preflight.mjs",
     "selftest": "node mcp/server.mjs --selftest",

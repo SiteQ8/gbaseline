@@ -5,9 +5,12 @@
 An open, independent, weekly measurement of how the public domains of the six Arabian Gulf states (Kuwait, Saudi Arabia, UAE, Qatar, Bahrain and Oman) protect email, DNS and the web, under 36 domain suffixes in six sectors, against 13 standards. Published every Monday as totals by state, sector and standard. No domain is named next to a result and the states are never ranked. Arabic first, English under /en/.
 Latest: issue 2, week of 2026-10-19, 11,917 live domains measured.
 
+The readiness index: whenever CISA catalogues an exploited vulnerability in software a website announces from outside (PHP, Apache, nginx, IIS, WordPress and the like), the first page of every live domain is read within a day and the share announcing an affected version is published, for the Gulf and for each state, with the share of announced software past its support (endoflife.date). Repeated after every issue, so the series shows how fast patches arrive.
+
 ## Pages
 - [Home, the Arabian Gulf as a whole](https://gbaseline.3li.info/) and [in English](https://gbaseline.3li.info/en/)
 - [Every issue](https://gbaseline.3li.info/issues/): one page per issue, with a page for each state
+- [Readiness](https://gbaseline.3li.info/readiness/): exploited vulnerabilities and end of life software against what the sites announce, with a page for each state
 - [The six states](https://gbaseline.3li.info/countries/)
 - [The thirteen standards](https://gbaseline.3li.info/standards/): each with why it matters, how a domain passes and how to fix it
 - [Method and data](https://gbaseline.3li.info/method/)
@@ -18,6 +21,7 @@ Latest: issue 2, week of 2026-10-19, 11,917 live domains measured.
 - [latest.csv](https://gbaseline.3li.info/data/open/latest.csv): every total of the latest issue
 - [history.csv](https://gbaseline.3li.info/data/open/history.csv): every issue so far
 - [summary.json](https://gbaseline.3li.info/data/summary.json) and [history.json](https://gbaseline.3li.info/data/history.json)
+- [readiness.json](https://gbaseline.3li.info/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used
 - Atom feed of issues: Arabic at https://gbaseline.3li.info/feed.xml, English at https://gbaseline.3li.info/en/feed.xml
 - Source, command line tool and MCP server: https://github.com/SiteQ8/gbaseline
 
@@ -26,4 +30,5 @@ Every figure on the site has a citation in Arabic and in English with the issue 
 
 ## بالعربية
 قياس أسبوعي مفتوح لمدى حماية النطاقات العامة في دول الخليج العربي الست للبريد الإلكتروني ونظام أسماء النطاقات والمواقع ينشر مجاميع يستطيع أي شخص الاستشهاد بها مع فحص مباشر لأي نطاق. مشروع مستقل مفتوح المصدر تصف أرقامه الإعدادات العامة فقط ولا تُعد تدقيقاً لأي جهة. يصدر عدد جديد صباح كل اثنين.
-الصفحات: الرئيسية https://gbaseline.3li.info/ والأعداد https://gbaseline.3li.info/issues/ والدول الست https://gbaseline.3li.info/countries/ والمعايير https://gbaseline.3li.info/standards/ والمنهجية والبيانات https://gbaseline.3li.info/method/ وفحص نطاق https://gbaseline.3li.info/check/ وفيلم الإطلاق https://gbaseline.3li.info/film/
+كلما أُدرجت ثغرة مستغلة في برمجية يراها الزائر من الخارج تُقرأ الصفحة الأولى لكل نطاق حي خلال يوم فنعرف كم من المواقع ما زال يعلن إصداراً مصاباً ثمّ يُعاد القياس بعد كل عدد لنرى كم تسرع الترقيعات.
+الصفحات: الرئيسية https://gbaseline.3li.info/ والأعداد https://gbaseline.3li.info/issues/ والاستعدادية https://gbaseline.3li.info/readiness/ والدول الست https://gbaseline.3li.info/countries/ والمعايير https://gbaseline.3li.info/standards/ والمنهجية والبيانات https://gbaseline.3li.info/method/ وفحص نطاق https://gbaseline.3li.info/check/ وفيلم الإطلاق https://gbaseline.3li.info/film/

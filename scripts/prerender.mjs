@@ -25,10 +25,42 @@ export function loadData(root = here) {
   const read = (p) => (existsSync(join(root, p)) ? JSON.parse(readFileSync(join(root, p), 'utf8')) : null);
   const summary = read('docs/data/summary.json');
   const history = read('docs/data/history.json');
+  const readiness = read('docs/data/readiness.json');
   return {
     B: read('docs/data/bundle.json'),
-    D: { summary: summary && summary.checks ? summary : null, history: Array.isArray(history) ? history : [] },
+    D: { summary: summary && summary.checks ? summary : null, history: Array.isArray(history) ? history : [], readiness: readiness && readiness.schema === 'readiness/1' ? readiness : null },
     pictures: read('data/src/pictures.json').pictures,
+  };
+}
+
+// The readiness index as search engines read it, on its page for the Gulf.
+export function readinessDataset(B, D, lang, k) {
+  const R = D.readiness;
+  const site = `https://${B.project.domain}`;
+  const name = lang === 'ar' ? B.project.name_ar : B.project.name_en;
+  const person = { '@type': 'Person', name: tr(B.project.author, lang), url: B.project.author_url };
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${name}: ${k.t('readiness_title')}`,
+    description: k.t('readiness_intro'),
+    url: `${site}${pathOf(lang, 'readiness/')}`,
+    isPartOf: `${site}${pathOf(lang)}`,
+    inLanguage: ['ar', 'en'],
+    isAccessibleForFree: true,
+    license: 'https://opensource.org/license/mit',
+    creator: person,
+    publisher: person,
+    keywords: lang === 'ar'
+      ? ['الثغرات المستغلة', 'الاستعدادية', 'الخليج العربي', 'CISA KEV', 'نهاية الدعم', 'بيانات مفتوحة']
+      : ['exploited vulnerabilities', 'readiness', 'Arabian Gulf', 'GCC', 'CISA KEV', 'end of life', 'open data'],
+    spatialCoverage: Object.values(B.scope.countries).map((c) => ({ '@type': 'Country', name: tr(c, lang) })),
+    temporalCoverage: `${R.history.length ? R.history[0].date : R.date}/..`,
+    dateModified: R.date,
+    variableMeasured: [k.t('kev_h'), k.t('eol_h'), k.t('announce_h')],
+    measurementTechnique: tr(B.ui.readiness_how[0], lang),
+    isBasedOn: ['https://www.cisa.gov/known-exploited-vulnerabilities-catalog', 'https://nvd.nist.gov/', 'https://endoflife.date/'],
+    distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${site}/data/readiness.json` }],
   };
 }
 
@@ -89,9 +121,11 @@ export function structured(data, route, lang, v) {
   if (route.page === 'standard') trail.push([v.title, route.rel]);
   if (route.page === 'issues' || route.page === 'issue') trail.push([k.t('nav_issues'), 'issues/']);
   if (route.page === 'issue') { trail.push([k.t('issue', { n: route.n }), `issues/${route.n}/`]); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
+  if (route.page === 'readiness') { trail.push([k.t('nav_readiness'), 'readiness/']); if (route.place !== 'GCC') trail.push([k.place(route.place), route.rel]); }
   if (['check', 'method', 'film'].includes(route.page)) trail.push([v.title, route.rel]);
   if (trail.length > 1) out.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map(([label, rel], i) => ({ '@type': 'ListItem', position: i + 1, name: label, item: url(rel) })) });
   if (route.page === 'home') out.push(dataset(B, D, lang));
+  if (route.page === 'readiness' && route.place === 'GCC' && D.readiness) out.push(readinessDataset(B, D, lang, k));
   if (route.page === 'issue' && route.place === 'GCC') {
     const issue = issueOf(D, route.n);
     const main = dataset(B, D, lang);
@@ -193,7 +227,7 @@ export function sitemap(B, D) {
   const entries = routes(B, D).flatMap((r) => LANGS.map((lang) => [
     '  <url>',
     `    <loc>${site}${pathOf(lang, r.rel)}</loc>`,
-    `    <lastmod>${r.page === 'issue' ? D.history[r.n - 1]?.date || lastmod : r.page === 'film' ? FILM.date : lastmod}</lastmod>`,
+    `    <lastmod>${r.page === 'issue' ? D.history[r.n - 1]?.date || lastmod : r.page === 'film' ? FILM.date : r.page === 'readiness' && D.readiness ? D.readiness.date : lastmod}</lastmod>`,
     ...LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${site}${pathOf(l, r.rel)}"/>`),
     ...(r.page === 'film' ? video(lang) : []),
     '  </url>',
@@ -253,6 +287,7 @@ export function llms(data) {
   const { B, D } = data;
   const site = `https://${B.project.domain}`;
   const s = D.summary;
+  const R = D.readiness;
   const k = kit({ ...data, lang: 'en', route: { page: 'home', rel: '' } });
   const ka = kit({ ...data, lang: 'ar', route: { page: 'home', rel: '' } });
   const states = listed(k, Object.keys(B.scope.countries).map((cc) => k.place(cc)));
@@ -264,9 +299,12 @@ export function llms(data) {
     `An open, independent, weekly measurement of how the public domains of the six Arabian Gulf states (${states}) protect email, DNS and the web, under ${B.scope.suffixes.length} domain suffixes in six sectors, against ${CHECKS.length} standards. Published every Monday as totals by state, sector and standard. No domain is named next to a result and the states are never ranked. Arabic first, English under /en/.`,
     s ? `Latest: issue ${s.issue}, week of ${s.date}, ${k.num(s.inventory.GCC.all.live)} live domains measured.` : '',
     '',
+    `The readiness index: whenever CISA catalogues an exploited vulnerability in software a website announces from outside (PHP, Apache, nginx, IIS, WordPress and the like), the first page of every live domain is read within a day and the share announcing an affected version is published, for the Gulf and for each state, with the share of announced software past its support (endoflife.date). Repeated after every issue, so the series shows how fast patches arrive.${R ? ` Latest census: ${R.date}, ${k.num(R.places.GCC.sites)} first pages read, ${R.kev.length} exploited vulnerabilities followed.` : ''}`,
+    '',
     '## Pages',
     `- [Home, the Arabian Gulf as a whole](${site}/) and [in English](${site}/en/)`,
     `- [Every issue](${site}/issues/): one page per issue, with a page for each state`,
+    `- [Readiness](${site}/readiness/): exploited vulnerabilities and end of life software against what the sites announce, with a page for each state`,
     `- [The six states](${site}/countries/)`,
     `- [The thirteen standards](${site}/standards/): each with why it matters, how a domain passes and how to fix it`,
     `- [Method and data](${site}/method/)`,
@@ -277,6 +315,7 @@ export function llms(data) {
     `- [latest.csv](${site}/data/open/latest.csv): every total of the latest issue`,
     `- [history.csv](${site}/data/open/history.csv): every issue so far`,
     `- [summary.json](${site}/data/summary.json) and [history.json](${site}/data/history.json)`,
+    `- [readiness.json](${site}/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used`,
     `- Atom feed of issues: Arabic at ${site}/feed.xml, English at ${site}/en/feed.xml`,
     `- Source, command line tool and MCP server: ${B.project.repo}`,
     '',
@@ -285,7 +324,8 @@ export function llms(data) {
     '',
     '## بالعربية',
     `${tr(B.project.about, 'ar')} ${ka.t('foot_note')} ${ka.t('foot_monday')}`,
-    `الصفحات: الرئيسية ${site}/ والأعداد ${site}/issues/ والدول الست ${site}/countries/ والمعايير ${site}/standards/ والمنهجية والبيانات ${site}/method/ وفحص نطاق ${site}/check/ وفيلم الإطلاق ${site}/film/`,
+    `${ka.t('readiness_intro')}`,
+    `الصفحات: الرئيسية ${site}/ والأعداد ${site}/issues/ والاستعدادية ${site}/readiness/ والدول الست ${site}/countries/ والمعايير ${site}/standards/ والمنهجية والبيانات ${site}/method/ وفحص نطاق ${site}/check/ وفيلم الإطلاق ${site}/film/`,
     '',
   ].join('\n');
 }
@@ -304,7 +344,7 @@ export function renderSite(data) {
 }
 
 // The folders the printer owns, so pages of states, standards or issues that no longer exist are removed.
-const OWNED = ['en', 'countries', 'standards', 'check', 'method', 'film', 'issues'];
+const OWNED = ['en', 'countries', 'readiness', 'standards', 'check', 'method', 'film', 'issues'];
 
 function listOwned(dir) {
   const out = [];
