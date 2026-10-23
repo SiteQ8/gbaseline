@@ -1172,6 +1172,7 @@ function readinessSection(k) {
     more,
   ] : [h('p', { class: 'lead', 'data-rise': '' }, k.t('readiness_pending')), more];
   body.push(h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href(REPORT_REL) }, k.t('readiness_report_link'))));
+  body.push(h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href('cis/') }, k.t('cis_home_link'))));
   return ledger(k, 'ready', k.t('readiness_title'), body, { note: k.t('readiness_home_note'), panel: false, cls: 'ready' });
 }
 

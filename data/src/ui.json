@@ -1434,5 +1434,9 @@
   "cis_col_count": {
     "ar": "يجتاز من مقيس",
     "en": "Meeting of measured"
+  },
+  "cis_home_link": {
+    "ar": "الأرقام نفسها مقروءة بضوابط CIS",
+    "en": "The same figures read against the CIS Controls"
   }
 }
