@@ -848,6 +848,11 @@ function howSection(k, R) {
     k.B.ui.readiness_how.map((x) => h('p', { class: 'how-p', 'data-rise': '' }, tr(x, k.lang))),
     h('h3', { class: 'sub-h', 'data-rise': '' }, k.t('readiness_sources_h')),
     sourcesList(k, R),
+    h('h3', { class: 'sub-h', 'data-rise': '' }, k.t('readiness_follow_h')),
+    h('p', { class: 'how-p', 'data-rise': '' }, k.t('readiness_follow')),
+    h('ul', { class: 'refs', 'data-rise': '' },
+      h('li', {}, h('a', { href: `${k.B.project.repo}/issues?q=label%3Areadiness-alert`, rel: 'noopener' }, k.t('readiness_follow_issues'))),
+      h('li', {}, h('a', { href: k.href('readiness/feed.xml') }, k.t('readiness_feed_note')))),
   ], { panel: false, cls: 'how' });
 }
 
