@@ -1350,5 +1350,69 @@
   "readiness_follow_issues": {
     "ar": "تنبيهات الاستعدادية على GitHub",
     "en": "Readiness alerts on GitHub"
+  },
+  "cis_title": {
+    "ar": "ضوابط CIS",
+    "en": "CIS Controls"
+  },
+  "cis_h_state": {
+    "ar": "ضوابط CIS في {place}",
+    "en": "CIS Controls in {place}"
+  },
+  "cis_intro": {
+    "ar": "ما يمكن رؤيته من الخارج لكل ضابط حماية من ضوابط CIS الإصدار 8.1 مقيساً على النطاقات العامة في {place} وهو دليل ظاهر على الضابط لا تقييم كامل له.",
+    "en": "What can be seen from outside for each CIS Controls v8.1 safeguard, measured across the public domains of {place}, as visible evidence for the safeguard and not a full assessment of it."
+  },
+  "cis_note": {
+    "ar": "كل رقم نسبة ما يجتاز الدليل الظاهر ولا يعني الامتثال للضابط لأن أغلب متطلباته داخلية لا تُرى من الخارج.",
+    "en": "Each figure is the share meeting the visible evidence, and it does not mean the safeguard is met, since most of what it asks happens inside and cannot be seen from outside."
+  },
+  "cis_ig": {
+    "ar": "مجموعة التنفيذ {n}",
+    "en": "Implementation Group {n}"
+  },
+  "cis_ev_supported": {
+    "ar": "تعلن إصداراً ما زال مدعوماً",
+    "en": "Announce a version still supported"
+  },
+  "cis_ev_patched": {
+    "ar": "على آخر إصدار في دورة دعمها",
+    "en": "On the latest release of their support cycle"
+  },
+  "cis_ev_unexposed": {
+    "ar": "لا تعلن إصداراً مصاباً بثغرة مستغلة",
+    "en": "Announce no version hit by an exploited vulnerability"
+  },
+  "cis_ev_sites": {
+    "ar": "{pass} من {sites}",
+    "en": "{pass} of {sites}"
+  },
+  "cis_pending": {
+    "ar": "يظهر مع قياس الاستعدادية القادم",
+    "en": "Appears with the next readiness census"
+  },
+  "cis_credit": {
+    "ar": "ضوابط CIS من مركز أمن الإنترنت (CIS) وتُستخدم أرقام الضوابط وعناوينها ومجموعات تنفيذها كما نشرها دون تعديل بموجب رخصة CC BY-NC-ND 4.0.",
+    "en": "CIS Controls® by the Center for Internet Security, Inc. Safeguard numbers, titles and Implementation Groups are used as CIS publishes them, unchanged, under CC BY-NC-ND 4.0."
+  },
+  "cis_more": {
+    "ar": "ضوابط CIS على موقع CIS",
+    "en": "The CIS Controls on the CIS site"
+  },
+  "cis_licence": {
+    "ar": "نص الرخصة",
+    "en": "The licence"
+  },
+  "cis_states": {
+    "ar": "ضوابط CIS في كل دولة",
+    "en": "The CIS Controls in each state"
+  },
+  "cis_page_more": {
+    "ar": "كل الضوابط وطريقة ربطها",
+    "en": "Every safeguard and how it is tied"
+  },
+  "cis_why": {
+    "ar": "تربط هذه الصفحة ما يقيسه خط الأساس بضوابط CIS التي تعتمدها كثير من الجهات في الخليج العربي فيقرأ كل فريق أرقام دولته بلغة الإطار الذي يعمل به.",
+    "en": "This page ties what the baseline measures to the CIS Controls many organisations in the Arabian Gulf work with, so each team reads its state's figures in the language of the framework it already uses."
   }
 }

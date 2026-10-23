@@ -32,6 +32,10 @@ The films on the site's film page, `docs/film/gbaseline-film-ar.mp4` and `docs/f
 - **The National Vulnerability Database**, NVD, of the National Institute of Standards and Technology (https://nvd.nist.gov), read through its API, for the versions each vulnerability affects. This product uses the NVD API but is not endorsed or certified by the NVD.
 - **endoflife.date** (https://endoflife.date, https://github.com/endoflife-date/endoflife.date), read through its API, for the support cycles of each product. Its data is under the MIT licence. The cycles of Microsoft IIS, which endoflife.date does not list, are Microsoft's lifecycle dates for the Windows Server each version ships with, kept in `docs/assets/engine/software.js`.
 
+## CIS Controls
+
+CIS Controls® v8.1 by the Center for Internet Security, Inc. (https://www.cisecurity.org/controls/v8-1), licensed under CC BY-NC-ND 4.0 (https://creativecommons.org/licenses/by-nc-nd/4.0/). The site and `data/src/cis.json` quote the numbers, titles and Implementation Groups of six safeguards as CIS publishes them, unchanged, the Arabic titles from the CIS Controls v8.1.2 Arabic worksheet, for non commercial use with this credit. The CIS Controls themselves are not reproduced or modified here; the figures beside each safeguard are this project's own outside evidence, not an assessment against the CIS Controls.
+
 ## Standards
 
 The checks follow RFC 7489 (DMARC), RFC 7208 (SPF), RFC 8461 (MTA-STS), RFC 8460 (TLS-RPT), RFC 4033 and RFC 9364 (DNSSEC), RFC 8659 (CAA), RFC 6797 (HSTS), RFC 8446 (TLS 1.3), RFC 8996 (deprecating TLS 1.0 and 1.1), RFC 9525 (service identity), RFC 9116 (security.txt), FIPS 203 (ML-KEM) and the IETF draft on hybrid ECDHE and ML-KEM key agreement for TLS 1.3.

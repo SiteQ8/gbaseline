@@ -313,6 +313,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/readiness/cve-2017-7269/"/>
   </url>
   <url>
+    <loc>https://gbaseline.3li.info/cis/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/cis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/cis/"/>
+  </url>
+  <url>
+    <loc>https://gbaseline.3li.info/en/cis/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/cis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/cis/"/>
+  </url>
+  <url>
     <loc>https://gbaseline.3li.info/standards/</loc>
     <lastmod>2026-10-19</lastmod>
     <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/standards/"/>
