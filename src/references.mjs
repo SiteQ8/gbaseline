@@ -6,7 +6,9 @@ import { PRODUCTS, PRODUCT_IDS, kevProduct, rangesFromNvd } from '../docs/assets
 export const KEV_URL = 'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json';
 export const NVD_URL = 'https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=';
 export const EOL_URL = 'https://endoflife.date/api/';
-export const KEV_WINDOW_DAYS = 365;
+// The whole catalogue is followed, since a site still announcing a version hit years ago is still exposed: the
+// window only keeps an entry older than the catalogue itself from ever counting.
+export const KEV_WINDOW_DAYS = 3650;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -25,7 +27,7 @@ async function getJson(url, fetchImpl, { timeout = 30000, headers = {} } = {}) {
 }
 
 // The catalogue entries that concern a product the measurement can see, added within the window, plus any
-// entry already followed so its series continues.
+// entry already followed so its series continues. Newest first.
 export function relevantKev(catalogue, { today, known = [], windowDays = KEV_WINDOW_DAYS } = {}) {
   const since = new Date(Date.parse(`${today}T00:00:00Z`) - windowDays * 86400000).toISOString().slice(0, 10);
   const keep = new Set(known);
