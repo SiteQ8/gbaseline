@@ -1,0 +1,14 @@
+{
+  "title": "Gulf Cybersecurity Baseline | خط الأساس الخليجي للأمن السيبراني",
+  "description": "An open weekly measurement of how well the public domains of the six Arabian Gulf states (Kuwait, Saudi Arabia, the United Arab Emirates, Qatar, Bahrain and Oman) protect email, DNS and the web: thirteen standards across 36 domain suffixes in six sectors, published every Monday as totals by state, sector and standard, with open CSV and JSON. No domain is named next to a result and the states are never ranked. Each release archives one issue with its data. Site: https://gbaseline.3li.info",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [{ "name": "AlEnezi, Ali" }],
+  "keywords": ["cybersecurity", "Arabian Gulf", "GCC", "Kuwait", "Saudi Arabia", "United Arab Emirates", "Qatar", "Bahrain", "Oman", "DMARC", "SPF", "DNSSEC", "HTTPS", "HSTS", "TLS", "post quantum", "security.txt", "open data"],
+  "language": "ara",
+  "related_identifiers": [
+    { "identifier": "https://gbaseline.3li.info", "relation": "isSupplementTo", "resource_type": "dataset", "scheme": "url" },
+    { "identifier": "https://github.com/SiteQ8/gbaseline", "relation": "isSupplementTo", "scheme": "url" }
+  ]
+}
