@@ -11,6 +11,8 @@ export const EOL_URL = 'https://endoflife.date/api/';
 export const KEV_WINDOW_DAYS = 3650;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// The catalogue's words, with their typographic dashes written as plain hyphens, as everything on the site is.
+const plain = (s) => String(s || '').replace(/[\u2010-\u2015]/g, '-').replace(/\s+/g, ' ').trim();
 
 async function getJson(url, fetchImpl, { timeout = 30000, headers = {} } = {}) {
   const ctrl = new AbortController();
@@ -36,7 +38,7 @@ export function relevantKev(catalogue, { today, known = [], windowDays = KEV_WIN
     const id = kevProduct(e);
     if (!id) continue;
     if (e.dateAdded < since && !keep.has(e.cveID)) continue;
-    out.push({ cve: e.cveID, product: id, vendor: e.vendorProject, productName: e.product, name: e.vulnerabilityName, description: e.shortDescription, added: e.dateAdded, due: e.dueDate, ransomware: e.knownRansomwareCampaignUse, notes: String(e.notes || '').split(/\s*;\s*/).filter((u) => /^https?:\/\//.test(u)) });
+    out.push({ cve: e.cveID, product: id, vendor: plain(e.vendorProject), productName: plain(e.product), name: plain(e.vulnerabilityName), description: plain(e.shortDescription), added: e.dateAdded, due: e.dueDate, ransomware: e.knownRansomwareCampaignUse, notes: String(e.notes || '').split(/\s*;\s*/).filter((u) => /^https?:\/\//.test(u)) });
   }
   return out.sort((a, b) => (a.added < b.added ? 1 : a.added > b.added ? -1 : a.cve < b.cve ? 1 : -1));
 }
