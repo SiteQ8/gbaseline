@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { identify, cleanVersion, compareVersions, support, affected, rangesFromNvd, kevProduct, compactSoftware } from '../docs/assets/engine/software.js';
 import { relevantKev, newKev, fetchReferences } from '../src/references.mjs';
 import { aggregateReadiness, exposure } from '../src/readiness.mjs';
+import { alertsToSend, alertText } from '../scripts/alert.mjs';
 import { census, mergeCensus } from '../src/census.mjs';
 import { readJson } from './helpers.mjs';
 
@@ -161,4 +162,19 @@ test('the census asks every live domain once, in shards that cover the inventory
   assert.deepEqual(all.rows.map((r) => r.d), ['a.gov.kw', 'b.gov.kw', 'c.edu.sa', 'd.com.qa', 'e.org.om']);
   assert.equal(all.rows[0].c, 'KW');
   assert.equal(all.rows[2].s, 'education');
+});
+
+test('a newly measured exploited vulnerability is announced once, in both languages, with no domain named', async () => {
+  const refs = await fetchReferences({ today: TODAY, fetchImpl: fakeFetch(), nvdKey: 'test' });
+  const doc = aggregateReadiness(rows, scope, refs, { date: TODAY, run: 'watch' });
+  assert.deepEqual(alertsToSend(doc).map((e) => e.cve), ['CVE-2026-1001'], 'measured and recent: announced');
+  assert.deepEqual(alertsToSend(doc, ['CVE-2026-1001 · PHP · 33.3% of announcing sites in the Arabian Gulf affected']), [], 'announced once');
+  assert.deepEqual(alertsToSend(doc, [], { windowDays: 1 }), [], 'an old entry measured for the first time is not news');
+  const { title, body } = alertText(doc, doc.kev[0], { domain: 'gbaseline.3li.info' });
+  assert.match(title, /^CVE-2026-1001 · PHP · 33\.3% /);
+  assert.match(body, /33\.3٪ من المواقع التي تعلن إصدار PHP كاملاً تعلن إصداراً مصاباً بها أي 1 من 3/);
+  assert.match(body, /https:\/\/gbaseline\.3li\.info\/en\/readiness\/cve-2026-1001\//);
+  assert.ok(!/\.(gov|edu)\.(kw|sa)/.test(body), 'no domain named');
+  assert.ok(!/[\u2010-\u2015]/.test(title + body), 'no Unicode dashes');
+  assert.ok(!/\.\s+[وف]/.test(body), 'no Arabic sentence cut by a period before its connective');
 });
