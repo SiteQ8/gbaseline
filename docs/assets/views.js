@@ -6,6 +6,7 @@ import { h, frag } from './vnode.js';
 import { CHECKS, GROUPS, PASS_LEVELS, NA_LEVELS } from './engine/checks.js';
 import { CLAUSES, clauseShare } from './engine/clauses.js';
 import { PRODUCTS } from './engine/software.js';
+import { cisFigures } from './engine/cis.js';
 import { tr, fill, number, percent, counted, dateLong } from './engine/i18n.js';
 
 export const LANGS = ['ar', 'en'];
@@ -620,7 +621,7 @@ function viewMethod(k) {
     })))));
   const q = s ? s.quality : null;
   const agree = q && (q.agreement.same + q.agreement.differ) ? (q.agreement.same / (q.agreement.same + q.agreement.differ)) * 100 : null;
-  const dl = [['dl_latest_csv', '/data/open/latest.csv'], ['dl_history_csv', '/data/open/history.csv'], ['dl_summary_json', '/data/summary.json'], ['dl_history_json', '/data/history.json']];
+  const dl = [['dl_latest_csv', '/data/open/latest.csv'], ['dl_history_csv', '/data/open/history.csv'], ['dl_summary_json', '/data/summary.json'], ['dl_history_json', '/data/history.json'], ['dl_cis_csv', '/data/open/cis.csv'], ...(k.D.readiness ? [['dl_readiness_csv', '/data/open/readiness.csv'], ['dl_readiness_json', '/data/readiness.json']] : [])];
   const mcp = JSON.stringify({ mcpServers: { [k.B.project.slug]: { command: 'npx', args: ['-y', `github:${repo}`, 'mcp'] } } }, null, 2);
   const body = [
     sec('scope', 'm_scope_h', paras('m_scope'), h('h3', {}, k.t('m_suffixes')), legend, suffixes),
@@ -974,31 +975,26 @@ function viewKev(k, cve) {
 
 // The evidence for one safeguard in one place: each check it rests on with its share of domains passing, and each
 // figure of the readiness index with its share of sites meeting it. Every share reads the same way: what meets it.
-function cisEvidence(k, place, e) {
-  if (e.check) {
-    const cell = ((k.D.summary.checks[e.check] || {})[place] || {}).all;
-    const m = cell ? cell.pass + cell.fail : 0;
-    return figRow('li', { 'data-rise': '' }, m ? k.pct((cell.pass / m) * 100) : k.t('no_data'),
-      h('a', { href: k.href(`standards/${SLUGS[e.check]}/`) }, k.P(k.B.checks[e.check].short)),
-      m ? [basis(k.t('of_count', { pass: k.num(cell.pass), measured: k.num(m) }))] : null);
+function cisEvidenceRow(k, place, x) {
+  if (x.kind === 'check') {
+    return figRow('li', { 'data-rise': '' }, x.of ? k.pct(x.share) : k.t('no_data'),
+      h('a', { href: k.href(`standards/${SLUGS[x.id]}/`) }, k.P(k.B.checks[x.id].short)),
+      x.of ? [basis(k.t('of_count', { pass: k.num(x.pass), measured: k.num(x.of) }))] : null);
   }
-  const R = k.D.readiness;
-  const pair = R && R.places[place] && R.places[place].site ? R.places[place].site[{ supported: 'support', patched: 'patch', unexposed: 'kev' }[e.readiness]] : null;
-  const label = h('a', { href: k.href(readinessRel(place)) }, k.t(`cis_ev_${e.readiness}`));
-  if (!pair) return figRow('li', { 'data-rise': '' }, k.t('no_data'), label, [basis(k.t('cis_pending'))]);
-  const [bad, of] = pair;
-  return figRow('li', { 'data-rise': '' }, of ? k.pct(((of - bad) / of) * 100) : k.t('no_data'), label,
-    of ? [basis(k.t('cis_ev_sites', { pass: k.num(of - bad), sites: k.words(of, 'w_site') }))] : null);
+  const label = h('a', { href: k.href(readinessRel(place)) }, k.t(`cis_ev_${x.id}`));
+  if (x.pending) return figRow('li', { 'data-rise': '' }, k.t('no_data'), label, [basis(k.t('cis_pending'))]);
+  return figRow('li', { 'data-rise': '' }, x.of ? k.pct(x.share) : k.t('no_data'), label,
+    x.of ? [basis(k.t('cis_ev_sites', { pass: k.num(x.pass), sites: k.words(x.of, 'w_site') }))] : null);
 }
 
 function cisList(k, place) {
   const C = k.B.cis;
-  return h('ol', { class: 'cis-list' }, C.safeguards.map((g) => h('li', { class: 'cis-sg', id: `cis-${g.id.replace('.', '-')}` },
+  return h('ol', { class: 'cis-list' }, cisFigures(C, k.D.summary, k.D.readiness, place).map((g) => h('li', { class: 'cis-sg', id: `cis-${g.id.replace('.', '-')}` },
     h('h3', { class: 'cis-h', 'data-rise': '' },
       h('span', { class: 'cis-n' }, ltr(g.id)), ' ',
       h('span', { class: 'cis-t' }, k.P(g.title))),
     h('p', { class: 'cis-c small soft', 'data-rise': '' }, h('span', { class: 'cis-ig' }, k.t('cis_ig', { n: Math.min(...g.ig) })), ' ', ltr(`CIS ${g.control}`), ' ', k.P(C.controls[g.control])),
-    h('ul', { class: 'rows cis-ev' }, g.evidence.map((e) => cisEvidence(k, place, e))))));
+    h('ul', { class: 'rows cis-ev' }, g.evidence.map((x) => cisEvidenceRow(k, place, x))))));
 }
 
 function cisCredit(k) {
@@ -1106,12 +1102,25 @@ function viewReport(k) {
         h('td', { class: 'n share' }, ltr(k.pct((n / g.sites) * 100)), bar((n / g.sites) * 100)),
         h('th', { scope: 'row' }, k.t(key0)),
         h('td', { class: 'n' }, ltr(`${k.num(n)} / ${k.num(g.sites)}`)))))));
+  const cisSheet = k.D.summary ? sheet('',
+    sheetHead(k, R, 4),
+    h('h2', { class: 'r-h2' }, k.t('cis_h_state', { place: k.t('in_GCC') })),
+    h('p', { class: 'r-note' }, k.t('cis_note')),
+    h('table', { class: 'r-table compact' },
+      h('thead', {}, h('tr', {}, h('th', { scope: 'col', class: 'n' }, k.t('report_col_share')), h('th', { scope: 'col' }, k.t('cis_col_evidence')), h('th', { scope: 'col', class: 'n' }, k.t('cis_col_count')))),
+      cisFigures(k.B.cis, k.D.summary, R, 'GCC').map((g) => h('tbody', {},
+        h('tr', { class: 'group' }, h('th', { colspan: 3, scope: 'colgroup' }, ltr(g.id), ' ', k.P(g.title), ' · ', k.t('cis_ig', { n: Math.min(...g.ig) }))),
+        g.evidence.map((x) => h('tr', {},
+          h('td', { class: 'n share' }, x.of ? [ltr(k.pct(x.share)), bar(x.share)] : k.t('no_data')),
+          h('th', { scope: 'row' }, x.kind === 'check' ? k.P(k.B.checks[x.id].short) : k.t(`cis_ev_${x.id}`)),
+          h('td', { class: 'n' }, x.of ? ltr(`${k.num(x.pass)} / ${k.num(x.of)}`) : '')))))),
+    h('p', { class: 'r-note' }, k.t('cis_credit'))) : null;
   const year = R.date.slice(0, 4);
   const cite = (lang) => k.tl('report_cite', lang, { author: tr(k.B.project.author, lang), year, name: lang === 'ar' ? k.B.project.name_ar : k.B.project.name_en, date: dateLong(R.date, lang), url: k.abs(REPORT_REL, lang) });
   const src = (R.sources || {});
   const read = (x) => (x && x.fetched ? ` · ${k.t('src_read', { date: k.date(String(x.fetched).slice(0, 10)) })}` : '');
   const methodSheet = sheet('',
-    sheetHead(k, R, 4),
+    sheetHead(k, R, k.D.summary ? 5 : 4),
     h('h2', { class: 'r-h2' }, k.t('report_method_h')),
     k.B.ui.readiness_how.map((x) => h('p', { class: 'r-p' }, tr(x, k.lang))),
     h('p', { class: 'r-p' }, k.t('report_states')),
@@ -1136,7 +1145,7 @@ function viewReport(k) {
   const main = [
     h('div', { class: 'masthead report-top' }, header(k, 'readiness')),
     bar0,
-    h('div', { class: 'sheets' }, cover, kevSheet, softSheet, methodSheet),
+    h('div', { class: 'sheets' }, cover, kevSheet, softSheet, cisSheet, methodSheet),
   ];
   return { title: `${k.t('report_title')} · ${k.date(R.date)}`, description: k.t('report_intro'), main };
 }
