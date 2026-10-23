@@ -136,6 +136,8 @@ Each site is asked for its first page once, as any browser would ask, and only w
 |---|---|
 | `docs/data/summary.json` | This issue: totals and levels by country, sector and check, inventory counts, DNSSEC availability per suffix, data quality |
 | `docs/data/history.json` | The weekly series |
+| `docs/data/open/cis.csv` | The CIS Controls evidence for the Gulf and each state: safeguard, group, evidence, meeting, of, share |
+| `docs/data/open/readiness.csv` | The readiness index as CSV: exposure per exploited vulnerability, software past support, what sites announce, whole-site counts |
 | `docs/data/readiness.json` | The readiness index: what the sites announce, the exploited vulnerabilities followed with the exposure of the Gulf and each state, the support cycles used, the sources and the series |
 | `docs/data/open/latest.csv` | This issue as CSV |
 | `docs/data/open/history.csv` | Every issue as CSV |
@@ -169,6 +171,7 @@ npx -y github:SiteQ8/gbaseline check example.com --dns-only
 | `gbaseline_check_info` | What a check means, when it passes, how to fix it, the standards and the Gulf figure |
 | `gbaseline_history` | The weekly series of one check |
 | `gbaseline_readiness` | The readiness index for the Gulf or one state: exploited vulnerabilities with the share of sites announcing an affected version, software past its support, what the sites announce, and the series |
+| `gbaseline_cis` | The CIS Controls v8.1 safeguards that can be partly seen from outside, for the Gulf or one state, with the share meeting each piece of visible evidence |
 | `gbaseline_methodology` | Method, limits, data quality and how to cite |
 | `gbaseline_check_domain` | A live full check of any domain from your machine |
 

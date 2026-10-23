@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { page, routes, pathOf, LANGS, issueCount, issueOf, kit, FILM, filmFile, listed, kevMeasured, kevRel } from '../docs/assets/views.js';
 import { PRODUCTS } from '../docs/assets/engine/software.js';
+import { cisFigures } from '../docs/assets/engine/cis.js';
 import { CLAUSES, clauseShare } from '../docs/assets/engine/clauses.js';
 import { toHtml } from '../docs/assets/vnode.js';
 import { CHECKS } from '../docs/assets/engine/checks.js';
@@ -318,6 +319,7 @@ export function llms(data) {
     `- [latest.csv](${site}/data/open/latest.csv): every total of the latest issue`,
     `- [history.csv](${site}/data/open/history.csv): every issue so far`,
     `- [summary.json](${site}/data/summary.json) and [history.json](${site}/data/history.json)`,
+    `- [cis.csv](${site}/data/open/cis.csv) and [readiness.csv](${site}/data/open/readiness.csv): the CIS Controls evidence and the readiness index as CSV, for the Gulf and each state`,
     `- [readiness.json](${site}/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used`,
     `- Atom feed of issues: Arabic at ${site}/feed.xml, English at ${site}/en/feed.xml`,
     `- Atom feed of the readiness index, one entry per exploited vulnerability with its own citable page: ${site}/readiness/feed.xml and ${site}/en/readiness/feed.xml`,
@@ -375,6 +377,33 @@ export function readinessFeed(data, lang) {
   ].join('\n');
 }
 
+// The open data of the readiness index and of the CIS Controls, as CSV: totals only, one row per figure, the
+// Arabian Gulf and each state, so a figure on the site can be checked and reused without reading the pages.
+const share1 = (a, b) => (b ? (Math.round((a / b) * 1000) / 10).toFixed(1) : '');
+const csvLine = (cells) => cells.map((c) => (/[",\n]/.test(String(c)) ? `"${String(c).replace(/"/g, '""')}"` : String(c))).join(',');
+
+export function readinessCsv(D) {
+  const R = D.readiness;
+  const out = [csvLine(['date', 'place', 'measure', 'subject', 'product', 'count', 'of', 'share'])];
+  for (const [place, p] of Object.entries(R.places)) {
+    for (const e of R.kev) { const x = p.kev[e.cve]; if (x && x.announced) out.push(csvLine([R.date, place, 'announcing_affected_version', e.cve, e.product, x.exposed, x.announced, share1(x.exposed, x.announced)])); }
+    for (const [id, x] of Object.entries(p.products)) if (x.versioned && R.cycles[id]) out.push(csvLine([R.date, place, 'version_past_support', id, id, x.eol, x.versioned, share1(x.eol, x.versioned)]));
+    for (const k of ['server', 'version', 'cms', 'front']) out.push(csvLine([R.date, place, `announce_${k}`, '', '', p.announce[k], p.sites, share1(p.announce[k], p.sites)]));
+    if (p.site) for (const [k, [bad, of]] of Object.entries(p.site)) out.push(csvLine([R.date, place, `sites_${k}`, '', '', bad, of, share1(bad, of)]));
+  }
+  return `${out.join('\n')}\n`;
+}
+
+export function cisCsv(B, D) {
+  const out = [csvLine(['place', 'safeguard', 'implementation_group', 'evidence', 'kind', 'meeting', 'of', 'share', 'measured_on'])];
+  for (const place of ['GCC', ...Object.keys(B.scope.countries)]) {
+    for (const g of cisFigures(B.cis, D.summary, D.readiness, place)) {
+      for (const x of g.evidence) out.push(csvLine([place, g.id, `IG${Math.min(...g.ig)}`, x.id, x.kind, x.pending ? '' : x.pass, x.pending ? '' : x.of, x.pending ? '' : share1(x.pass, x.of), x.date || '']));
+    }
+  }
+  return `${out.join('\n')}\n`;
+}
+
 // Every file the site prints, as a map of path to text.
 export function renderSite(data) {
   const files = {};
@@ -385,6 +414,8 @@ export function renderSite(data) {
   files['sitemap.xml'] = sitemap(data.B, data.D);
   for (const lang of LANGS) files[`${pathOf(lang, 'feed.xml').slice(1)}`] = feed(data, lang);
   files['llms.txt'] = llms(data);
+  if (data.D.summary) files['data/open/cis.csv'] = cisCsv(data.B, data.D);
+  if (data.D.readiness) files['data/open/readiness.csv'] = readinessCsv(data.D);
   if (data.D.readiness) for (const lang of LANGS) files[`${pathOf(lang, 'readiness/feed.xml').slice(1)}`] = readinessFeed(data, lang);
   return files;
 }

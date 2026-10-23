@@ -2798,6 +2798,26 @@
   "cis_why": {
    "ar": "تربط هذه الصفحة ما يقيسه خط الأساس بضوابط CIS التي تعتمدها كثير من الجهات في الخليج العربي فيقرأ كل فريق أرقام دولته بلغة الإطار الذي يعمل به.",
    "en": "This page ties what the baseline measures to the CIS Controls many organisations in the Arabian Gulf work with, so each team reads its state's figures in the language of the framework it already uses."
+  },
+  "dl_cis_csv": {
+   "ar": "أدلة ضوابط CIS بصيغة CSV",
+   "en": "CIS Controls evidence as CSV"
+  },
+  "dl_readiness_csv": {
+   "ar": "مؤشر الاستعدادية بصيغة CSV",
+   "en": "The readiness index as CSV"
+  },
+  "dl_readiness_json": {
+   "ar": "مؤشر الاستعدادية مع سلسلته بصيغة JSON",
+   "en": "The readiness index with its series as JSON"
+  },
+  "cis_col_evidence": {
+   "ar": "الدليل الظاهر",
+   "en": "Visible evidence"
+  },
+  "cis_col_count": {
+   "ar": "يجتاز من مقيس",
+   "en": "Meeting of measured"
   }
  }
 }
