@@ -214,6 +214,7 @@ function clauseList(k, issue, place, sector) {
         figRow('summary', { class: 'row' }, k.pct(f.v), k.t(`row_${cl.id}`), [
           h('span', { class: 'basis' }, k.t('of_count', { pass: k.num(f.count), measured: k.num(f.measured) })),
           h('span', { class: 'cite-w' }, k.t('cite')),
+          h('a', { class: 'std-w', href: k.href(`standards/${SLUGS[cl.id]}/`), title: k.P(k.B.checks[cl.id].short) }, k.t('clause_standard')),
         ]),
         slip(k, cl, { issue: issue.n, date: issue.date, place, sector, v: f.v })));
   }));
