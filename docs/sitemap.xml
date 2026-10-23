@@ -181,6 +181,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/readiness/om/"/>
   </url>
   <url>
+    <loc>https://gbaseline.3li.info/readiness/report/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/readiness/report/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/readiness/report/"/>
+  </url>
+  <url>
+    <loc>https://gbaseline.3li.info/en/readiness/report/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/readiness/report/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gbaseline.3li.info/en/readiness/report/"/>
+  </url>
+  <url>
     <loc>https://gbaseline.3li.info/readiness/cve-2024-38475/</loc>
     <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="ar" href="https://gbaseline.3li.info/readiness/cve-2024-38475/"/>

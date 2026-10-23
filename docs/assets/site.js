@@ -137,6 +137,11 @@ async function copyText(text, node) {
   }
 }
 
+// The report prints itself from a button, shown only where script runs.
+function printing() {
+  doc.querySelectorAll('[data-print]').forEach((b) => { b.hidden = false; b.addEventListener('click', () => window.print()); });
+}
+
 function copies() {
   doc.querySelectorAll('[data-copy]').forEach((b) => {
     b.hidden = false;
@@ -224,6 +229,7 @@ function motion() {
 if (!legacy()) {
   tabs();
   copies();
+  printing();
   stamp();
   motion();
   live();
