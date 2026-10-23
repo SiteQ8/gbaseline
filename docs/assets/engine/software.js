@@ -9,7 +9,18 @@ export const PRODUCTS = {
   php: { en: 'PHP', ar: 'PHP', kind: 'platform', eol: 'php', cpe: ['php:php'] },
   apache: { en: 'Apache HTTP Server', ar: 'خادم Apache', kind: 'server', eol: 'apache', cpe: ['apache:http_server'] },
   nginx: { en: 'nginx', ar: 'nginx', kind: 'server', eol: 'nginx', cpe: ['nginx:nginx', 'f5:nginx', 'f5:nginx_open_source'] },
-  iis: { en: 'Microsoft IIS', ar: 'Microsoft IIS', kind: 'server', eol: 'iis', cpe: ['microsoft:internet_information_services'] },
+  // IIS ships with Windows Server and is supported as long as it is, so its cycles are Microsoft's dates for each
+  // Windows Server, kept here because endoflife.date lists the servers and not IIS: 10.0 on 2016 and later, 8.5 on
+  // 2012 R2 and 8.0 on 2012 (both ended 10 October 2023), 7.5 on 2008 R2 and 7.0 on 2008 (14 January 2020), 6.0 on
+  // 2003 (14 July 2015).
+  iis: { en: 'Microsoft IIS', ar: 'Microsoft IIS', kind: 'server', eol: null, cpe: ['microsoft:internet_information_services'], cycles: [
+    { cycle: '10.0', eol: false, latest: '10.0', support: true },
+    { cycle: '8.5', eol: '2023-10-10', latest: '8.5', support: false },
+    { cycle: '8.0', eol: '2023-10-10', latest: '8.0', support: false },
+    { cycle: '7.5', eol: '2020-01-14', latest: '7.5', support: false },
+    { cycle: '7.0', eol: '2020-01-14', latest: '7.0', support: false },
+    { cycle: '6.0', eol: '2015-07-14', latest: '6.0', support: false },
+  ] },
   litespeed: { en: 'LiteSpeed', ar: 'LiteSpeed', kind: 'server', eol: null, cpe: ['litespeedtech:litespeed_web_server', 'litespeedtech:openlitespeed'] },
   openresty: { en: 'OpenResty', ar: 'OpenResty', kind: 'server', eol: null, cpe: ['openresty:openresty'] },
   tomcat: { en: 'Apache Tomcat', ar: 'Apache Tomcat', kind: 'server', eol: 'tomcat', cpe: ['apache:tomcat'] },

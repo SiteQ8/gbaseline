@@ -785,7 +785,7 @@ function kevList(k, R, place) {
 // The products whose makers publish support cycles, most announced first: the share of their announcing sites on a
 // version past its support, the count under it and the cycles seen most.
 function eolItems(p) {
-  return Object.entries(p.products).filter(([id, x]) => PRODUCTS[id] && PRODUCTS[id].eol && x.versioned).sort((a, b) => b[1].versioned - a[1].versioned || b[1].eol - a[1].eol);
+  return Object.entries(p.products).filter(([id, x]) => PRODUCTS[id] && (PRODUCTS[id].eol || PRODUCTS[id].cycles) && x.versioned).sort((a, b) => b[1].versioned - a[1].versioned || b[1].eol - a[1].eol);
 }
 
 function eolList(k, p) {
