@@ -585,7 +585,12 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
   .others-list { grid-template-columns: repeat(2, 1fr); }
   .others-list img { aspect-ratio: 4 / 3; }
   .std-list .fig { font-size: var(--step-body); }
-  .kev-exposure .fig-row { display: block; }
+  .kev-exposure .fig-row, .ready .facts .fig-row { display: block; }
+  .ready .facts .fig-row .fig { display: block; font-size: 2.5rem; line-height: 1.1; margin-bottom: var(--s-2); }
+  .ready .facts .fig-row { padding-bottom: var(--s-5); }
+  .ready .facts .fig-detail { margin-top: var(--s-2); }
+  .cis-c { padding-inline-start: 0; }
+  .cis-h { grid-template-columns: auto minmax(0, 1fr); }
   .kev-exposure .fig-row .fig { display: block; font-size: 3.5rem; line-height: 1.1; margin-bottom: var(--s-2); }
   .kev-exposure .fig-row .fig-detail { margin-top: var(--s-3); }
 }
