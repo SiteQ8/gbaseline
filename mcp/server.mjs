@@ -7,6 +7,7 @@ import { CHECKS, GROUPS, suffixChain } from '../docs/assets/engine/checks.js';
 import { createResolver, cleanDomain } from '../docs/assets/engine/dns.js';
 import { CLAUSES, clauseShare } from '../docs/assets/engine/clauses.js';
 import { PRODUCTS } from '../docs/assets/engine/software.js';
+import { cisFigures } from '../docs/assets/engine/cis.js';
 import { tr, ui, share, percent, counted, dateLong } from '../docs/assets/engine/i18n.js';
 import { bundle, project, scope, userAgent, levelText } from '../src/meta.mjs';
 import { bySuffixLength } from '../src/inventory.mjs';
@@ -40,6 +41,7 @@ export const tools = [
   { name: T('check_info'), title: 'What a check means and how to fix it', description: 'The question a check answers, why it matters, exactly when it passes, the steps to fix it, an example record, the standards behind it and the Gulf figure from the latest issue.', inputSchema: { type: 'object', properties: { check: CHECK, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
   { name: T('history'), title: 'Week by week series', description: 'The weekly series of one check for a place and sector: date, issue number, passing, measured and share.', inputSchema: { type: 'object', properties: { check: CHECK, place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
   { name: T('readiness'), title: 'Readiness against exploited vulnerabilities', description: 'The readiness index for the Gulf as a whole or one state: the date of the last census of what every live site announces about its software (server, platform, content system, version), every exploited vulnerability from the CISA KEV catalogue that concerns software visible from outside with the share of sites announcing an affected version, the share of announced software past its support on endoflife.date, and the series of both. A floor, not a count: only sites that announce a version are measured against a vulnerability. One place per call.', inputSchema: { type: 'object', properties: { place: PLACE, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
+  { name: T('cis'), title: 'CIS Controls evidence from outside', description: 'For the Gulf as a whole or one state: the CIS Controls v8.1 safeguards the measurement can partly see from outside (9.5, 3.10, 16.2, 2.2, 7.4, 7.7), each with its title and Implementation Group as CIS publishes them and the share meeting each piece of visible evidence (checks over domains, readiness figures over sites). Visible evidence only, never a statement that a safeguard is met. One place per call. CIS Controls by the Center for Internet Security, CC BY-NC-ND 4.0.', inputSchema: { type: 'object', properties: { place: PLACE, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('methodology'), title: 'Method, limits and citation', description: 'How the domains are found and measured, what is published and what is not, the limits of the measurement, data quality for the latest issue and how to cite a figure.', inputSchema: { type: 'object', properties: { lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('check_domain'), title: 'Check any domain live', description: 'Runs every check live for one domain from this machine: DNS over HTTPS through two public resolvers, then HTTPS, HSTS, TLS versions, the post quantum hybrid key exchange and security.txt. Takes a few seconds. dns_only skips the website and TLS probes.', inputSchema: { type: 'object', properties: { domain: { type: 'string', description: 'A domain such as example.com. A URL or an email address works too.' }, dns_only: { type: 'boolean', default: false }, lang: LANG, response_format: FORMAT }, required: ['domain'], additionalProperties: false }, annotations: { ...RO, idempotentHint: false, openWorldHint: true } },
 ];
@@ -152,6 +154,21 @@ export function makeHandlers(data) {
       ].join('\n');
       return result(out, md, args);
     },
+    [T('cis')](args) {
+      const lang = pickLang(args);
+      const s = requireSummary(data, lang);
+      const place = pick(args.place, PLACES, 'GCC');
+      const round = (v) => (v === null ? null : Math.round(v * 10) / 10);
+      const name = (x) => (x.kind === 'check' ? tr(bundle.checks[x.id].short, lang) : ui(bundle, `cis_ev_${x.id}`, lang));
+      const safeguards = cisFigures(bundle.cis, s, data.readiness, place).map((g) => ({ safeguard: g.id, control: g.control, implementation_group: Math.min(...g.ig), title: tr(g.title, lang), control_title: tr(g.controlTitle, lang), evidence: g.evidence.map((x) => ({ kind: x.kind, id: x.id, name: name(x), meeting: x.pending ? null : x.pass, of: x.pending ? null : x.of, unit: x.unit, share: x.pending ? null : round(x.share), measured_on: x.date })) }));
+      const out = { place, issue: s.issue, census: data.readiness ? data.readiness.date : null, note: ui(bundle, 'cis_note', lang), credit: ui(bundle, 'cis_credit', lang), licence: bundle.cis.licence, safeguards, page: site() ? `${site()}${lang === 'ar' ? '' : 'en/'}${place === 'GCC' ? 'cis/' : `countries/${place.toLowerCase()}/#cis`}` : null };
+      const md = [
+        `# ${J(lang, ui(bundle, 'cis_title', lang), placeName(place, lang))}`, '', out.note, '',
+        ...safeguards.flatMap((g) => [`## CIS ${g.safeguard} · ${g.title} (IG${g.implementation_group})`, ...g.evidence.map((x) => `- ${KV(lang, x.name, x.share === null ? ui(bundle, 'cis_pending', lang) : pctText(x.share, lang))}${x.share === null ? '' : ` ${C(lang, x.meeting, x.of)}`}`), '']),
+        out.credit,
+      ].join('\n');
+      return result(out, md, args);
+    },
     [T('methodology')](args) {
       const lang = pickLang(args);
       const join = (k) => bundle.ui[k].map((p) => tr(p, lang)).join('\n\n');
@@ -260,7 +277,7 @@ async function selftest() {
   let failn = 0;
   const ok = (cond, label) => { if (cond) pass += 1; else { failn += 1; console.error('FAIL: ' + label); } };
   try {
-    ok(tools.length === 7, 'seven tools');
+    ok(tools.length === 8, 'eight tools');
     ok(!tools.some((x) => /compare/.test(x.name)), 'no tool sets the states side by side');
     ok(!JSON.stringify(h[T('overview')]({}).structuredContent).includes('a.gov.kw'), 'no tool names a measured domain');
     const ov = h[T('overview')]({}).structuredContent;
@@ -282,6 +299,10 @@ async function selftest() {
     ok(rd.sites_read === 3 && rd.exploited_vulnerabilities.length === 1 && rd.exploited_vulnerabilities[0].share === 50 && rd.exploited_vulnerabilities[0].announcing_version === 2, 'one of the two sites announcing a PHP version announces an affected one');
     ok(rd.products.find((x) => x.product === 'php').share_past_support === 50 && !JSON.stringify(rd).includes('gov.kw'), 'half of the announced PHP versions are past their support, and no domain is named');
     ok(h[T('readiness')]({ place: 'SA' }).structuredContent.exploited_vulnerabilities[0].share === null, 'a state where no site announces the product has no share');
+    const ci = h[T('cis')]({ place: 'KW' }).structuredContent;
+    const cdm = ci.safeguards.find((g) => g.safeguard === '9.5').evidence.find((x) => x.id === 'dmarc');
+    ok(ci.safeguards.length === 6 && cdm.share === 50 && cdm.of === 2, 'CIS 9.5 in Kuwait reads the Kuwaiti DMARC share');
+    ok(ci.safeguards.find((g) => g.safeguard === '7.7').evidence[0].share === 50, 'CIS 7.7 reads the share of sites announcing no affected version');
     const empty = makeHandlers({ summary: null, history: [], readiness: null });
     ok(empty[T('overview')]({}).structuredContent.issue === null, 'overview works before the first issue');
     threw = false; try { empty[T('readiness')]({}); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'readiness before the first census throws ToolError');

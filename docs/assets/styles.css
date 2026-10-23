@@ -668,3 +668,8 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
 .cis-c { margin-top: var(--s-2); padding-inline-start: calc(3.2ch * 1.25 + var(--s-3)); }
 .cis-ev { padding-inline-start: 0; }
 .cis-ev { margin-top: var(--s-2); }
+
+.r-table tr.group th { color: var(--ink); border-bottom-color: var(--rule); padding-top: 14px; font-size: 0.8rem; }
+.r-table.compact th, .r-table.compact td { padding-top: 5px; padding-bottom: 5px; }
+.r-table.compact tr.group th { padding-top: 10px; }
+.r-table.compact td.share .bar { display: none; }

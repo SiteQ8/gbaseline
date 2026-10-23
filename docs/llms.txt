@@ -22,6 +22,7 @@ The readiness index: whenever CISA catalogues an exploited vulnerability in soft
 - [latest.csv](https://gbaseline.3li.info/data/open/latest.csv): every total of the latest issue
 - [history.csv](https://gbaseline.3li.info/data/open/history.csv): every issue so far
 - [summary.json](https://gbaseline.3li.info/data/summary.json) and [history.json](https://gbaseline.3li.info/data/history.json)
+- [cis.csv](https://gbaseline.3li.info/data/open/cis.csv) and [readiness.csv](https://gbaseline.3li.info/data/open/readiness.csv): the CIS Controls evidence and the readiness index as CSV, for the Gulf and each state
 - [readiness.json](https://gbaseline.3li.info/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used
 - Atom feed of issues: Arabic at https://gbaseline.3li.info/feed.xml, English at https://gbaseline.3li.info/en/feed.xml
 - Atom feed of the readiness index, one entry per exploited vulnerability with its own citable page: https://gbaseline.3li.info/readiness/feed.xml and https://gbaseline.3li.info/en/readiness/feed.xml
