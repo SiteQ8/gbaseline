@@ -23,6 +23,7 @@ The readiness index: whenever CISA catalogues an exploited vulnerability in soft
 - [summary.json](https://gbaseline.3li.info/data/summary.json) and [history.json](https://gbaseline.3li.info/data/history.json)
 - [readiness.json](https://gbaseline.3li.info/data/readiness.json): the readiness index with its series, the exploited vulnerabilities followed and the support cycles used
 - Atom feed of issues: Arabic at https://gbaseline.3li.info/feed.xml, English at https://gbaseline.3li.info/en/feed.xml
+- Atom feed of the readiness index, one entry per exploited vulnerability with its own citable page: https://gbaseline.3li.info/readiness/feed.xml and https://gbaseline.3li.info/en/readiness/feed.xml
 - Source, command line tool and MCP server: https://github.com/SiteQ8/gbaseline
 
 ## How to cite

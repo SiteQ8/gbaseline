@@ -23,6 +23,7 @@ export function routes(B, D) {
   for (const c of cc) out.push({ page: 'country', cc: c, rel: `countries/${c.toLowerCase()}/` });
   out.push({ page: 'readiness', place: 'GCC', rel: readinessRel('GCC') });
   for (const c of cc) out.push({ page: 'readiness', place: c, rel: readinessRel(c) });
+  for (const e of kevMeasured(D)) out.push({ page: 'kev', cve: e.cve, rel: kevRel(e.cve) });
   out.push({ page: 'standards', rel: 'standards/' });
   for (const c of CHECKS) out.push({ page: 'standard', id: c.id, rel: `standards/${SLUGS[c.id]}/` });
   out.push({ page: 'check', rel: 'check/' }, { page: 'method', rel: 'method/' }, { page: 'film', rel: 'film/' }, { page: 'issues', rel: 'issues/' });
@@ -726,6 +727,14 @@ function viewIssue(k, n, place) {
 /* ---------- readiness: what the sites announce, held against the exploited vulnerabilities and the support cycles ---------- */
 
 export const readinessRel = (place) => `readiness/${place === 'GCC' ? '' : `${place.toLowerCase()}/`}`;
+export const kevRel = (cve) => `readiness/${cve.toLowerCase()}/`;
+
+// The vulnerabilities the Gulf can be measured against: each has a page of its own that can be cited.
+export function kevMeasured(D) {
+  const R = D && D.readiness;
+  if (!R) return [];
+  return R.kev.filter((e) => { const x = R.places.GCC.kev[e.cve]; return x && x.announced; });
+}
 
 // The exposure of a place to one catalogued vulnerability: of the sites announcing a version of its product, the
 // share announcing an affected one. Null when no site announces a version, so nothing is read into silence.
@@ -774,7 +783,7 @@ function kevList(k, R, place) {
     const was = place === 'GCC' ? firstExposure(R, e.cve) : null;
     const vendor = vendorNote(e);
     return figRow('li', { id: e.cve.toLowerCase(), 'data-rise': '' }, k.pct(x.share),
-      [productName(k, e.product), ' ', cveId(e.cve)],
+      h('a', { href: k.href(kevRel(e.cve)) }, productName(k, e.product), ' ', cveId(e.cve)),
       [
         h('span', { class: 'kev-name', dir: 'ltr', lang: 'en' }, e.name),
         basis(k.t('kev_row_basis', { exposed: k.num(x.exposed), announced: k.num(x.announced) })),
@@ -877,6 +886,79 @@ function viewReadiness(k, place) {
   return { title, description: place === 'GCC' ? standfirst : `${standfirst} ${measured || k.t('readiness_pending')}`, main };
 }
 
+// A range NVD gives, written the way it is read: 2.4.0 ≤ v < 2.4.60, or = 6.0 for one version.
+export function rangeText(r) {
+  if (r.exact) return `v = ${r.exact}`;
+  const lo = r.start ? `${r.start} ${r.startIncluded === false ? '<' : '≤'} ` : '';
+  const hi = r.end ? ` ${r.endIncluded ? '≤' : '<'} ${r.end}` : '';
+  return `${lo}v${hi}`;
+}
+
+// The citation of one vulnerability's exposure in both languages, the page's language first.
+function kevCite(k, R, e, x) {
+  const order = k.lang === 'ar' ? ['ar', 'en'] : ['en', 'ar'];
+  const quote = (lang) => {
+    const product = tr(PRODUCTS[e.product] || { en: e.product, ar: e.product }, lang);
+    const url = k.abs(kevRel(e.cve), lang);
+    const name = lang === 'ar' ? k.B.project.name_ar : k.B.project.name_en;
+    const [before, after = ''] = tr(k.B.ui.kev_cite_src, lang).split('{url}');
+    const vars = { name, date: dateLong(R.date, lang) };
+    return h('blockquote', { lang, dir: lang === 'ar' ? 'rtl' : 'ltr', 'data-quote': lang },
+      h('p', {}, k.tl('kev_cite', lang, { pct: percent(x.share, lang), place: k.tl('in_GCC', lang), product, cve: e.cve })),
+      h('p', {}, fill(before, vars), ltr(url), fill(after, vars)));
+  };
+  return h('div', { class: 'cite-issue' },
+    order.map(quote),
+    h('p', { class: 'copies' },
+      order.map((lang) => h('button', { type: 'button', class: 'textbtn', 'data-copy': lang, hidden: true }, k.t(lang === 'ar' ? 'copy_ar' : 'copy_en'))),
+      h('span', { class: 'done', 'aria-live': 'polite', 'data-copied': k.t('copied') })));
+}
+
+// The page of one exploited vulnerability: the Gulf's exposure, the way to each state, the series, the affected
+// versions with the fix, the citation and the sources. Every figure is the Gulf's; a state's is on its own page.
+function viewKev(k, cve) {
+  const R = k.D.readiness;
+  const e = R.kev.find((x) => x.cve === cve);
+  const x = exposureOf(R.places.GCC, cve);
+  const product = k.P(PRODUCTS[e.product] || { en: e.product, ar: e.product });
+  const states = Object.keys(k.B.scope.countries);
+  const standfirst = k.t('kev_page_intro', { date: k.date(e.added), product });
+  const series = (R.history || []).filter((h0) => h0.kev && h0.kev[cve] && h0.kev[cve][1]).slice().reverse();
+  const vendor = vendorNote(e);
+  const main = [
+    h('div', { class: 'masthead slim' }, header(k, 'readiness'), strip(k)),
+    cover(k, { lines: [e.cve, product], standfirst, kind: 'page kev-cover' }),
+    ledger(k, 'exposure', k.t('kev_exposure_h'), [
+      h('ul', { class: 'facts' }, figRow('li', { 'data-rise': '' }, k.pct(x.share), k.t('kev_exposure_label', { product }), [
+        basis(k.t('kev_row_basis', { exposed: k.num(x.exposed), announced: k.num(x.announced) })),
+        h('span', {}, measuredLine(k, R, 'GCC')),
+      ])),
+      h('p', { class: 'kev-name big', dir: 'ltr', lang: 'en', 'data-rise': '' }, e.name),
+      e.description ? h('p', { class: 'small soft', dir: 'ltr', lang: 'en', 'data-rise': '' }, e.description) : null,
+      e.ransomware === 'Known' ? h('p', { 'data-rise': '' }, h('span', { class: 'flag' }, k.t('kev_ransomware'))) : null,
+      h('nav', { class: 'places after', 'aria-label': k.t('readiness_places'), 'data-rise': '' }, h('ul', {}, states.map((c) => h('li', {}, h('a', { href: `${k.href(readinessRel(c))}#${cve.toLowerCase()}` }, k.place(c)))))),
+      h('p', { class: 'after small soft', 'data-rise': '' }, k.t('kev_states_note')),
+    ], { note: k.t('kev_added', { date: k.date(e.added) }), panel: false, cls: 'kev-exposure' }),
+    ledger(k, 'series', k.t('kev_series_h'), h('ol', { class: 'rows series-list' }, series.map((s0) => {
+      const [ex, an] = s0.kev[cve];
+      return figRow('li', { 'data-rise': '' }, k.pct((ex / an) * 100), k.date(s0.date), [basis(k.t('kev_row_basis', { exposed: k.num(ex), announced: k.num(an) }))]);
+    })), { note: k.t('kev_series_note'), cls: 'series' }),
+    ledger(k, 'versions', k.t('kev_versions_h'), [
+      h('ul', { class: 'ranges', 'data-rise': '' }, e.ranges.map((r) => h('li', {}, h('span', { class: 'r-product' }, productName(k, r.product)), ' ', h('bdi', { dir: 'ltr', class: 'r-range' }, rangeText(r))))),
+      h('p', { class: 'after', 'data-rise': '' }, k.t('kev_fix', { product })),
+      e.due ? h('p', { class: 'after small soft', 'data-rise': '' }, k.t('kev_due', { date: k.date(e.due) })) : null,
+    ], { note: k.t('kev_versions_note'), panel: false, cls: 'versions' }),
+    ledger(k, 'cite', k.t('kev_cite_h'), h('div', { 'data-rise': '' }, kevCite(k, R, e, x)), { panel: false, cls: 'cite-sec' }),
+    ledger(k, 'read', k.t('kev_sources_h'), h('ul', { class: 'refs' },
+      h('li', {}, h('a', { href: `https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=${encodeURIComponent(cve)}`, rel: 'noopener' }, k.t('src_kev'))),
+      h('li', {}, h('a', { href: `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(cve)}`, rel: 'noopener' }, k.t('src_nvd'))),
+      vendor ? h('li', {}, h('a', { href: vendor, rel: 'noopener' }, k.t('kev_src_vendor'))) : null,
+      h('li', {}, h('a', { href: k.href('readiness/') }, k.t('readiness_back'))),
+      h('li', {}, h('a', { href: k.href('readiness/feed.xml') }, k.t('readiness_feed_note')))), { panel: false, cls: 'read' }),
+  ];
+  return { title: `${e.cve} · ${product}`, description: `${standfirst} ${k.t('kev_cite', { pct: k.pct(x.share), place: k.t('in_GCC'), product, cve })}.`, main };
+}
+
 // The readiness on the home page: the newest exploited vulnerability the Gulf's sites announce a version for and
 // the product most often past its support, each in the row of the figures, then the way to the whole page.
 function readinessSection(k) {
@@ -960,6 +1042,7 @@ export function page(ctx) {
   else if (r.page === 'issue') v = viewIssue(k, r.n, r.place);
   else if (r.page === 'film') v = viewFilm(k);
   else if (r.page === 'readiness') v = viewReadiness(k, r.place);
+  else if (r.page === 'kev') v = viewKev(k, r.cve);
   else v = viewNotFound(k);
   const body = h('div', { class: `site p-${r.page}`, id: 'top' },
     h('a', { class: 'skip', href: '#main' }, k.t('skip')),
