@@ -216,7 +216,7 @@ try {
   assert.equal(await page.locator('main a[href="/readiness/cve-2026-2002/"]').count(), 0, 'a vulnerability no site can be held against has no page');
   // The report: four sheets of A4 with the Gulf's figures, the citation, and the PDFs beside it.
   await go(page, 'readiness/report/');
-  assert.equal(await page.locator('.sheet').count(), 4, 'a cover and three sheets');
+  assert.equal(await page.locator('.sheet').count(), 5, 'a cover and four sheets, the CIS Controls among them');
   assert.match(await page.textContent('.cover-sheet'), /تقرير الاستعدادية/);
   assert.match(await page.textContent('.r-keys'), /18\.2٪/, 'the cover leads with the vulnerability most sites are exposed to');
   assert.equal(await page.locator('.report-bar a[href="/readiness/report/gbaseline-readiness-ar.pdf"]').count(), 1);
