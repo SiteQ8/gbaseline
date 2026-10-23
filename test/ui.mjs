@@ -225,6 +225,20 @@ try {
   await page.emulateMedia({ media: 'print' });
   assert.equal(await page.locator('.report-bar').isVisible(), false, 'nothing but the sheets is printed');
   await page.emulateMedia({ media: 'screen' });
+  // The CIS Controls: each safeguard with its CIS number, title and group as CIS publishes them, and the evidence
+  // the measurement can see, for the Gulf on its page and for each state on the state's own page.
+  await go(page, 'cis/');
+  assert.equal(await page.locator('#cis .cis-sg').count(), B.cis.safeguards.length);
+  assert.match(await page.textContent('#cis-9-5 .cis-t'), /تطبيق DMARC/);
+  assert.equal((await page.textContent('#cis-9-5 .cis-ev li:first-child .v')).trim(), '50.0٪', 'DMARC evidence is the Gulf share enforcing it');
+  assert.match(await page.textContent('#cis-7-7'), /لا تعلن إصداراً مصاباً بثغرة مستغلة/);
+  assert.match(await page.textContent('#cis'), /CC BY-NC-ND 4\.0/, 'CIS is credited with its licence');
+  assert.ok(!STRAY.test(await pageText(page)), 'cis: no stray null');
+  assert.ok(!NOT_JOINED.test(await pageText(page)), 'cis: no Arabic sentence cut by a period before its connective');
+  await go(page, 'countries/kw/');
+  assert.equal(await page.locator('#cis .cis-sg').count(), B.cis.safeguards.length, 'each state reads its own figures against the safeguards');
+  const kwCis = await page.textContent('#cis');
+  for (const c of codes.filter((x) => x !== 'KW')) assert.ok(!kwCis.includes(scope.countries[c].ar), `the Kuwaiti CIS figures never name ${scope.countries[c].en}`);
   await go(page, 'readiness/kw/');
   assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '0.0٪', 'the Kuwaiti site announcing a PHP version is not affected after the first census');
   assert.equal(await page.locator('nav.others a').count(), codes.length - 1, 'a state leads to the other five');
@@ -287,7 +301,7 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/ui-desktop-en.png`, fullPage: true });
   // A phone: no sideways scroll on any page, the mosaic comes before the title.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'readiness/cve-2026-1001/', 'readiness/report/', 'en/', 'en/readiness/report/', 'en/readiness/cve-2026-1001/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
+  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'readiness/cve-2026-1001/', 'readiness/report/', 'cis/', 'en/', 'en/readiness/report/', 'en/readiness/cve-2026-1001/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
     await go(phone, path);
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${path || 'home'}: no sideways scroll on a phone (overflow ${overflow}px)`);

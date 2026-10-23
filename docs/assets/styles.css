@@ -657,3 +657,14 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
   .p-report .sheet { width: 210mm; height: 297mm; min-height: 0; overflow: hidden; break-after: page; }
   .p-report .sheet:last-child { break-after: auto; }
 }
+
+/* ---------- the CIS Controls: each safeguard, then the rows of its evidence ---------- */
+.cis-list { display: grid; gap: var(--s-7); }
+.cis-h { display: grid; grid-template-columns: 3.2ch minmax(0, 1fr); align-items: baseline; column-gap: var(--s-3); font-size: var(--step-lead); line-height: 1.35; }
+:lang(ar) .cis-h { line-height: 1.6; }
+.cis-n { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--led); }
+.cis-t { font-weight: 600; }
+.cis-ig { display: inline-block; margin-inline-end: var(--s-2); padding: 0 8px; background: var(--amber); color: var(--navy); font-size: var(--step-small); font-weight: 500; line-height: 1.7; }
+.cis-c { margin-top: var(--s-2); padding-inline-start: calc(3.2ch * 1.25 + var(--s-3)); }
+.cis-ev { padding-inline-start: 0; }
+.cis-ev { margin-top: var(--s-2); }

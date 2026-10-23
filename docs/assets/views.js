@@ -25,6 +25,7 @@ export function routes(B, D) {
   for (const c of cc) out.push({ page: 'readiness', place: c, rel: readinessRel(c) });
   if (D && D.readiness) out.push({ page: 'report', rel: REPORT_REL });
   for (const e of kevMeasured(D)) out.push({ page: 'kev', cve: e.cve, rel: kevRel(e.cve) });
+  out.push({ page: 'cis', rel: 'cis/' });
   out.push({ page: 'standards', rel: 'standards/' });
   for (const c of CHECKS) out.push({ page: 'standard', id: c.id, rel: `standards/${SLUGS[c.id]}/` });
   out.push({ page: 'check', rel: 'check/' }, { page: 'method', rel: 'method/' }, { page: 'film', rel: 'film/' }, { page: 'issues', rel: 'issues/' });
@@ -272,6 +273,7 @@ function footer(k) {
       h('ul', { class: 'links' },
         h('li', {}, h('a', { href: k.href('issues/') }, k.t('nav_issues'))),
         h('li', {}, h('a', { href: k.href('readiness/') }, k.t('nav_readiness'))),
+        h('li', {}, h('a', { href: k.href('cis/') }, k.t('cis_title'))),
         h('li', {}, h('a', { href: k.href('film/') }, k.t('film_title'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#data` }, k.t('foot_data'))),
         h('li', {}, h('a', { href: `${k.href('method/')}#cli` }, k.t('foot_tools'))),
@@ -496,6 +498,7 @@ function viewCountry(k, cc) {
       inv && inv.all.retired ? h('p', { class: 'after', 'data-rise': '' }, k.t('country_retired', { n: k.num(inv.all.retired) })) : null,
       h('p', { class: 'small soft after', 'data-rise': '' }, k.t('countries_intro')),
     ], { note: k.t('chain_note') }),
+    issue ? cisSection(k, cc) : null,
     others(k, cc, (x) => `countries/${x.toLowerCase()}/`),
   ];
   return { title: k.place(cc), description: standfirst, main };
@@ -967,6 +970,63 @@ function viewKev(k, cve) {
   return { title: `${e.cve} · ${product}`, description: `${standfirst} ${k.t('kev_cite', { pct: k.pct(x.share), place: k.t('in_GCC'), product, cve })}.`, main };
 }
 
+/* ---------- the CIS Controls: what can be seen from outside for each safeguard ---------- */
+
+// The evidence for one safeguard in one place: each check it rests on with its share of domains passing, and each
+// figure of the readiness index with its share of sites meeting it. Every share reads the same way: what meets it.
+function cisEvidence(k, place, e) {
+  if (e.check) {
+    const cell = ((k.D.summary.checks[e.check] || {})[place] || {}).all;
+    const m = cell ? cell.pass + cell.fail : 0;
+    return figRow('li', { 'data-rise': '' }, m ? k.pct((cell.pass / m) * 100) : k.t('no_data'),
+      h('a', { href: k.href(`standards/${SLUGS[e.check]}/`) }, k.P(k.B.checks[e.check].short)),
+      m ? [basis(k.t('of_count', { pass: k.num(cell.pass), measured: k.num(m) }))] : null);
+  }
+  const R = k.D.readiness;
+  const pair = R && R.places[place] && R.places[place].site ? R.places[place].site[{ supported: 'support', patched: 'patch', unexposed: 'kev' }[e.readiness]] : null;
+  const label = h('a', { href: k.href(readinessRel(place)) }, k.t(`cis_ev_${e.readiness}`));
+  if (!pair) return figRow('li', { 'data-rise': '' }, k.t('no_data'), label, [basis(k.t('cis_pending'))]);
+  const [bad, of] = pair;
+  return figRow('li', { 'data-rise': '' }, of ? k.pct(((of - bad) / of) * 100) : k.t('no_data'), label,
+    of ? [basis(k.t('cis_ev_sites', { pass: k.num(of - bad), sites: k.words(of, 'w_site') }))] : null);
+}
+
+function cisList(k, place) {
+  const C = k.B.cis;
+  return h('ol', { class: 'cis-list' }, C.safeguards.map((g) => h('li', { class: 'cis-sg', id: `cis-${g.id.replace('.', '-')}` },
+    h('h3', { class: 'cis-h', 'data-rise': '' },
+      h('span', { class: 'cis-n' }, ltr(g.id)), ' ',
+      h('span', { class: 'cis-t' }, k.P(g.title))),
+    h('p', { class: 'cis-c small soft', 'data-rise': '' }, h('span', { class: 'cis-ig' }, k.t('cis_ig', { n: Math.min(...g.ig) })), ' ', ltr(`CIS ${g.control}`), ' ', k.P(C.controls[g.control])),
+    h('ul', { class: 'rows cis-ev' }, g.evidence.map((e) => cisEvidence(k, place, e))))));
+}
+
+function cisCredit(k) {
+  return h('p', { class: 'after small soft', 'data-rise': '' }, k.t('cis_credit'), ' ',
+    h('a', { href: k.B.cis.source, rel: 'noopener' }, k.t('cis_more')), ' ',
+    h('a', { href: k.B.cis.licence, rel: 'license noopener' }, k.t('cis_licence')));
+}
+
+// The section on the page of a state: its own figures against each safeguard, never another state's.
+function cisSection(k, cc) {
+  return ledger(k, 'cis', k.t('cis_h_state', { place: k.t(`in_${cc}`) }), [cisList(k, cc), h('p', { class: 'after', 'data-rise': '' }, h('a', { href: k.href('cis/') }, k.t('cis_page_more'))), cisCredit(k)],
+    { note: k.t('cis_note'), cls: 'cis' });
+}
+
+function viewCis(k) {
+  const s = k.D.summary;
+  const states = Object.keys(k.B.scope.countries);
+  const standfirst = k.t('cis_intro', { place: k.t('in_GCC') });
+  const main = [
+    h('div', { class: 'masthead slim' }, header(k, 'standards'), strip(k)),
+    cover(k, { lines: [k.t('cis_title')], standfirst, kind: 'page' }),
+    h('section', { class: 'lede', 'aria-labelledby': 'cis-why-h' }, h('h2', { id: 'cis-why-h', class: 'sr' }, k.t('cis_title')), h('p', { class: 'statement', 'data-rise': '' }, k.t('cis_why'))),
+    s ? ledger(k, 'cis', k.t('cis_h_state', { place: k.t('in_GCC') }), [cisList(k, 'GCC'), cisCredit(k)], { note: k.t('cis_note'), cls: 'cis' }) : null,
+    ledger(k, 'cis-states', k.t('cis_states'), h('nav', { class: 'places', 'aria-label': k.t('cis_states'), 'data-rise': '' }, h('ul', {}, states.map((c) => h('li', {}, h('a', { href: `${k.href(`countries/${c.toLowerCase()}/`)}#cis` }, k.place(c)))))), { panel: false, cls: 'cis-states' }),
+  ];
+  return { title: k.t('cis_title'), description: standfirst, main };
+}
+
 /* ---------- the readiness report: the same figures as sheets of A4, to print, to send and to keep as PDF ---------- */
 
 // The figures the report leads with: how many sites answered, the vulnerability most sites are exposed to, the
@@ -1167,6 +1227,7 @@ export function page(ctx) {
   else if (r.page === 'readiness') v = viewReadiness(k, r.place);
   else if (r.page === 'kev') v = viewKev(k, r.cve);
   else if (r.page === 'report') v = viewReport(k);
+  else if (r.page === 'cis') v = viewCis(k);
   else v = viewNotFound(k);
   const body = h('div', { class: `site p-${r.page}`, id: 'top' },
     h('a', { class: 'skip', href: '#main' }, k.t('skip')),

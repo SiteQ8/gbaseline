@@ -10,7 +10,11 @@ const CMS = new Set(PRODUCT_IDS.filter((id) => PRODUCTS[id].kind === 'cms'));
 // Whether a product's maker publishes support cycles the index can read, on endoflife.date or kept in the engine.
 export const hasCycles = (id) => Boolean(PRODUCTS[id] && (PRODUCTS[id].eol || PRODUCTS[id].cycles));
 
-const emptyPlace = () => ({ live: 0, sites: 0, announce: { server: 0, version: 0, platform: 0, cms: 0, front: 0 }, fronts: {}, products: {}, kev: {} });
+// site: counts of whole sites, for the evidence of a CIS safeguard. support: sites on a version past its support
+// of the sites whose versions can be placed in a support cycle; patch: sites behind the latest release of their cycle
+// of the sites whose cycle is known; kev: sites announcing a version affected by any exploited vulnerability followed
+// of the sites whose versions can be held against one. Each as [count, of].
+const emptyPlace = () => ({ live: 0, sites: 0, announce: { server: 0, version: 0, platform: 0, cms: 0, front: 0 }, fronts: {}, products: {}, kev: {}, site: { support: [0, 0], patch: [0, 0], kev: [0, 0] } });
 const emptyProduct = () => ({ sites: 0, versioned: 0, eol: 0, supported: 0, unknown: 0, behind: 0, cycles: {}, versions: {} });
 
 export function aggregateReadiness(rows, scope, refs, { date, run = 'census', previous = null, seconds = null } = {}) {
@@ -32,6 +36,7 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
       if (products.some(([id]) => CMS.has(id))) p.announce.cms += 1;
       if (fronts.length) p.announce.front += 1;
       for (const f of fronts) p.fronts[f] = (p.fronts[f] || 0) + 1;
+      const site = { decided: false, eol: false, cycled: false, behind: false, held: false, exposed: false };
       for (const [id, version] of products) {
         const x = p.products[id] || (p.products[id] = emptyProduct());
         x.sites += 1;
@@ -40,8 +45,10 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
         const cycles = (refs.cycles || {})[id] || null;
         const s = support(version, cycles, date);
         x[s] += 1;
+        if (s !== 'unknown') { site.decided = true; if (s === 'eol') site.eol = true; }
         const c = cycleOf(version, cycles);
         if (c) { x.cycles[c.cycle] = (x.cycles[c.cycle] || 0) + 1; if (c.latest && compareVersions(version, c.latest) < 0) x.behind += 1; }
+        if (c && c.latest) { site.cycled = true; if (compareVersions(version, c.latest) < 0) site.behind = true; }
         if (p === places.GCC) x.versions[version] = (x.versions[version] || 0) + 1;
         for (const k of kev) {
           if (k.product !== id) continue;
@@ -50,8 +57,13 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
           if (hit === null) continue;
           p.kev[k.cve].announced += 1;
           if (hit) p.kev[k.cve].exposed += 1;
+          site.held = true;
+          if (hit) site.exposed = true;
         }
       }
+      if (site.decided) { p.site.support[1] += 1; if (site.eol) p.site.support[0] += 1; }
+      if (site.cycled) { p.site.patch[1] += 1; if (site.behind) p.site.patch[0] += 1; }
+      if (site.held) { p.site.kev[1] += 1; if (site.exposed) p.site.kev[0] += 1; }
     }
   }
   // Versions of the whole Gulf, largest first and at most forty per product, so the file stays small.
@@ -62,6 +74,7 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
     date, run, sites: places.GCC.sites, live: places.GCC.live,
     kev: Object.fromEntries(Object.entries(places.GCC.kev).map(([cve, x]) => [cve, [x.exposed, x.announced]])),
     eol: Object.fromEntries(Object.entries(places.GCC.products).filter(([id]) => hasCycles(id)).map(([id, x]) => [id, [x.eol, x.versioned]])),
+    site: places.GCC.site,
   };
   const history = [...((previous && previous.history) || []).filter((h) => h.date !== date), entry].sort((a, b) => (a.date < b.date ? -1 : 1));
   return {
