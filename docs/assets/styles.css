@@ -187,10 +187,12 @@ main a:not(.btn):not(.cell):not(.reach-line) { text-decoration-color: color-mix(
 .clauses summary::-webkit-details-marker { display: none; }
 .clauses details[open] summary { color: var(--led); }
 .clauses details[open] .fig { color: var(--led); }
-.clauses .cite-w { color: var(--amber); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .32em; transition: text-underline-offset .2s var(--ease), color .2s var(--ease); }
+.clauses .cite-w, .clauses .std-w { color: var(--amber); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .32em; transition: text-underline-offset .2s var(--ease), color .2s var(--ease); }
+.clauses .std-w { color: var(--amber-soft); }
 .clauses summary:active .fig-label { color: var(--led); }
 @media (hover: hover) and (pointer: fine) {
   .clauses summary:hover .fig-label, .clauses summary:hover .cite-w { color: var(--led); }
+  .clauses .std-w:hover { color: var(--amber); }
   .clauses summary:hover .cite-w { text-underline-offset: .45em; }
 }
 .clauses li:target, .clauses li.stamped { margin-inline: -12px; padding-inline: 12px; background: var(--deep); }
