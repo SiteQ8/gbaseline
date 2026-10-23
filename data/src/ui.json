@@ -1010,12 +1010,12 @@
     "en": "The catalogue holds no exploited vulnerability in software whose version can be seen from outside."
   },
   "kev_row_basis": {
-    "ar": "{exposed} من {announced} يعلن إصداره",
-    "en": "{exposed} of {announced} announcing a version"
+    "ar": "{exposed} من {announced} يعلن إصداره كاملاً",
+    "en": "{exposed} of {announced} announcing a full version"
   },
   "kev_none_announce": {
-    "ar": "لا موقع يعلن إصداره",
-    "en": "No site announces its version"
+    "ar": "لا موقع يعلن إصداره كاملاً",
+    "en": "No site announces its full version"
   },
   "kev_added": {
     "ar": "أُدرجت في {date}",
@@ -1113,6 +1113,10 @@
     {
       "ar": "يُقاس بعد كل عدد أسبوعي وخلال يوم من إدراج ثغرة جديدة في برمجية مرئية ولا يُذكر اسم أي نطاق ولا تُرتب الدول.",
       "en": "It is measured after every weekly issue and within a day of a new entry for visible software, no domain is named and the states are never ranked."
+    },
+    {
+      "ar": "قد يعلن الموقع إصداراً أقدم من شيفرته حين تنقل توزيعة نظامه الترقيعات إلى الإصدار القديم كما تفعل Red Hat وDebian وقد لا يعلن إلا رقم الإصدار الرئيسي فلا يُحسب حينها إلا إذا كانت كل إصداراته مصابة أو كلها سليمة لذلك تقيس النسبة ما يعلنه الموقع لا ما يعمل فيه بالضبط.",
+      "en": "A site can announce a version older than its code when its distribution backports the fixes, as Red Hat and Debian do, and it can announce only its major, in which case it is counted only when every version under it is affected or none is, so the share measures what a site announces, not exactly what runs inside it."
     }
   ],
   "readiness_sources_h": {
@@ -1154,5 +1158,9 @@
   "eol_home_label": {
     "ar": "{product} على إصدار انتهى دعمه",
     "en": "{product} on a version past its support"
+  },
+  "kev_silent": {
+    "ar": "و{n} أخرى في {products} لا يعلن أي موقع إصدارها كاملاً فلا تُقاس بعد.",
+    "en": "And {n} more in {products}, which no site announces a full version of, so they are not measured yet."
   }
 }

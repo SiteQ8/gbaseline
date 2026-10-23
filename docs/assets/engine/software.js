@@ -124,22 +124,42 @@ export function support(version, cycles, today) {
   return oldest && compareVersions(version, oldest) < 0 ? 'eol' : 'unknown';
 }
 
-// Whether a version falls in one of the ranges a vulnerability names (as NVD writes them).
+// Whether a version falls in one of the ranges a vulnerability names (as NVD writes them): true, false, or null
+// when the site does not say enough to tell. A version given to fewer places than the bounds it is held against
+// (Drupal 10, Apache/2.4) stands for every version under it: it is affected when all of them are, clear when none
+// is, and undecided otherwise, so a site announcing only its major is never counted on a guess.
+const places = (v) => String(v).split('.').length;
+const below = (version, bound, included) => { const c = compareVersions(version, bound); return c < 0 || (c === 0 && included); };
+const above = (version, bound, included) => { const c = compareVersions(version, bound); return c > 0 || (c === 0 && included); };
+
+function inRange(version, r) {
+  const depth = Math.max(places(r.start || ''), places(r.end || ''), places(r.exact || ''));
+  const n = places(version);
+  // The lowest and the highest version the announcement can stand for.
+  const lo = version;
+  const hi = n >= depth ? version : `${version}${'.999999'.repeat(depth - n)}`;
+  if (r.exact) {
+    if (compareVersions(version, r.exact) === 0 && n >= depth) return true;
+    return above(r.exact, lo, true) && below(r.exact, hi, true) ? null : false;
+  }
+  if (!r.start && !r.end) return false;
+  const startOk = (v) => !r.start || above(v, r.start, r.startIncluded !== false);
+  const endOk = (v) => !r.end || below(v, r.end, Boolean(r.endIncluded));
+  const whole = startOk(lo) && endOk(hi);
+  if (whole) return true;
+  const some = startOk(hi) && endOk(lo);
+  return some ? null : false;
+}
+
 export function affected(version, ranges) {
-  if (!version || !ranges) return false;
-  return ranges.some((r) => {
-    if (r.exact) return compareVersions(version, r.exact) === 0;
-    if (!r.start && !r.end) return false;
-    if (r.start) {
-      const c = compareVersions(version, r.start);
-      if (c < 0 || (c === 0 && r.startIncluded === false)) return false;
-    }
-    if (r.end) {
-      const c = compareVersions(version, r.end);
-      if (c > 0 || (c === 0 && !r.endIncluded)) return false;
-    }
-    return true;
-  });
+  if (!version || !ranges || !ranges.length) return false;
+  let undecided = false;
+  for (const r of ranges) {
+    const x = inRange(version, r);
+    if (x === true) return true;
+    if (x === null) undecided = true;
+  }
+  return undecided ? null : false;
 }
 
 // The ranges of one vulnerability from NVD's configurations, kept only for products the measurement can see.
