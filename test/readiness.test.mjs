@@ -89,6 +89,8 @@ test('the references are refreshed from their publishers and what was known is k
   assert.equal(refs.cycles.php.length, 5);
   assert.equal(refs.sources.kev.version, '2026.10.23');
   assert.equal(refs.sources.eol.products, 1, 'the cycles of one product could be read in this fixture');
+  assert.equal(refs.cycles.iis.length, 6, 'the cycles IIS takes from Windows Server are kept in the engine');
+  assert.deepEqual(['10.0', '8.5', '7.5'].map((v) => support(v, refs.cycles.iis, TODAY)), ['supported', 'eol', 'eol']);
   // A second run asks NVD nothing for a vulnerability whose ranges are known.
   const log2 = [];
   const again = await fetchReferences({ today: TODAY, previous: { kev: refs.kev, cycles: refs.cycles, sources: refs.sources }, fetchImpl: fakeFetch(log2), nvdKey: 'test' });

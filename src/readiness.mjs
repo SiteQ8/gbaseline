@@ -7,6 +7,9 @@ const PLATFORMS = new Set(PRODUCT_IDS.filter((id) => PRODUCTS[id].kind === 'plat
 const SERVERS = new Set(PRODUCT_IDS.filter((id) => PRODUCTS[id].kind === 'server'));
 const CMS = new Set(PRODUCT_IDS.filter((id) => PRODUCTS[id].kind === 'cms'));
 
+// Whether a product's maker publishes support cycles the index can read, on endoflife.date or kept in the engine.
+export const hasCycles = (id) => Boolean(PRODUCTS[id] && (PRODUCTS[id].eol || PRODUCTS[id].cycles));
+
 const emptyPlace = () => ({ live: 0, sites: 0, announce: { server: 0, version: 0, platform: 0, cms: 0, front: 0 }, fronts: {}, products: {}, kev: {} });
 const emptyProduct = () => ({ sites: 0, versioned: 0, eol: 0, supported: 0, unknown: 0, behind: 0, cycles: {}, versions: {} });
 
@@ -55,7 +58,7 @@ export function aggregateReadiness(rows, scope, refs, { date, run = 'census', pr
   const entry = {
     date, run, sites: places.GCC.sites, live: places.GCC.live,
     kev: Object.fromEntries(Object.entries(places.GCC.kev).map(([cve, x]) => [cve, [x.exposed, x.announced]])),
-    eol: Object.fromEntries(Object.entries(places.GCC.products).filter(([id]) => PRODUCTS[id].eol).map(([id, x]) => [id, [x.eol, x.versioned]])),
+    eol: Object.fromEntries(Object.entries(places.GCC.products).filter(([id]) => hasCycles(id)).map(([id, x]) => [id, [x.eol, x.versioned]])),
   };
   const history = [...((previous && previous.history) || []).filter((h) => h.date !== date), entry].sort((a, b) => (a.date < b.date ? -1 : 1));
   return {
