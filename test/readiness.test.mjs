@@ -57,7 +57,7 @@ test('a version is placed in its support cycle and matched against the ranges a 
 });
 
 const catalogue = { catalogVersion: '2026.10.23', dateReleased: '2026-10-23T12:00:00.0000Z', vulnerabilities: [
-  { cveID: 'CVE-2026-1001', vendorProject: 'PHP Group', product: 'PHP', vulnerabilityName: 'PHP argument injection', dateAdded: '2026-10-20', dueDate: '2026-11-10', shortDescription: 'PHP contains an argument injection vulnerability.', notes: 'https://www.php.net/advisory ; https://nvd.nist.gov/vuln/detail/CVE-2026-1001', knownRansomwareCampaignUse: 'Unknown' },
+  { cveID: 'CVE-2026-1001', vendorProject: 'PHP Group', product: 'PHP', vulnerabilityName: 'PHP argument injection', dateAdded: '2026-10-20', dueDate: '2026-11-10', shortDescription: 'PHP contains an argument injection vulnerability \u2013 on Windows.', notes: 'https://www.php.net/advisory ; https://nvd.nist.gov/vuln/detail/CVE-2026-1001', knownRansomwareCampaignUse: 'Unknown' },
   { cveID: 'CVE-2024-0001', vendorProject: 'Apache', product: 'HTTP Server', vulnerabilityName: 'Old Apache bug', dateAdded: '2024-01-10', dueDate: '2024-01-31', shortDescription: 'Old.', notes: '', knownRansomwareCampaignUse: 'Known' },
   { cveID: 'CVE-2026-2002', vendorProject: 'Microsoft', product: 'Exchange Server', vulnerabilityName: 'Not visible from outside', dateAdded: '2026-10-21', dueDate: '2026-11-11', shortDescription: 'x', notes: '', knownRansomwareCampaignUse: 'Unknown' },
 ] };
@@ -80,6 +80,7 @@ test('the references are refreshed from their publishers and what was known is k
   assert.deepEqual(relevantKev(catalogue, { today: TODAY, windowDays: 365, known: ['CVE-2024-0001'] }).map((k) => k.cve), ['CVE-2026-1001', 'CVE-2024-0001'], 'an entry already followed keeps its series');
   assert.deepEqual(relevantKev(catalogue, { today: TODAY }).map((k) => k.cve), ['CVE-2026-1001', 'CVE-2024-0001'], 'by default the whole catalogue is followed, newest first');
   assert.deepEqual(kept[0].notes, ['https://www.php.net/advisory', 'https://nvd.nist.gov/vuln/detail/CVE-2026-1001']);
+  assert.equal(kept[0].description, 'PHP contains an argument injection vulnerability - on Windows.', 'the catalogue dash is written plain, as everything published is');
   const log = [];
   const refs = await fetchReferences({ today: TODAY, fetchImpl: fakeFetch(log), nvdKey: 'test' });
   assert.equal(refs.kev.length, 2, 'both entries for visible software, the newest first');
