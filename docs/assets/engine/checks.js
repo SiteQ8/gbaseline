@@ -119,7 +119,7 @@ async function caaFor(domain, resolver) {
   return { status: 'ok', at: null, inherited: false, records: [] };
 }
 
-async function addresses(name, resolver) {
+export async function addresses(name, resolver) {
   const [a, aaaa] = await Promise.all([resolver.query(name, 'A'), resolver.query(name, 'AAAA')]);
   return { v4: a.answers.length, v6: aaaa.answers.length, error: failed(a) && failed(aaaa) };
 }

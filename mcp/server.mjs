@@ -6,6 +6,7 @@ import { createInterface } from 'node:readline';
 import { CHECKS, GROUPS, suffixChain } from '../docs/assets/engine/checks.js';
 import { createResolver, cleanDomain } from '../docs/assets/engine/dns.js';
 import { CLAUSES, clauseShare } from '../docs/assets/engine/clauses.js';
+import { PRODUCTS } from '../docs/assets/engine/software.js';
 import { tr, ui, share, percent, counted, dateLong } from '../docs/assets/engine/i18n.js';
 import { bundle, project, scope, userAgent, levelText } from '../src/meta.mjs';
 import { bySuffixLength } from '../src/inventory.mjs';
@@ -19,7 +20,8 @@ const loadJson = (rel) => {
   return existsSync(u) ? JSON.parse(readFileSync(u, 'utf8')) : null;
 };
 export function publishedData() {
-  return { summary: loadJson('docs/data/summary.json'), history: loadJson('docs/data/history.json') || [] };
+  const readiness = loadJson('docs/data/readiness.json');
+  return { summary: loadJson('docs/data/summary.json'), history: loadJson('docs/data/history.json') || [], readiness: readiness && readiness.schema === 'readiness/1' ? readiness : null };
 }
 
 const PLACES = ['GCC', ...Object.keys(scope.countries)];
@@ -37,6 +39,7 @@ export const tools = [
   { name: T('figures'), title: 'Every check for the Gulf or one state', description: 'The share of measured domains passing each of the thirteen checks, with the passing and measured counts and what the scan found (the levels), for the Gulf as a whole or for one state on its own, all sectors or one of them. One place per call: the baseline does not rank or compare the states.', inputSchema: { type: 'object', properties: { place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('check_info'), title: 'What a check means and how to fix it', description: 'The question a check answers, why it matters, exactly when it passes, the steps to fix it, an example record, the standards behind it and the Gulf figure from the latest issue.', inputSchema: { type: 'object', properties: { check: CHECK, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
   { name: T('history'), title: 'Week by week series', description: 'The weekly series of one check for a place and sector: date, issue number, passing, measured and share.', inputSchema: { type: 'object', properties: { check: CHECK, place: PLACE, sector: SECTOR, lang: LANG, response_format: FORMAT }, required: ['check'], additionalProperties: false }, annotations: RO },
+  { name: T('readiness'), title: 'Readiness against exploited vulnerabilities', description: 'The readiness index for the Gulf as a whole or one state: the date of the last census of what every live site announces about its software (server, platform, content system, version), every exploited vulnerability from the CISA KEV catalogue that concerns software visible from outside with the share of sites announcing an affected version, the share of announced software past its support on endoflife.date, and the series of both. A floor, not a count: only sites that announce a version are measured against a vulnerability. One place per call.', inputSchema: { type: 'object', properties: { place: PLACE, lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('methodology'), title: 'Method, limits and citation', description: 'How the domains are found and measured, what is published and what is not, the limits of the measurement, data quality for the latest issue and how to cite a figure.', inputSchema: { type: 'object', properties: { lang: LANG, response_format: FORMAT }, additionalProperties: false }, annotations: RO },
   { name: T('check_domain'), title: 'Check any domain live', description: 'Runs every check live for one domain from this machine: DNS over HTTPS through two public resolvers, then HTTPS, HSTS, TLS versions, the post quantum hybrid key exchange and security.txt. Takes a few seconds. dns_only skips the website and TLS probes.', inputSchema: { type: 'object', properties: { domain: { type: 'string', description: 'A domain such as example.com. A URL or an email address works too.' }, dns_only: { type: 'boolean', default: false }, lang: LANG, response_format: FORMAT }, required: ['domain'], additionalProperties: false }, annotations: { ...RO, idempotentHint: false, openWorldHint: true } },
 ];
@@ -122,6 +125,33 @@ export function makeHandlers(data) {
       const md = [`# ${J(lang, tr(bundle.checks[id].short, lang), placeName(place, lang), sectorName(sector, lang))}`, '', ...series.map((p) => `- ${KV(lang, J(lang, ui(bundle, 'issue', lang, { n: p.issue }), p.date), pctText(p.share, lang))} ${C(lang, p.pass, p.measured)}`)].join('\n');
       return result(out, md, args);
     },
+    [T('readiness')](args) {
+      const lang = pickLang(args);
+      const R = data.readiness;
+      if (!R) throw new ToolError(ui(bundle, 'readiness_pending', lang));
+      const place = pick(args.place, PLACES, 'GCC');
+      const p = R.places[place];
+      const round1 = (a, b) => (b ? Math.round((a / b) * 1000) / 10 : null);
+      const name = (id) => tr(PRODUCTS[id] || { en: id, ar: id }, lang);
+      const kev = R.kev.map((e) => {
+        const x = p.kev[e.cve] || { exposed: 0, announced: 0 };
+        return { cve: e.cve, product: e.product, product_name: name(e.product), name: e.name, added: e.added, due: e.due, ransomware: e.ransomware, exposed: x.exposed, announcing_version: x.announced, share: round1(x.exposed, x.announced), catalogue: `https://www.cisa.gov/known-exploited-vulnerabilities-catalog?search_api_fulltext=${encodeURIComponent(e.cve)}`, nvd: `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(e.cve)}`, notes: e.notes };
+      });
+      const products = Object.entries(p.products).sort((a, b) => b[1].sites - a[1].sites).map(([id, x]) => ({ product: id, name: name(id), sites: x.sites, announcing_version: x.versioned, past_support: x.eol, supported: x.supported, support_unknown: x.unknown, share_past_support: PRODUCTS[id] && PRODUCTS[id].eol ? round1(x.eol, x.versioned) : null, cycles: x.cycles }));
+      const page = site() ? `${site()}${lang === 'ar' ? '' : 'en/'}readiness/${place === 'GCC' ? '' : `${place.toLowerCase()}/`}` : null;
+      const out = { date: R.date, run: R.run, place, live_domains: p.live, sites_read: p.sites, announce: { ...p.announce }, fronts: p.fronts, exploited_vulnerabilities: kev, unmatched: R.unmatched || [], products, sources: R.sources, series: place === 'GCC' ? R.history : null, page, data: site() ? `${site()}data/readiness.json` : null };
+      const measured = ui(bundle, 'readiness_measured', lang, { date: dateLong(R.date, lang), place: ui(bundle, `in_${place}`, lang), sites: counted(p.sites, bundle.ui.w_site, lang) });
+      const md = [
+        `# ${J(lang, ui(bundle, 'readiness_title', lang), placeName(place, lang), dateLong(R.date, lang))}`, '', measured, '',
+        `## ${ui(bundle, 'kev_h', lang)}`,
+        ...(kev.length ? kev.map((e) => `- ${KV(lang, `${e.product_name} ${e.cve}`, e.share === null ? ui(bundle, 'kev_none_announce', lang) : `${pctText(e.share, lang)} ${C(lang, e.exposed, e.announcing_version)}`)} · ${e.name}`) : [ui(bundle, 'kev_none', lang)]),
+        '', `## ${ui(bundle, 'eol_h', lang)}`,
+        ...products.filter((x) => x.share_past_support !== null).map((x) => `- ${KV(lang, x.name, pctText(x.share_past_support, lang))} ${C(lang, x.past_support, x.announcing_version)}`),
+        '', `## ${ui(bundle, 'announce_h', lang)}`,
+        ...['server', 'version', 'cms', 'front'].map((key) => `- ${KV(lang, ui(bundle, `announce_${key}`, lang), pctText(round1(p.announce[key], p.sites), lang))} ${C(lang, p.announce[key], p.sites)}`),
+      ].join('\n');
+      return result(out, md, args);
+    },
     [T('methodology')](args) {
       const lang = pickLang(args);
       const join = (k) => bundle.ui[k].map((p) => tr(p, lang)).join('\n\n');
@@ -168,7 +198,7 @@ export function serve(handlers) {
           protocolVersion: SUPPORTED.includes(asked) ? asked : SUPPORTED[0],
           capabilities: { tools: { listChanged: false } },
           serverInfo: { name: pkg.name, title: `${project.name_en || 'Gulf Cybersecurity Baseline'} MCP server`, version: pkg.version },
-          instructions: 'Read-only tools over a weekly, passive measurement of every public domain under the government, education, health, business, non-profit and network suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman: email impersonation protection, DNSSEC, HTTPS and HSTS, TLS versions, post quantum key exchange and security.txt. Cite the issue number and date with any figure. The figures describe public configuration only and are not an audit of any organisation. No tool lists organisations, and no tool ranks or compares the states: ask for the Gulf as a whole or for one state at a time.',
+          instructions: 'Read-only tools over a weekly, passive measurement of every public domain under the government, education, health, business, non-profit and network suffixes of Kuwait, Saudi Arabia, the UAE, Qatar, Bahrain and Oman: email impersonation protection, DNSSEC, HTTPS and HSTS, TLS versions, post quantum key exchange and security.txt, plus the readiness index: what the sites announce about their software against the CISA KEV catalogue of exploited vulnerabilities and the support cycles on endoflife.date. Cite the issue number and date, or the census date, with any figure. The figures describe public configuration only and are not an audit of any organisation. No tool lists organisations, and no tool ranks or compares the states: ask for the Gulf as a whole or for one state at a time.',
         });
         return;
       }
@@ -213,13 +243,24 @@ async function selftest() {
   ];
   const { summary } = aggregate(rows, scope, { date: '2026-10-19', chain: {} });
   summary.issue = 1;
-  const data = { summary, history: appendHistory([], summary) };
+  const { aggregateReadiness } = await import('../src/readiness.mjs');
+  const refs = {
+    kev: [{ cve: 'CVE-2026-1001', product: 'php', vendor: 'PHP Group', productName: 'PHP', name: 'PHP argument injection', description: 'x', added: '2026-10-20', due: '2026-11-10', ransomware: 'Unknown', notes: [], ranges: [{ product: 'php', start: '8.1.0', startIncluded: true, end: '8.1.31', endIncluded: false }] }],
+    cycles: { php: [{ cycle: '8.3', eol: '2027-12-31', latest: '8.3.26', support: '2025-12-31' }, { cycle: '8.1', eol: '2025-12-31', latest: '8.1.33', support: '2023-11-25' }] },
+    sources: { kev: { fetched: '2026-10-23T05:00:00.000Z' } },
+  };
+  const readiness = aggregateReadiness([
+    { d: 'a.gov.kw', c: 'KW', s: 'government', dns: 'live', web: 'ok', sw: { p: [['apache', '2.4.41'], ['php', '8.1.2']], f: [] } },
+    { d: 'b.gov.kw', c: 'KW', s: 'government', dns: 'live', web: 'ok', sw: { p: [['nginx', '1.18.0'], ['php', '8.3.1']], f: [] } },
+    { d: 'c.edu.sa', c: 'SA', s: 'education', dns: 'live', web: 'ok', sw: { p: [], f: ['cloudflare'] } },
+  ], scope, refs, { date: '2026-10-23', run: 'census' });
+  const data = { summary, history: appendHistory([], summary), readiness };
   const h = makeHandlers(data);
   let pass = 0;
   let failn = 0;
   const ok = (cond, label) => { if (cond) pass += 1; else { failn += 1; console.error('FAIL: ' + label); } };
   try {
-    ok(tools.length === 6, 'six tools');
+    ok(tools.length === 7, 'seven tools');
     ok(!tools.some((x) => /compare/.test(x.name)), 'no tool sets the states side by side');
     ok(!JSON.stringify(h[T('overview')]({}).structuredContent).includes('a.gov.kw'), 'no tool names a measured domain');
     const ov = h[T('overview')]({}).structuredContent;
@@ -237,8 +278,13 @@ async function selftest() {
     ok(h[T('methodology')]({ lang: 'ar' }).structuredContent.sections.length === 6, 'six method sections');
     let threw = false; try { await h[T('check_domain')]({ domain: 'not a domain' }); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'invalid domain throws ToolError');
     threw = false; try { h[T('figures')]({ place: 'XX' }); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'unknown place throws ToolError');
-    const empty = makeHandlers({ summary: null, history: [] });
+    const rd = h[T('readiness')]({ lang: 'ar' }).structuredContent;
+    ok(rd.sites_read === 3 && rd.exploited_vulnerabilities.length === 1 && rd.exploited_vulnerabilities[0].share === 50 && rd.exploited_vulnerabilities[0].announcing_version === 2, 'one of the two sites announcing a PHP version announces an affected one');
+    ok(rd.products.find((x) => x.product === 'php').share_past_support === 50 && !JSON.stringify(rd).includes('gov.kw'), 'half of the announced PHP versions are past their support, and no domain is named');
+    ok(h[T('readiness')]({ place: 'SA' }).structuredContent.exploited_vulnerabilities[0].share === null, 'a state where no site announces the product has no share');
+    const empty = makeHandlers({ summary: null, history: [], readiness: null });
     ok(empty[T('overview')]({}).structuredContent.issue === null, 'overview works before the first issue');
+    threw = false; try { empty[T('readiness')]({}); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'readiness before the first census throws ToolError');
     threw = false; try { empty[T('figures')]({}); } catch (x) { threw = x instanceof ToolError; } ok(threw, 'figures before the first issue throws ToolError');
   } catch (x) { failn += 1; console.error('THREW: ' + x.stack); }
   console.log(`selftest: ${pass} passed, ${failn} failed`);

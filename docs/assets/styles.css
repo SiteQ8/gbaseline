@@ -206,7 +206,7 @@ details:not([open]) > .slip { display: none; }
 .slip :focus-visible, .field-band :focus-visible, .foot :focus-visible { outline-color: var(--navy); }
 
 /* sector tabs: every panel is printed, the browser shows one behind a grid of equal cells */
-.tablist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 6.25em), 1fr)); gap: var(--s-1); margin: var(--s-5) 0 0; }
+.tablist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 6.25em), 1fr)); gap: var(--s-1); margin: var(--s-5) 0 0; font-size: var(--step-small); }
 .tablist [role='tab'] { min-height: 44px; padding: var(--s-2); background: var(--navy-2); border: 0; border-radius: 0; color: var(--amber-soft); font: 500 var(--step-small)/1.3 var(--text); text-align: center; transition: background-color .15s var(--ease), color .15s var(--ease), transform .12s var(--ease); }
 .tablist [role='tab'][aria-selected='true'] { background: var(--amber); color: var(--navy); }
 .tablist [role='tab']:active { transform: scale(.97); }
@@ -427,13 +427,30 @@ li.fail .dot { background: none; }
 .issues .latest { font-size: var(--step-small); background: var(--amber); color: var(--navy); padding: 2px 10px; }
 .issues .d { flex-basis: 100%; color: var(--amber-soft); font-size: var(--step-small); }
 /* the places of an issue: the same cells as the sector tabs, the current place filled */
-.places ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 6.25em), 1fr)); gap: var(--s-1); max-width: 760px; }
+.places ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5em), 1fr)); gap: var(--s-1); max-width: 1040px; font-size: var(--step-small); }
 .places a { display: flex; min-height: 44px; align-items: center; justify-content: center; padding: var(--s-2); background: var(--navy-2); color: var(--amber-soft); font: 500 var(--step-small)/1.3 var(--text); text-align: center; text-decoration: none; transition: background-color .15s var(--ease), color .15s var(--ease); }
 main .places a[aria-current='page'] { background: var(--amber); color: var(--navy); }
 @media (hover: hover) and (pointer: fine) {
   main .places a:not([aria-current]):hover { color: var(--amber); background: color-mix(in srgb, var(--amber) 12%, var(--navy-2)); }
 }
+.text.places-only { padding-bottom: 0; }
 .past { padding: 14px 18px; background: var(--navy-2); max-width: 62ch; }
+
+/* readiness: lists of the same row, the exposure first, the product and the entry beside it, the rest under them */
+.rows > li { padding: var(--s-4) 0; }
+.rows > li:first-child { padding-top: var(--s-2); }
+.rows .fig-label { font-weight: 500; }
+.rows .fig-detail, .facts .fig-detail { row-gap: var(--s-1); }
+.kev-name { flex-basis: 100%; font-weight: 500; color: var(--amber); }
+:lang(ar) .kev-name { text-align: right; }
+.cve { white-space: nowrap; }
+.flag { padding: 0 8px; background: var(--amber); color: var(--navy); font-weight: 500; }
+.sub-h { margin: var(--s-7) 0 var(--s-3); max-width: 24ch; }
+.ledger-body > .sub-h:first-child { margin-top: 0; }
+.how .how-p { max-width: 62ch; }
+.how .how-p + .how-p { margin-top: 1em; }
+.sources li { max-width: 70ch; }
+.ready .facts .fig-detail { max-width: 52ch; }
 .cite-issue { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 72ch; }
 .cite-issue > * { min-width: 0; }
 .cite-issue blockquote { padding: 16px 18px; background: var(--led); color: var(--led-ink); line-height: 1.6; overflow-wrap: anywhere; }
@@ -462,10 +479,10 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
 
 /* ---------- a wide screen: the six figures read at the size of a heading ---------- */
 @media (min-width: 1100px) {
-  .clauses .fig { font-size: clamp(2rem, 2.6vw, 2.75rem); line-height: 1.15; }
-  .clauses .fig-label { font-size: var(--step-lead); line-height: 1.35; }
-  :lang(ar) .clauses .fig-label { line-height: 1.6; }
-  .clauses .row { padding: var(--s-5) 0; }
+  .clauses .fig, .kev-list .fig, .eol-list .fig { font-size: clamp(2rem, 2.6vw, 2.75rem); line-height: 1.15; }
+  .clauses .fig-label, .kev-list .fig-label, .eol-list .fig-label { font-size: var(--step-lead); line-height: 1.35; }
+  :lang(ar) .clauses .fig-label, :lang(ar) .kev-list .fig-label, :lang(ar) .eol-list .fig-label { line-height: 1.6; }
+  .clauses .row, .kev-list > li, .eol-list > li { padding: var(--s-5) 0; }
 }
 
 /* ---------- tablet: each section's heading over its body, the body still on the axis ---------- */
