@@ -1109,7 +1109,7 @@ function viewReport(k) {
     h('table', { class: 'r-table compact' },
       h('thead', {}, h('tr', {}, h('th', { scope: 'col', class: 'n' }, k.t('report_col_share')), h('th', { scope: 'col' }, k.t('cis_col_evidence')), h('th', { scope: 'col', class: 'n' }, k.t('cis_col_count')))),
       cisFigures(k.B.cis, k.D.summary, R, 'GCC').map((g) => h('tbody', {},
-        h('tr', { class: 'group' }, h('th', { colspan: 3, scope: 'colgroup' }, ltr(g.id), ' ', k.P(g.title), ' · ', k.t('cis_ig', { n: Math.min(...g.ig) }))),
+        h('tr', { class: 'group' }, h('th', { colspan: 3, scope: 'colgroup' }, h('span', { class: 'r-sg' }, ltr(g.id), ' ', k.P(g.title)), ' ', h('span', { class: 'r-ig' }, k.t('cis_ig', { n: Math.min(...g.ig) })))),
         g.evidence.map((x) => h('tr', {},
           h('td', { class: 'n share' }, x.of ? [ltr(k.pct(x.share)), bar(x.share)] : k.t('no_data')),
           h('th', { scope: 'row' }, x.kind === 'check' ? k.P(k.B.checks[x.id].short) : k.t(`cis_ev_${x.id}`)),
