@@ -199,6 +199,21 @@ try {
   assert.ok(!NOT_JOINED.test(await pageText(page)), 'readiness: no Arabic sentence is cut by a period before its connective');
   const readyLatin = ((await pageText(page, ['.lang'])).match(/[A-Za-z][A-Za-z0-9.\-/:+&]*/g) || []).filter((w) => !/^[A-Z0-9]/.test(w) && !w.includes('.') && !/^https?:/.test(w));
   assert.deepEqual(readyLatin, [], 'no lowercase English inside the Arabic readiness page');
+  // Each vulnerability has a page that can be cited: the Gulf's exposure, the series, the affected versions and the
+  // citation in both languages, reached from its row.
+  assert.equal(await page.locator('#cve-2026-1001 a[href="/readiness/cve-2026-1001/"]').count(), 1, 'the row leads to the page of its vulnerability');
+  await go(page, 'readiness/cve-2026-1001/');
+  assert.equal((await page.textContent('#exposure .v')).trim(), '18.2٪');
+  assert.equal(await page.locator('#series .series-list li').count(), 2, 'one row per census');
+  assert.match(await page.textContent('#versions .r-range'), /8\.1\.0 ≤ v < 8\.1\.31/);
+  assert.match(await page.textContent('#cite blockquote[lang="ar"]'), /^18\.2٪ من مواقع الخليج العربي التي تعلن إصدار PHP كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة CVE-2026-1001/);
+  assert.equal(await page.locator('#cite blockquote[lang="ar"] bdi').textContent(), `${host}/readiness/cve-2026-1001/`);
+  await page.locator('#cite button[data-copy="en"]').click();
+  assert.match(await page.evaluate(() => navigator.clipboard.readText()), /^18\.2% of the sites in the Arabian Gulf .*\nSource: .*readiness index, census of 23 October 2026, https:\/\/\S+\/en\/readiness\/cve-2026-1001\/$/s);
+  assert.equal(await page.locator('#exposure .places a').count(), codes.length, 'the way to each state, none set beside another');
+  assert.ok(!STRAY.test(await pageText(page)), 'vulnerability page: no stray null');
+  assert.ok(!NOT_JOINED.test(await pageText(page)), 'vulnerability page: no Arabic sentence cut by a period before its connective');
+  assert.equal(await page.locator('main a[href="/readiness/cve-2026-2002/"]').count(), 0, 'a vulnerability no site can be held against has no page');
   await go(page, 'readiness/kw/');
   assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '0.0٪', 'the Kuwaiti site announcing a PHP version is not affected after the first census');
   assert.equal(await page.locator('nav.others a').count(), codes.length - 1, 'a state leads to the other five');
@@ -261,7 +276,7 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/ui-desktop-en.png`, fullPage: true });
   // A phone: no sideways scroll on any page, the mosaic comes before the title.
   const phone = await preparePage({ width: 390, height: 860 }, 2);
-  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'en/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
+  for (const path of ['', 'countries/kw/', 'standards/dmarc/', 'check/', 'method/', 'film/', 'issues/2/', 'readiness/', 'readiness/cve-2026-1001/', 'en/', 'en/readiness/cve-2026-1001/', 'en/countries/sa/', 'en/standards/dmarc/', 'en/issues/2/', 'en/readiness/kw/']) {
     await go(phone, path);
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     assert.ok(overflow <= 1, `${path || 'home'}: no sideways scroll on a phone (overflow ${overflow}px)`);

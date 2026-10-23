@@ -1162,5 +1162,69 @@
   "kev_silent": {
     "ar": "و{n} أخرى في {products} لا يعلن أي موقع إصدارها كاملاً فلا تُقاس بعد.",
     "en": "And {n} more in {products}, which no site announces a full version of, so they are not measured yet."
+  },
+  "kev_page_intro": {
+    "ar": "ثغرة مستغلة أدرجتها CISA في {date} وتصيب {product} وتتبع هذه الصفحة كم من مواقع الخليج العربي ما زال يعلن إصداراً مصاباً بها مع كل قياس.",
+    "en": "An exploited vulnerability CISA catalogued on {date} in {product}, and this page follows how many of the Arabian Gulf's sites still announce an affected version with every census."
+  },
+  "kev_exposure_h": {
+    "ar": "التعرض اليوم",
+    "en": "Exposure today"
+  },
+  "kev_exposure_label": {
+    "ar": "من مواقع الخليج العربي التي تعلن إصدار {product} كاملاً تعلن إصداراً مصاباً",
+    "en": "of the Arabian Gulf's sites announcing a full {product} version announce an affected one"
+  },
+  "kev_states_note": {
+    "ar": "ولكل دولة رقمها في صفحتها دون مقارنة بغيرها.",
+    "en": "Each state has its own figure on its own page, never set beside another."
+  },
+  "kev_series_h": {
+    "ar": "السلسلة",
+    "en": "The series"
+  },
+  "kev_series_note": {
+    "ar": "كل قياس منذ بدأ المؤشر يتبع هذه الثغرة من الأحدث إلى الأقدم.",
+    "en": "Every census since the index began following this vulnerability, newest first."
+  },
+  "kev_versions_h": {
+    "ar": "الإصدارات المصابة",
+    "en": "Affected versions"
+  },
+  "kev_versions_note": {
+    "ar": "كما تحددها NVD ويُقارن بها ما يعلنه كل موقع.",
+    "en": "As NVD gives them, and what each site announces is held against them."
+  },
+  "kev_fix": {
+    "ar": "الحل ترقية {product} إلى إصدار خارج هذه النطاقات أو تطبيق ما يوصي به صانعه ثمّ التوقف عن إعلان رقم الإصدار في ترويسات الموقع.",
+    "en": "The fix is to move {product} to a version outside these ranges, or apply what its maker advises, and then stop announcing the version in the site's headers."
+  },
+  "kev_due": {
+    "ar": "وحددت CISA يوم {date} موعداً لمعالجتها في الجهات الاتحادية الأمريكية.",
+    "en": "CISA set {date} as the deadline for US federal agencies to fix it."
+  },
+  "kev_cite_h": {
+    "ar": "الاستشهاد",
+    "en": "How to cite"
+  },
+  "kev_cite": {
+    "ar": "{pct} من مواقع {place} التي تعلن إصدار {product} كاملاً تعلن إصداراً مصاباً بالثغرة المستغلة {cve}",
+    "en": "{pct} of the sites in {place} announcing a full {product} version announce one affected by the exploited vulnerability {cve}"
+  },
+  "kev_cite_src": {
+    "ar": "المصدر {name} مؤشر الاستعدادية بقياس {date} على {url}",
+    "en": "Source: {name}, readiness index, census of {date}, {url}"
+  },
+  "kev_sources_h": {
+    "ar": "اقرأ أكثر",
+    "en": "Read more"
+  },
+  "readiness_back": {
+    "ar": "كل الثغرات المستغلة",
+    "en": "Every exploited vulnerability"
+  },
+  "readiness_feed_note": {
+    "ar": "خلاصة Atom بالثغرات المتابعة",
+    "en": "Atom feed of the vulnerabilities followed"
   }
 }
