@@ -30,7 +30,7 @@ The films on the site's film page, `docs/film/gbaseline-film-ar.mp4` and `docs/f
 - **Public DNS over HTTPS resolvers** run by Cloudflare (https://cloudflare-dns.com) and Google (https://dns.google), for every DNS answer.
 - **The Known Exploited Vulnerabilities catalogue** of the Cybersecurity and Infrastructure Security Agency, CISA (https://www.cisa.gov/known-exploited-vulnerabilities-catalog), read through its JSON feed, for the exploited vulnerabilities the readiness index follows. The catalogue is in the public domain as a work of the United States government.
 - **The National Vulnerability Database**, NVD, of the National Institute of Standards and Technology (https://nvd.nist.gov), read through its API, for the versions each vulnerability affects. This product uses the NVD API but is not endorsed or certified by the NVD.
-- **endoflife.date** (https://endoflife.date, https://github.com/endoflife-date/endoflife.date), read through its API, for the support cycles of each product. Its data is under the MIT licence.
+- **endoflife.date** (https://endoflife.date, https://github.com/endoflife-date/endoflife.date), read through its API, for the support cycles of each product. Its data is under the MIT licence. The cycles of Microsoft IIS, which endoflife.date does not list, are Microsoft's lifecycle dates for the Windows Server each version ships with, kept in `docs/assets/engine/software.js`.
 
 ## Standards
 

@@ -88,6 +88,7 @@ export async function fetchReferences({ today, previous = null, fetchImpl = glob
   const cycles = { ...(prev.cycles || {}) };
   let eolOk = 0;
   for (const id of PRODUCT_IDS) {
+    if (PRODUCTS[id].cycles) { cycles[id] = PRODUCTS[id].cycles.map((c) => ({ ...c })); continue; }
     const slug = PRODUCTS[id].eol;
     if (!slug) continue;
     const r = await getJson(`${EOL_URL}${slug}.json`, fetchImpl, { timeout: 20000 });
