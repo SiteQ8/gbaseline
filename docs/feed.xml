@@ -5,9 +5,18 @@
   <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/"/>
   <link rel="self" type="application/atom+xml" href="https://gbaseline.3li.info/feed.xml"/>
   <id>https://gbaseline.3li.info/</id>
-  <updated>2026-10-19T02:17:00Z</updated>
+  <updated>2026-10-26T02:17:00Z</updated>
   <author><name>علي العنزي</name><uri>https://3li.info</uri></author>
   <rights>خط الأساس الخليجي للأمن السيبراني · MIT</rights>
+  <entry>
+    <title>العدد 3 الصادر في 26 أكتوبر 2026</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/issues/3/"/>
+    <id>https://gbaseline.3li.info/issues/3/</id>
+    <published>2026-10-26T02:17:00Z</published>
+    <updated>2026-10-26T02:17:00Z</updated>
+    <summary>صدر في 26 أكتوبر 2026 وقيس فيه 13,810 نطاقات حية في دول الخليج العربي الست.</summary>
+    <content type="html">&lt;ol&gt;&lt;li&gt;80.7٪ من النطاقات المقيسة في الخليج العربي يمكن انتحال أسمائها في البريد الإلكتروني لأنها بلا سياسة DMARC مُلزمة.&lt;/li&gt;&lt;li&gt;2.7٪ من النطاقات المقيسة في الخليج العربي تحمل توقيع DNSSEC يجتاز التحقق.&lt;/li&gt;&lt;li&gt;18.5٪ من مواقع النطاقات المقيسة في الخليج العربي تُلزم المتصفح بـ HTTPS لمدة سنة أو أكثر.&lt;/li&gt;&lt;li&gt;30.5٪ من مواقع النطاقات المقيسة في الخليج العربي ما زالت تقبل TLS 1.0 أو 1.1.&lt;/li&gt;&lt;li&gt;52.5٪ من مواقع النطاقات المقيسة في الخليج العربي تقبل تبادل المفاتيح المقاوم للحوسبة الكمية.&lt;/li&gt;&lt;li&gt;1.9٪ من مواقع النطاقات المقيسة في الخليج العربي توضح طريقة الإبلاغ عن الثغرات.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;a href=&quot;https://gbaseline.3li.info/issues/3/&quot;&gt;كيف تستشهد بهذا العدد&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>العدد 2 الصادر في 19 أكتوبر 2026</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/issues/2/"/>
