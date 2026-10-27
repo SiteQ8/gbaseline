@@ -5,22 +5,38 @@
   <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/"/>
   <link rel="self" type="application/atom+xml" href="https://gbaseline.3li.info/en/readiness/feed.xml"/>
   <id>https://gbaseline.3li.info/en/readiness/</id>
-  <updated>2026-10-26T05:41:00Z</updated>
+  <updated>2026-10-27T05:41:00Z</updated>
   <author><name>Ali AlEnezi</name><uri>https://3li.info</uri></author>
   <entry>
-    <title>CVE-2024-38475 · Apache HTTP Server · 57.0%</title>
+    <title>CVE-2026-109619 · PHP · 39.7%</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2026-109619/"/>
+    <id>https://gbaseline.3li.info/en/readiness/cve-2026-109619/</id>
+    <published>2026-10-26T05:41:00Z</published>
+    <updated>2026-10-27T05:41:00Z</updated>
+    <summary>39.7% of the sites in the Arabian Gulf announcing a full PHP version announce one affected by the exploited vulnerability CVE-2026-109619. PHP Stale Internal Request-State Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-109618 · PHP · 35.8%</title>
+    <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2026-109618/"/>
+    <id>https://gbaseline.3li.info/en/readiness/cve-2026-109618/</id>
+    <published>2026-10-26T05:41:00Z</published>
+    <updated>2026-10-27T05:41:00Z</updated>
+    <summary>35.8% of the sites in the Arabian Gulf announcing a full PHP version announce one affected by the exploited vulnerability CVE-2026-109618. PHP Memory Corruption Vulnerability</summary>
+  </entry>
+  <entry>
+    <title>CVE-2024-38475 · Apache HTTP Server · 56.1%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2024-38475/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2024-38475/</id>
     <published>2025-05-01T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
-    <summary>57.0% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2024-38475. Apache HTTP Server Improper Escaping of Output Vulnerability</summary>
+    <updated>2026-10-27T05:41:00Z</updated>
+    <summary>56.1% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2024-38475. Apache HTTP Server Improper Escaping of Output Vulnerability</summary>
   </entry>
   <entry>
     <title>CVE-2024-4577 · PHP · 0.4%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2024-4577/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2024-4577/</id>
     <published>2024-06-12T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.4% of the sites in the Arabian Gulf announcing a full PHP version announce one affected by the exploited vulnerability CVE-2024-4577. PHP-CGI OS Command Injection Vulnerability</summary>
   </entry>
   <entry>
@@ -28,23 +44,23 @@
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2014-0160/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2014-0160/</id>
     <published>2022-05-04T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.0% of the sites in the Arabian Gulf announcing a full OpenSSL version announce one affected by the exploited vulnerability CVE-2014-0160. OpenSSL Information Disclosure Vulnerability</summary>
   </entry>
   <entry>
-    <title>CVE-2012-1823 · PHP · 0.3%</title>
+    <title>CVE-2012-1823 · PHP · 0.2%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2012-1823/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2012-1823/</id>
     <published>2022-03-25T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
-    <summary>0.3% of the sites in the Arabian Gulf announcing a full PHP version announce one affected by the exploited vulnerability CVE-2012-1823. PHP-CGI Query String Parameter Vulnerability</summary>
+    <updated>2026-10-27T05:41:00Z</updated>
+    <summary>0.2% of the sites in the Arabian Gulf announcing a full PHP version announce one affected by the exploited vulnerability CVE-2012-1823. PHP-CGI Query String Parameter Vulnerability</summary>
   </entry>
   <entry>
     <title>CVE-2020-13671 · Drupal · 0.0%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2020-13671/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2020-13671/</id>
     <published>2022-01-18T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.0% of the sites in the Arabian Gulf announcing a full Drupal version announce one affected by the exploited vulnerability CVE-2020-13671. Drupal core Un-restricted Upload of File</summary>
   </entry>
   <entry>
@@ -52,7 +68,7 @@
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2021-42013/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2021-42013/</id>
     <published>2021-11-03T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.0% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2021-42013. Apache HTTP Server Path Traversal Vulnerability</summary>
   </entry>
   <entry>
@@ -60,23 +76,23 @@
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2021-41773/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2021-41773/</id>
     <published>2021-11-03T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.0% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2021-41773. Apache HTTP Server Path Traversal Vulnerability</summary>
   </entry>
   <entry>
-    <title>CVE-2019-0211 · Apache HTTP Server · 9.5%</title>
+    <title>CVE-2019-0211 · Apache HTTP Server · 9.0%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2019-0211/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2019-0211/</id>
     <published>2021-11-03T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
-    <summary>9.5% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2019-0211. Apache HTTP Server Privilege Escalation Vulnerability</summary>
+    <updated>2026-10-27T05:41:00Z</updated>
+    <summary>9.0% of the sites in the Arabian Gulf announcing a full Apache HTTP Server version announce one affected by the exploited vulnerability CVE-2019-0211. Apache HTTP Server Privilege Escalation Vulnerability</summary>
   </entry>
   <entry>
     <title>CVE-2018-7600 · Drupal · 0.0%</title>
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2018-7600/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2018-7600/</id>
     <published>2021-11-03T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.0% of the sites in the Arabian Gulf announcing a full Drupal version announce one affected by the exploited vulnerability CVE-2018-7600. Drupal Core Remote Code Execution Vulnerability</summary>
   </entry>
   <entry>
@@ -84,7 +100,7 @@
     <link rel="alternate" type="text/html" href="https://gbaseline.3li.info/en/readiness/cve-2017-7269/"/>
     <id>https://gbaseline.3li.info/en/readiness/cve-2017-7269/</id>
     <published>2021-11-03T05:41:00Z</published>
-    <updated>2026-10-26T05:41:00Z</updated>
+    <updated>2026-10-27T05:41:00Z</updated>
     <summary>0.3% of the sites in the Arabian Gulf announcing a full Microsoft IIS version announce one affected by the exploited vulnerability CVE-2017-7269. Microsoft Windows Server Buffer Overflow Vulnerability</summary>
   </entry>
 </feed>
