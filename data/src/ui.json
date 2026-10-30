@@ -1160,7 +1160,7 @@
     "en": "{product} on a version past its support"
   },
   "kev_silent": {
-    "ar": "و{n} أخرى في {products} لا يعلن أي موقع إصدارها كاملاً فلا تُقاس بعد.",
+    "ar": "وكذلك {n} أخرى في {products} لا يعلن أي موقع إصدارها كاملاً فلا تُقاس بعد.",
     "en": "And {n} more in {products}, which no site announces a full version of, so they are not measured yet."
   },
   "kev_page_intro": {
@@ -1438,5 +1438,13 @@
   "cis_home_link": {
     "ar": "الأرقام نفسها مقروءة بضوابط CIS",
     "en": "The same figures read against the CIS Controls"
+  },
+  "kev_clear_h": {
+    "ar": "ثغرات لا يعلن أي موقع إصداراً مصاباً بها ({n})",
+    "en": "No site announces an affected version ({n})"
+  },
+  "kev_clear_of": {
+    "ar": "من {announced} يعلن إصداره",
+    "en": "of {announced} announcing a version"
   }
 }
