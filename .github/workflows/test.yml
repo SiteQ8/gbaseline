@@ -29,7 +29,8 @@ jobs:
         run: npm run selftest
 
   browser:
-    runs-on: ubuntu-latest
+    # Playwright installs its browser dependencies only on the Ubuntu releases it supports.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
