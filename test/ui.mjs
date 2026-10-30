@@ -187,7 +187,7 @@ try {
   assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '18.2٪', 'two of the eleven sites announcing a PHP version announce an affected one');
   assert.equal((await page.textContent('#cve-2026-1001 .basis')).trim(), '2 من 11 يعلن إصداره كاملاً');
   assert.equal(await page.locator('#kev .kev-list li').count(), 1, 'only the measured entries are rows');
-  assert.match(await page.textContent('#kev'), /و1 أخرى في Apache Tomcat لا يعلن أي موقع إصدارها كاملاً/, 'the entry no site can be held against is named in one line');
+  assert.match(await page.textContent('#kev'), /وكذلك 1 أخرى في Apache Tomcat لا يعلن أي موقع إصدارها كاملاً/, 'the entry no site can be held against is named in one line');
   assert.match(await page.textContent('#cve-2026-1001'), /كانت 25\.0٪ في 21 أكتوبر 2026/, 'the row says where the share moved from');
   assert.match(await page.textContent('#cve-2026-1001'), /تُستخدم في حملات فدية/);
   assert.equal(await page.locator('#cve-2026-1001 a[href^="https://nvd.nist.gov/vuln/detail/CVE-2026-1001"]').count(), 1);
@@ -240,7 +240,8 @@ try {
   const kwCis = await page.textContent('#cis');
   for (const c of codes.filter((x) => x !== 'KW')) assert.ok(!kwCis.includes(scope.countries[c].ar), `the Kuwaiti CIS figures never name ${scope.countries[c].en}`);
   await go(page, 'readiness/kw/');
-  assert.equal((await page.textContent('#cve-2026-1001 .v')).trim(), '0.0٪', 'the Kuwaiti site announcing a PHP version is not affected after the first census');
+  assert.equal(await page.locator('#cve-2026-1001').count(), 0, 'a vulnerability no Kuwaiti site is exposed to is not a row of its own');
+  assert.equal(await page.locator('.kev-clear a[href="/readiness/cve-2026-1001/"]').count(), 1, 'it is named in the compact list of those no site announces an affected version of');
   assert.equal(await page.locator('nav.others a').count(), codes.length - 1, 'a state leads to the other five');
   assert.equal(await page.locator('main .places a[aria-current="page"]').textContent(), scope.countries.KW.ar);
   await go(page, '');
