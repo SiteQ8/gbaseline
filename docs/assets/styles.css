@@ -669,7 +669,7 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
 :lang(ar) .cis-h { line-height: 1.6; }
 .cis-n { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--led); }
 .cis-t { font-weight: 600; }
-.cis-ig { display: inline-block; margin-inline-end: var(--s-2); padding: 0 8px; background: var(--amber); color: var(--navy); font-size: var(--step-small); font-weight: 500; line-height: 1.7; }
+.cis-ig { display: inline-block; margin-inline-end: var(--s-2); padding: 0 6px; border: 1px solid var(--amber-soft); color: var(--amber); font-size: var(--step-small); font-weight: 500; line-height: 1.7; }
 .cis-c { margin-top: var(--s-2); padding-inline-start: calc(3.2ch * 1.25 + var(--s-3)); }
 .cis-ev { padding-inline-start: 0; }
 .cis-ev { margin-top: var(--s-2); }
@@ -695,4 +695,23 @@ main .places a[aria-current='page'] { background: var(--amber); color: var(--nav
   .r-ig { display: block; width: fit-content; margin: var(--s-1) 0 0; }
   .sheet .r-note { font-size: 0.85rem; }
   .sheet-head span:first-child { display: none; }
+}
+
+/* polish: the ransomware flag is the only filled tag; CVE identifiers never break; small links get a full tap area */
+.flag::before { content: ''; display: inline-block; width: .5em; height: .5em; margin-inline-end: .45em; background: var(--navy); transform: translateY(-.05em); }
+.cve, .kev-cover .title .line:first-child > span { white-space: nowrap; }
+.fig-detail a, .clauses .std-w, .clauses .cite-w { position: relative; }
+.fig-detail a::after, .clauses .std-w::after, .clauses .cite-w::after { content: ''; position: absolute; inset: -10px -4px; }
+.kev-clear { margin-top: var(--s-6); }
+.kev-clear ul { display: grid; gap: var(--s-1); }
+.kev-clear li { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); align-items: baseline; }
+.kev-clear a { display: inline-flex; gap: .4em; min-height: 40px; align-items: center; font-weight: 500; }
+.kev-clear .sub-h { font-size: var(--step-body); }
+.kev-clear .soft { font-size: var(--step-small); }
+.tablist { grid-template-columns: repeat(auto-fill, minmax(min(100%, 7.5em), 1fr)); }
+@media (max-width: 760px) {
+  .kev-cover .title { font-size: clamp(2rem, 9.5vw, 2.75rem); }
+  /* the first screen on a phone: three photographs and one amber tile, no pale tile that reads as a picture that did not load */
+  .m-f { display: none; }
+  .m-b { display: block; grid-column: 2; grid-row: 2; }
 }
