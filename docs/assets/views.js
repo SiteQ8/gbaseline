@@ -415,9 +415,12 @@ function contents(k, items) {
   return { label: k.t('contents_label'), body: h('ol', { class: 'toc' }, items.map(([id, label]) => h('li', {}, h('a', { href: `#${id}` }, label)))) };
 }
 
+// Arabic joins with و, and a hair space after it before a Latin word keeps it from reading as a Latin g.
+const AND = ' و';
+
 // A list of things in prose, joined the way the language joins them.
 export function listed(k, parts) {
-  if (k.lang === 'ar') return parts.join(' و');
+  if (k.lang === 'ar') return parts.map((p, i) => (i ? `${AND}${/^[A-Za-z0-9]/.test(p) ? '\u2009' : ''}${p}` : p)).join('');
   return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}` : parts.join('');
 }
 
@@ -770,7 +773,7 @@ const basis = (text) => h('span', { class: 'basis' }, text);
 
 // Parts listed in prose, as vnodes: the way the language joins them, with each part kept whole.
 function listedNodes(k, parts) {
-  if (k.lang === 'ar') return parts.flatMap((p, i) => (i ? [' و', p] : [p]));
+  if (k.lang === 'ar') return parts.flatMap((p, i) => (i ? [`${AND}\u2009`, p] : [p]));
   return parts.flatMap((p, i) => (i === 0 ? [p] : i === parts.length - 1 ? [' and ', p] : [', ', p]));
 }
 
@@ -781,10 +784,15 @@ function kevList(k, R, place) {
   if (!R.kev.length) return h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none'));
   // The entries no site can be held against (no site announces a full version of their software) are named in
   // one line after the rows, so the list holds only what was measured.
-  const measured = R.kev.filter((e) => exposureOf(p, e.cve));
+  const measured = R.kev.filter((e) => { const x = exposureOf(p, e.cve); return x && x.exposed; });
+  const clear = R.kev.filter((e) => { const x = exposureOf(p, e.cve); return x && !x.exposed; });
   const silent = R.kev.filter((e) => !exposureOf(p, e.cve));
   const silentLine = silent.length ? h('p', { class: 'after small soft', 'data-rise': '' }, rich(k, 'kev_silent', { n: k.num(silent.length), products: listedNodes(k, [...new Set(silent.map((e) => e.product))].map((id) => productName(k, id))) }, [])) : null;
-  if (!measured.length) return [h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none_announce')), silentLine];
+  // Measured, and no site announcing an affected version: named in one compact list, each leading to its page.
+  const clearList = clear.length ? h('div', { class: 'kev-clear', 'data-rise': '' },
+    h('h3', { class: 'sub-h' }, k.t('kev_clear_h', { n: k.num(clear.length) })),
+    h('ul', {}, clear.map((e) => { const x = exposureOf(p, e.cve); return h('li', {}, h('a', { href: k.href(kevRel(e.cve)) }, productName(k, e.product), ' ', cveId(e.cve)), ' ', h('span', { class: 'soft' }, k.t('kev_clear_of', { announced: k.num(x.announced) }))); }))) : null;
+  if (!measured.length) return [clearList || h('p', { class: 'lead', 'data-rise': '' }, k.t('kev_none_announce')), silentLine];
   return [h('ol', { class: 'rows kev-list' }, measured.map((e) => {
     const x = exposureOf(p, e.cve);
     const was = place === 'GCC' ? firstExposure(R, e.cve) : null;
@@ -801,7 +809,7 @@ function kevList(k, R, place) {
         h('a', { href: `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(e.cve)}`, rel: 'noopener' }, k.t('kev_src_nvd')),
         vendor ? h('a', { href: vendor, rel: 'noopener' }, k.t('kev_src_vendor')) : null,
       ]);
-  })), silentLine];
+  })), clearList, silentLine];
 }
 
 // The products whose makers publish support cycles, most announced first: the share of their announcing sites on a
@@ -1062,7 +1070,7 @@ function viewReport(k) {
     h('p', { class: 'r-intro' }, k.t('report_intro')),
     h('h2', { class: 'r-h' }, k.t('report_key_h')),
     h('ul', { class: 'r-keys' },
-      key(k.pct((g.sites / g.live) * 100), k.t('report_key_sites'), ltr(`${k.num(g.sites)} / ${k.num(g.live)}`)),
+      key(k.pct((g.sites / g.live) * 100), k.t('report_key_sites'), [ltr(`${k.num(g.sites)} / ${k.num(g.live)}`), ' · ', k.t('report_census', { date: k.date(R.date) })]),
       kev ? key(k.pct(kev.x.share), rich(k, 'report_key_kev', { product: productName(k, kev.e.product), cve: cveId(kev.e.cve) }, []), k.t('kev_row_basis', { exposed: k.num(kev.x.exposed), announced: k.num(kev.x.announced) })) : null,
       eol ? key(k.pct((eol[1].eol / eol[1].versioned) * 100), rich(k, 'report_key_eol', { product: productName(k, eol[0]) }, []), k.t('eol_row_basis', { eol: k.num(eol[1].eol), versioned: k.num(eol[1].versioned) })) : null,
       key(k.pct((g.announce.version / g.sites) * 100), k.t('report_key_version'), k.t('announce_of', { n: k.num(g.announce.version), sites: k.num(g.sites) }))),
