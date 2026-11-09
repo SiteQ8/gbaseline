@@ -1,24 +1,24 @@
 {
  "schema": "summary/1",
- "date": "2026-11-02",
+ "date": "2026-11-09",
  "inventory": {
   "GCC": {
    "all": {
-    "discovered": 21312,
-    "live": 14880,
-    "retired": 5976,
-    "broken": 456
+    "discovered": 21336,
+    "live": 14887,
+    "retired": 5998,
+    "broken": 451
    },
    "government": {
     "discovered": 2834,
-    "live": 1850,
-    "retired": 939,
-    "broken": 45
+    "live": 1849,
+    "retired": 941,
+    "broken": 44
    },
    "education": {
     "discovered": 2896,
-    "live": 1915,
-    "retired": 937,
+    "live": 1917,
+    "retired": 935,
     "broken": 44
    },
    "health": {
@@ -28,30 +28,30 @@
     "broken": 7
    },
    "business": {
-    "discovered": 8175,
-    "live": 5804,
-    "retired": 2128,
-    "broken": 243
+    "discovered": 8177,
+    "live": 5792,
+    "retired": 2147,
+    "broken": 238
    },
    "nonprofit": {
-    "discovered": 5916,
-    "live": 4554,
-    "retired": 1282,
+    "discovered": 5938,
+    "live": 4571,
+    "retired": 1287,
     "broken": 80
    },
    "network": {
     "discovered": 1091,
-    "live": 550,
-    "retired": 504,
-    "broken": 37
+    "live": 551,
+    "retired": 502,
+    "broken": 38
    }
   },
   "KW": {
    "all": {
     "discovered": 3475,
-    "live": 2212,
-    "retired": 1179,
-    "broken": 84
+    "live": 2209,
+    "retired": 1185,
+    "broken": 81
    },
    "government": {
     "discovered": 153,
@@ -73,9 +73,9 @@
    },
    "business": {
     "discovered": 3017,
-    "live": 1842,
-    "retired": 1104,
-    "broken": 71
+    "live": 1839,
+    "retired": 1110,
+    "broken": 68
    },
    "nonprofit": {
     "discovered": 140,
@@ -92,21 +92,21 @@
   },
   "SA": {
    "all": {
-    "discovered": 11424,
-    "live": 7905,
-    "retired": 3361,
-    "broken": 158
+    "discovered": 11448,
+    "live": 7919,
+    "retired": 3370,
+    "broken": 159
    },
    "government": {
     "discovered": 1079,
-    "live": 395,
-    "retired": 669,
-    "broken": 15
+    "live": 394,
+    "retired": 671,
+    "broken": 14
    },
    "education": {
     "discovered": 2093,
-    "live": 1267,
-    "retired": 798,
+    "live": 1269,
+    "retired": 796,
     "broken": 28
    },
    "health": {
@@ -116,30 +116,30 @@
     "broken": 7
    },
    "business": {
-    "discovered": 1263,
-    "live": 1230,
-    "retired": 28,
-    "broken": 5
+    "discovered": 1265,
+    "live": 1225,
+    "retired": 34,
+    "broken": 6
    },
    "nonprofit": {
-    "discovered": 5590,
-    "live": 4314,
-    "retired": 1205,
+    "discovered": 5612,
+    "live": 4331,
+    "retired": 1210,
     "broken": 71
    },
    "network": {
     "discovered": 1005,
-    "live": 495,
-    "retired": 478,
-    "broken": 32
+    "live": 496,
+    "retired": 476,
+    "broken": 33
    }
   },
   "AE": {
    "all": {
     "discovered": 1529,
-    "live": 1160,
-    "retired": 349,
-    "broken": 20
+    "live": 1159,
+    "retired": 351,
+    "broken": 19
    },
    "government": {
     "discovered": 851,
@@ -161,9 +161,9 @@
    },
    "business": {
     "discovered": 351,
-    "live": 221,
-    "retired": 125,
-    "broken": 5
+    "live": 220,
+    "retired": 127,
+    "broken": 4
    },
    "nonprofit": {
     "discovered": 39,
@@ -181,9 +181,9 @@
   "QA": {
    "all": {
     "discovered": 2890,
-    "live": 2026,
-    "retired": 739,
-    "broken": 125
+    "live": 2022,
+    "retired": 745,
+    "broken": 123
    },
    "government": {
     "discovered": 242,
@@ -205,9 +205,9 @@
    },
    "business": {
     "discovered": 2427,
-    "live": 1651,
-    "retired": 662,
-    "broken": 114
+    "live": 1647,
+    "retired": 668,
+    "broken": 112
    },
    "nonprofit": {
     "discovered": 91,
@@ -269,8 +269,8 @@
   "OM": {
    "all": {
     "discovered": 1156,
-    "live": 842,
-    "retired": 265,
+    "live": 843,
+    "retired": 264,
     "broken": 49
    },
    "government": {
@@ -293,8 +293,8 @@
    },
    "business": {
     "discovered": 622,
-    "live": 445,
-    "retired": 143,
+    "live": 446,
+    "retired": 142,
     "broken": 34
    },
    "nonprofit": {
@@ -315,51 +315,50 @@
   "dmarc": {
    "GCC": {
     "all": {
-     "pass": 2901,
-     "fail": 11969,
+     "pass": 2917,
+     "fail": 11961,
      "na": 0,
-     "unknown": 466,
+     "unknown": 460,
      "levels": {
-      "none": 3743,
-      "missing": 8041,
-      "quarantine": 1218,
-      "reject": 1683,
-      "multiple": 55,
-      "dns-broken": 456,
-      "resolvers-disagree": 6,
-      "partial": 116,
+      "none": 3789,
+      "missing": 7991,
+      "quarantine": 1230,
+      "reject": 1687,
+      "multiple": 52,
+      "dns-broken": 451,
+      "resolvers-disagree": 4,
+      "partial": 115,
       "invalid": 14,
-      "dns-error": 4
+      "dns-error": 5
      }
     },
     "government": {
-     "pass": 669,
-     "fail": 1177,
+     "pass": 673,
+     "fail": 1173,
      "na": 0,
-     "unknown": 49,
+     "unknown": 47,
      "levels": {
-      "none": 261,
-      "reject": 449,
-      "missing": 858,
-      "quarantine": 220,
-      "partial": 50,
-      "dns-broken": 45,
+      "none": 260,
+      "reject": 450,
+      "missing": 857,
+      "quarantine": 223,
+      "partial": 49,
+      "dns-broken": 44,
       "invalid": 3,
-      "multiple": 5,
-      "dns-error": 2,
-      "resolvers-disagree": 2
+      "multiple": 4,
+      "dns-error": 3
      }
     },
     "education": {
-     "pass": 379,
-     "fail": 1534,
+     "pass": 382,
+     "fail": 1533,
      "na": 0,
      "unknown": 46,
      "levels": {
-      "missing": 1005,
-      "none": 499,
+      "missing": 985,
+      "none": 518,
       "reject": 186,
-      "quarantine": 193,
+      "quarantine": 196,
       "dns-broken": 44,
       "resolvers-disagree": 2,
       "partial": 18,
@@ -374,94 +373,91 @@
      "unknown": 7,
      "levels": {
       "reject": 24,
-      "missing": 118,
+      "missing": 116,
       "dns-broken": 7,
-      "none": 54,
+      "none": 56,
       "partial": 3,
       "quarantine": 8
      }
     },
     "business": {
-     "pass": 1473,
-     "fail": 4328,
+     "pass": 1482,
+     "fail": 4306,
      "na": 0,
-     "unknown": 246,
+     "unknown": 242,
      "levels": {
-      "missing": 3042,
-      "quarantine": 619,
-      "none": 1226,
-      "reject": 854,
-      "multiple": 21,
-      "dns-broken": 243,
+      "missing": 3012,
+      "quarantine": 626,
+      "none": 1235,
+      "reject": 856,
+      "multiple": 20,
+      "dns-broken": 238,
       "partial": 36,
-      "invalid": 3,
       "dns-error": 2,
-      "resolvers-disagree": 1
+      "invalid": 3,
+      "resolvers-disagree": 2
      }
     },
     "nonprofit": {
-     "pass": 270,
-     "fail": 4284,
+     "pass": 269,
+     "fail": 4302,
      "na": 0,
      "unknown": 80,
      "levels": {
-      "missing": 2682,
-      "none": 1574,
-      "reject": 127,
+      "missing": 2687,
+      "none": 1587,
+      "reject": 128,
       "multiple": 21,
       "dns-broken": 80,
-      "quarantine": 143,
+      "quarantine": 141,
       "partial": 4,
       "invalid": 3
      }
     },
     "network": {
-     "pass": 78,
-     "fail": 471,
+     "pass": 79,
+     "fail": 472,
      "na": 0,
      "unknown": 38,
      "levels": {
-      "none": 129,
-      "missing": 336,
-      "quarantine": 35,
+      "none": 133,
+      "missing": 334,
+      "quarantine": 36,
       "reject": 43,
-      "dns-broken": 37,
-      "resolvers-disagree": 1,
-      "multiple": 1,
+      "dns-broken": 38,
       "partial": 5
      }
     }
    },
    "KW": {
     "all": {
-     "pass": 539,
-     "fail": 1669,
+     "pass": 543,
+     "fail": 1662,
      "na": 0,
-     "unknown": 88,
+     "unknown": 85,
      "levels": {
-      "quarantine": 272,
-      "missing": 1200,
-      "reject": 267,
-      "none": 449,
+      "quarantine": 274,
+      "missing": 1180,
+      "reject": 269,
+      "none": 462,
       "multiple": 7,
       "resolvers-disagree": 4,
-      "dns-broken": 84,
+      "dns-broken": 81,
       "partial": 9,
       "invalid": 4
      }
     },
     "government": {
-     "pass": 47,
+     "pass": 48,
      "fail": 93,
      "na": 0,
-     "unknown": 8,
+     "unknown": 7,
      "levels": {
       "missing": 77,
-      "quarantine": 36,
+      "quarantine": 37,
       "none": 16,
       "reject": 11,
-      "dns-broken": 7,
-      "resolvers-disagree": 1
+      "dns-broken": 7
      }
     },
     "education": {
@@ -470,8 +466,8 @@
      "na": 0,
      "unknown": 4,
      "levels": {
-      "missing": 64,
-      "none": 21,
+      "missing": 60,
+      "none": 25,
       "resolvers-disagree": 2,
       "quarantine": 21,
       "reject": 14,
@@ -486,20 +482,20 @@
      "levels": {}
     },
     "business": {
-     "pass": 441,
-     "fail": 1400,
+     "pass": 444,
+     "fail": 1393,
      "na": 0,
-     "unknown": 72,
+     "unknown": 70,
      "levels": {
-      "quarantine": 204,
-      "missing": 998,
-      "reject": 237,
-      "none": 384,
+      "quarantine": 205,
+      "missing": 983,
+      "reject": 239,
+      "none": 392,
       "multiple": 6,
-      "dns-broken": 71,
+      "dns-broken": 68,
       "partial": 9,
       "invalid": 3,
-      "resolvers-disagree": 1
+      "resolvers-disagree": 2
      }
     },
     "nonprofit": {
@@ -508,8 +504,8 @@
      "na": 0,
      "unknown": 4,
      "levels": {
-      "missing": 55,
-      "none": 27,
+      "missing": 54,
+      "none": 28,
       "dns-broken": 4,
       "quarantine": 9,
       "invalid": 1,
@@ -532,51 +528,49 @@
    },
    "SA": {
     "all": {
-     "pass": 1135,
-     "fail": 6765,
+     "pass": 1142,
+     "fail": 6774,
      "na": 0,
-     "unknown": 163,
+     "unknown": 162,
      "levels": {
-      "missing": 4258,
-      "none": 2387,
-      "reject": 720,
-      "quarantine": 415,
-      "multiple": 30,
-      "dns-broken": 158,
-      "partial": 81,
+      "missing": 4242,
+      "none": 2414,
+      "reject": 723,
+      "quarantine": 419,
+      "multiple": 29,
+      "dns-broken": 159,
+      "partial": 80,
       "invalid": 9,
-      "resolvers-disagree": 2,
       "dns-error": 3
      }
     },
     "government": {
-     "pass": 265,
-     "fail": 127,
+     "pass": 266,
+     "fail": 125,
      "na": 0,
-     "unknown": 18,
+     "unknown": 17,
      "levels": {
-      "reject": 242,
-      "partial": 43,
-      "none": 29,
-      "dns-broken": 15,
+      "reject": 243,
+      "partial": 42,
+      "none": 28,
+      "dns-broken": 14,
       "invalid": 3,
       "quarantine": 23,
       "missing": 51,
-      "dns-error": 2,
-      "multiple": 1,
-      "resolvers-disagree": 1
+      "dns-error": 3,
+      "multiple": 1
      }
     },
     "education": {
-     "pass": 179,
+     "pass": 181,
      "fail": 1088,
      "na": 0,
      "unknown": 28,
      "levels": {
-      "missing": 679,
-      "none": 392,
+      "missing": 667,
+      "none": 404,
       "reject": 98,
-      "quarantine": 81,
+      "quarantine": 83,
       "partial": 8,
       "dns-broken": 28,
       "invalid": 5,
@@ -590,103 +584,100 @@
      "unknown": 7,
      "levels": {
       "reject": 24,
-      "missing": 115,
+      "missing": 113,
       "dns-broken": 7,
-      "none": 54,
+      "none": 56,
       "partial": 3,
       "quarantine": 8
      }
     },
     "business": {
-     "pass": 370,
-     "fail": 859,
+     "pass": 374,
+     "fail": 851,
      "na": 0,
      "unknown": 6,
      "levels": {
-      "missing": 563,
-      "none": 272,
-      "reject": 206,
-      "quarantine": 164,
+      "none": 271,
+      "reject": 207,
+      "missing": 556,
+      "quarantine": 167,
       "partial": 20,
-      "dns-broken": 5,
-      "multiple": 4,
-      "dns-error": 1
+      "dns-broken": 6,
+      "multiple": 4
      }
     },
     "nonprofit": {
-     "pass": 223,
-     "fail": 4091,
+     "pass": 222,
+     "fail": 4109,
      "na": 0,
      "unknown": 71,
      "levels": {
-      "none": 1519,
-      "missing": 2548,
-      "reject": 113,
+      "none": 1530,
+      "missing": 2555,
+      "reject": 114,
       "multiple": 20,
       "dns-broken": 71,
-      "quarantine": 110,
+      "quarantine": 108,
       "partial": 3,
       "invalid": 1
      }
     },
     "network": {
-     "pass": 66,
-     "fail": 428,
+     "pass": 67,
+     "fail": 429,
      "na": 0,
      "unknown": 33,
      "levels": {
-      "none": 121,
-      "missing": 302,
-      "quarantine": 29,
+      "none": 125,
+      "missing": 300,
+      "quarantine": 30,
       "reject": 37,
-      "dns-broken": 32,
-      "resolvers-disagree": 1,
-      "multiple": 1,
+      "dns-broken": 33,
       "partial": 4
      }
     }
    },
    "AE": {
     "all": {
-     "pass": 335,
-     "fail": 825,
+     "pass": 337,
+     "fail": 822,
      "na": 0,
-     "unknown": 20,
+     "unknown": 19,
      "levels": {
-      "none": 253,
-      "missing": 557,
+      "none": 252,
+      "missing": 555,
       "reject": 159,
-      "quarantine": 176,
+      "quarantine": 178,
       "partial": 12,
       "multiple": 3,
-      "dns-broken": 20
+      "dns-broken": 19
      }
     },
     "government": {
-     "pass": 189,
-     "fail": 495,
+     "pass": 190,
+     "fail": 494,
      "na": 0,
      "unknown": 10,
      "levels": {
       "none": 149,
-      "missing": 341,
-      "quarantine": 114,
+      "missing": 340,
+      "quarantine": 115,
       "reject": 75,
       "dns-broken": 10,
       "partial": 5
      }
     },
     "education": {
-     "pass": 87,
-     "fail": 129,
+     "pass": 88,
+     "fail": 128,
      "na": 0,
      "unknown": 5,
      "levels": {
       "reject": 42,
       "none": 41,
-      "quarantine": 45,
+      "quarantine": 46,
       "partial": 5,
-      "missing": 82,
+      "missing": 81,
       "multiple": 1,
       "dns-broken": 5
      }
@@ -700,14 +691,14 @@
     },
     "business": {
      "pass": 50,
-     "fail": 171,
+     "fail": 170,
      "na": 0,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
       "missing": 116,
-      "none": 53,
+      "none": 52,
       "reject": 36,
-      "dns-broken": 5,
+      "dns-broken": 4,
       "quarantine": 14,
       "multiple": 2
      }
@@ -740,18 +731,19 @@
    },
    "QA": {
     "all": {
-     "pass": 445,
-     "fail": 1581,
+     "pass": 447,
+     "fail": 1574,
      "na": 0,
-     "unknown": 125,
+     "unknown": 124,
      "levels": {
-      "missing": 1110,
-      "quarantine": 214,
-      "reject": 231,
-      "none": 458,
-      "dns-broken": 125,
+      "missing": 1102,
+      "quarantine": 217,
+      "reject": 230,
+      "none": 460,
+      "dns-broken": 123,
+      "dns-error": 1,
       "partial": 6,
-      "multiple": 7
+      "multiple": 6
      }
     },
     "government": {
@@ -762,9 +754,9 @@
      "levels": {
       "missing": 113,
       "none": 23,
-      "reject": 30,
+      "reject": 29,
       "dns-broken": 5,
-      "quarantine": 30,
+      "quarantine": 31,
       "partial": 1
      }
     },
@@ -790,18 +782,19 @@
      "levels": {}
     },
     "business": {
-     "pass": 341,
-     "fail": 1310,
+     "pass": 343,
+     "fail": 1303,
      "na": 0,
-     "unknown": 114,
+     "unknown": 113,
      "levels": {
-      "quarantine": 156,
-      "missing": 893,
+      "quarantine": 158,
       "reject": 185,
-      "none": 406,
-      "dns-broken": 114,
+      "missing": 886,
+      "none": 407,
+      "dns-broken": 112,
+      "dns-error": 1,
       "partial": 4,
-      "multiple": 7
+      "multiple": 6
      }
     },
     "nonprofit": {
@@ -810,9 +803,9 @@
      "na": 0,
      "unknown": 2,
      "levels": {
-      "missing": 38,
+      "missing": 37,
       "quarantine": 15,
-      "none": 15,
+      "none": 16,
       "reject": 4,
       "dns-broken": 2
      }
@@ -833,31 +826,31 @@
    },
    "BH": {
     "all": {
-     "pass": 173,
-     "fail": 562,
+     "pass": 175,
+     "fail": 560,
      "na": 0,
      "unknown": 20,
      "levels": {
-      "missing": 464,
-      "reject": 104,
-      "quarantine": 69,
+      "missing": 460,
+      "reject": 105,
+      "quarantine": 70,
       "dns-broken": 20,
-      "none": 86,
+      "none": 89,
       "partial": 5,
-      "multiple": 6,
+      "multiple": 5,
       "invalid": 1
      }
     },
     "government": {
-     "pass": 17,
-     "fail": 232,
+     "pass": 18,
+     "fail": 231,
      "na": 0,
      "unknown": 1,
      "levels": {
       "missing": 213,
       "dns-broken": 1,
-      "reject": 11,
-      "multiple": 3,
+      "reject": 12,
+      "multiple": 2,
       "quarantine": 6,
       "none": 15,
       "partial": 1
@@ -869,9 +862,9 @@
      "na": 0,
      "unknown": 3,
      "levels": {
-      "missing": 26,
+      "missing": 24,
       "dns-broken": 3,
-      "none": 8,
+      "none": 10,
       "reject": 4,
       "quarantine": 11,
       "multiple": 1,
@@ -886,15 +879,15 @@
      "levels": {}
     },
     "business": {
-     "pass": 136,
-     "fail": 279,
+     "pass": 137,
+     "fail": 278,
      "na": 0,
      "unknown": 14,
      "levels": {
-      "missing": 214,
+      "missing": 212,
       "reject": 89,
-      "quarantine": 47,
-      "none": 60,
+      "quarantine": 48,
+      "none": 61,
       "partial": 3,
       "multiple": 2,
       "dns-broken": 14
@@ -925,14 +918,14 @@
    },
    "OM": {
     "all": {
-     "pass": 274,
-     "fail": 567,
+     "pass": 273,
+     "fail": 569,
      "na": 0,
      "unknown": 50,
      "levels": {
       "missing": 452,
-      "reject": 202,
-      "none": 110,
+      "reject": 201,
+      "none": 112,
       "quarantine": 72,
       "dns-broken": 49,
       "partial": 3,
@@ -960,10 +953,10 @@
      "na": 0,
      "unknown": 5,
      "levels": {
-      "missing": 105,
+      "missing": 104,
       "quarantine": 26,
       "reject": 19,
-      "none": 25,
+      "none": 26,
       "dns-broken": 5,
       "partial": 3,
       "multiple": 1
@@ -979,14 +972,14 @@
      }
     },
     "business": {
-     "pass": 135,
-     "fail": 309,
+     "pass": 134,
+     "fail": 311,
      "na": 0,
      "unknown": 35,
      "levels": {
-      "missing": 258,
-      "reject": 101,
-      "none": 51,
+      "missing": 259,
+      "reject": 100,
+      "none": 52,
       "dns-broken": 34,
       "quarantine": 34,
       "dns-error": 1
@@ -1022,57 +1015,57 @@
   "spf": {
    "GCC": {
     "all": {
-     "pass": 10429,
-     "fail": 4440,
+     "pass": 10447,
+     "fail": 4430,
      "na": 0,
-     "unknown": 467,
+     "unknown": 461,
      "levels": {
-      "strict": 5050,
-      "soft": 5379,
-      "missing": 3756,
-      "invalid": 50,
+      "strict": 5047,
+      "soft": 5400,
+      "missing": 3746,
+      "invalid": 51,
       "too-many-lookups": 156,
       "multiple": 195,
       "error": 127,
-      "neutral": 101,
-      "dns-broken": 456,
+      "neutral": 100,
+      "dns-broken": 451,
       "no-all": 50,
       "open": 5,
-      "dns-error": 11
+      "dns-error": 10
      }
     },
     "government": {
-     "pass": 1265,
-     "fail": 581,
+     "pass": 1267,
+     "fail": 580,
      "na": 0,
-     "unknown": 49,
+     "unknown": 46,
      "levels": {
-      "strict": 965,
-      "soft": 300,
-      "missing": 528,
+      "strict": 966,
+      "soft": 301,
+      "missing": 527,
       "error": 20,
-      "dns-broken": 45,
+      "dns-broken": 44,
       "neutral": 5,
       "multiple": 18,
-      "dns-error": 4,
       "too-many-lookups": 3,
       "no-all": 4,
+      "dns-error": 2,
       "invalid": 3
      }
     },
     "education": {
-     "pass": 1431,
-     "fail": 483,
+     "pass": 1439,
+     "fail": 477,
      "na": 0,
      "unknown": 45,
      "levels": {
-      "soft": 754,
-      "missing": 373,
-      "strict": 677,
-      "multiple": 42,
+      "soft": 760,
+      "missing": 367,
+      "strict": 679,
+      "multiple": 41,
       "dns-broken": 44,
       "error": 20,
-      "too-many-lookups": 25,
+      "too-many-lookups": 26,
       "neutral": 10,
       "open": 1,
       "dns-error": 1,
@@ -1081,16 +1074,16 @@
      }
     },
     "health": {
-     "pass": 154,
-     "fail": 52,
+     "pass": 155,
+     "fail": 51,
      "na": 0,
      "unknown": 8,
      "levels": {
       "strict": 69,
-      "missing": 34,
+      "missing": 33,
       "dns-broken": 7,
       "error": 2,
-      "soft": 85,
+      "soft": 86,
       "multiple": 6,
       "too-many-lookups": 8,
       "invalid": 2,
@@ -1098,36 +1091,36 @@
      }
     },
     "business": {
-     "pass": 4171,
-     "fail": 1630,
+     "pass": 4168,
+     "fail": 1620,
      "na": 0,
-     "unknown": 246,
+     "unknown": 242,
      "levels": {
-      "missing": 1328,
-      "strict": 2334,
-      "soft": 1837,
+      "missing": 1318,
+      "strict": 2330,
+      "soft": 1838,
       "invalid": 23,
-      "too-many-lookups": 70,
+      "too-many-lookups": 69,
       "error": 61,
-      "multiple": 71,
+      "multiple": 73,
       "no-all": 28,
-      "dns-broken": 243,
-      "dns-error": 3,
-      "neutral": 48,
+      "dns-broken": 238,
+      "dns-error": 4,
+      "neutral": 47,
       "open": 1
      }
     },
     "nonprofit": {
-     "pass": 3056,
-     "fail": 1496,
+     "pass": 3066,
+     "fail": 1503,
      "na": 0,
      "unknown": 82,
      "levels": {
-      "invalid": 17,
-      "soft": 2174,
-      "missing": 1319,
-      "strict": 882,
-      "multiple": 50,
+      "invalid": 18,
+      "soft": 2186,
+      "missing": 1326,
+      "strict": 880,
+      "multiple": 49,
       "neutral": 36,
       "error": 20,
       "dns-broken": 80,
@@ -1139,15 +1132,15 @@
     },
     "network": {
      "pass": 352,
-     "fail": 198,
+     "fail": 199,
      "na": 0,
-     "unknown": 37,
+     "unknown": 38,
      "levels": {
       "soft": 229,
-      "missing": 174,
+      "missing": 175,
       "strict": 123,
       "too-many-lookups": 7,
-      "dns-broken": 37,
+      "dns-broken": 38,
       "no-all": 2,
       "multiple": 8,
       "neutral": 2,
@@ -1158,33 +1151,33 @@
    },
    "KW": {
     "all": {
-     "pass": 1585,
-     "fail": 625,
+     "pass": 1587,
+     "fail": 620,
      "na": 0,
-     "unknown": 86,
+     "unknown": 83,
      "levels": {
-      "strict": 868,
-      "missing": 505,
-      "soft": 717,
+      "strict": 869,
+      "missing": 500,
+      "soft": 718,
       "multiple": 32,
       "invalid": 9,
       "no-all": 11,
-      "error": 25,
+      "error": 26,
       "too-many-lookups": 15,
       "dns-error": 2,
-      "dns-broken": 84,
-      "neutral": 27,
+      "dns-broken": 81,
+      "neutral": 26,
       "open": 1
      }
     },
     "government": {
-     "pass": 110,
-     "fail": 31,
+     "pass": 111,
+     "fail": 30,
      "na": 0,
      "unknown": 7,
      "levels": {
-      "strict": 86,
-      "missing": 25,
+      "strict": 87,
+      "missing": 24,
       "soft": 24,
       "neutral": 3,
       "multiple": 3,
@@ -1215,22 +1208,22 @@
      "levels": {}
     },
     "business": {
-     "pass": 1300,
-     "fail": 541,
+     "pass": 1301,
+     "fail": 537,
      "na": 0,
-     "unknown": 72,
+     "unknown": 69,
      "levels": {
       "strict": 682,
-      "missing": 443,
-      "soft": 618,
+      "missing": 439,
+      "soft": 619,
       "invalid": 8,
       "no-all": 10,
-      "error": 19,
+      "error": 20,
       "too-many-lookups": 15,
       "dns-error": 1,
-      "dns-broken": 71,
+      "dns-broken": 68,
       "multiple": 23,
-      "neutral": 22,
+      "neutral": 21,
       "open": 1
      }
     },
@@ -1265,54 +1258,54 @@
    },
    "SA": {
     "all": {
-     "pass": 5617,
-     "fail": 2280,
+     "pass": 5632,
+     "fail": 2281,
      "na": 0,
-     "unknown": 166,
+     "unknown": 165,
      "levels": {
-      "soft": 3328,
-      "missing": 1949,
-      "invalid": 17,
-      "strict": 2289,
+      "soft": 3346,
+      "invalid": 18,
+      "strict": 2286,
+      "missing": 1948,
       "neutral": 51,
       "error": 47,
-      "dns-broken": 158,
+      "dns-broken": 159,
       "too-many-lookups": 84,
-      "multiple": 99,
+      "multiple": 100,
       "open": 4,
       "no-all": 29,
-      "dns-error": 8
+      "dns-error": 6
      }
     },
     "government": {
      "pass": 348,
-     "fail": 43,
+     "fail": 44,
      "na": 0,
-     "unknown": 19,
+     "unknown": 16,
      "levels": {
       "strict": 318,
-      "dns-broken": 15,
-      "missing": 38,
+      "missing": 39,
+      "dns-broken": 14,
       "soft": 30,
-      "dns-error": 4,
       "multiple": 2,
       "no-all": 2,
+      "dns-error": 2,
       "error": 1
      }
     },
     "education": {
-     "pass": 948,
-     "fail": 319,
+     "pass": 952,
+     "fail": 317,
      "na": 0,
      "unknown": 28,
      "levels": {
-      "soft": 541,
-      "missing": 247,
-      "multiple": 28,
+      "soft": 545,
+      "missing": 242,
+      "multiple": 29,
       "strict": 407,
       "dns-broken": 28,
-      "error": 10,
-      "too-many-lookups": 17,
+      "error": 11,
+      "too-many-lookups": 18,
       "neutral": 9,
       "open": 1,
       "invalid": 2,
@@ -1320,16 +1313,16 @@
      }
     },
     "health": {
-     "pass": 153,
-     "fail": 50,
+     "pass": 154,
+     "fail": 49,
      "na": 0,
      "unknown": 8,
      "levels": {
       "strict": 69,
-      "missing": 33,
+      "missing": 32,
       "dns-broken": 7,
       "error": 2,
-      "soft": 84,
+      "soft": 85,
       "multiple": 5,
       "too-many-lookups": 8,
       "invalid": 2,
@@ -1338,54 +1331,54 @@
     },
     "business": {
      "pass": 953,
-     "fail": 276,
+     "fail": 271,
      "na": 0,
-     "unknown": 6,
+     "unknown": 7,
      "levels": {
-      "missing": 215,
       "invalid": 4,
-      "strict": 603,
-      "soft": 350,
-      "too-many-lookups": 12,
-      "error": 13,
-      "multiple": 13,
+      "strict": 602,
+      "missing": 211,
+      "soft": 351,
+      "too-many-lookups": 11,
+      "error": 12,
+      "multiple": 14,
       "no-all": 12,
-      "dns-broken": 5,
+      "dns-broken": 6,
       "neutral": 7,
       "dns-error": 1
      }
     },
     "nonprofit": {
-     "pass": 2892,
-     "fail": 1420,
+     "pass": 2902,
+     "fail": 1427,
      "na": 0,
      "unknown": 73,
      "levels": {
-      "soft": 2107,
-      "missing": 1264,
-      "strict": 785,
+      "soft": 2119,
+      "missing": 1271,
+      "strict": 783,
       "neutral": 33,
       "error": 18,
       "dns-broken": 71,
       "open": 3,
       "too-many-lookups": 42,
-      "multiple": 44,
+      "multiple": 43,
       "no-all": 8,
-      "invalid": 8,
+      "invalid": 9,
       "dns-error": 2
      }
     },
     "network": {
      "pass": 323,
-     "fail": 172,
+     "fail": 173,
      "na": 0,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
       "soft": 216,
-      "missing": 152,
+      "missing": 153,
       "strict": 107,
       "too-many-lookups": 5,
-      "dns-broken": 32,
+      "dns-broken": 33,
       "no-all": 2,
       "neutral": 2,
       "multiple": 7,
@@ -1396,32 +1389,32 @@
    },
    "AE": {
     "all": {
-     "pass": 775,
-     "fail": 385,
+     "pass": 778,
+     "fail": 381,
      "na": 0,
-     "unknown": 20,
+     "unknown": 19,
      "levels": {
-      "strict": 484,
-      "missing": 331,
-      "soft": 291,
+      "strict": 485,
+      "missing": 329,
+      "soft": 293,
       "too-many-lookups": 7,
-      "error": 18,
-      "multiple": 18,
-      "dns-broken": 20,
+      "error": 17,
+      "multiple": 17,
+      "dns-broken": 19,
       "invalid": 7,
       "no-all": 2,
       "neutral": 2
      }
     },
     "government": {
-     "pass": 434,
-     "fail": 250,
+     "pass": 435,
+     "fail": 249,
      "na": 0,
      "unknown": 10,
      "levels": {
       "strict": 295,
-      "missing": 227,
-      "soft": 139,
+      "missing": 226,
+      "soft": 140,
       "error": 12,
       "too-many-lookups": 3,
       "multiple": 5,
@@ -1432,17 +1425,17 @@
      }
     },
     "education": {
-     "pass": 159,
-     "fail": 57,
+     "pass": 162,
+     "fail": 54,
      "na": 0,
      "unknown": 5,
      "levels": {
-      "soft": 67,
-      "error": 3,
-      "strict": 92,
+      "soft": 69,
+      "error": 2,
+      "strict": 93,
       "too-many-lookups": 2,
-      "multiple": 6,
-      "missing": 43,
+      "multiple": 5,
+      "missing": 42,
       "dns-broken": 5,
       "invalid": 2,
       "no-all": 1
@@ -1456,16 +1449,16 @@
      "levels": {}
     },
     "business": {
-     "pass": 154,
+     "pass": 153,
      "fail": 67,
      "na": 0,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
-      "soft": 76,
+      "soft": 75,
       "strict": 78,
       "too-many-lookups": 1,
       "missing": 51,
-      "dns-broken": 5,
+      "dns-broken": 4,
       "multiple": 7,
       "invalid": 4,
       "error": 3,
@@ -1498,22 +1491,22 @@
    },
    "QA": {
     "all": {
-     "pass": 1428,
-     "fail": 597,
+     "pass": 1426,
+     "fail": 594,
      "na": 0,
-     "unknown": 126,
+     "unknown": 125,
      "levels": {
       "invalid": 11,
       "soft": 642,
-      "strict": 786,
-      "missing": 491,
+      "strict": 784,
+      "missing": 488,
       "too-many-lookups": 38,
       "error": 18,
       "multiple": 18,
-      "dns-broken": 125,
+      "dns-broken": 123,
       "neutral": 14,
-      "no-all": 7,
-      "dns-error": 1
+      "dns-error": 2,
+      "no-all": 7
      }
     },
     "government": {
@@ -1534,15 +1527,15 @@
      }
     },
     "education": {
-     "pass": 48,
-     "fail": 32,
+     "pass": 47,
+     "fail": 33,
      "na": 0,
      "unknown": 1,
      "levels": {
-      "missing": 25,
+      "missing": 26,
       "strict": 28,
       "error": 1,
-      "soft": 20,
+      "soft": 19,
       "too-many-lookups": 3,
       "multiple": 2,
       "dns-broken": 1,
@@ -1557,22 +1550,22 @@
      "levels": {}
     },
     "business": {
-     "pass": 1199,
-     "fail": 451,
+     "pass": 1198,
+     "fail": 447,
      "na": 0,
-     "unknown": 115,
+     "unknown": 114,
      "levels": {
-      "soft": 575,
-      "strict": 624,
-      "missing": 370,
+      "soft": 576,
+      "strict": 622,
+      "missing": 366,
       "too-many-lookups": 33,
       "error": 15,
       "multiple": 14,
-      "dns-broken": 114,
+      "dns-broken": 112,
       "neutral": 12,
+      "dns-error": 2,
       "no-all": 5,
-      "invalid": 2,
-      "dns-error": 1
+      "invalid": 2
      }
     },
     "nonprofit": {
@@ -1606,13 +1599,13 @@
    },
    "BH": {
     "all": {
-     "pass": 431,
-     "fail": 304,
+     "pass": 432,
+     "fail": 303,
      "na": 0,
      "unknown": 20,
      "levels": {
-      "missing": 266,
-      "strict": 292,
+      "missing": 265,
+      "strict": 293,
       "soft": 139,
       "dns-broken": 20,
       "multiple": 11,
@@ -1639,17 +1632,16 @@
      }
     },
     "education": {
-     "pass": 36,
-     "fail": 15,
+     "pass": 38,
+     "fail": 13,
      "na": 0,
      "unknown": 3,
      "levels": {
-      "strict": 24,
-      "missing": 13,
+      "strict": 25,
+      "missing": 12,
       "dns-broken": 3,
-      "soft": 12,
-      "error": 1,
-      "multiple": 1
+      "soft": 13,
+      "error": 1
      }
     },
     "health": {
@@ -1660,15 +1652,15 @@
      "levels": {}
     },
     "business": {
-     "pass": 263,
-     "fail": 152,
+     "pass": 262,
+     "fail": 153,
      "na": 0,
      "unknown": 14,
      "levels": {
       "missing": 125,
       "strict": 151,
-      "soft": 112,
-      "multiple": 5,
+      "soft": 111,
+      "multiple": 6,
       "error": 8,
       "dns-broken": 14,
       "too-many-lookups": 5,
@@ -1701,13 +1693,13 @@
    },
    "OM": {
     "all": {
-     "pass": 593,
-     "fail": 249,
+     "pass": 592,
+     "fail": 251,
      "na": 0,
      "unknown": 49,
      "levels": {
-      "missing": 214,
-      "strict": 331,
+      "missing": 216,
+      "strict": 330,
       "soft": 262,
       "dns-broken": 49,
       "multiple": 17,
@@ -1759,13 +1751,13 @@
      }
     },
     "business": {
-     "pass": 302,
-     "fail": 143,
+     "pass": 301,
+     "fail": 145,
      "na": 0,
      "unknown": 34,
      "levels": {
-      "missing": 124,
-      "strict": 196,
+      "missing": 126,
+      "strict": 195,
       "soft": 106,
       "dns-broken": 34,
       "multiple": 9,
@@ -1803,17 +1795,17 @@
   "mta_sts": {
    "GCC": {
     "all": {
-     "pass": 52,
-     "fail": 11636,
-     "na": 3184,
-     "unknown": 464,
+     "pass": 54,
+     "fail": 11638,
+     "na": 3187,
+     "unknown": 459,
      "levels": {
-      "missing": 11541,
-      "no-mail": 3184,
-      "dns-broken": 456,
-      "policy-unreachable": 27,
-      "enforce": 52,
-      "testing": 66,
+      "missing": 11543,
+      "no-mail": 3187,
+      "dns-broken": 451,
+      "policy-unreachable": 29,
+      "enforce": 54,
+      "testing": 64,
       "dns-error": 8,
       "none": 1,
       "policy-invalid": 1
@@ -1821,28 +1813,28 @@
     },
     "government": {
      "pass": 28,
-     "fail": 1314,
-     "na": 504,
-     "unknown": 49,
+     "fail": 1316,
+     "na": 502,
+     "unknown": 47,
      "levels": {
-      "missing": 1266,
-      "no-mail": 504,
+      "missing": 1268,
+      "no-mail": 502,
       "policy-unreachable": 11,
-      "dns-broken": 45,
+      "dns-broken": 44,
       "enforce": 28,
       "testing": 36,
-      "dns-error": 4,
+      "dns-error": 3,
       "none": 1
      }
     },
     "education": {
      "pass": 8,
-     "fail": 1684,
-     "na": 223,
+     "fail": 1688,
+     "na": 221,
      "unknown": 44,
      "levels": {
-      "missing": 1668,
-      "no-mail": 223,
+      "missing": 1672,
+      "no-mail": 221,
       "dns-broken": 44,
       "policy-unreachable": 8,
       "testing": 7,
@@ -1852,38 +1844,38 @@
     },
     "health": {
      "pass": 0,
-     "fail": 186,
-     "na": 21,
+     "fail": 187,
+     "na": 20,
      "unknown": 7,
      "levels": {
-      "missing": 186,
-      "no-mail": 21,
+      "missing": 187,
+      "no-mail": 20,
       "dns-broken": 7
      }
     },
     "business": {
-     "pass": 13,
-     "fail": 4577,
-     "na": 1210,
-     "unknown": 247,
+     "pass": 15,
+     "fail": 4565,
+     "na": 1207,
+     "unknown": 243,
      "levels": {
-      "no-mail": 1210,
-      "missing": 4552,
-      "dns-broken": 243,
-      "enforce": 13,
-      "testing": 19,
-      "dns-error": 4,
-      "policy-unreachable": 6
+      "no-mail": 1207,
+      "missing": 4540,
+      "dns-broken": 238,
+      "enforce": 15,
+      "testing": 17,
+      "dns-error": 5,
+      "policy-unreachable": 8
      }
     },
     "nonprofit": {
      "pass": 1,
-     "fail": 3465,
-     "na": 1088,
+     "fail": 3474,
+     "na": 1096,
      "unknown": 80,
      "levels": {
-      "missing": 3462,
-      "no-mail": 1088,
+      "missing": 3471,
+      "no-mail": 1096,
       "dns-broken": 80,
       "testing": 1,
       "enforce": 1,
@@ -1892,13 +1884,13 @@
     },
     "network": {
      "pass": 2,
-     "fail": 410,
-     "na": 138,
-     "unknown": 37,
+     "fail": 408,
+     "na": 141,
+     "unknown": 38,
      "levels": {
-      "missing": 407,
-      "no-mail": 138,
-      "dns-broken": 37,
+      "missing": 405,
+      "no-mail": 141,
+      "dns-broken": 38,
       "testing": 3,
       "enforce": 2
      }
@@ -1906,27 +1898,27 @@
    },
    "KW": {
     "all": {
-     "pass": 1,
-     "fail": 1776,
-     "na": 435,
-     "unknown": 84,
+     "pass": 3,
+     "fail": 1774,
+     "na": 432,
+     "unknown": 81,
      "levels": {
-      "missing": 1773,
-      "no-mail": 435,
-      "dns-broken": 84,
-      "testing": 2,
-      "policy-unreachable": 1,
-      "enforce": 1
+      "missing": 1772,
+      "no-mail": 432,
+      "dns-broken": 81,
+      "enforce": 3,
+      "testing": 1,
+      "policy-unreachable": 1
      }
     },
     "government": {
      "pass": 0,
-     "fail": 122,
-     "na": 19,
+     "fail": 123,
+     "na": 18,
      "unknown": 7,
      "levels": {
-      "missing": 122,
-      "no-mail": 19,
+      "missing": 123,
+      "no-mail": 18,
       "dns-broken": 7
      }
     },
@@ -1950,16 +1942,16 @@
      "levels": {}
     },
     "business": {
-     "pass": 1,
-     "fail": 1448,
-     "na": 393,
-     "unknown": 71,
+     "pass": 3,
+     "fail": 1445,
+     "na": 391,
+     "unknown": 68,
      "levels": {
-      "missing": 1446,
-      "no-mail": 393,
-      "dns-broken": 71,
-      "testing": 2,
-      "enforce": 1
+      "missing": 1444,
+      "no-mail": 391,
+      "dns-broken": 68,
+      "enforce": 3,
+      "testing": 1
      }
     },
     "nonprofit": {
@@ -1987,15 +1979,15 @@
    "SA": {
     "all": {
      "pass": 5,
-     "fail": 6350,
-     "na": 1543,
+     "fail": 6359,
+     "na": 1549,
      "unknown": 165,
      "levels": {
-      "missing": 6338,
-      "no-mail": 1543,
-      "dns-broken": 158,
-      "policy-unreachable": 8,
-      "dns-error": 7,
+      "missing": 6346,
+      "no-mail": 1549,
+      "dns-broken": 159,
+      "policy-unreachable": 9,
+      "dns-error": 6,
       "testing": 4,
       "enforce": 5
      }
@@ -2004,22 +1996,22 @@
      "pass": 0,
      "fail": 354,
      "na": 37,
-     "unknown": 19,
+     "unknown": 17,
      "levels": {
       "missing": 354,
-      "dns-broken": 15,
+      "dns-broken": 14,
       "no-mail": 37,
-      "dns-error": 4
+      "dns-error": 3
      }
     },
     "education": {
      "pass": 1,
-     "fail": 1115,
-     "na": 151,
+     "fail": 1120,
+     "na": 148,
      "unknown": 28,
      "levels": {
-      "missing": 1112,
-      "no-mail": 151,
+      "missing": 1117,
+      "no-mail": 148,
       "dns-broken": 28,
       "policy-unreachable": 3,
       "enforce": 1
@@ -2027,51 +2019,51 @@
     },
     "health": {
      "pass": 0,
-     "fail": 183,
-     "na": 21,
+     "fail": 184,
+     "na": 20,
      "unknown": 7,
      "levels": {
-      "missing": 183,
-      "no-mail": 21,
+      "missing": 184,
+      "no-mail": 20,
       "dns-broken": 7
      }
     },
     "business": {
      "pass": 2,
-     "fail": 1060,
-     "na": 165,
-     "unknown": 8,
+     "fail": 1056,
+     "na": 164,
+     "unknown": 9,
      "levels": {
-      "missing": 1055,
-      "no-mail": 165,
+      "missing": 1050,
+      "no-mail": 164,
       "dns-error": 3,
-      "dns-broken": 5,
+      "dns-broken": 6,
       "testing": 2,
-      "policy-unreachable": 3,
+      "policy-unreachable": 4,
       "enforce": 2
      }
     },
     "nonprofit": {
      "pass": 0,
-     "fail": 3264,
-     "na": 1050,
+     "fail": 3273,
+     "na": 1058,
      "unknown": 71,
      "levels": {
-      "missing": 3262,
-      "no-mail": 1050,
+      "missing": 3271,
+      "no-mail": 1058,
       "dns-broken": 71,
       "policy-unreachable": 2
      }
     },
     "network": {
      "pass": 2,
-     "fail": 374,
-     "na": 119,
-     "unknown": 32,
+     "fail": 372,
+     "na": 122,
+     "unknown": 33,
      "levels": {
-      "missing": 372,
-      "no-mail": 119,
-      "dns-broken": 32,
+      "missing": 370,
+      "no-mail": 122,
+      "dns-broken": 33,
       "testing": 2,
       "enforce": 2
      }
@@ -2081,13 +2073,13 @@
     "all": {
      "pass": 9,
      "fail": 855,
-     "na": 296,
-     "unknown": 20,
+     "na": 295,
+     "unknown": 19,
      "levels": {
       "missing": 837,
-      "no-mail": 296,
+      "no-mail": 295,
       "policy-unreachable": 8,
-      "dns-broken": 20,
+      "dns-broken": 19,
       "testing": 9,
       "enforce": 9,
       "policy-invalid": 1
@@ -2095,12 +2087,12 @@
     },
     "government": {
      "pass": 7,
-     "fail": 476,
-     "na": 201,
+     "fail": 477,
+     "na": 200,
      "unknown": 10,
      "levels": {
-      "missing": 466,
-      "no-mail": 201,
+      "missing": 467,
+      "no-mail": 200,
       "policy-unreachable": 4,
       "enforce": 7,
       "dns-broken": 10,
@@ -2131,13 +2123,13 @@
     },
     "business": {
      "pass": 0,
-     "fail": 161,
+     "fail": 160,
      "na": 60,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
       "no-mail": 60,
-      "missing": 159,
-      "dns-broken": 5,
+      "missing": 158,
+      "dns-broken": 4,
       "policy-unreachable": 2
      }
     },
@@ -2165,15 +2157,16 @@
    "QA": {
     "all": {
      "pass": 3,
-     "fail": 1561,
-     "na": 462,
-     "unknown": 125,
+     "fail": 1557,
+     "na": 461,
+     "unknown": 124,
      "levels": {
-      "missing": 1553,
-      "no-mail": 462,
-      "dns-broken": 125,
+      "missing": 1549,
+      "no-mail": 461,
+      "dns-broken": 123,
       "testing": 7,
       "enforce": 3,
+      "dns-error": 1,
       "policy-unreachable": 1
      }
     },
@@ -2192,12 +2185,12 @@
     },
     "education": {
      "pass": 0,
-     "fail": 64,
-     "na": 16,
+     "fail": 63,
+     "na": 17,
      "unknown": 1,
      "levels": {
-      "missing": 64,
-      "no-mail": 16,
+      "missing": 63,
+      "no-mail": 17,
       "dns-broken": 1
      }
     },
@@ -2210,15 +2203,16 @@
     },
     "business": {
      "pass": 1,
-     "fail": 1301,
-     "na": 349,
-     "unknown": 114,
+     "fail": 1298,
+     "na": 347,
+     "unknown": 113,
      "levels": {
-      "missing": 1295,
-      "no-mail": 349,
-      "dns-broken": 114,
+      "missing": 1292,
+      "no-mail": 347,
+      "dns-broken": 112,
       "testing": 6,
-      "enforce": 1
+      "enforce": 1,
+      "dns-error": 1
      }
     },
     "nonprofit": {
@@ -2328,17 +2322,17 @@
    "OM": {
     "all": {
      "pass": 33,
-     "fail": 610,
-     "na": 198,
+     "fail": 609,
+     "na": 200,
      "unknown": 50,
      "levels": {
-      "missing": 560,
-      "no-mail": 198,
+      "missing": 559,
+      "no-mail": 200,
       "dns-broken": 49,
       "enforce": 33,
-      "testing": 41,
+      "testing": 40,
       "dns-error": 1,
-      "policy-unreachable": 8,
+      "policy-unreachable": 9,
       "none": 1
      }
     },
@@ -2382,16 +2376,17 @@
     },
     "business": {
      "pass": 8,
-     "fail": 312,
-     "na": 124,
+     "fail": 311,
+     "na": 126,
      "unknown": 35,
      "levels": {
-      "missing": 305,
-      "no-mail": 124,
+      "missing": 304,
+      "no-mail": 126,
       "dns-broken": 34,
       "enforce": 8,
-      "testing": 7,
-      "dns-error": 1
+      "testing": 6,
+      "dns-error": 1,
+      "policy-unreachable": 1
      }
     },
     "nonprofit": {
@@ -2423,113 +2418,113 @@
   "tls_rpt": {
    "GCC": {
     "all": {
-     "pass": 144,
-     "fail": 11542,
-     "na": 3184,
-     "unknown": 466,
+     "pass": 145,
+     "fail": 11544,
+     "na": 3187,
+     "unknown": 462,
      "levels": {
-      "missing": 11542,
-      "no-mail": 3184,
-      "dns-broken": 456,
-      "present": 144,
-      "dns-error": 10
+      "missing": 11544,
+      "no-mail": 3187,
+      "dns-broken": 451,
+      "present": 145,
+      "dns-error": 11
      }
     },
     "government": {
      "pass": 74,
-     "fail": 1266,
-     "na": 504,
-     "unknown": 51,
+     "fail": 1267,
+     "na": 502,
+     "unknown": 50,
      "levels": {
-      "missing": 1266,
-      "no-mail": 504,
+      "missing": 1267,
+      "no-mail": 502,
       "present": 74,
-      "dns-broken": 45,
+      "dns-broken": 44,
       "dns-error": 6
      }
     },
     "education": {
      "pass": 22,
-     "fail": 1670,
-     "na": 223,
+     "fail": 1674,
+     "na": 221,
      "unknown": 44,
      "levels": {
-      "missing": 1670,
-      "no-mail": 223,
+      "missing": 1674,
+      "no-mail": 221,
       "dns-broken": 44,
       "present": 22
      }
     },
     "health": {
      "pass": 0,
-     "fail": 186,
-     "na": 21,
+     "fail": 187,
+     "na": 20,
      "unknown": 7,
      "levels": {
-      "missing": 186,
-      "no-mail": 21,
+      "missing": 187,
+      "no-mail": 20,
       "dns-broken": 7
      }
     },
     "business": {
-     "pass": 40,
-     "fail": 4550,
-     "na": 1210,
-     "unknown": 247,
+     "pass": 41,
+     "fail": 4539,
+     "na": 1207,
+     "unknown": 243,
      "levels": {
-      "no-mail": 1210,
-      "missing": 4550,
-      "dns-broken": 243,
-      "present": 40,
-      "dns-error": 4
+      "no-mail": 1207,
+      "missing": 4539,
+      "dns-broken": 238,
+      "present": 41,
+      "dns-error": 5
      }
     },
     "nonprofit": {
      "pass": 3,
-     "fail": 3463,
-     "na": 1088,
+     "fail": 3472,
+     "na": 1096,
      "unknown": 80,
      "levels": {
-      "missing": 3463,
-      "no-mail": 1088,
+      "missing": 3472,
+      "no-mail": 1096,
       "dns-broken": 80,
       "present": 3
      }
     },
     "network": {
      "pass": 5,
-     "fail": 407,
-     "na": 138,
-     "unknown": 37,
+     "fail": 405,
+     "na": 141,
+     "unknown": 38,
      "levels": {
-      "missing": 407,
-      "no-mail": 138,
-      "dns-broken": 37,
+      "missing": 405,
+      "no-mail": 141,
+      "dns-broken": 38,
       "present": 5
      }
     }
    },
    "KW": {
     "all": {
-     "pass": 4,
-     "fail": 1773,
-     "na": 435,
-     "unknown": 84,
+     "pass": 5,
+     "fail": 1772,
+     "na": 432,
+     "unknown": 81,
      "levels": {
-      "missing": 1773,
-      "no-mail": 435,
-      "dns-broken": 84,
-      "present": 4
+      "missing": 1772,
+      "no-mail": 432,
+      "dns-broken": 81,
+      "present": 5
      }
     },
     "government": {
      "pass": 0,
-     "fail": 122,
-     "na": 19,
+     "fail": 123,
+     "na": 18,
      "unknown": 7,
      "levels": {
-      "missing": 122,
-      "no-mail": 19,
+      "missing": 123,
+      "no-mail": 18,
       "dns-broken": 7
      }
     },
@@ -2553,15 +2548,15 @@
      "levels": {}
     },
     "business": {
-     "pass": 3,
-     "fail": 1446,
-     "na": 393,
-     "unknown": 71,
+     "pass": 4,
+     "fail": 1444,
+     "na": 391,
+     "unknown": 68,
      "levels": {
-      "missing": 1446,
-      "no-mail": 393,
-      "dns-broken": 71,
-      "present": 3
+      "missing": 1444,
+      "no-mail": 391,
+      "dns-broken": 68,
+      "present": 4
      }
     },
     "nonprofit": {
@@ -2589,25 +2584,25 @@
    "SA": {
     "all": {
      "pass": 18,
-     "fail": 6335,
-     "na": 1543,
-     "unknown": 167,
+     "fail": 6343,
+     "na": 1549,
+     "unknown": 168,
      "levels": {
-      "missing": 6335,
-      "no-mail": 1543,
-      "dns-broken": 158,
+      "missing": 6343,
+      "no-mail": 1549,
+      "dns-broken": 159,
       "present": 18,
       "dns-error": 9
      }
     },
     "government": {
      "pass": 1,
-     "fail": 351,
+     "fail": 350,
      "na": 37,
-     "unknown": 21,
+     "unknown": 20,
      "levels": {
-      "missing": 351,
-      "dns-broken": 15,
+      "missing": 350,
+      "dns-broken": 14,
       "no-mail": 37,
       "dns-error": 6,
       "present": 1
@@ -2615,61 +2610,61 @@
     },
     "education": {
      "pass": 4,
-     "fail": 1112,
-     "na": 151,
+     "fail": 1117,
+     "na": 148,
      "unknown": 28,
      "levels": {
-      "missing": 1112,
-      "no-mail": 151,
+      "missing": 1117,
+      "no-mail": 148,
       "dns-broken": 28,
       "present": 4
      }
     },
     "health": {
      "pass": 0,
-     "fail": 183,
-     "na": 21,
+     "fail": 184,
+     "na": 20,
      "unknown": 7,
      "levels": {
-      "missing": 183,
-      "no-mail": 21,
+      "missing": 184,
+      "no-mail": 20,
       "dns-broken": 7
      }
     },
     "business": {
      "pass": 8,
-     "fail": 1054,
-     "na": 165,
-     "unknown": 8,
+     "fail": 1050,
+     "na": 164,
+     "unknown": 9,
      "levels": {
-      "missing": 1054,
-      "no-mail": 165,
+      "missing": 1050,
+      "no-mail": 164,
       "dns-error": 3,
-      "dns-broken": 5,
+      "dns-broken": 6,
       "present": 8
      }
     },
     "nonprofit": {
      "pass": 1,
-     "fail": 3263,
-     "na": 1050,
+     "fail": 3272,
+     "na": 1058,
      "unknown": 71,
      "levels": {
-      "missing": 3263,
-      "no-mail": 1050,
+      "missing": 3272,
+      "no-mail": 1058,
       "dns-broken": 71,
       "present": 1
      }
     },
     "network": {
      "pass": 4,
-     "fail": 372,
-     "na": 119,
-     "unknown": 32,
+     "fail": 370,
+     "na": 122,
+     "unknown": 33,
      "levels": {
-      "missing": 372,
-      "no-mail": 119,
-      "dns-broken": 32,
+      "missing": 370,
+      "no-mail": 122,
+      "dns-broken": 33,
       "present": 4
      }
     }
@@ -2678,23 +2673,23 @@
     "all": {
      "pass": 22,
      "fail": 842,
-     "na": 296,
-     "unknown": 20,
+     "na": 295,
+     "unknown": 19,
      "levels": {
       "missing": 842,
-      "no-mail": 296,
+      "no-mail": 295,
       "present": 22,
-      "dns-broken": 20
+      "dns-broken": 19
      }
     },
     "government": {
      "pass": 15,
-     "fail": 468,
-     "na": 201,
+     "fail": 469,
+     "na": 200,
      "unknown": 10,
      "levels": {
-      "missing": 468,
-      "no-mail": 201,
+      "missing": 469,
+      "no-mail": 200,
       "present": 15,
       "dns-broken": 10
      }
@@ -2720,13 +2715,13 @@
     },
     "business": {
      "pass": 1,
-     "fail": 160,
+     "fail": 159,
      "na": 60,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
       "no-mail": 60,
-      "missing": 160,
-      "dns-broken": 5,
+      "missing": 159,
+      "dns-broken": 4,
       "present": 1
      }
     },
@@ -2754,14 +2749,15 @@
    "QA": {
     "all": {
      "pass": 11,
-     "fail": 1553,
-     "na": 462,
-     "unknown": 125,
+     "fail": 1549,
+     "na": 461,
+     "unknown": 124,
      "levels": {
-      "missing": 1553,
-      "no-mail": 462,
-      "dns-broken": 125,
-      "present": 11
+      "missing": 1549,
+      "no-mail": 461,
+      "dns-broken": 123,
+      "present": 11,
+      "dns-error": 1
      }
     },
     "government": {
@@ -2778,12 +2774,12 @@
     },
     "education": {
      "pass": 0,
-     "fail": 64,
-     "na": 16,
+     "fail": 63,
+     "na": 17,
      "unknown": 1,
      "levels": {
-      "missing": 64,
-      "no-mail": 16,
+      "missing": 63,
+      "no-mail": 17,
       "dns-broken": 1
      }
     },
@@ -2796,14 +2792,15 @@
     },
     "business": {
      "pass": 8,
-     "fail": 1294,
-     "na": 349,
-     "unknown": 114,
+     "fail": 1291,
+     "na": 347,
+     "unknown": 113,
      "levels": {
-      "missing": 1294,
-      "no-mail": 349,
-      "dns-broken": 114,
-      "present": 8
+      "missing": 1291,
+      "no-mail": 347,
+      "dns-broken": 112,
+      "present": 8,
+      "dns-error": 1
      }
     },
     "nonprofit": {
@@ -2909,12 +2906,12 @@
    "OM": {
     "all": {
      "pass": 83,
-     "fail": 560,
-     "na": 198,
+     "fail": 559,
+     "na": 200,
      "unknown": 50,
      "levels": {
-      "missing": 560,
-      "no-mail": 198,
+      "missing": 559,
+      "no-mail": 200,
       "dns-broken": 49,
       "present": 83,
       "dns-error": 1
@@ -2955,12 +2952,12 @@
     },
     "business": {
      "pass": 15,
-     "fail": 305,
-     "na": 124,
+     "fail": 304,
+     "na": 126,
      "unknown": 35,
      "levels": {
-      "missing": 305,
-      "no-mail": 124,
+      "missing": 304,
+      "no-mail": 126,
       "dns-broken": 34,
       "present": 15,
       "dns-error": 1
@@ -2995,92 +2992,89 @@
   "dnssec": {
    "GCC": {
     "all": {
-     "pass": 385,
-     "fail": 14495,
+     "pass": 388,
+     "fail": 14499,
      "na": 0,
-     "unknown": 456,
+     "unknown": 451,
      "levels": {
-      "chain-unavailable": 4277,
-      "unsigned": 10212,
-      "dns-broken": 456,
-      "validated": 385,
-      "bogus": 6
+      "chain-unavailable": 4273,
+      "unsigned": 10222,
+      "dns-broken": 451,
+      "validated": 388,
+      "bogus": 4
      }
     },
     "government": {
-     "pass": 224,
-     "fail": 1626,
+     "pass": 225,
+     "fail": 1624,
      "na": 0,
-     "unknown": 45,
+     "unknown": 44,
      "levels": {
       "chain-unavailable": 1314,
-      "unsigned": 310,
-      "validated": 224,
-      "dns-broken": 45,
+      "unsigned": 308,
+      "validated": 225,
+      "dns-broken": 44,
       "bogus": 2
      }
     },
     "education": {
-     "pass": 36,
+     "pass": 38,
      "fail": 1879,
      "na": 0,
      "unknown": 44,
      "levels": {
-      "unsigned": 1403,
+      "unsigned": 1404,
       "chain-unavailable": 475,
       "dns-broken": 44,
-      "validated": 36,
-      "bogus": 1
+      "validated": 38
      }
     },
     "health": {
-     "pass": 9,
-     "fail": 198,
+     "pass": 10,
+     "fail": 197,
      "na": 0,
      "unknown": 7,
      "levels": {
       "unsigned": 194,
       "dns-broken": 7,
-      "validated": 9,
-      "bogus": 1,
+      "validated": 10,
       "chain-unavailable": 3
      }
     },
     "business": {
-     "pass": 74,
-     "fail": 5730,
+     "pass": 73,
+     "fail": 5719,
      "na": 0,
-     "unknown": 243,
+     "unknown": 238,
      "levels": {
-      "unsigned": 3412,
-      "chain-unavailable": 2317,
-      "dns-broken": 243,
-      "validated": 74,
-      "bogus": 1
+      "unsigned": 3404,
+      "chain-unavailable": 2313,
+      "dns-broken": 238,
+      "validated": 73,
+      "bogus": 2
      }
     },
     "nonprofit": {
      "pass": 26,
-     "fail": 4528,
+     "fail": 4545,
      "na": 0,
      "unknown": 80,
      "levels": {
       "chain-unavailable": 123,
-      "unsigned": 4404,
+      "unsigned": 4422,
       "dns-broken": 80,
-      "validated": 26,
-      "bogus": 1
+      "validated": 26
      }
     },
     "network": {
      "pass": 16,
-     "fail": 534,
+     "fail": 535,
      "na": 0,
-     "unknown": 37,
+     "unknown": 38,
      "levels": {
-      "unsigned": 489,
+      "unsigned": 490,
       "chain-unavailable": 45,
-      "dns-broken": 37,
+      "dns-broken": 38,
       "validated": 16
      }
     }
@@ -3088,12 +3082,12 @@
    "KW": {
     "all": {
      "pass": 4,
-     "fail": 2208,
+     "fail": 2205,
      "na": 0,
-     "unknown": 84,
+     "unknown": 81,
      "levels": {
-      "unsigned": 2208,
-      "dns-broken": 84,
+      "unsigned": 2205,
+      "dns-broken": 81,
       "validated": 4
      }
     },
@@ -3126,12 +3120,12 @@
     },
     "business": {
      "pass": 3,
-     "fail": 1839,
+     "fail": 1836,
      "na": 0,
-     "unknown": 71,
+     "unknown": 68,
      "levels": {
-      "unsigned": 1839,
-      "dns-broken": 71,
+      "unsigned": 1836,
+      "dns-broken": 68,
       "validated": 3
      }
     },
@@ -3158,85 +3152,82 @@
    },
    "SA": {
     "all": {
-     "pass": 377,
-     "fail": 7528,
+     "pass": 380,
+     "fail": 7539,
      "na": 0,
-     "unknown": 158,
+     "unknown": 159,
      "levels": {
-      "unsigned": 7522,
-      "dns-broken": 158,
-      "validated": 377,
-      "bogus": 6
+      "unsigned": 7535,
+      "dns-broken": 159,
+      "validated": 380,
+      "bogus": 4
      }
     },
     "government": {
-     "pass": 224,
-     "fail": 171,
+     "pass": 225,
+     "fail": 169,
      "na": 0,
-     "unknown": 15,
+     "unknown": 14,
      "levels": {
-      "unsigned": 169,
-      "validated": 224,
-      "dns-broken": 15,
+      "unsigned": 167,
+      "validated": 225,
+      "dns-broken": 14,
       "bogus": 2
      }
     },
     "education": {
-     "pass": 35,
+     "pass": 37,
      "fail": 1232,
      "na": 0,
      "unknown": 28,
      "levels": {
-      "unsigned": 1231,
+      "unsigned": 1232,
       "dns-broken": 28,
-      "validated": 35,
-      "bogus": 1
+      "validated": 37
      }
     },
     "health": {
-     "pass": 9,
-     "fail": 195,
+     "pass": 10,
+     "fail": 194,
      "na": 0,
      "unknown": 7,
      "levels": {
       "unsigned": 194,
       "dns-broken": 7,
-      "validated": 9,
-      "bogus": 1
+      "validated": 10
      }
     },
     "business": {
-     "pass": 69,
-     "fail": 1161,
+     "pass": 68,
+     "fail": 1157,
      "na": 0,
-     "unknown": 5,
+     "unknown": 6,
      "levels": {
-      "unsigned": 1160,
-      "validated": 69,
-      "dns-broken": 5,
-      "bogus": 1
+      "unsigned": 1155,
+      "validated": 68,
+      "dns-broken": 6,
+      "bogus": 2
      }
     },
     "nonprofit": {
      "pass": 24,
-     "fail": 4290,
+     "fail": 4307,
      "na": 0,
      "unknown": 71,
      "levels": {
-      "unsigned": 4289,
+      "unsigned": 4307,
       "dns-broken": 71,
-      "validated": 24,
-      "bogus": 1
+      "validated": 24
      }
     },
     "network": {
      "pass": 16,
-     "fail": 479,
+     "fail": 480,
      "na": 0,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
-      "unsigned": 479,
-      "dns-broken": 32,
+      "unsigned": 480,
+      "dns-broken": 33,
       "validated": 16
      }
     }
@@ -3244,12 +3235,12 @@
    "AE": {
     "all": {
      "pass": 0,
-     "fail": 1160,
+     "fail": 1159,
      "na": 0,
-     "unknown": 20,
+     "unknown": 19,
      "levels": {
-      "chain-unavailable": 1160,
-      "dns-broken": 20
+      "chain-unavailable": 1159,
+      "dns-broken": 19
      }
     },
     "government": {
@@ -3281,12 +3272,12 @@
     },
     "business": {
      "pass": 0,
-     "fail": 221,
+     "fail": 220,
      "na": 0,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
-      "chain-unavailable": 221,
-      "dns-broken": 5
+      "chain-unavailable": 220,
+      "dns-broken": 4
      }
     },
     "nonprofit": {
@@ -3311,12 +3302,12 @@
    "QA": {
     "all": {
      "pass": 0,
-     "fail": 2026,
+     "fail": 2022,
      "na": 0,
-     "unknown": 125,
+     "unknown": 123,
      "levels": {
-      "chain-unavailable": 2026,
-      "dns-broken": 125
+      "chain-unavailable": 2022,
+      "dns-broken": 123
      }
     },
     "government": {
@@ -3348,12 +3339,12 @@
     },
     "business": {
      "pass": 0,
-     "fail": 1651,
+     "fail": 1647,
      "na": 0,
-     "unknown": 114,
+     "unknown": 112,
      "levels": {
-      "chain-unavailable": 1651,
-      "dns-broken": 114
+      "chain-unavailable": 1647,
+      "dns-broken": 112
      }
     },
     "nonprofit": {
@@ -3453,11 +3444,11 @@
    "OM": {
     "all": {
      "pass": 0,
-     "fail": 842,
+     "fail": 843,
      "na": 0,
      "unknown": 49,
      "levels": {
-      "chain-unavailable": 842,
+      "chain-unavailable": 843,
       "dns-broken": 49
      }
     },
@@ -3492,11 +3483,11 @@
     },
     "business": {
      "pass": 0,
-     "fail": 445,
+     "fail": 446,
      "na": 0,
      "unknown": 34,
      "levels": {
-      "chain-unavailable": 445,
+      "chain-unavailable": 446,
       "dns-broken": 34
      }
     },
@@ -3525,38 +3516,38 @@
   "caa": {
    "GCC": {
     "all": {
-     "pass": 335,
-     "fail": 14541,
+     "pass": 336,
+     "fail": 14546,
      "na": 0,
-     "unknown": 460,
+     "unknown": 456,
      "levels": {
-      "none": 14541,
-      "dns-broken": 456,
-      "own": 335,
-      "dns-error": 4
+      "none": 14546,
+      "dns-broken": 451,
+      "own": 336,
+      "dns-error": 5
      }
     },
     "government": {
-     "pass": 81,
-     "fail": 1766,
+     "pass": 82,
+     "fail": 1763,
      "na": 0,
      "unknown": 48,
      "levels": {
-      "none": 1766,
-      "own": 81,
-      "dns-broken": 45,
-      "dns-error": 3
+      "none": 1763,
+      "own": 82,
+      "dns-broken": 44,
+      "dns-error": 4
      }
     },
     "education": {
-     "pass": 37,
-     "fail": 1878,
+     "pass": 38,
+     "fail": 1879,
      "na": 0,
      "unknown": 44,
      "levels": {
-      "none": 1878,
+      "none": 1879,
       "dns-broken": 44,
-      "own": 37
+      "own": 38
      }
     },
     "health": {
@@ -3570,49 +3561,49 @@
      }
     },
     "business": {
-     "pass": 139,
-     "fail": 5664,
+     "pass": 138,
+     "fail": 5653,
      "na": 0,
-     "unknown": 244,
+     "unknown": 239,
      "levels": {
-      "none": 5664,
-      "own": 139,
-      "dns-broken": 243,
+      "none": 5653,
+      "own": 138,
+      "dns-broken": 238,
       "dns-error": 1
      }
     },
     "nonprofit": {
      "pass": 58,
-     "fail": 4496,
+     "fail": 4513,
      "na": 0,
      "unknown": 80,
      "levels": {
-      "none": 4496,
+      "none": 4513,
       "dns-broken": 80,
       "own": 58
      }
     },
     "network": {
      "pass": 20,
-     "fail": 530,
+     "fail": 531,
      "na": 0,
-     "unknown": 37,
+     "unknown": 38,
      "levels": {
-      "none": 530,
+      "none": 531,
       "own": 20,
-      "dns-broken": 37
+      "dns-broken": 38
      }
     }
    },
    "KW": {
     "all": {
      "pass": 59,
-     "fail": 2153,
+     "fail": 2150,
      "na": 0,
-     "unknown": 84,
+     "unknown": 81,
      "levels": {
-      "none": 2153,
-      "dns-broken": 84,
+      "none": 2150,
+      "dns-broken": 81,
       "own": 59
      }
     },
@@ -3647,12 +3638,12 @@
     },
     "business": {
      "pass": 51,
-     "fail": 1791,
+     "fail": 1788,
      "na": 0,
-     "unknown": 71,
+     "unknown": 68,
      "levels": {
-      "none": 1791,
-      "dns-broken": 71,
+      "none": 1788,
+      "dns-broken": 68,
       "own": 51
      }
     },
@@ -3680,38 +3671,38 @@
    },
    "SA": {
     "all": {
-     "pass": 166,
-     "fail": 7735,
+     "pass": 168,
+     "fail": 7747,
      "na": 0,
-     "unknown": 162,
+     "unknown": 163,
      "levels": {
-      "none": 7735,
-      "dns-broken": 158,
-      "own": 166,
+      "none": 7747,
+      "dns-broken": 159,
+      "own": 168,
       "dns-error": 4
      }
     },
     "government": {
-     "pass": 32,
-     "fail": 360,
+     "pass": 33,
+     "fail": 357,
      "na": 0,
      "unknown": 18,
      "levels": {
-      "none": 360,
-      "own": 32,
-      "dns-broken": 15,
-      "dns-error": 3
+      "none": 357,
+      "own": 33,
+      "dns-broken": 14,
+      "dns-error": 4
      }
     },
     "education": {
-     "pass": 25,
-     "fail": 1242,
+     "pass": 26,
+     "fail": 1243,
      "na": 0,
      "unknown": 28,
      "levels": {
-      "none": 1242,
+      "none": 1243,
       "dns-broken": 28,
-      "own": 25
+      "own": 26
      }
     },
     "health": {
@@ -3726,49 +3717,48 @@
     },
     "business": {
      "pass": 39,
-     "fail": 1190,
+     "fail": 1186,
      "na": 0,
      "unknown": 6,
      "levels": {
-      "none": 1190,
+      "none": 1186,
       "own": 39,
-      "dns-broken": 5,
-      "dns-error": 1
+      "dns-broken": 6
      }
     },
     "nonprofit": {
      "pass": 52,
-     "fail": 4262,
+     "fail": 4279,
      "na": 0,
      "unknown": 71,
      "levels": {
-      "none": 4262,
+      "none": 4279,
       "dns-broken": 71,
       "own": 52
      }
     },
     "network": {
      "pass": 18,
-     "fail": 477,
+     "fail": 478,
      "na": 0,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
-      "none": 477,
+      "none": 478,
       "own": 18,
-      "dns-broken": 32
+      "dns-broken": 33
      }
     }
    },
    "AE": {
     "all": {
      "pass": 50,
-     "fail": 1110,
+     "fail": 1109,
      "na": 0,
-     "unknown": 20,
+     "unknown": 19,
      "levels": {
-      "none": 1110,
+      "none": 1109,
       "own": 50,
-      "dns-broken": 20
+      "dns-broken": 19
      }
     },
     "government": {
@@ -3802,12 +3792,12 @@
     },
     "business": {
      "pass": 4,
-     "fail": 217,
+     "fail": 216,
      "na": 0,
-     "unknown": 5,
+     "unknown": 4,
      "levels": {
-      "none": 217,
-      "dns-broken": 5,
+      "none": 216,
+      "dns-broken": 4,
       "own": 4
      }
     },
@@ -3833,14 +3823,15 @@
    },
    "QA": {
     "all": {
-     "pass": 37,
-     "fail": 1989,
+     "pass": 36,
+     "fail": 1985,
      "na": 0,
-     "unknown": 125,
+     "unknown": 124,
      "levels": {
-      "none": 1989,
-      "dns-broken": 125,
-      "own": 37
+      "none": 1985,
+      "dns-broken": 123,
+      "own": 36,
+      "dns-error": 1
      }
     },
     "government": {
@@ -3873,14 +3864,15 @@
      "levels": {}
     },
     "business": {
-     "pass": 29,
-     "fail": 1622,
+     "pass": 28,
+     "fail": 1618,
      "na": 0,
-     "unknown": 114,
+     "unknown": 113,
      "levels": {
-      "none": 1622,
-      "dns-broken": 114,
-      "own": 29
+      "none": 1618,
+      "dns-broken": 112,
+      "own": 28,
+      "dns-error": 1
      }
     },
     "nonprofit": {
@@ -3979,11 +3971,11 @@
    "OM": {
     "all": {
      "pass": 17,
-     "fail": 825,
+     "fail": 826,
      "na": 0,
      "unknown": 49,
      "levels": {
-      "none": 825,
+      "none": 826,
       "dns-broken": 49,
       "own": 17
      }
@@ -4020,11 +4012,11 @@
     },
     "business": {
      "pass": 12,
-     "fail": 433,
+     "fail": 434,
      "na": 0,
      "unknown": 34,
      "levels": {
-      "none": 433,
+      "none": 434,
       "dns-broken": 34,
       "own": 12
      }
@@ -4055,125 +4047,122 @@
   "https": {
    "GCC": {
     "all": {
-     "pass": 11544,
-     "fail": 1214,
-     "na": 1095,
-     "unknown": 1483,
+     "pass": 11548,
+     "fail": 1217,
+     "na": 1109,
+     "unknown": 1464,
      "levels": {
-      "handshake-failed": 379,
-      "valid": 11405,
-      "no-web": 1095,
-      "unreachable": 1027,
-      "expired": 259,
-      "no-https": 42,
-      "name-mismatch": 508,
-      "self-signed": 25,
-      "dns-broken": 456,
-      "valid-incomplete-chain": 139,
-      "untrusted": 1
+      "handshake-failed": 383,
+      "valid": 11406,
+      "no-web": 1109,
+      "unreachable": 1013,
+      "expired": 243,
+      "no-https": 43,
+      "name-mismatch": 524,
+      "self-signed": 24,
+      "dns-broken": 451,
+      "valid-incomplete-chain": 142
      }
     },
     "government": {
-     "pass": 843,
-     "fail": 189,
-     "na": 333,
-     "unknown": 530,
+     "pass": 837,
+     "fail": 191,
+     "na": 328,
+     "unknown": 537,
      "levels": {
-      "handshake-failed": 79,
-      "no-web": 333,
-      "valid": 775,
-      "unreachable": 485,
-      "valid-incomplete-chain": 68,
+      "handshake-failed": 84,
+      "no-web": 328,
+      "valid": 767,
+      "unreachable": 493,
+      "valid-incomplete-chain": 70,
       "expired": 32,
-      "name-mismatch": 68,
-      "dns-broken": 45,
-      "no-https": 9,
-      "untrusted": 1
+      "name-mismatch": 66,
+      "dns-broken": 44,
+      "no-https": 9
      }
     },
     "education": {
-     "pass": 1540,
-     "fail": 162,
-     "na": 122,
-     "unknown": 135,
+     "pass": 1543,
+     "fail": 160,
+     "na": 121,
+     "unknown": 137,
      "levels": {
-      "valid": 1515,
-      "unreachable": 91,
-      "handshake-failed": 57,
-      "name-mismatch": 60,
-      "valid-incomplete-chain": 25,
-      "no-web": 122,
+      "valid": 1519,
+      "unreachable": 93,
+      "handshake-failed": 54,
+      "name-mismatch": 62,
+      "valid-incomplete-chain": 24,
+      "no-web": 121,
       "dns-broken": 44,
       "self-signed": 9,
-      "expired": 36
+      "expired": 35
      }
     },
     "health": {
-     "pass": 159,
-     "fail": 13,
-     "na": 16,
+     "pass": 158,
+     "fail": 15,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "valid": 158,
+      "no-web": 15,
+      "valid": 157,
       "dns-broken": 7,
-      "handshake-failed": 5,
+      "handshake-failed": 8,
       "name-mismatch": 3,
       "expired": 4,
-      "self-signed": 1,
       "unreachable": 19,
       "valid-incomplete-chain": 1
      }
     },
     "business": {
-     "pass": 4334,
-     "fail": 684,
+     "pass": 4340,
+     "fail": 682,
      "na": 462,
-     "unknown": 567,
+     "unknown": 546,
      "levels": {
       "no-web": 462,
-      "unreachable": 324,
-      "valid": 4300,
-      "expired": 142,
+      "unreachable": 308,
+      "valid": 4304,
+      "expired": 132,
       "no-https": 31,
-      "name-mismatch": 295,
-      "self-signed": 9,
-      "handshake-failed": 207,
-      "dns-broken": 243,
-      "valid-incomplete-chain": 34
+      "name-mismatch": 305,
+      "self-signed": 10,
+      "handshake-failed": 204,
+      "dns-broken": 238,
+      "valid-incomplete-chain": 36
      }
     },
     "nonprofit": {
-     "pass": 4289,
-     "fail": 118,
-     "na": 83,
-     "unknown": 144,
+     "pass": 4294,
+     "fail": 119,
+     "na": 102,
+     "unknown": 136,
      "levels": {
-      "valid": 4280,
-      "unreachable": 64,
-      "handshake-failed": 23,
+      "valid": 4285,
+      "unreachable": 56,
+      "handshake-failed": 26,
       "dns-broken": 80,
-      "expired": 34,
-      "name-mismatch": 56,
-      "no-web": 83,
-      "no-https": 2,
+      "expired": 30,
+      "name-mismatch": 58,
+      "no-web": 102,
+      "no-https": 3,
       "valid-incomplete-chain": 9,
-      "self-signed": 3
+      "self-signed": 2
      }
     },
     "network": {
-     "pass": 379,
-     "fail": 48,
-     "na": 79,
-     "unknown": 81,
+     "pass": 376,
+     "fail": 50,
+     "na": 81,
+     "unknown": 82,
      "levels": {
-      "valid": 377,
-      "no-web": 79,
-      "name-mismatch": 26,
-      "dns-broken": 37,
+      "valid": 374,
+      "no-web": 81,
+      "name-mismatch": 30,
+      "dns-broken": 38,
       "unreachable": 44,
-      "handshake-failed": 8,
-      "expired": 11,
+      "handshake-failed": 7,
+      "expired": 10,
       "self-signed": 3,
       "valid-incomplete-chain": 2
      }
@@ -4181,20 +4170,20 @@
    },
    "KW": {
     "all": {
-     "pass": 1693,
-     "fail": 245,
-     "na": 140,
-     "unknown": 218,
+     "pass": 1694,
+     "fail": 241,
+     "na": 142,
+     "unknown": 213,
      "levels": {
-      "unreachable": 134,
-      "valid": 1677,
-      "expired": 64,
-      "name-mismatch": 97,
-      "no-web": 140,
-      "valid-incomplete-chain": 16,
-      "handshake-failed": 74,
+      "unreachable": 132,
+      "valid": 1679,
+      "expired": 60,
+      "name-mismatch": 100,
+      "no-web": 142,
+      "valid-incomplete-chain": 15,
+      "handshake-failed": 71,
       "no-https": 5,
-      "dns-broken": 84,
+      "dns-broken": 81,
       "self-signed": 5
      }
     },
@@ -4215,15 +4204,15 @@
      }
     },
     "education": {
-     "pass": 95,
+     "pass": 97,
      "fail": 13,
      "na": 3,
-     "unknown": 13,
+     "unknown": 11,
      "levels": {
-      "valid": 92,
+      "valid": 94,
       "valid-incomplete-chain": 3,
       "handshake-failed": 8,
-      "unreachable": 11,
+      "unreachable": 9,
       "no-web": 3,
       "name-mismatch": 3,
       "expired": 2,
@@ -4239,34 +4228,34 @@
     },
     "business": {
      "pass": 1443,
-     "fail": 206,
-     "na": 116,
-     "unknown": 148,
+     "fail": 202,
+     "na": 118,
+     "unknown": 144,
      "levels": {
-      "unreachable": 77,
-      "valid": 1436,
-      "expired": 57,
-      "name-mismatch": 81,
-      "no-web": 116,
-      "handshake-failed": 59,
+      "unreachable": 76,
+      "valid": 1437,
+      "expired": 53,
+      "name-mismatch": 84,
+      "no-web": 118,
+      "handshake-failed": 56,
       "no-https": 4,
-      "dns-broken": 71,
-      "valid-incomplete-chain": 7,
+      "dns-broken": 68,
+      "valid-incomplete-chain": 6,
       "self-signed": 5
      }
     },
     "nonprofit": {
-     "pass": 81,
+     "pass": 80,
      "fail": 8,
      "na": 4,
-     "unknown": 8,
+     "unknown": 9,
      "levels": {
-      "valid": 79,
+      "valid": 78,
       "dns-broken": 4,
       "no-https": 1,
       "name-mismatch": 6,
       "no-web": 4,
-      "unreachable": 4,
+      "unreachable": 5,
       "valid-incomplete-chain": 2,
       "expired": 1
      }
@@ -4286,119 +4275,120 @@
    },
    "SA": {
     "all": {
-     "pass": 6833,
-     "fail": 373,
-     "na": 356,
-     "unknown": 501,
+     "pass": 6819,
+     "fail": 391,
+     "na": 365,
+     "unknown": 503,
      "levels": {
-      "valid": 6797,
-      "no-web": 356,
-      "unreachable": 343,
-      "name-mismatch": 150,
-      "handshake-failed": 121,
-      "expired": 86,
-      "dns-broken": 158,
-      "valid-incomplete-chain": 36,
+      "valid": 6781,
+      "no-web": 365,
+      "unreachable": 344,
+      "name-mismatch": 164,
+      "handshake-failed": 128,
+      "expired": 82,
+      "dns-broken": 159,
+      "valid-incomplete-chain": 38,
       "self-signed": 12,
-      "no-https": 4
+      "no-https": 5
      }
     },
     "government": {
-     "pass": 170,
-     "fail": 15,
-     "na": 60,
-     "unknown": 165,
+     "pass": 163,
+     "fail": 18,
+     "na": 56,
+     "unknown": 171,
      "levels": {
-      "no-web": 60,
-      "unreachable": 150,
-      "valid": 158,
-      "dns-broken": 15,
-      "handshake-failed": 6,
+      "no-web": 56,
+      "unreachable": 157,
+      "valid": 151,
+      "dns-broken": 14,
+      "handshake-failed": 8,
       "valid-incomplete-chain": 12,
-      "name-mismatch": 6,
+      "name-mismatch": 7,
       "expired": 1,
       "no-https": 2
      }
     },
     "education": {
-     "pass": 1053,
-     "fail": 102,
-     "na": 73,
-     "unknown": 67,
+     "pass": 1054,
+     "fail": 101,
+     "na": 72,
+     "unknown": 70,
      "levels": {
-      "valid": 1048,
-      "handshake-failed": 37,
-      "name-mismatch": 37,
-      "no-web": 73,
+      "valid": 1049,
+      "handshake-failed": 35,
+      "name-mismatch": 39,
+      "no-web": 72,
       "valid-incomplete-chain": 5,
       "self-signed": 6,
-      "expired": 22,
+      "expired": 21,
       "dns-broken": 28,
-      "unreachable": 39
+      "unreachable": 42
      }
     },
     "health": {
-     "pass": 156,
-     "fail": 13,
-     "na": 16,
+     "pass": 155,
+     "fail": 15,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "valid": 155,
+      "no-web": 15,
+      "valid": 154,
       "dns-broken": 7,
-      "handshake-failed": 5,
+      "handshake-failed": 8,
       "name-mismatch": 3,
       "expired": 4,
-      "self-signed": 1,
       "unreachable": 19,
       "valid-incomplete-chain": 1
      }
     },
     "business": {
-     "pass": 994,
-     "fail": 109,
-     "na": 73,
-     "unknown": 59,
+     "pass": 984,
+     "fail": 119,
+     "na": 67,
+     "unknown": 61,
      "levels": {
-      "no-web": 73,
-      "valid": 978,
-      "expired": 22,
-      "name-mismatch": 42,
-      "handshake-failed": 43,
+      "valid": 966,
+      "no-web": 67,
+      "expired": 24,
+      "name-mismatch": 46,
+      "handshake-failed": 45,
       "no-https": 2,
-      "unreachable": 54,
-      "dns-broken": 5,
-      "valid-incomplete-chain": 16
-     }
-    },
-    "nonprofit": {
-     "pass": 4104,
-     "fail": 93,
-     "na": 68,
-     "unknown": 120,
-     "levels": {
-      "valid": 4104,
-      "unreachable": 49,
-      "handshake-failed": 22,
-      "dns-broken": 71,
-      "name-mismatch": 40,
-      "expired": 29,
-      "no-web": 68,
+      "unreachable": 55,
+      "dns-broken": 6,
+      "valid-incomplete-chain": 18,
       "self-signed": 2
      }
     },
-    "network": {
-     "pass": 356,
-     "fail": 41,
-     "na": 66,
-     "unknown": 64,
+    "nonprofit": {
+     "pass": 4110,
+     "fail": 95,
+     "na": 87,
+     "unknown": 110,
      "levels": {
-      "valid": 354,
-      "no-web": 66,
-      "name-mismatch": 22,
-      "dns-broken": 32,
-      "handshake-failed": 8,
-      "expired": 8,
+      "valid": 4110,
+      "unreachable": 39,
+      "handshake-failed": 25,
+      "dns-broken": 71,
+      "expired": 25,
+      "name-mismatch": 43,
+      "no-web": 87,
+      "self-signed": 1,
+      "no-https": 1
+     }
+    },
+    "network": {
+     "pass": 353,
+     "fail": 43,
+     "na": 68,
+     "unknown": 65,
+     "levels": {
+      "valid": 351,
+      "no-web": 68,
+      "name-mismatch": 26,
+      "dns-broken": 33,
+      "handshake-failed": 7,
+      "expired": 7,
       "unreachable": 32,
       "self-signed": 3,
       "valid-incomplete-chain": 2
@@ -4407,53 +4397,53 @@
    },
    "AE": {
     "all": {
-     "pass": 684,
-     "fail": 137,
-     "na": 183,
-     "unknown": 176,
+     "pass": 687,
+     "fail": 136,
+     "na": 182,
+     "unknown": 173,
      "levels": {
       "handshake-failed": 73,
-      "unreachable": 156,
-      "valid": 657,
-      "no-web": 183,
-      "name-mismatch": 33,
+      "unreachable": 154,
+      "valid": 660,
+      "no-web": 182,
+      "name-mismatch": 35,
       "valid-incomplete-chain": 27,
-      "expired": 20,
-      "dns-broken": 20,
+      "expired": 17,
+      "dns-broken": 19,
       "no-https": 10,
       "self-signed": 1
      }
     },
     "government": {
-     "pass": 335,
+     "pass": 336,
      "fail": 90,
-     "na": 130,
+     "na": 129,
      "unknown": 139,
      "levels": {
-      "handshake-failed": 55,
+      "handshake-failed": 56,
       "unreachable": 129,
       "valid": 313,
-      "no-web": 130,
-      "valid-incomplete-chain": 22,
-      "expired": 13,
+      "no-web": 129,
+      "valid-incomplete-chain": 23,
+      "expired": 12,
       "name-mismatch": 15,
       "no-https": 7,
       "dns-broken": 10
      }
     },
     "education": {
-     "pass": 156,
-     "fail": 18,
+     "pass": 157,
+     "fail": 16,
      "na": 26,
-     "unknown": 21,
+     "unknown": 22,
      "levels": {
-      "unreachable": 16,
-      "valid": 151,
-      "name-mismatch": 6,
+      "unreachable": 17,
+      "valid": 153,
+      "name-mismatch": 5,
       "no-web": 26,
       "expired": 4,
-      "valid-incomplete-chain": 5,
-      "handshake-failed": 7,
+      "valid-incomplete-chain": 4,
+      "handshake-failed": 6,
       "dns-broken": 5,
       "self-signed": 1
      }
@@ -4466,18 +4456,18 @@
      "levels": {}
     },
     "business": {
-     "pass": 165,
-     "fail": 25,
+     "pass": 166,
+     "fail": 26,
      "na": 21,
-     "unknown": 15,
+     "unknown": 11,
      "levels": {
-      "valid": 165,
+      "valid": 166,
       "no-web": 21,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "dns-broken": 4,
+      "name-mismatch": 13,
+      "unreachable": 7,
       "handshake-failed": 10,
-      "expired": 3,
-      "name-mismatch": 10,
+      "expired": 1,
       "no-https": 2
      }
     },
@@ -4508,38 +4498,36 @@
    },
    "QA": {
     "all": {
-     "pass": 1394,
-     "fail": 267,
-     "na": 179,
-     "unknown": 311,
+     "pass": 1401,
+     "fail": 265,
+     "na": 181,
+     "unknown": 298,
      "levels": {
-      "valid": 1360,
-      "expired": 43,
-      "name-mismatch": 141,
-      "no-web": 179,
+      "valid": 1366,
+      "name-mismatch": 140,
+      "no-web": 181,
       "no-https": 21,
-      "valid-incomplete-chain": 34,
-      "handshake-failed": 58,
-      "dns-broken": 125,
-      "unreachable": 186,
-      "self-signed": 3,
-      "untrusted": 1
+      "valid-incomplete-chain": 35,
+      "handshake-failed": 59,
+      "dns-broken": 123,
+      "unreachable": 175,
+      "expired": 42,
+      "self-signed": 3
      }
     },
     "government": {
-     "pass": 82,
-     "fail": 16,
+     "pass": 83,
+     "fail": 15,
      "na": 42,
      "unknown": 62,
      "levels": {
-      "valid": 65,
+      "valid": 66,
       "no-web": 42,
       "dns-broken": 5,
       "unreachable": 57,
-      "name-mismatch": 11,
+      "name-mismatch": 9,
       "valid-incomplete-chain": 17,
-      "handshake-failed": 3,
-      "untrusted": 1,
+      "handshake-failed": 5,
       "expired": 1
      }
     },
@@ -4551,12 +4539,12 @@
      "levels": {
       "valid": 56,
       "valid-incomplete-chain": 6,
+      "handshake-failed": 1,
       "unreachable": 9,
-      "name-mismatch": 4,
+      "name-mismatch": 5,
       "dns-broken": 1,
       "no-web": 2,
-      "expired": 2,
-      "handshake-failed": 1
+      "expired": 1
      }
     },
     "health": {
@@ -4567,35 +4555,35 @@
      "levels": {}
     },
     "business": {
-     "pass": 1193,
+     "pass": 1199,
      "fail": 228,
-     "na": 126,
-     "unknown": 218,
+     "na": 128,
+     "unknown": 204,
      "levels": {
-      "valid": 1187,
-      "expired": 36,
-      "name-mismatch": 115,
-      "no-web": 126,
+      "valid": 1192,
+      "name-mismatch": 116,
+      "no-web": 128,
       "no-https": 21,
-      "handshake-failed": 54,
-      "dns-broken": 114,
-      "unreachable": 104,
-      "valid-incomplete-chain": 6,
+      "handshake-failed": 53,
+      "dns-broken": 112,
+      "unreachable": 92,
+      "valid-incomplete-chain": 7,
+      "expired": 36,
       "self-signed": 2
      }
     },
     "nonprofit": {
      "pass": 48,
-     "fail": 10,
+     "fail": 9,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
       "valid": 43,
       "valid-incomplete-chain": 5,
-      "unreachable": 8,
+      "unreachable": 9,
       "dns-broken": 2,
       "expired": 2,
-      "name-mismatch": 7,
+      "name-mismatch": 6,
       "no-web": 6,
       "self-signed": 1
      }
@@ -4617,19 +4605,19 @@
    },
    "BH": {
     "all": {
-     "pass": 410,
-     "fail": 80,
-     "na": 102,
-     "unknown": 163,
+     "pass": 413,
+     "fail": 77,
+     "na": 101,
+     "unknown": 164,
      "levels": {
-      "no-web": 102,
-      "valid": 405,
-      "unreachable": 143,
-      "name-mismatch": 36,
+      "no-web": 101,
+      "valid": 409,
+      "unreachable": 144,
+      "name-mismatch": 35,
       "dns-broken": 20,
-      "expired": 17,
+      "expired": 15,
       "handshake-failed": 24,
-      "valid-incomplete-chain": 5,
+      "valid-incomplete-chain": 4,
       "no-https": 1,
       "self-signed": 2
      }
@@ -4641,13 +4629,13 @@
      "unknown": 86,
      "levels": {
       "unreachable": 85,
-      "valid": 82,
+      "valid": 83,
       "no-web": 56,
       "name-mismatch": 15,
       "dns-broken": 1,
       "handshake-failed": 4,
       "expired": 4,
-      "valid-incomplete-chain": 3
+      "valid-incomplete-chain": 2
      }
     },
     "education": {
@@ -4671,16 +4659,16 @@
      "levels": {}
     },
     "business": {
-     "pass": 269,
-     "fail": 55,
-     "na": 40,
-     "unknown": 65,
+     "pass": 272,
+     "fail": 52,
+     "na": 39,
+     "unknown": 66,
      "levels": {
-      "no-web": 40,
-      "valid": 267,
-      "unreachable": 51,
-      "name-mismatch": 21,
-      "expired": 13,
+      "no-web": 39,
+      "valid": 270,
+      "unreachable": 52,
+      "name-mismatch": 20,
+      "expired": 11,
       "handshake-failed": 20,
       "dns-broken": 14,
       "valid-incomplete-chain": 2,
@@ -4711,51 +4699,51 @@
    },
    "OM": {
     "all": {
-     "pass": 530,
-     "fail": 112,
-     "na": 135,
-     "unknown": 114,
+     "pass": 534,
+     "fail": 107,
+     "na": 138,
+     "unknown": 113,
      "levels": {
-      "valid": 509,
+      "valid": 511,
       "no-https": 1,
-      "self-signed": 2,
-      "unreachable": 65,
-      "no-web": 135,
-      "name-mismatch": 51,
+      "self-signed": 1,
+      "unreachable": 64,
+      "no-web": 138,
+      "name-mismatch": 50,
       "dns-broken": 49,
-      "expired": 29,
-      "handshake-failed": 29,
-      "valid-incomplete-chain": 21
+      "expired": 27,
+      "handshake-failed": 28,
+      "valid-incomplete-chain": 23
      }
     },
     "government": {
-     "pass": 101,
+     "pass": 100,
      "fail": 28,
      "na": 30,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
-      "valid": 91,
-      "name-mismatch": 14,
-      "expired": 10,
-      "valid-incomplete-chain": 10,
+      "valid": 88,
+      "name-mismatch": 13,
+      "expired": 11,
+      "valid-incomplete-chain": 12,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25,
+      "unreachable": 26,
       "handshake-failed": 4
      }
     },
     "education": {
-     "pass": 133,
-     "fail": 20,
+     "pass": 132,
+     "fail": 21,
      "na": 14,
      "unknown": 17,
      "levels": {
       "unreachable": 12,
-      "valid": 127,
+      "valid": 126,
       "name-mismatch": 10,
       "no-web": 14,
       "dns-broken": 5,
-      "expired": 6,
+      "expired": 7,
       "valid-incomplete-chain": 6,
       "handshake-failed": 4
      }
@@ -4770,20 +4758,20 @@
      }
     },
     "business": {
-     "pass": 270,
-     "fail": 61,
-     "na": 86,
-     "unknown": 62,
+     "pass": 276,
+     "fail": 55,
+     "na": 89,
+     "unknown": 60,
      "levels": {
-      "valid": 267,
+      "valid": 273,
       "no-https": 1,
-      "self-signed": 2,
-      "no-web": 86,
+      "self-signed": 1,
+      "no-web": 89,
       "dns-broken": 34,
       "name-mismatch": 26,
-      "handshake-failed": 21,
-      "unreachable": 28,
-      "expired": 11,
+      "handshake-failed": 20,
+      "unreachable": 26,
+      "expired": 7,
       "valid-incomplete-chain": 3
      }
     },
@@ -4817,132 +4805,132 @@
   "redirect": {
    "GCC": {
     "all": {
-     "pass": 9660,
-     "fail": 2548,
-     "na": 1095,
-     "unknown": 2033,
+     "pass": 9697,
+     "fail": 2516,
+     "na": 1109,
+     "unknown": 2016,
      "levels": {
-      "redirects-https": 9601,
-      "no-web": 1095,
-      "serves-http": 2277,
-      "unreachable": 1032,
-      "redirects-http": 271,
-      "http-error": 545,
-      "dns-broken": 456,
-      "closed": 59
+      "redirects-https": 9639,
+      "no-web": 1109,
+      "serves-http": 2241,
+      "unreachable": 1019,
+      "redirects-http": 275,
+      "http-error": 546,
+      "dns-broken": 451,
+      "closed": 58
      }
     },
     "government": {
-     "pass": 607,
+     "pass": 608,
      "fail": 173,
-     "na": 333,
-     "unknown": 782,
+     "na": 328,
+     "unknown": 784,
      "levels": {
-      "redirects-https": 569,
-      "no-web": 333,
-      "unreachable": 489,
-      "http-error": 248,
+      "redirects-https": 572,
+      "no-web": 328,
+      "unreachable": 496,
+      "http-error": 244,
       "serves-http": 156,
-      "closed": 38,
-      "dns-broken": 45,
+      "closed": 36,
+      "dns-broken": 44,
       "redirects-http": 17
      }
     },
     "education": {
-     "pass": 1281,
-     "fail": 355,
-     "na": 122,
-     "unknown": 201,
+     "pass": 1291,
+     "fail": 346,
+     "na": 121,
+     "unknown": 203,
      "levels": {
-      "redirects-https": 1276,
-      "serves-http": 316,
-      "unreachable": 91,
-      "http-error": 66,
-      "no-web": 122,
+      "redirects-https": 1285,
+      "serves-http": 308,
+      "unreachable": 94,
+      "http-error": 65,
+      "no-web": 121,
       "dns-broken": 44,
-      "redirects-http": 39,
-      "closed": 5
+      "redirects-http": 38,
+      "closed": 6
      }
     },
     "health": {
-     "pass": 122,
-     "fail": 42,
-     "na": 16,
+     "pass": 124,
+     "fail": 41,
+     "na": 15,
      "unknown": 34,
      "levels": {
-      "no-web": 16,
+      "no-web": 15,
       "http-error": 8,
-      "redirects-https": 120,
+      "redirects-https": 122,
       "dns-broken": 7,
-      "serves-http": 39,
+      "serves-http": 38,
       "redirects-http": 3,
       "unreachable": 19,
       "closed": 2
      }
     },
     "business": {
-     "pass": 3664,
-     "fail": 1185,
+     "pass": 3676,
+     "fail": 1169,
      "na": 462,
-     "unknown": 736,
+     "unknown": 723,
      "levels": {
       "no-web": 462,
-      "unreachable": 325,
-      "redirects-https": 3652,
-      "serves-http": 1049,
-      "redirects-http": 136,
-      "http-error": 168,
-      "dns-broken": 243,
+      "unreachable": 309,
+      "redirects-https": 3664,
+      "serves-http": 1034,
+      "redirects-http": 135,
+      "http-error": 176,
+      "dns-broken": 238,
       "closed": 12
      }
     },
     "nonprofit": {
-     "pass": 3696,
-     "fail": 665,
-     "na": 83,
-     "unknown": 190,
+     "pass": 3709,
+     "fail": 659,
+     "na": 102,
+     "unknown": 181,
      "levels": {
-      "redirects-https": 3695,
-      "unreachable": 64,
-      "serves-http": 605,
-      "redirects-http": 60,
+      "redirects-https": 3708,
+      "unreachable": 56,
+      "serves-http": 593,
+      "redirects-http": 66,
       "dns-broken": 80,
-      "http-error": 46,
-      "no-web": 83,
+      "http-error": 45,
+      "no-web": 102,
       "closed": 1
      }
     },
     "network": {
-     "pass": 290,
+     "pass": 289,
      "fail": 128,
-     "na": 79,
-     "unknown": 90,
+     "na": 81,
+     "unknown": 91,
      "levels": {
       "serves-http": 112,
-      "redirects-https": 289,
-      "no-web": 79,
+      "redirects-https": 288,
+      "no-web": 81,
       "redirects-http": 16,
-      "dns-broken": 37,
-      "unreachable": 44,
-      "http-error": 9,
+      "dns-broken": 38,
+      "unreachable": 45,
+      "http-error": 8,
       "closed": 1
      }
     }
    },
    "KW": {
     "all": {
-     "pass": 1408,
-     "fail": 455,
-     "na": 140,
+     "pass": 1414,
+     "fail": 441,
+     "na": 142,
      "unknown": 293,
      "levels": {
-      "unreachable": 134,
-      "redirects-https": 1403,
-      "serves-http": 389,
-      "http-error": 75,
+      "unreachable": 133,
+      "redirects-https": 1409,
+      "serves-http": 375,
+      "http-error": 79,
       "redirects-http": 66,
-      "no-web": 140,
-      "dns-broken": 84,
+      "no-web": 142,
+      "dns-broken": 81,
       "closed": 5
      }
     },
@@ -4963,17 +4951,17 @@
      }
     },
     "education": {
-     "pass": 78,
-     "fail": 24,
+     "pass": 81,
+     "fail": 22,
      "na": 3,
-     "unknown": 19,
+     "unknown": 18,
      "levels": {
-      "redirects-https": 77,
-      "serves-http": 22,
-      "unreachable": 11,
-      "http-error": 6,
+      "redirects-https": 80,
+      "serves-http": 19,
+      "unreachable": 9,
+      "http-error": 7,
       "no-web": 3,
-      "redirects-http": 2,
+      "redirects-http": 3,
       "dns-broken": 2,
       "closed": 1
      }
@@ -4986,34 +4974,34 @@
      "levels": {}
     },
     "business": {
-     "pass": 1215,
-     "fail": 383,
-     "na": 116,
+     "pass": 1219,
+     "fail": 371,
+     "na": 118,
      "unknown": 199,
      "levels": {
       "unreachable": 77,
-      "redirects-https": 1213,
-      "serves-http": 331,
-      "http-error": 51,
-      "redirects-http": 52,
-      "no-web": 116,
-      "dns-broken": 71,
+      "redirects-https": 1217,
+      "serves-http": 320,
+      "http-error": 54,
+      "redirects-http": 51,
+      "no-web": 118,
+      "dns-broken": 68,
       "closed": 2
      }
     },
     "nonprofit": {
-     "pass": 53,
+     "pass": 52,
      "fail": 31,
      "na": 4,
-     "unknown": 13,
+     "unknown": 14,
      "levels": {
       "serves-http": 22,
       "redirects-http": 9,
       "dns-broken": 4,
-      "redirects-https": 53,
+      "redirects-https": 52,
       "no-web": 4,
       "http-error": 5,
-      "unreachable": 4
+      "unreachable": 5
      }
     },
     "network": {
@@ -5031,144 +5019,144 @@
    },
    "SA": {
     "all": {
-     "pass": 5732,
-     "fail": 1267,
-     "na": 356,
-     "unknown": 708,
+     "pass": 5756,
+     "fail": 1255,
+     "na": 365,
+     "unknown": 702,
      "levels": {
-      "redirects-https": 5715,
-      "serves-http": 1151,
-      "no-web": 356,
+      "redirects-https": 5741,
+      "serves-http": 1135,
+      "no-web": 365,
       "unreachable": 348,
-      "redirects-http": 116,
-      "http-error": 202,
-      "dns-broken": 158,
-      "closed": 17
+      "redirects-http": 120,
+      "http-error": 195,
+      "dns-broken": 159,
+      "closed": 15
      }
     },
     "government": {
-     "pass": 99,
+     "pass": 101,
      "fail": 18,
-     "na": 60,
+     "na": 56,
      "unknown": 233,
      "levels": {
-      "no-web": 60,
-      "unreachable": 154,
-      "redirects-https": 94,
+      "no-web": 56,
+      "unreachable": 159,
+      "redirects-https": 98,
       "serves-http": 17,
-      "dns-broken": 15,
-      "http-error": 64,
-      "closed": 5,
+      "dns-broken": 14,
+      "http-error": 60,
+      "closed": 3,
       "redirects-http": 1
      }
     },
     "education": {
-     "pass": 859,
-     "fail": 267,
-     "na": 73,
-     "unknown": 96,
+     "pass": 865,
+     "fail": 262,
+     "na": 72,
+     "unknown": 98,
      "levels": {
-      "redirects-https": 857,
-      "serves-http": 238,
-      "no-web": 73,
-      "http-error": 29,
+      "redirects-https": 863,
+      "serves-http": 235,
+      "no-web": 72,
+      "http-error": 27,
       "dns-broken": 28,
-      "unreachable": 39,
-      "redirects-http": 29,
+      "unreachable": 43,
+      "redirects-http": 27,
       "closed": 2
      }
     },
     "health": {
-     "pass": 120,
-     "fail": 41,
-     "na": 16,
+     "pass": 122,
+     "fail": 40,
+     "na": 15,
      "unknown": 34,
      "levels": {
-      "no-web": 16,
+      "no-web": 15,
       "http-error": 8,
-      "redirects-https": 118,
+      "redirects-https": 120,
       "dns-broken": 7,
-      "serves-http": 38,
+      "serves-http": 37,
       "redirects-http": 3,
       "unreachable": 19,
       "closed": 2
      }
     },
     "business": {
-     "pass": 840,
-     "fail": 201,
-     "na": 73,
-     "unknown": 121,
+     "pass": 841,
+     "fail": 199,
+     "na": 67,
+     "unknown": 124,
      "levels": {
-      "no-web": 73,
-      "redirects-https": 834,
-      "serves-http": 183,
-      "http-error": 61,
+      "redirects-https": 835,
+      "serves-http": 181,
+      "no-web": 67,
+      "http-error": 63,
       "unreachable": 55,
-      "dns-broken": 5,
+      "dns-broken": 6,
       "redirects-http": 18,
       "closed": 6
      }
     },
     "nonprofit": {
-     "pass": 3546,
-     "fail": 619,
-     "na": 68,
-     "unknown": 152,
+     "pass": 3560,
+     "fail": 615,
+     "na": 87,
+     "unknown": 140,
      "levels": {
-      "redirects-https": 3545,
-      "unreachable": 49,
-      "serves-http": 570,
-      "redirects-http": 49,
+      "redirects-https": 3559,
+      "unreachable": 39,
+      "serves-http": 560,
+      "redirects-http": 55,
       "dns-broken": 71,
-      "http-error": 32,
-      "no-web": 68,
+      "http-error": 30,
+      "no-web": 87,
       "closed": 1
      }
     },
     "network": {
-     "pass": 268,
+     "pass": 267,
      "fail": 121,
-     "na": 66,
-     "unknown": 72,
+     "na": 68,
+     "unknown": 73,
      "levels": {
       "serves-http": 105,
-      "redirects-https": 267,
-      "no-web": 66,
+      "redirects-https": 266,
+      "no-web": 68,
       "redirects-http": 16,
-      "dns-broken": 32,
-      "unreachable": 32,
-      "http-error": 8,
+      "dns-broken": 33,
+      "unreachable": 33,
+      "http-error": 7,
       "closed": 1
      }
     }
    },
    "AE": {
     "all": {
-     "pass": 569,
-     "fail": 148,
-     "na": 183,
-     "unknown": 280,
+     "pass": 572,
+     "fail": 147,
+     "na": 182,
+     "unknown": 277,
      "levels": {
-      "redirects-https": 564,
-      "unreachable": 156,
-      "serves-http": 136,
-      "no-web": 183,
+      "redirects-https": 567,
+      "unreachable": 154,
+      "serves-http": 134,
+      "no-web": 182,
       "http-error": 104,
-      "dns-broken": 20,
-      "redirects-http": 12,
+      "dns-broken": 19,
+      "redirects-http": 13,
       "closed": 5
      }
     },
     "government": {
-     "pass": 268,
+     "pass": 269,
      "fail": 75,
-     "na": 130,
+     "na": 129,
      "unknown": 221,
      "levels": {
-      "redirects-https": 264,
+      "redirects-https": 265,
       "unreachable": 129,
-      "no-web": 130,
+      "no-web": 129,
       "http-error": 82,
       "serves-http": 65,
       "redirects-http": 10,
@@ -5178,15 +5166,15 @@
     },
     "education": {
      "pass": 134,
-     "fail": 22,
+     "fail": 21,
      "na": 26,
-     "unknown": 39,
+     "unknown": 40,
      "levels": {
-      "unreachable": 16,
+      "unreachable": 17,
       "http-error": 18,
       "redirects-https": 133,
       "no-web": 26,
-      "serves-http": 21,
+      "serves-http": 20,
       "dns-broken": 5,
       "redirects-http": 1,
       "closed": 1
@@ -5201,29 +5189,29 @@
     },
     "business": {
      "pass": 143,
-     "fail": 44,
+     "fail": 46,
      "na": 21,
-     "unknown": 18,
+     "unknown": 14,
      "levels": {
-      "serves-http": 43,
+      "serves-http": 44,
       "redirects-https": 143,
       "no-web": 21,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "dns-broken": 4,
       "http-error": 3,
-      "redirects-http": 1
+      "unreachable": 7,
+      "redirects-http": 2
      }
     },
     "nonprofit": {
-     "pass": 19,
-     "fail": 5,
+     "pass": 21,
+     "fail": 3,
      "na": 2,
      "unknown": 1,
      "levels": {
       "http-error": 1,
       "no-web": 2,
-      "redirects-https": 19,
-      "serves-http": 5
+      "redirects-https": 21,
+      "serves-http": 3
      }
     },
     "network": {
@@ -5241,31 +5229,31 @@
    },
    "QA": {
     "all": {
-     "pass": 1202,
-     "fail": 399,
-     "na": 179,
-     "unknown": 371,
+     "pass": 1200,
+     "fail": 400,
+     "na": 181,
+     "unknown": 364,
      "levels": {
-      "redirects-https": 1196,
-      "serves-http": 350,
-      "redirects-http": 49,
-      "no-web": 179,
-      "dns-broken": 125,
-      "unreachable": 186,
-      "http-error": 60,
-      "closed": 6
+      "redirects-https": 1193,
+      "serves-http": 349,
+      "redirects-http": 51,
+      "no-web": 181,
+      "dns-broken": 123,
+      "unreachable": 175,
+      "http-error": 66,
+      "closed": 7
      }
     },
     "government": {
-     "pass": 63,
+     "pass": 62,
      "fail": 5,
      "na": 42,
-     "unknown": 92,
+     "unknown": 93,
      "levels": {
-      "redirects-https": 60,
+      "redirects-https": 59,
       "no-web": 42,
       "dns-broken": 5,
-      "http-error": 30,
+      "http-error": 31,
       "unreachable": 57,
       "closed": 3,
       "serves-http": 5
@@ -5277,7 +5265,8 @@
      "na": 2,
      "unknown": 12,
      "levels": {
-      "redirects-https": 63,
+      "redirects-https": 62,
+      "closed": 1,
       "unreachable": 9,
       "redirects-http": 2,
       "dns-broken": 1,
@@ -5294,32 +5283,32 @@
      "levels": {}
     },
     "business": {
-     "pass": 1017,
-     "fail": 381,
-     "na": 126,
-     "unknown": 241,
+     "pass": 1018,
+     "fail": 382,
+     "na": 128,
+     "unknown": 231,
      "levels": {
-      "redirects-https": 1014,
-      "serves-http": 335,
-      "redirects-http": 46,
-      "no-web": 126,
-      "dns-broken": 114,
-      "unreachable": 104,
-      "http-error": 23,
+      "redirects-https": 1015,
+      "serves-http": 334,
+      "redirects-http": 48,
+      "no-web": 128,
+      "dns-broken": 112,
+      "unreachable": 92,
+      "http-error": 27,
       "closed": 3
      }
     },
     "nonprofit": {
-     "pass": 48,
+     "pass": 46,
      "fail": 6,
      "na": 6,
-     "unknown": 14,
+     "unknown": 16,
      "levels": {
-      "redirects-https": 48,
-      "unreachable": 8,
+      "redirects-https": 46,
+      "unreachable": 9,
       "redirects-http": 1,
       "dns-broken": 2,
-      "http-error": 4,
+      "http-error": 5,
       "serves-http": 5,
       "no-web": 6
      }
@@ -5341,17 +5330,17 @@
    },
    "BH": {
     "all": {
-     "pass": 301,
-     "fail": 145,
-     "na": 102,
+     "pass": 303,
+     "fail": 144,
+     "na": 101,
      "unknown": 207,
      "levels": {
-      "no-web": 102,
-      "redirects-https": 289,
-      "unreachable": 143,
-      "serves-http": 134,
-      "redirects-http": 11,
-      "http-error": 44,
+      "no-web": 101,
+      "redirects-https": 291,
+      "unreachable": 145,
+      "serves-http": 132,
+      "redirects-http": 12,
+      "http-error": 42,
       "dns-broken": 20,
       "closed": 12
      }
@@ -5362,10 +5351,10 @@
      "na": 56,
      "unknown": 103,
      "levels": {
-      "unreachable": 85,
+      "unreachable": 86,
       "serves-http": 48,
       "no-web": 56,
-      "http-error": 17,
+      "http-error": 16,
       "redirects-https": 31,
       "dns-broken": 1,
       "closed": 11,
@@ -5394,17 +5383,17 @@
      "levels": {}
     },
     "business": {
-     "pass": 212,
-     "fail": 92,
-     "na": 40,
+     "pass": 214,
+     "fail": 91,
+     "na": 39,
      "unknown": 85,
      "levels": {
-      "no-web": 40,
-      "redirects-https": 211,
-      "unreachable": 51,
-      "serves-http": 82,
-      "redirects-http": 10,
-      "http-error": 20,
+      "no-web": 39,
+      "redirects-https": 213,
+      "unreachable": 52,
+      "serves-http": 80,
+      "redirects-http": 11,
+      "http-error": 19,
       "dns-broken": 14,
       "closed": 1
      }
@@ -5435,46 +5424,46 @@
    },
    "OM": {
     "all": {
-     "pass": 448,
-     "fail": 134,
-     "na": 135,
-     "unknown": 174,
+     "pass": 452,
+     "fail": 129,
+     "na": 138,
+     "unknown": 173,
      "levels": {
-      "redirects-https": 434,
+      "redirects-https": 438,
       "http-error": 60,
-      "unreachable": 65,
-      "no-web": 135,
-      "redirects-http": 17,
-      "serves-http": 117,
+      "unreachable": 64,
+      "no-web": 138,
+      "redirects-http": 13,
+      "serves-http": 116,
       "dns-broken": 49,
       "closed": 14
      }
     },
     "government": {
-     "pass": 77,
+     "pass": 76,
      "fail": 10,
      "na": 30,
-     "unknown": 74,
+     "unknown": 75,
      "levels": {
-      "redirects-https": 64,
+      "redirects-https": 63,
       "http-error": 42,
       "closed": 13,
       "serves-http": 8,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25,
+      "unreachable": 26,
       "redirects-http": 2
      }
     },
     "education": {
-     "pass": 111,
-     "fail": 35,
+     "pass": 112,
+     "fail": 34,
      "na": 14,
      "unknown": 24,
      "levels": {
       "unreachable": 12,
-      "redirects-https": 110,
-      "serves-http": 30,
+      "redirects-https": 111,
+      "serves-http": 29,
       "no-web": 14,
       "dns-broken": 5,
       "http-error": 7,
@@ -5493,18 +5482,18 @@
      }
     },
     "business": {
-     "pass": 237,
-     "fail": 84,
-     "na": 86,
-     "unknown": 72,
+     "pass": 241,
+     "fail": 80,
+     "na": 89,
+     "unknown": 70,
      "levels": {
-      "redirects-https": 237,
+      "redirects-https": 241,
       "http-error": 10,
-      "no-web": 86,
-      "redirects-http": 9,
+      "no-web": 89,
+      "redirects-http": 5,
       "dns-broken": 34,
       "serves-http": 75,
-      "unreachable": 28
+      "unreachable": 26
      }
     },
     "nonprofit": {
@@ -5538,119 +5527,119 @@
   "hsts": {
    "GCC": {
     "all": {
-     "pass": 2327,
-     "fail": 10431,
-     "na": 1095,
-     "unknown": 1483,
+     "pass": 2336,
+     "fail": 10429,
+     "na": 1109,
+     "unknown": 1464,
      "levels": {
-      "no-https": 1214,
-      "one-year": 1666,
-      "no-web": 1095,
-      "missing": 8126,
-      "unreachable": 1027,
-      "preload-ready": 661,
-      "short": 1025,
-      "dns-broken": 456,
-      "disabled": 66
+      "no-https": 1217,
+      "one-year": 1681,
+      "no-web": 1109,
+      "missing": 8118,
+      "unreachable": 1013,
+      "preload-ready": 655,
+      "short": 1029,
+      "dns-broken": 451,
+      "disabled": 65
      }
     },
     "government": {
      "pass": 280,
-     "fail": 752,
-     "na": 333,
-     "unknown": 530,
+     "fail": 748,
+     "na": 328,
+     "unknown": 537,
      "levels": {
-      "no-https": 189,
-      "no-web": 333,
-      "missing": 415,
-      "unreachable": 485,
-      "preload-ready": 113,
-      "short": 138,
-      "disabled": 10,
-      "one-year": 167,
-      "dns-broken": 45
+      "no-https": 191,
+      "no-web": 328,
+      "missing": 412,
+      "unreachable": 493,
+      "preload-ready": 112,
+      "one-year": 168,
+      "short": 134,
+      "disabled": 11,
+      "dns-broken": 44
      }
     },
     "education": {
-     "pass": 364,
-     "fail": 1338,
-     "na": 122,
-     "unknown": 135,
+     "pass": 363,
+     "fail": 1340,
+     "na": 121,
+     "unknown": 137,
      "levels": {
-      "one-year": 254,
-      "missing": 1105,
-      "unreachable": 91,
-      "preload-ready": 110,
-      "no-https": 162,
+      "one-year": 258,
+      "missing": 1109,
+      "unreachable": 93,
+      "preload-ready": 105,
+      "no-https": 160,
       "short": 69,
-      "no-web": 122,
+      "no-web": 121,
       "dns-broken": 44,
       "disabled": 2
      }
     },
     "health": {
      "pass": 26,
-     "fail": 146,
-     "na": 16,
+     "fail": 147,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "missing": 124,
+      "no-web": 15,
+      "missing": 122,
       "dns-broken": 7,
       "preload-ready": 10,
-      "no-https": 13,
+      "no-https": 15,
       "one-year": 16,
+      "short": 9,
       "disabled": 1,
-      "short": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 858,
-     "fail": 4160,
+     "pass": 865,
+     "fail": 4157,
      "na": 462,
-     "unknown": 567,
+     "unknown": 546,
      "levels": {
       "no-web": 462,
-      "unreachable": 324,
-      "missing": 3039,
-      "no-https": 684,
-      "one-year": 609,
-      "short": 411,
-      "preload-ready": 249,
-      "dns-broken": 243,
+      "unreachable": 308,
+      "missing": 3041,
+      "no-https": 682,
+      "one-year": 615,
+      "short": 408,
+      "preload-ready": 250,
+      "dns-broken": 238,
       "disabled": 26
      }
     },
     "nonprofit": {
-     "pass": 717,
-     "fail": 3690,
-     "na": 83,
-     "unknown": 144,
+     "pass": 718,
+     "fail": 3695,
+     "na": 102,
+     "unknown": 136,
      "levels": {
-      "preload-ready": 156,
-      "unreachable": 64,
-      "missing": 3164,
-      "short": 384,
-      "one-year": 561,
-      "no-https": 118,
+      "preload-ready": 154,
+      "unreachable": 56,
+      "missing": 3160,
+      "short": 394,
+      "one-year": 564,
+      "no-https": 119,
       "dns-broken": 80,
-      "disabled": 24,
-      "no-web": 83
+      "disabled": 22,
+      "no-web": 102
      }
     },
     "network": {
-     "pass": 82,
-     "fail": 345,
-     "na": 79,
-     "unknown": 81,
+     "pass": 84,
+     "fail": 342,
+     "na": 81,
+     "unknown": 82,
      "levels": {
-      "missing": 279,
-      "no-web": 79,
-      "preload-ready": 23,
-      "no-https": 48,
-      "one-year": 59,
-      "dns-broken": 37,
+      "missing": 274,
+      "no-web": 81,
+      "preload-ready": 24,
+      "no-https": 50,
+      "one-year": 60,
+      "dns-broken": 38,
       "unreachable": 44,
       "short": 15,
       "disabled": 3
@@ -5659,34 +5648,34 @@
    },
    "KW": {
     "all": {
-     "pass": 325,
-     "fail": 1613,
-     "na": 140,
-     "unknown": 218,
+     "pass": 330,
+     "fail": 1605,
+     "na": 142,
+     "unknown": 213,
      "levels": {
-      "unreachable": 134,
-      "missing": 1159,
-      "no-https": 245,
-      "short": 204,
-      "one-year": 240,
-      "preload-ready": 85,
-      "no-web": 140,
-      "dns-broken": 84,
+      "unreachable": 132,
+      "missing": 1153,
+      "no-https": 241,
+      "short": 206,
+      "one-year": 244,
+      "preload-ready": 86,
+      "no-web": 142,
+      "dns-broken": 81,
       "disabled": 5
      }
     },
     "government": {
-     "pass": 13,
-     "fail": 74,
+     "pass": 14,
+     "fail": 73,
      "na": 15,
      "unknown": 46,
      "levels": {
-      "missing": 49,
+      "missing": 47,
       "no-web": 15,
       "unreachable": 39,
-      "short": 7,
+      "short": 8,
       "no-https": 17,
-      "one-year": 9,
+      "one-year": 10,
       "dns-broken": 7,
       "disabled": 1,
       "preload-ready": 4
@@ -5694,16 +5683,16 @@
     },
     "education": {
      "pass": 21,
-     "fail": 87,
+     "fail": 89,
      "na": 3,
-     "unknown": 13,
+     "unknown": 11,
      "levels": {
       "preload-ready": 9,
-      "short": 7,
+      "short": 8,
       "one-year": 12,
-      "missing": 67,
+      "missing": 68,
       "no-https": 13,
-      "unreachable": 11,
+      "unreachable": 9,
       "no-web": 3,
       "dns-broken": 2
      }
@@ -5716,35 +5705,35 @@
      "levels": {}
     },
     "business": {
-     "pass": 270,
-     "fail": 1379,
-     "na": 116,
-     "unknown": 148,
+     "pass": 274,
+     "fail": 1371,
+     "na": 118,
+     "unknown": 144,
      "levels": {
-      "unreachable": 77,
-      "missing": 985,
-      "no-https": 206,
-      "short": 184,
-      "one-year": 202,
-      "no-web": 116,
-      "dns-broken": 71,
-      "preload-ready": 68,
+      "unreachable": 76,
+      "missing": 980,
+      "no-https": 202,
+      "short": 185,
+      "one-year": 205,
+      "no-web": 118,
+      "dns-broken": 68,
+      "preload-ready": 69,
       "disabled": 4
      }
     },
     "nonprofit": {
      "pass": 19,
-     "fail": 70,
+     "fail": 69,
      "na": 4,
-     "unknown": 8,
+     "unknown": 9,
      "levels": {
       "missing": 56,
       "dns-broken": 4,
       "no-https": 8,
       "one-year": 16,
       "no-web": 4,
-      "unreachable": 4,
-      "short": 6,
+      "unreachable": 5,
+      "short": 5,
       "preload-ready": 3
      }
     },
@@ -5765,119 +5754,119 @@
    },
    "SA": {
     "all": {
-     "pass": 1306,
-     "fail": 5900,
-     "na": 356,
-     "unknown": 501,
+     "pass": 1311,
+     "fail": 5899,
+     "na": 365,
+     "unknown": 503,
      "levels": {
-      "one-year": 965,
-      "missing": 4894,
-      "no-web": 356,
-      "preload-ready": 341,
-      "short": 584,
-      "unreachable": 343,
-      "no-https": 373,
-      "dns-broken": 158,
-      "disabled": 49
+      "one-year": 973,
+      "missing": 4874,
+      "no-web": 365,
+      "preload-ready": 338,
+      "short": 586,
+      "unreachable": 344,
+      "no-https": 391,
+      "dns-broken": 159,
+      "disabled": 48
      }
     },
     "government": {
-     "pass": 67,
-     "fail": 118,
-     "na": 60,
-     "unknown": 165,
+     "pass": 66,
+     "fail": 115,
+     "na": 56,
+     "unknown": 171,
      "levels": {
-      "no-web": 60,
-      "unreachable": 150,
-      "missing": 65,
-      "disabled": 5,
-      "dns-broken": 15,
-      "one-year": 45,
-      "no-https": 15,
-      "preload-ready": 22,
-      "short": 33
+      "no-web": 56,
+      "unreachable": 157,
+      "disabled": 6,
+      "missing": 61,
+      "dns-broken": 14,
+      "one-year": 43,
+      "no-https": 18,
+      "preload-ready": 23,
+      "short": 30
      }
     },
     "education": {
-     "pass": 256,
-     "fail": 899,
-     "na": 73,
-     "unknown": 67,
+     "pass": 255,
+     "fail": 900,
+     "na": 72,
+     "unknown": 70,
      "levels": {
-      "one-year": 186,
-      "missing": 756,
-      "no-https": 102,
-      "preload-ready": 70,
-      "no-web": 73,
+      "one-year": 188,
+      "missing": 759,
+      "no-https": 101,
+      "preload-ready": 67,
+      "no-web": 72,
       "dns-broken": 28,
-      "short": 40,
-      "unreachable": 39,
+      "short": 39,
+      "unreachable": 42,
       "disabled": 1
      }
     },
     "health": {
      "pass": 26,
-     "fail": 143,
-     "na": 16,
+     "fail": 144,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "missing": 121,
+      "no-web": 15,
+      "missing": 119,
       "dns-broken": 7,
       "preload-ready": 10,
-      "no-https": 13,
+      "no-https": 15,
       "one-year": 16,
+      "short": 9,
       "disabled": 1,
-      "short": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 213,
-     "fail": 890,
-     "na": 73,
-     "unknown": 59,
+     "pass": 217,
+     "fail": 886,
+     "na": 67,
+     "unknown": 61,
      "levels": {
-      "no-web": 73,
-      "missing": 652,
-      "short": 113,
-      "one-year": 131,
-      "no-https": 109,
+      "missing": 644,
+      "short": 107,
+      "one-year": 135,
+      "no-web": 67,
+      "no-https": 119,
       "preload-ready": 82,
-      "unreachable": 54,
-      "dns-broken": 5,
+      "unreachable": 55,
+      "dns-broken": 6,
       "disabled": 16
      }
     },
     "nonprofit": {
-     "pass": 670,
-     "fail": 3527,
-     "na": 68,
-     "unknown": 120,
+     "pass": 671,
+     "fail": 3534,
+     "na": 87,
+     "unknown": 110,
      "levels": {
-      "preload-ready": 139,
-      "unreachable": 49,
-      "missing": 3035,
-      "short": 375,
-      "one-year": 531,
-      "no-https": 93,
+      "preload-ready": 137,
+      "unreachable": 39,
+      "missing": 3031,
+      "short": 386,
+      "one-year": 534,
+      "no-https": 95,
       "dns-broken": 71,
-      "disabled": 24,
-      "no-web": 68
+      "disabled": 22,
+      "no-web": 87
      }
     },
     "network": {
-     "pass": 74,
-     "fail": 323,
-     "na": 66,
-     "unknown": 64,
+     "pass": 76,
+     "fail": 320,
+     "na": 68,
+     "unknown": 65,
      "levels": {
-      "missing": 265,
-      "no-web": 66,
-      "preload-ready": 18,
-      "no-https": 41,
-      "one-year": 56,
-      "dns-broken": 32,
+      "missing": 260,
+      "no-web": 68,
+      "preload-ready": 19,
+      "no-https": 43,
+      "one-year": 57,
+      "dns-broken": 33,
       "unreachable": 32,
       "short": 15,
       "disabled": 2
@@ -5886,50 +5875,50 @@
    },
    "AE": {
     "all": {
-     "pass": 205,
-     "fail": 616,
-     "na": 183,
-     "unknown": 176,
+     "pass": 204,
+     "fail": 619,
+     "na": 182,
+     "unknown": 173,
      "levels": {
-      "no-https": 137,
-      "unreachable": 156,
-      "missing": 377,
+      "no-https": 136,
+      "unreachable": 154,
+      "missing": 381,
       "short": 102,
-      "no-web": 183,
-      "preload-ready": 88,
+      "no-web": 182,
+      "preload-ready": 87,
       "one-year": 117,
-      "dns-broken": 20
+      "dns-broken": 19
      }
     },
     "government": {
-     "pass": 125,
+     "pass": 126,
      "fail": 300,
-     "na": 130,
+     "na": 129,
      "unknown": 139,
      "levels": {
       "no-https": 90,
       "unreachable": 129,
-      "missing": 131,
-      "no-web": 130,
+      "missing": 132,
+      "no-web": 129,
       "preload-ready": 60,
-      "short": 79,
-      "one-year": 65,
+      "one-year": 66,
+      "short": 78,
       "dns-broken": 10
      }
     },
     "education": {
-     "pass": 47,
+     "pass": 46,
      "fail": 127,
      "na": 26,
-     "unknown": 21,
+     "unknown": 22,
      "levels": {
-      "unreachable": 16,
-      "missing": 100,
-      "no-https": 18,
+      "unreachable": 17,
+      "missing": 101,
+      "no-https": 16,
       "no-web": 26,
       "one-year": 26,
-      "preload-ready": 21,
-      "short": 9,
+      "preload-ready": 20,
+      "short": 10,
       "dns-broken": 5
      }
     },
@@ -5941,18 +5930,18 @@
      "levels": {}
     },
     "business": {
-     "pass": 26,
-     "fail": 164,
+     "pass": 25,
+     "fail": 167,
      "na": 21,
-     "unknown": 15,
+     "unknown": 11,
      "levels": {
-      "missing": 127,
+      "missing": 129,
       "short": 12,
       "no-web": 21,
-      "dns-broken": 5,
-      "unreachable": 10,
-      "one-year": 22,
-      "no-https": 25,
+      "dns-broken": 4,
+      "no-https": 26,
+      "one-year": 21,
+      "unreachable": 7,
       "preload-ready": 4
      }
     },
@@ -5985,36 +5974,36 @@
    },
    "QA": {
     "all": {
-     "pass": 270,
-     "fail": 1391,
-     "na": 179,
-     "unknown": 311,
+     "pass": 269,
+     "fail": 1397,
+     "na": 181,
+     "unknown": 298,
      "levels": {
       "preload-ready": 92,
-      "one-year": 178,
-      "no-https": 267,
-      "missing": 1034,
-      "no-web": 179,
-      "dns-broken": 125,
-      "unreachable": 186,
+      "one-year": 177,
+      "missing": 1042,
+      "no-https": 265,
+      "no-web": 181,
+      "dns-broken": 123,
+      "unreachable": 175,
       "short": 81,
       "disabled": 9
      }
     },
     "government": {
-     "pass": 22,
-     "fail": 76,
+     "pass": 23,
+     "fail": 75,
      "na": 42,
      "unknown": 62,
      "levels": {
-      "missing": 49,
+      "missing": 50,
       "no-web": 42,
       "dns-broken": 5,
       "preload-ready": 11,
       "unreachable": 57,
-      "one-year": 11,
-      "no-https": 16,
-      "short": 8,
+      "one-year": 12,
+      "no-https": 15,
+      "short": 7,
       "disabled": 3
      }
     },
@@ -6024,11 +6013,11 @@
      "na": 2,
      "unknown": 10,
      "levels": {
-      "missing": 47,
-      "short": 5,
+      "missing": 48,
+      "short": 4,
       "preload-ready": 4,
-      "unreachable": 9,
       "no-https": 7,
+      "unreachable": 9,
       "dns-broken": 1,
       "one-year": 6,
       "no-web": 2
@@ -6042,34 +6031,34 @@
      "levels": {}
     },
     "business": {
-     "pass": 216,
-     "fail": 1205,
-     "na": 126,
-     "unknown": 218,
+     "pass": 214,
+     "fail": 1213,
+     "na": 128,
+     "unknown": 204,
      "levels": {
-      "one-year": 152,
+      "one-year": 150,
+      "missing": 911,
       "no-https": 228,
-      "missing": 905,
-      "no-web": 126,
+      "no-web": 128,
       "preload-ready": 64,
-      "dns-broken": 114,
-      "unreachable": 104,
-      "short": 67,
+      "dns-broken": 112,
+      "unreachable": 92,
+      "short": 69,
       "disabled": 5
      }
     },
     "nonprofit": {
      "pass": 19,
-     "fail": 39,
+     "fail": 38,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
       "preload-ready": 12,
       "missing": 28,
-      "unreachable": 8,
+      "unreachable": 9,
       "one-year": 7,
       "dns-broken": 2,
-      "no-https": 10,
+      "no-https": 9,
       "no-web": 6,
       "short": 1
      }
@@ -6095,13 +6084,13 @@
     "all": {
      "pass": 75,
      "fail": 415,
-     "na": 102,
-     "unknown": 163,
+     "na": 101,
+     "unknown": 164,
      "levels": {
-      "no-web": 102,
-      "missing": 310,
-      "unreachable": 143,
-      "no-https": 80,
+      "no-web": 101,
+      "missing": 313,
+      "unreachable": 144,
+      "no-https": 77,
       "dns-broken": 20,
       "one-year": 58,
       "preload-ready": 17,
@@ -6150,13 +6139,13 @@
     "business": {
      "pass": 59,
      "fail": 265,
-     "na": 40,
-     "unknown": 65,
+     "na": 39,
+     "unknown": 66,
      "levels": {
-      "no-web": 40,
-      "missing": 188,
-      "unreachable": 51,
-      "no-https": 55,
+      "no-web": 39,
+      "missing": 191,
+      "unreachable": 52,
+      "no-https": 52,
       "one-year": 43,
       "preload-ready": 16,
       "short": 22,
@@ -6189,51 +6178,51 @@
    },
    "OM": {
     "all": {
-     "pass": 146,
-     "fail": 496,
-     "na": 135,
-     "unknown": 114,
+     "pass": 147,
+     "fail": 494,
+     "na": 138,
+     "unknown": 113,
      "levels": {
-      "one-year": 108,
-      "no-https": 112,
-      "missing": 352,
-      "unreachable": 65,
-      "no-web": 135,
+      "one-year": 112,
+      "no-https": 107,
+      "missing": 355,
+      "unreachable": 64,
+      "no-web": 138,
       "dns-broken": 49,
-      "preload-ready": 38,
+      "preload-ready": 35,
       "short": 31,
       "disabled": 1
      }
     },
     "government": {
-     "pass": 42,
-     "fail": 87,
+     "pass": 40,
+     "fail": 88,
      "na": 30,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
-      "missing": 48,
+      "missing": 49,
       "no-https": 28,
       "one-year": 26,
       "dns-broken": 7,
       "short": 11,
-      "preload-ready": 16,
+      "preload-ready": 14,
       "no-web": 30,
-      "unreachable": 25
+      "unreachable": 26
      }
     },
     "education": {
-     "pass": 27,
-     "fail": 126,
+     "pass": 28,
+     "fail": 125,
      "na": 14,
      "unknown": 17,
      "levels": {
       "unreachable": 12,
-      "missing": 99,
-      "no-https": 20,
-      "one-year": 21,
+      "missing": 97,
+      "no-https": 21,
+      "one-year": 23,
       "no-web": 14,
       "dns-broken": 5,
-      "preload-ready": 6,
+      "preload-ready": 5,
       "short": 7
      }
     },
@@ -6247,19 +6236,19 @@
      }
     },
     "business": {
-     "pass": 74,
-     "fail": 257,
-     "na": 86,
-     "unknown": 62,
+     "pass": 76,
+     "fail": 255,
+     "na": 89,
+     "unknown": 60,
      "levels": {
-      "one-year": 59,
-      "no-https": 61,
-      "missing": 182,
-      "no-web": 86,
+      "one-year": 61,
+      "no-https": 55,
+      "missing": 186,
+      "no-web": 89,
       "dns-broken": 34,
       "preload-ready": 15,
       "short": 13,
-      "unreachable": 28,
+      "unreachable": 26,
       "disabled": 1
      }
     },
@@ -6293,143 +6282,143 @@
   "tls13": {
    "GCC": {
     "all": {
-     "pass": 11081,
+     "pass": 11088,
      "fail": 1677,
-     "na": 1095,
-     "unknown": 1483,
+     "na": 1109,
+     "unknown": 1464,
      "levels": {
-      "no-https": 421,
-      "supported": 11081,
-      "no-web": 1095,
-      "unreachable": 1027,
-      "not-supported": 1256,
-      "dns-broken": 456
+      "no-https": 426,
+      "supported": 11088,
+      "no-web": 1109,
+      "unreachable": 1013,
+      "not-supported": 1251,
+      "dns-broken": 451
      }
     },
     "government": {
-     "pass": 553,
-     "fail": 479,
-     "na": 333,
-     "unknown": 530,
+     "pass": 544,
+     "fail": 484,
+     "na": 328,
+     "unknown": 537,
      "levels": {
-      "no-https": 88,
-      "no-web": 333,
-      "supported": 553,
-      "unreachable": 485,
+      "no-https": 93,
+      "no-web": 328,
+      "supported": 544,
+      "unreachable": 493,
       "not-supported": 391,
-      "dns-broken": 45
+      "dns-broken": 44
      }
     },
     "education": {
-     "pass": 1445,
-     "fail": 257,
-     "na": 122,
-     "unknown": 135,
+     "pass": 1450,
+     "fail": 253,
+     "na": 121,
+     "unknown": 137,
      "levels": {
-      "supported": 1445,
-      "unreachable": 91,
-      "no-https": 57,
-      "not-supported": 200,
-      "no-web": 122,
+      "supported": 1450,
+      "unreachable": 93,
+      "no-https": 54,
+      "not-supported": 199,
+      "no-web": 121,
       "dns-broken": 44
      }
     },
     "health": {
-     "pass": 152,
-     "fail": 20,
-     "na": 16,
+     "pass": 151,
+     "fail": 22,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "supported": 152,
+      "no-web": 15,
+      "supported": 151,
       "dns-broken": 7,
-      "not-supported": 15,
-      "no-https": 5,
+      "not-supported": 14,
+      "no-https": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 4277,
-     "fail": 741,
+     "pass": 4283,
+     "fail": 739,
      "na": 462,
-     "unknown": 567,
+     "unknown": 546,
      "levels": {
       "no-web": 462,
-      "unreachable": 324,
-      "supported": 4277,
-      "no-https": 238,
-      "not-supported": 503,
-      "dns-broken": 243
+      "unreachable": 308,
+      "supported": 4283,
+      "no-https": 235,
+      "not-supported": 504,
+      "dns-broken": 238
      }
     },
     "nonprofit": {
-     "pass": 4259,
-     "fail": 148,
-     "na": 83,
-     "unknown": 144,
+     "pass": 4266,
+     "fail": 147,
+     "na": 102,
+     "unknown": 136,
      "levels": {
-      "not-supported": 123,
-      "supported": 4259,
-      "unreachable": 64,
-      "no-https": 25,
+      "not-supported": 118,
+      "supported": 4266,
+      "unreachable": 56,
+      "no-https": 29,
       "dns-broken": 80,
-      "no-web": 83
+      "no-web": 102
      }
     },
     "network": {
-     "pass": 395,
+     "pass": 394,
      "fail": 32,
-     "na": 79,
-     "unknown": 81,
+     "na": 81,
+     "unknown": 82,
      "levels": {
-      "supported": 395,
-      "no-web": 79,
-      "dns-broken": 37,
+      "supported": 394,
+      "no-web": 81,
+      "dns-broken": 38,
       "unreachable": 44,
-      "no-https": 8,
-      "not-supported": 24
+      "no-https": 7,
+      "not-supported": 25
      }
     }
    },
    "KW": {
     "all": {
-     "pass": 1667,
-     "fail": 271,
-     "na": 140,
-     "unknown": 218,
+     "pass": 1663,
+     "fail": 272,
+     "na": 142,
+     "unknown": 213,
      "levels": {
-      "unreachable": 134,
-      "supported": 1667,
-      "not-supported": 192,
-      "no-web": 140,
-      "no-https": 79,
-      "dns-broken": 84
+      "unreachable": 132,
+      "supported": 1663,
+      "not-supported": 196,
+      "no-web": 142,
+      "no-https": 76,
+      "dns-broken": 81
      }
     },
     "government": {
-     "pass": 59,
-     "fail": 28,
+     "pass": 58,
+     "fail": 29,
      "na": 15,
      "unknown": 46,
      "levels": {
-      "supported": 59,
+      "supported": 58,
       "no-web": 15,
       "unreachable": 39,
-      "not-supported": 21,
+      "not-supported": 22,
       "no-https": 7,
       "dns-broken": 7
      }
     },
     "education": {
-     "pass": 80,
+     "pass": 82,
      "fail": 28,
      "na": 3,
-     "unknown": 13,
+     "unknown": 11,
      "levels": {
-      "supported": 80,
+      "supported": 82,
       "not-supported": 20,
       "no-https": 8,
-      "unreachable": 11,
+      "unreachable": 9,
       "no-web": 3,
       "dns-broken": 2
      }
@@ -6442,31 +6431,31 @@
      "levels": {}
     },
     "business": {
-     "pass": 1447,
+     "pass": 1443,
      "fail": 202,
-     "na": 116,
-     "unknown": 148,
+     "na": 118,
+     "unknown": 144,
      "levels": {
-      "unreachable": 77,
-      "supported": 1447,
-      "not-supported": 139,
-      "no-web": 116,
-      "no-https": 63,
-      "dns-broken": 71
+      "unreachable": 76,
+      "supported": 1443,
+      "not-supported": 142,
+      "no-web": 118,
+      "no-https": 60,
+      "dns-broken": 68
      }
     },
     "nonprofit": {
-     "pass": 78,
+     "pass": 77,
      "fail": 11,
      "na": 4,
-     "unknown": 8,
+     "unknown": 9,
      "levels": {
-      "supported": 78,
+      "supported": 77,
       "dns-broken": 4,
       "no-https": 1,
       "no-web": 4,
       "not-supported": 10,
-      "unreachable": 4
+      "unreachable": 5
      }
     },
     "network": {
@@ -6484,144 +6473,144 @@
    },
    "SA": {
     "all": {
-     "pass": 6611,
-     "fail": 595,
-     "na": 356,
-     "unknown": 501,
+     "pass": 6618,
+     "fail": 592,
+     "na": 365,
+     "unknown": 503,
      "levels": {
-      "supported": 6611,
-      "no-web": 356,
-      "unreachable": 343,
-      "not-supported": 470,
-      "no-https": 125,
-      "dns-broken": 158
+      "supported": 6618,
+      "no-web": 365,
+      "unreachable": 344,
+      "not-supported": 459,
+      "no-https": 133,
+      "dns-broken": 159
      }
     },
     "government": {
-     "pass": 89,
+     "pass": 85,
      "fail": 96,
-     "na": 60,
-     "unknown": 165,
+     "na": 56,
+     "unknown": 171,
      "levels": {
-      "no-web": 60,
-      "unreachable": 150,
-      "supported": 89,
-      "dns-broken": 15,
-      "not-supported": 88,
-      "no-https": 8
+      "no-web": 56,
+      "unreachable": 157,
+      "supported": 85,
+      "dns-broken": 14,
+      "not-supported": 86,
+      "no-https": 10
      }
     },
     "education": {
-     "pass": 1013,
-     "fail": 142,
-     "na": 73,
-     "unknown": 67,
+     "pass": 1016,
+     "fail": 139,
+     "na": 72,
+     "unknown": 70,
      "levels": {
-      "supported": 1013,
-      "no-https": 37,
-      "not-supported": 105,
-      "no-web": 73,
+      "supported": 1016,
+      "no-https": 35,
+      "not-supported": 104,
+      "no-web": 72,
       "dns-broken": 28,
-      "unreachable": 39
+      "unreachable": 42
      }
     },
     "health": {
-     "pass": 150,
-     "fail": 19,
-     "na": 16,
+     "pass": 149,
+     "fail": 21,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "supported": 150,
+      "no-web": 15,
+      "supported": 149,
       "dns-broken": 7,
-      "not-supported": 14,
-      "no-https": 5,
+      "not-supported": 13,
+      "no-https": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 892,
-     "fail": 211,
-     "na": 73,
-     "unknown": 59,
+     "pass": 894,
+     "fail": 209,
+     "na": 67,
+     "unknown": 61,
      "levels": {
-      "no-web": 73,
-      "supported": 892,
-      "not-supported": 166,
-      "no-https": 45,
-      "unreachable": 54,
-      "dns-broken": 5
+      "supported": 894,
+      "no-web": 67,
+      "not-supported": 162,
+      "no-https": 47,
+      "unreachable": 55,
+      "dns-broken": 6
      }
     },
     "nonprofit": {
-     "pass": 4098,
+     "pass": 4106,
      "fail": 99,
-     "na": 68,
-     "unknown": 120,
+     "na": 87,
+     "unknown": 110,
      "levels": {
-      "supported": 4098,
-      "unreachable": 49,
-      "not-supported": 77,
-      "no-https": 22,
+      "supported": 4106,
+      "unreachable": 39,
+      "not-supported": 73,
+      "no-https": 26,
       "dns-broken": 71,
-      "no-web": 68
+      "no-web": 87
      }
     },
     "network": {
-     "pass": 369,
+     "pass": 368,
      "fail": 28,
-     "na": 66,
-     "unknown": 64,
+     "na": 68,
+     "unknown": 65,
      "levels": {
-      "supported": 369,
-      "no-web": 66,
-      "dns-broken": 32,
-      "no-https": 8,
-      "not-supported": 20,
+      "supported": 368,
+      "no-web": 68,
+      "dns-broken": 33,
+      "no-https": 7,
+      "not-supported": 21,
       "unreachable": 32
      }
     }
    },
    "AE": {
     "all": {
-     "pass": 559,
+     "pass": 561,
      "fail": 262,
-     "na": 183,
-     "unknown": 176,
+     "na": 182,
+     "unknown": 173,
      "levels": {
       "no-https": 83,
-      "unreachable": 156,
-      "supported": 559,
+      "unreachable": 154,
+      "supported": 561,
       "not-supported": 179,
-      "no-web": 183,
-      "dns-broken": 20
+      "no-web": 182,
+      "dns-broken": 19
      }
     },
     "government": {
      "pass": 226,
-     "fail": 199,
-     "na": 130,
+     "fail": 200,
+     "na": 129,
      "unknown": 139,
      "levels": {
-      "no-https": 62,
+      "no-https": 63,
       "unreachable": 129,
       "supported": 226,
-      "no-web": 130,
+      "no-web": 129,
       "not-supported": 137,
       "dns-broken": 10
      }
     },
     "education": {
      "pass": 142,
-     "fail": 32,
+     "fail": 31,
      "na": 26,
-     "unknown": 21,
+     "unknown": 22,
      "levels": {
-      "unreachable": 16,
+      "unreachable": 17,
       "not-supported": 25,
       "supported": 142,
       "no-web": 26,
-      "no-https": 7,
+      "no-https": 6,
       "dns-broken": 5
      }
     },
@@ -6633,16 +6622,16 @@
      "levels": {}
     },
     "business": {
-     "pass": 163,
+     "pass": 165,
      "fail": 27,
      "na": 21,
-     "unknown": 15,
+     "unknown": 11,
      "levels": {
-      "supported": 163,
+      "supported": 165,
       "not-supported": 15,
       "no-web": 21,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "dns-broken": 4,
+      "unreachable": 7,
       "no-https": 12
      }
     },
@@ -6673,44 +6662,44 @@
    "QA": {
     "all": {
      "pass": 1403,
-     "fail": 258,
-     "na": 179,
-     "unknown": 311,
+     "fail": 263,
+     "na": 181,
+     "unknown": 298,
      "levels": {
-      "not-supported": 179,
+      "not-supported": 183,
       "supported": 1403,
-      "no-web": 179,
-      "no-https": 79,
-      "dns-broken": 125,
-      "unreachable": 186
+      "no-web": 181,
+      "no-https": 80,
+      "dns-broken": 123,
+      "unreachable": 175
      }
     },
     "government": {
-     "pass": 55,
-     "fail": 43,
+     "pass": 52,
+     "fail": 46,
      "na": 42,
      "unknown": 62,
      "levels": {
-      "supported": 55,
+      "supported": 52,
       "no-web": 42,
       "dns-broken": 5,
-      "not-supported": 40,
+      "not-supported": 41,
       "unreachable": 57,
-      "no-https": 3
+      "no-https": 5
      }
     },
     "education": {
-     "pass": 57,
-     "fail": 12,
+     "pass": 58,
+     "fail": 11,
      "na": 2,
      "unknown": 10,
      "levels": {
-      "supported": 57,
-      "not-supported": 11,
+      "supported": 58,
+      "not-supported": 10,
+      "no-https": 1,
       "unreachable": 9,
       "dns-broken": 1,
-      "no-web": 2,
-      "no-https": 1
+      "no-web": 2
      }
     },
     "health": {
@@ -6721,27 +6710,27 @@
      "levels": {}
     },
     "business": {
-     "pass": 1247,
-     "fail": 174,
-     "na": 126,
-     "unknown": 218,
+     "pass": 1249,
+     "fail": 178,
+     "na": 128,
+     "unknown": 204,
      "levels": {
-      "supported": 1247,
-      "no-web": 126,
-      "not-supported": 99,
-      "no-https": 75,
-      "dns-broken": 114,
-      "unreachable": 104
+      "supported": 1249,
+      "no-web": 128,
+      "not-supported": 104,
+      "no-https": 74,
+      "dns-broken": 112,
+      "unreachable": 92
      }
     },
     "nonprofit": {
      "pass": 31,
-     "fail": 27,
+     "fail": 26,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
-      "not-supported": 27,
-      "unreachable": 8,
+      "not-supported": 26,
+      "unreachable": 9,
       "supported": 31,
       "dns-broken": 2,
       "no-web": 6
@@ -6763,15 +6752,15 @@
    },
    "BH": {
     "all": {
-     "pass": 404,
-     "fail": 86,
-     "na": 102,
-     "unknown": 163,
+     "pass": 406,
+     "fail": 84,
+     "na": 101,
+     "unknown": 164,
      "levels": {
-      "no-web": 102,
-      "not-supported": 61,
-      "unreachable": 143,
-      "supported": 404,
+      "no-web": 101,
+      "not-supported": 59,
+      "unreachable": 144,
+      "supported": 406,
       "dns-broken": 20,
       "no-https": 25
      }
@@ -6811,15 +6800,15 @@
      "levels": {}
     },
     "business": {
-     "pass": 270,
-     "fail": 54,
-     "na": 40,
-     "unknown": 65,
+     "pass": 272,
+     "fail": 52,
+     "na": 39,
+     "unknown": 66,
      "levels": {
-      "no-web": 40,
-      "not-supported": 33,
-      "unreachable": 51,
-      "supported": 270,
+      "no-web": 39,
+      "not-supported": 31,
+      "unreachable": 52,
+      "supported": 272,
       "no-https": 21,
       "dns-broken": 14
      }
@@ -6850,41 +6839,41 @@
    "OM": {
     "all": {
      "pass": 437,
-     "fail": 205,
-     "na": 135,
-     "unknown": 114,
+     "fail": 204,
+     "na": 138,
+     "unknown": 113,
      "levels": {
       "supported": 437,
-      "no-https": 30,
+      "no-https": 29,
       "not-supported": 175,
-      "unreachable": 65,
-      "no-web": 135,
+      "unreachable": 64,
+      "no-web": 138,
       "dns-broken": 49
      }
     },
     "government": {
-     "pass": 42,
+     "pass": 41,
      "fail": 87,
      "na": 30,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
       "not-supported": 83,
-      "supported": 42,
+      "supported": 41,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25,
+      "unreachable": 26,
       "no-https": 4
      }
     },
     "education": {
-     "pass": 113,
-     "fail": 40,
+     "pass": 112,
+     "fail": 41,
      "na": 14,
      "unknown": 17,
      "levels": {
       "unreachable": 12,
-      "supported": 113,
-      "not-supported": 36,
+      "supported": 112,
+      "not-supported": 37,
       "no-web": 14,
       "dns-broken": 5,
       "no-https": 4
@@ -6901,17 +6890,17 @@
      }
     },
     "business": {
-     "pass": 258,
-     "fail": 73,
-     "na": 86,
-     "unknown": 62,
+     "pass": 260,
+     "fail": 71,
+     "na": 89,
+     "unknown": 60,
      "levels": {
-      "supported": 258,
-      "no-https": 22,
-      "not-supported": 51,
-      "no-web": 86,
+      "supported": 260,
+      "no-https": 21,
+      "not-supported": 50,
+      "no-web": 89,
       "dns-broken": 34,
-      "unreachable": 28
+      "unreachable": 26
      }
     },
     "nonprofit": {
@@ -6942,162 +6931,164 @@
   "legacy_tls": {
    "GCC": {
     "all": {
-     "pass": 8666,
-     "fail": 3652,
-     "na": 1095,
-     "unknown": 1923,
+     "pass": 8655,
+     "fail": 3657,
+     "na": 1109,
+     "unknown": 1917,
      "levels": {
-      "no-https": 423,
-      "refused": 8666,
-      "no-web": 1095,
-      "unreachable": 1031,
-      "tls10": 3506,
-      "tls11": 146,
-      "dns-broken": 456,
-      "probe-failed": 13
+      "no-https": 430,
+      "refused": 8655,
+      "no-web": 1109,
+      "unreachable": 1015,
+      "tls10": 3514,
+      "tls11": 143,
+      "dns-broken": 451,
+      "probe-failed": 21
      }
     },
     "government": {
-     "pass": 731,
-     "fail": 205,
-     "na": 333,
-     "unknown": 626,
+     "pass": 726,
+     "fail": 197,
+     "na": 328,
+     "unknown": 642,
      "levels": {
-      "no-https": 89,
-      "no-web": 333,
-      "refused": 731,
-      "unreachable": 487,
+      "no-https": 93,
+      "no-web": 328,
+      "refused": 726,
+      "unreachable": 494,
       "tls11": 21,
-      "tls10": 184,
-      "dns-broken": 45,
-      "probe-failed": 5
+      "tls10": 176,
+      "dns-broken": 44,
+      "probe-failed": 11
      }
     },
     "education": {
-     "pass": 1311,
-     "fail": 333,
-     "na": 122,
+     "pass": 1315,
+     "fail": 332,
+     "na": 121,
      "unknown": 193,
      "levels": {
-      "refused": 1311,
-      "unreachable": 91,
-      "no-https": 57,
-      "tls10": 310,
-      "no-web": 122,
+      "refused": 1315,
+      "unreachable": 93,
+      "no-https": 54,
+      "tls10": 309,
+      "no-web": 121,
       "dns-broken": 44,
       "tls11": 23,
-      "probe-failed": 1
+      "probe-failed": 2
      }
     },
     "health": {
-     "pass": 135,
-     "fail": 32,
-     "na": 16,
-     "unknown": 31,
+     "pass": 131,
+     "fail": 33,
+     "na": 15,
+     "unknown": 35,
      "levels": {
-      "no-web": 16,
-      "refused": 135,
+      "no-web": 15,
+      "refused": 131,
       "dns-broken": 7,
-      "tls10": 28,
-      "no-https": 5,
+      "tls10": 29,
+      "no-https": 8,
       "tls11": 4,
+      "probe-failed": 1,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 3914,
-     "fail": 860,
+     "pass": 3932,
+     "fail": 847,
      "na": 462,
-     "unknown": 811,
+     "unknown": 789,
      "levels": {
       "no-web": 462,
-      "unreachable": 325,
-      "refused": 3914,
-      "tls10": 774,
+      "unreachable": 309,
+      "refused": 3932,
+      "tls10": 764,
       "no-https": 238,
-      "tls11": 86,
-      "dns-broken": 243,
-      "probe-failed": 5
+      "tls11": 83,
+      "dns-broken": 238,
+      "probe-failed": 4
      }
     },
     "nonprofit": {
-     "pass": 2261,
-     "fail": 2118,
-     "na": 83,
-     "unknown": 172,
+     "pass": 2238,
+     "fail": 2143,
+     "na": 102,
+     "unknown": 168,
      "levels": {
-      "tls10": 2110,
-      "refused": 2261,
-      "unreachable": 65,
-      "no-https": 25,
+      "tls10": 2135,
+      "refused": 2238,
+      "unreachable": 56,
+      "no-https": 30,
       "dns-broken": 80,
-      "no-web": 83,
+      "no-web": 102,
       "tls11": 8,
       "probe-failed": 2
      }
     },
     "network": {
-     "pass": 314,
-     "fail": 104,
-     "na": 79,
+     "pass": 313,
+     "fail": 105,
+     "na": 81,
      "unknown": 90,
      "levels": {
-      "refused": 314,
-      "tls10": 100,
-      "no-web": 79,
-      "dns-broken": 37,
+      "refused": 313,
+      "tls10": 101,
+      "no-web": 81,
+      "dns-broken": 38,
       "unreachable": 44,
-      "no-https": 9,
+      "no-https": 7,
+      "probe-failed": 1,
       "tls11": 4
      }
     }
    },
    "KW": {
     "all": {
-     "pass": 1430,
-     "fail": 425,
-     "na": 140,
-     "unknown": 301,
+     "pass": 1434,
+     "fail": 420,
+     "na": 142,
+     "unknown": 294,
      "levels": {
-      "unreachable": 134,
-      "refused": 1430,
-      "tls10": 381,
-      "tls11": 44,
-      "no-web": 140,
-      "no-https": 80,
-      "probe-failed": 3,
-      "dns-broken": 84
+      "unreachable": 132,
+      "refused": 1434,
+      "tls10": 377,
+      "tls11": 43,
+      "no-web": 142,
+      "no-https": 78,
+      "dns-broken": 81,
+      "probe-failed": 3
      }
     },
     "government": {
-     "pass": 56,
-     "fail": 23,
+     "pass": 57,
+     "fail": 22,
      "na": 15,
      "unknown": 54,
      "levels": {
       "tls11": 2,
       "no-web": 15,
-      "refused": 56,
+      "refused": 57,
       "unreachable": 39,
-      "tls10": 21,
-      "no-https": 8,
+      "tls10": 20,
+      "no-https": 7,
+      "probe-failed": 1,
       "dns-broken": 7
      }
     },
     "education": {
-     "pass": 74,
-     "fail": 25,
+     "pass": 75,
+     "fail": 27,
      "na": 3,
-     "unknown": 22,
+     "unknown": 19,
      "levels": {
-      "refused": 74,
-      "tls10": 23,
+      "refused": 75,
+      "tls10": 24,
       "no-https": 8,
-      "unreachable": 11,
-      "probe-failed": 1,
+      "unreachable": 9,
       "no-web": 3,
-      "dns-broken": 2,
-      "tls11": 2
+      "tls11": 3,
+      "dns-broken": 2
      }
     },
     "health": {
@@ -7108,33 +7099,33 @@
      "levels": {}
     },
     "business": {
-     "pass": 1234,
-     "fail": 350,
-     "na": 116,
-     "unknown": 213,
+     "pass": 1237,
+     "fail": 344,
+     "na": 118,
+     "unknown": 208,
      "levels": {
-      "unreachable": 77,
-      "refused": 1234,
-      "tls10": 312,
-      "tls11": 38,
-      "no-web": 116,
-      "no-https": 63,
-      "dns-broken": 71,
+      "unreachable": 76,
+      "refused": 1237,
+      "tls10": 308,
+      "tls11": 36,
+      "no-web": 118,
+      "no-https": 62,
+      "dns-broken": 68,
       "probe-failed": 2
      }
     },
     "nonprofit": {
-     "pass": 61,
+     "pass": 60,
      "fail": 27,
      "na": 4,
-     "unknown": 9,
+     "unknown": 10,
      "levels": {
-      "refused": 61,
+      "refused": 60,
       "dns-broken": 4,
       "no-https": 1,
       "tls10": 25,
       "no-web": 4,
-      "unreachable": 4,
+      "unreachable": 5,
       "tls11": 2
      }
     },
@@ -7152,145 +7143,146 @@
    },
    "SA": {
     "all": {
-     "pass": 4409,
-     "fail": 2659,
-     "na": 356,
-     "unknown": 639,
+     "pass": 4380,
+     "fail": 2677,
+     "na": 365,
+     "unknown": 656,
      "levels": {
-      "refused": 4409,
-      "tls10": 2623,
-      "no-web": 356,
-      "unreachable": 347,
-      "no-https": 126,
-      "dns-broken": 158,
-      "tls11": 36,
-      "probe-failed": 8
+      "refused": 4380,
+      "tls10": 2642,
+      "no-web": 365,
+      "unreachable": 345,
+      "no-https": 134,
+      "dns-broken": 159,
+      "tls11": 35,
+      "probe-failed": 18
      }
     },
     "government": {
-     "pass": 127,
-     "fail": 44,
-     "na": 60,
-     "unknown": 179,
+     "pass": 119,
+     "fail": 41,
+     "na": 56,
+     "unknown": 192,
      "levels": {
-      "no-web": 60,
-      "unreachable": 152,
-      "refused": 127,
-      "tls10": 43,
-      "dns-broken": 15,
-      "no-https": 8,
-      "tls11": 1,
-      "probe-failed": 4
+      "no-web": 56,
+      "unreachable": 158,
+      "refused": 119,
+      "tls10": 40,
+      "dns-broken": 14,
+      "probe-failed": 10,
+      "no-https": 10,
+      "tls11": 1
      }
     },
     "education": {
-     "pass": 887,
-     "fail": 231,
-     "na": 73,
-     "unknown": 104,
+     "pass": 889,
+     "fail": 229,
+     "na": 72,
+     "unknown": 107,
      "levels": {
-      "refused": 887,
-      "no-https": 37,
-      "tls10": 222,
-      "no-web": 73,
+      "refused": 889,
+      "no-https": 35,
+      "tls10": 221,
+      "no-web": 72,
       "dns-broken": 28,
-      "unreachable": 39,
-      "tls11": 9
+      "unreachable": 42,
+      "tls11": 8,
+      "probe-failed": 2
      }
     },
     "health": {
-     "pass": 133,
-     "fail": 31,
-     "na": 16,
-     "unknown": 31,
+     "pass": 129,
+     "fail": 32,
+     "na": 15,
+     "unknown": 35,
      "levels": {
-      "no-web": 16,
-      "refused": 133,
+      "no-web": 15,
+      "refused": 129,
       "dns-broken": 7,
-      "tls10": 28,
-      "no-https": 5,
+      "tls10": 29,
+      "no-https": 8,
       "tls11": 3,
+      "probe-failed": 1,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 855,
-     "fail": 200,
-     "na": 73,
-     "unknown": 107,
+     "pass": 860,
+     "fail": 194,
+     "na": 67,
+     "unknown": 110,
      "levels": {
-      "no-web": 73,
-      "refused": 855,
-      "tls10": 186,
-      "no-https": 45,
+      "refused": 860,
+      "no-web": 67,
+      "tls10": 180,
+      "no-https": 47,
       "tls11": 14,
       "unreachable": 55,
-      "dns-broken": 5,
+      "dns-broken": 6,
       "probe-failed": 2
      }
     },
     "nonprofit": {
-     "pass": 2119,
-     "fail": 2053,
-     "na": 68,
-     "unknown": 145,
+     "pass": 2096,
+     "fail": 2080,
+     "na": 87,
+     "unknown": 139,
      "levels": {
-      "refused": 2119,
-      "unreachable": 50,
-      "tls10": 2048,
-      "no-https": 22,
+      "refused": 2096,
+      "unreachable": 39,
+      "tls10": 2075,
+      "no-https": 27,
       "dns-broken": 71,
-      "no-web": 68,
+      "no-web": 87,
       "tls11": 5,
       "probe-failed": 2
      }
     },
     "network": {
-     "pass": 288,
-     "fail": 100,
-     "na": 66,
+     "pass": 287,
+     "fail": 101,
+     "na": 68,
      "unknown": 73,
      "levels": {
-      "refused": 288,
-      "tls10": 96,
-      "no-web": 66,
-      "dns-broken": 32,
-      "no-https": 9,
+      "refused": 287,
+      "tls10": 97,
+      "no-web": 68,
+      "dns-broken": 33,
+      "no-https": 7,
       "unreachable": 32,
+      "probe-failed": 1,
       "tls11": 4
      }
     }
    },
    "AE": {
     "all": {
-     "pass": 626,
-     "fail": 111,
-     "na": 183,
-     "unknown": 260,
+     "pass": 628,
+     "fail": 112,
+     "na": 182,
+     "unknown": 256,
      "levels": {
       "no-https": 83,
-      "unreachable": 156,
-      "refused": 626,
-      "no-web": 183,
+      "unreachable": 154,
+      "refused": 628,
+      "no-web": 182,
       "tls10": 102,
-      "tls11": 9,
-      "dns-broken": 20,
-      "probe-failed": 1
+      "tls11": 10,
+      "dns-broken": 19
      }
     },
     "government": {
-     "pass": 310,
+     "pass": 311,
      "fail": 52,
-     "na": 130,
+     "na": 129,
      "unknown": 202,
      "levels": {
-      "no-https": 62,
+      "no-https": 63,
       "unreachable": 129,
-      "refused": 310,
-      "no-web": 130,
-      "tls11": 6,
-      "tls10": 46,
-      "probe-failed": 1,
+      "refused": 311,
+      "no-web": 129,
+      "tls11": 7,
+      "tls10": 45,
       "dns-broken": 10
      }
     },
@@ -7300,12 +7292,12 @@
      "na": 26,
      "unknown": 28,
      "levels": {
-      "unreachable": 16,
+      "unreachable": 17,
       "tls10": 36,
       "refused": 129,
       "tls11": 2,
       "no-web": 26,
-      "no-https": 7,
+      "no-https": 6,
       "dns-broken": 5
      }
     },
@@ -7317,17 +7309,17 @@
      "levels": {}
     },
     "business": {
-     "pass": 161,
-     "fail": 17,
+     "pass": 162,
+     "fail": 18,
      "na": 21,
-     "unknown": 27,
+     "unknown": 23,
      "levels": {
-      "refused": 161,
+      "refused": 162,
       "no-web": 21,
-      "tls10": 16,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "tls10": 17,
+      "dns-broken": 4,
       "tls11": 1,
+      "unreachable": 7,
       "no-https": 12
      }
     },
@@ -7358,33 +7350,33 @@
    },
    "QA": {
     "all": {
-     "pass": 1334,
-     "fail": 248,
-     "na": 179,
-     "unknown": 390,
+     "pass": 1338,
+     "fail": 246,
+     "na": 181,
+     "unknown": 380,
      "levels": {
-      "tls10": 233,
-      "refused": 1334,
-      "no-web": 179,
-      "no-https": 79,
-      "dns-broken": 125,
-      "tls11": 15,
-      "unreachable": 186
+      "tls10": 232,
+      "refused": 1338,
+      "no-web": 181,
+      "no-https": 81,
+      "dns-broken": 123,
+      "tls11": 14,
+      "unreachable": 176
      }
     },
     "government": {
      "pass": 69,
-     "fail": 26,
+     "fail": 24,
      "na": 42,
-     "unknown": 65,
+     "unknown": 67,
      "levels": {
       "refused": 69,
-      "tls11": 5,
+      "tls11": 4,
       "no-web": 42,
       "dns-broken": 5,
       "unreachable": 57,
-      "tls10": 21,
-      "no-https": 3
+      "tls10": 20,
+      "no-https": 5
      }
     },
     "education": {
@@ -7395,10 +7387,10 @@
      "levels": {
       "refused": 56,
       "tls10": 12,
+      "no-https": 1,
       "unreachable": 9,
       "dns-broken": 1,
-      "no-web": 2,
-      "no-https": 1
+      "no-web": 2
      }
     },
     "health": {
@@ -7409,29 +7401,29 @@
      "levels": {}
     },
     "business": {
-     "pass": 1165,
-     "fail": 181,
-     "na": 126,
-     "unknown": 293,
+     "pass": 1168,
+     "fail": 183,
+     "na": 128,
+     "unknown": 280,
      "levels": {
-      "refused": 1165,
-      "no-web": 126,
-      "tls10": 171,
+      "refused": 1168,
+      "no-web": 128,
+      "tls10": 173,
       "no-https": 75,
-      "dns-broken": 114,
-      "unreachable": 104,
+      "dns-broken": 112,
+      "unreachable": 93,
       "tls11": 10
      }
     },
     "nonprofit": {
-     "pass": 31,
-     "fail": 27,
+     "pass": 32,
+     "fail": 25,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
-      "tls10": 27,
-      "unreachable": 8,
-      "refused": 31,
+      "tls10": 25,
+      "unreachable": 9,
+      "refused": 32,
       "dns-broken": 2,
       "no-web": 6
      }
@@ -7452,19 +7444,18 @@
    },
    "BH": {
     "all": {
-     "pass": 375,
-     "fail": 89,
-     "na": 102,
+     "pass": 379,
+     "fail": 86,
+     "na": 101,
      "unknown": 189,
      "levels": {
-      "no-web": 102,
-      "refused": 375,
-      "unreachable": 143,
+      "no-web": 101,
+      "refused": 379,
+      "unreachable": 144,
       "dns-broken": 20,
-      "tls10": 84,
+      "tls10": 81,
       "no-https": 25,
-      "tls11": 5,
-      "probe-failed": 1
+      "tls11": 5
      }
     },
     "government": {
@@ -7483,15 +7474,15 @@
      }
     },
     "education": {
-     "pass": 35,
-     "fail": 8,
+     "pass": 36,
+     "fail": 7,
      "na": 4,
      "unknown": 7,
      "levels": {
       "unreachable": 4,
-      "refused": 35,
+      "refused": 36,
       "dns-broken": 3,
-      "tls10": 8,
+      "tls10": 7,
       "no-web": 4
      }
     },
@@ -7503,19 +7494,18 @@
      "levels": {}
     },
     "business": {
-     "pass": 247,
-     "fail": 55,
-     "na": 40,
+     "pass": 250,
+     "fail": 53,
+     "na": 39,
      "unknown": 87,
      "levels": {
-      "no-web": 40,
-      "refused": 247,
-      "unreachable": 51,
-      "tls10": 51,
+      "no-web": 39,
+      "refused": 250,
+      "unreachable": 52,
+      "tls10": 49,
       "no-https": 21,
       "dns-broken": 14,
-      "tls11": 4,
-      "probe-failed": 1
+      "tls11": 4
      }
     },
     "nonprofit": {
@@ -7543,32 +7533,32 @@
    },
    "OM": {
     "all": {
-     "pass": 492,
-     "fail": 120,
-     "na": 135,
-     "unknown": 144,
+     "pass": 496,
+     "fail": 116,
+     "na": 138,
+     "unknown": 142,
      "levels": {
-      "refused": 492,
-      "no-https": 30,
-      "tls11": 37,
-      "unreachable": 65,
-      "no-web": 135,
+      "refused": 496,
+      "no-https": 29,
+      "tls11": 36,
+      "unreachable": 64,
+      "no-web": 138,
       "dns-broken": 49,
-      "tls10": 83
+      "tls10": 80
      }
     },
     "government": {
-     "pass": 87,
-     "fail": 38,
+     "pass": 88,
+     "fail": 36,
      "na": 30,
-     "unknown": 36,
+     "unknown": 37,
      "levels": {
-      "refused": 87,
+      "refused": 88,
       "tls11": 6,
-      "tls10": 32,
+      "tls10": 30,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25,
+      "unreachable": 26,
       "no-https": 4
      }
     },
@@ -7598,18 +7588,18 @@
      }
     },
     "business": {
-     "pass": 252,
-     "fail": 57,
-     "na": 86,
-     "unknown": 84,
+     "pass": 255,
+     "fail": 55,
+     "na": 89,
+     "unknown": 81,
      "levels": {
-      "refused": 252,
-      "no-https": 22,
-      "tls11": 19,
-      "no-web": 86,
+      "refused": 255,
+      "no-https": 21,
+      "tls11": 18,
+      "no-web": 89,
       "dns-broken": 34,
-      "unreachable": 28,
-      "tls10": 38
+      "unreachable": 26,
+      "tls10": 37
      }
     },
     "nonprofit": {
@@ -7642,159 +7632,161 @@
   "pq_kex": {
    "GCC": {
     "all": {
-     "pass": 6784,
-     "fail": 5960,
-     "na": 1095,
-     "unknown": 1497,
+     "pass": 6807,
+     "fail": 5942,
+     "na": 1109,
+     "unknown": 1480,
      "levels": {
-      "no-https": 423,
-      "hybrid": 6784,
-      "no-web": 1095,
-      "classical": 4312,
-      "unreachable": 1031,
-      "no-tls13": 1225,
-      "dns-broken": 456,
-      "probe-failed": 10
+      "no-https": 429,
+      "hybrid": 6807,
+      "no-web": 1109,
+      "classical": 4295,
+      "unreachable": 1015,
+      "no-tls13": 1218,
+      "dns-broken": 451,
+      "probe-failed": 14
      }
     },
     "government": {
-     "pass": 275,
-     "fail": 751,
-     "na": 333,
-     "unknown": 536,
+     "pass": 279,
+     "fail": 740,
+     "na": 328,
+     "unknown": 546,
      "levels": {
-      "no-https": 89,
-      "no-web": 333,
-      "hybrid": 275,
-      "unreachable": 487,
-      "classical": 277,
-      "no-tls13": 385,
-      "dns-broken": 45,
-      "probe-failed": 4
+      "no-https": 93,
+      "no-web": 328,
+      "hybrid": 279,
+      "unreachable": 494,
+      "classical": 267,
+      "no-tls13": 380,
+      "dns-broken": 44,
+      "probe-failed": 8
      }
     },
     "education": {
-     "pass": 788,
-     "fail": 914,
-     "na": 122,
-     "unknown": 135,
+     "pass": 792,
+     "fail": 908,
+     "na": 121,
+     "unknown": 140,
      "levels": {
-      "hybrid": 788,
+      "hybrid": 792,
       "classical": 659,
-      "unreachable": 91,
-      "no-https": 57,
-      "no-tls13": 198,
-      "no-web": 122,
-      "dns-broken": 44
+      "unreachable": 93,
+      "no-https": 54,
+      "no-tls13": 195,
+      "no-web": 121,
+      "dns-broken": 44,
+      "probe-failed": 3
      }
     },
     "health": {
      "pass": 81,
-     "fail": 90,
-     "na": 16,
-     "unknown": 27,
+     "fail": 92,
+     "na": 15,
+     "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "classical": 71,
+      "no-web": 15,
+      "classical": 70,
       "hybrid": 81,
       "dns-broken": 7,
       "no-tls13": 14,
-      "no-https": 5,
-      "probe-failed": 1,
+      "no-https": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 2404,
-     "fail": 2609,
+     "pass": 2405,
+     "fail": 2615,
      "na": 462,
-     "unknown": 572,
+     "unknown": 548,
      "levels": {
       "no-web": 462,
-      "unreachable": 325,
-      "hybrid": 2404,
-      "classical": 1878,
+      "unreachable": 309,
+      "hybrid": 2405,
+      "classical": 1884,
       "no-https": 238,
       "no-tls13": 493,
-      "dns-broken": 243,
-      "probe-failed": 4
+      "dns-broken": 238,
+      "probe-failed": 1
      }
     },
     "nonprofit": {
-     "pass": 3022,
-     "fail": 1383,
-     "na": 83,
-     "unknown": 146,
+     "pass": 3038,
+     "fail": 1374,
+     "na": 102,
+     "unknown": 137,
      "levels": {
       "no-tls13": 113,
-      "hybrid": 3022,
-      "unreachable": 65,
-      "classical": 1245,
-      "no-https": 25,
+      "hybrid": 3038,
+      "unreachable": 56,
+      "classical": 1232,
+      "no-https": 29,
       "dns-broken": 80,
-      "no-web": 83,
+      "no-web": 102,
       "probe-failed": 1
      }
     },
     "network": {
-     "pass": 214,
+     "pass": 212,
      "fail": 213,
-     "na": 79,
-     "unknown": 81,
+     "na": 81,
+     "unknown": 83,
      "levels": {
-      "classical": 182,
-      "hybrid": 214,
-      "no-web": 79,
-      "dns-broken": 37,
+      "classical": 183,
+      "hybrid": 212,
+      "no-web": 81,
+      "dns-broken": 38,
       "unreachable": 44,
-      "no-https": 9,
-      "no-tls13": 22
+      "no-https": 7,
+      "no-tls13": 23,
+      "probe-failed": 1
      }
     }
    },
    "KW": {
     "all": {
      "pass": 958,
-     "fail": 979,
-     "na": 140,
-     "unknown": 219,
+     "fail": 975,
+     "na": 142,
+     "unknown": 215,
      "levels": {
-      "unreachable": 134,
+      "unreachable": 132,
       "hybrid": 958,
-      "classical": 711,
-      "no-tls13": 188,
-      "no-web": 140,
-      "no-https": 80,
-      "dns-broken": 84,
-      "probe-failed": 1
+      "classical": 708,
+      "no-tls13": 189,
+      "no-web": 142,
+      "no-https": 78,
+      "dns-broken": 81,
+      "probe-failed": 2
      }
     },
     "government": {
      "pass": 27,
-     "fail": 60,
+     "fail": 58,
      "na": 15,
-     "unknown": 46,
+     "unknown": 48,
      "levels": {
-      "classical": 32,
+      "classical": 31,
       "no-web": 15,
       "unreachable": 39,
       "no-tls13": 20,
-      "no-https": 8,
+      "no-https": 7,
       "hybrid": 27,
+      "probe-failed": 2,
       "dns-broken": 7
      }
     },
     "education": {
-     "pass": 44,
-     "fail": 64,
+     "pass": 45,
+     "fail": 65,
      "na": 3,
-     "unknown": 13,
+     "unknown": 11,
      "levels": {
-      "classical": 36,
+      "classical": 37,
       "no-tls13": 20,
-      "hybrid": 44,
+      "hybrid": 45,
       "no-https": 8,
-      "unreachable": 11,
+      "unreachable": 9,
       "no-web": 3,
       "dns-broken": 2
      }
@@ -7808,33 +7800,32 @@
     },
     "business": {
      "pass": 850,
-     "fail": 798,
-     "na": 116,
-     "unknown": 149,
+     "fail": 795,
+     "na": 118,
+     "unknown": 144,
      "levels": {
-      "unreachable": 77,
+      "unreachable": 76,
       "hybrid": 850,
-      "classical": 599,
-      "no-tls13": 136,
-      "no-web": 116,
-      "no-https": 63,
-      "dns-broken": 71,
-      "probe-failed": 1
+      "classical": 596,
+      "no-tls13": 137,
+      "no-web": 118,
+      "no-https": 62,
+      "dns-broken": 68
      }
     },
     "nonprofit": {
-     "pass": 37,
+     "pass": 36,
      "fail": 52,
      "na": 4,
-     "unknown": 8,
+     "unknown": 9,
      "levels": {
       "classical": 41,
       "dns-broken": 4,
       "no-https": 1,
-      "hybrid": 37,
+      "hybrid": 36,
       "no-web": 4,
       "no-tls13": 10,
-      "unreachable": 4
+      "unreachable": 5
      }
     },
     "network": {
@@ -7852,161 +7843,160 @@
    },
    "SA": {
     "all": {
-     "pass": 4361,
-     "fail": 2834,
-     "na": 356,
-     "unknown": 512,
+     "pass": 4383,
+     "fail": 2815,
+     "na": 365,
+     "unknown": 515,
      "levels": {
-      "hybrid": 4361,
-      "classical": 2261,
-      "no-web": 356,
-      "unreachable": 347,
-      "no-tls13": 447,
-      "no-https": 126,
-      "dns-broken": 158,
-      "probe-failed": 7
+      "hybrid": 4383,
+      "classical": 2243,
+      "no-web": 365,
+      "unreachable": 345,
+      "no-tls13": 439,
+      "no-https": 133,
+      "dns-broken": 159,
+      "probe-failed": 11
      }
     },
     "government": {
-     "pass": 34,
-     "fail": 146,
-     "na": 60,
-     "unknown": 170,
+     "pass": 36,
+     "fail": 138,
+     "na": 56,
+     "unknown": 178,
      "levels": {
-      "no-web": 60,
-      "unreachable": 152,
-      "hybrid": 34,
-      "classical": 54,
-      "dns-broken": 15,
-      "no-tls13": 84,
-      "no-https": 8,
-      "probe-failed": 3
+      "no-web": 56,
+      "unreachable": 158,
+      "hybrid": 36,
+      "classical": 50,
+      "dns-broken": 14,
+      "no-tls13": 78,
+      "probe-failed": 6,
+      "no-https": 10
      }
     },
     "education": {
-     "pass": 589,
-     "fail": 566,
-     "na": 73,
-     "unknown": 67,
+     "pass": 591,
+     "fail": 562,
+     "na": 72,
+     "unknown": 72,
      "levels": {
-      "hybrid": 589,
+      "hybrid": 591,
       "classical": 426,
-      "no-https": 37,
-      "no-tls13": 103,
-      "no-web": 73,
+      "no-https": 35,
+      "no-tls13": 101,
+      "no-web": 72,
       "dns-broken": 28,
-      "unreachable": 39
+      "unreachable": 42,
+      "probe-failed": 2
      }
     },
     "health": {
      "pass": 81,
-     "fail": 87,
-     "na": 16,
-     "unknown": 27,
+     "fail": 89,
+     "na": 15,
+     "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "classical": 69,
+      "no-web": 15,
+      "classical": 68,
       "hybrid": 81,
       "dns-broken": 7,
       "no-tls13": 13,
-      "no-https": 5,
-      "probe-failed": 1,
+      "no-https": 8,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 502,
-     "fail": 598,
-     "na": 73,
+     "pass": 506,
+     "fail": 596,
+     "na": 67,
      "unknown": 62,
      "levels": {
-      "no-web": 73,
-      "hybrid": 502,
-      "classical": 391,
-      "no-tls13": 162,
-      "no-https": 45,
+      "hybrid": 506,
+      "classical": 389,
+      "no-web": 67,
+      "no-tls13": 160,
+      "no-https": 47,
       "unreachable": 55,
-      "dns-broken": 5,
-      "probe-failed": 2
+      "dns-broken": 6,
+      "probe-failed": 1
      }
     },
     "nonprofit": {
-     "pass": 2953,
-     "fail": 1242,
-     "na": 68,
-     "unknown": 122,
+     "pass": 2969,
+     "fail": 1235,
+     "na": 87,
+     "unknown": 111,
      "levels": {
-      "hybrid": 2953,
-      "unreachable": 50,
-      "classical": 1153,
-      "no-tls13": 67,
-      "no-https": 22,
+      "hybrid": 2969,
+      "unreachable": 39,
+      "classical": 1141,
+      "no-tls13": 68,
+      "no-https": 26,
       "dns-broken": 71,
-      "no-web": 68,
+      "no-web": 87,
       "probe-failed": 1
      }
     },
     "network": {
-     "pass": 202,
+     "pass": 200,
      "fail": 195,
-     "na": 66,
-     "unknown": 64,
+     "na": 68,
+     "unknown": 66,
      "levels": {
-      "classical": 168,
-      "hybrid": 202,
-      "no-web": 66,
-      "dns-broken": 32,
-      "no-https": 9,
-      "no-tls13": 18,
-      "unreachable": 32
+      "classical": 169,
+      "hybrid": 200,
+      "no-web": 68,
+      "dns-broken": 33,
+      "no-https": 7,
+      "no-tls13": 19,
+      "unreachable": 32,
+      "probe-failed": 1
      }
     }
    },
    "AE": {
     "all": {
-     "pass": 277,
-     "fail": 543,
-     "na": 183,
-     "unknown": 177,
+     "pass": 281,
+     "fail": 542,
+     "na": 182,
+     "unknown": 173,
      "levels": {
       "no-https": 83,
-      "unreachable": 156,
-      "classical": 282,
+      "unreachable": 154,
+      "classical": 281,
       "no-tls13": 178,
-      "no-web": 183,
-      "hybrid": 277,
-      "dns-broken": 20,
-      "probe-failed": 1
+      "no-web": 182,
+      "hybrid": 281,
+      "dns-broken": 19
      }
     },
     "government": {
-     "pass": 108,
+     "pass": 110,
      "fail": 316,
-     "na": 130,
-     "unknown": 140,
+     "na": 129,
+     "unknown": 139,
      "levels": {
-      "no-https": 62,
+      "no-https": 63,
       "unreachable": 129,
-      "classical": 118,
-      "no-web": 130,
+      "classical": 117,
+      "no-web": 129,
       "no-tls13": 136,
-      "hybrid": 108,
-      "probe-failed": 1,
+      "hybrid": 110,
       "dns-broken": 10
      }
     },
     "education": {
-     "pass": 72,
-     "fail": 102,
+     "pass": 73,
+     "fail": 100,
      "na": 26,
-     "unknown": 21,
+     "unknown": 22,
      "levels": {
-      "unreachable": 16,
+      "unreachable": 17,
       "no-tls13": 25,
-      "classical": 70,
+      "classical": 69,
       "no-web": 26,
-      "hybrid": 72,
-      "no-https": 7,
+      "hybrid": 73,
+      "no-https": 6,
       "dns-broken": 5
      }
     },
@@ -8018,17 +8008,17 @@
      "levels": {}
     },
     "business": {
-     "pass": 82,
-     "fail": 108,
+     "pass": 83,
+     "fail": 109,
      "na": 21,
-     "unknown": 15,
+     "unknown": 11,
      "levels": {
-      "classical": 81,
+      "classical": 82,
       "no-tls13": 15,
-      "hybrid": 82,
+      "hybrid": 83,
       "no-web": 21,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "dns-broken": 4,
+      "unreachable": 7,
       "no-https": 12
      }
     },
@@ -8060,18 +8050,18 @@
    },
    "QA": {
     "all": {
-     "pass": 708,
-     "fail": 953,
-     "na": 179,
-     "unknown": 311,
+     "pass": 707,
+     "fail": 958,
+     "na": 181,
+     "unknown": 299,
      "levels": {
-      "no-tls13": 178,
-      "hybrid": 708,
-      "classical": 696,
-      "no-web": 179,
-      "no-https": 79,
-      "dns-broken": 125,
-      "unreachable": 186
+      "no-tls13": 179,
+      "hybrid": 707,
+      "classical": 698,
+      "no-web": 181,
+      "no-https": 81,
+      "dns-broken": 123,
+      "unreachable": 176
      }
     },
     "government": {
@@ -8081,27 +8071,27 @@
      "unknown": 62,
      "levels": {
       "hybrid": 21,
-      "classical": 34,
+      "classical": 31,
       "no-web": 42,
       "dns-broken": 5,
-      "no-tls13": 40,
+      "no-tls13": 41,
       "unreachable": 57,
-      "no-https": 3
+      "no-https": 5
      }
     },
     "education": {
-     "pass": 20,
-     "fail": 49,
+     "pass": 21,
+     "fail": 48,
      "na": 2,
      "unknown": 10,
      "levels": {
       "classical": 37,
-      "no-tls13": 11,
-      "hybrid": 20,
+      "no-tls13": 10,
+      "hybrid": 21,
+      "no-https": 1,
       "unreachable": 9,
       "dns-broken": 1,
-      "no-web": 2,
-      "no-https": 1
+      "no-web": 2
      }
     },
     "health": {
@@ -8112,31 +8102,31 @@
      "levels": {}
     },
     "business": {
-     "pass": 652,
-     "fail": 769,
-     "na": 126,
-     "unknown": 218,
+     "pass": 649,
+     "fail": 777,
+     "na": 128,
+     "unknown": 205,
      "levels": {
-      "hybrid": 652,
-      "classical": 596,
-      "no-web": 126,
-      "no-tls13": 98,
+      "hybrid": 649,
+      "classical": 602,
+      "no-web": 128,
+      "no-tls13": 100,
       "no-https": 75,
-      "dns-broken": 114,
-      "unreachable": 104
+      "dns-broken": 112,
+      "unreachable": 93
      }
     },
     "nonprofit": {
-     "pass": 9,
-     "fail": 49,
+     "pass": 10,
+     "fail": 47,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
-      "no-tls13": 27,
-      "unreachable": 8,
-      "classical": 22,
+      "no-tls13": 26,
+      "unreachable": 9,
+      "classical": 21,
       "dns-broken": 2,
-      "hybrid": 9,
+      "hybrid": 10,
       "no-web": 6
      }
     },
@@ -8157,17 +8147,17 @@
    },
    "BH": {
     "all": {
-     "pass": 271,
-     "fail": 218,
-     "na": 102,
-     "unknown": 164,
+     "pass": 272,
+     "fail": 217,
+     "na": 101,
+     "unknown": 165,
      "levels": {
-      "no-web": 102,
-      "no-tls13": 60,
-      "unreachable": 143,
+      "no-web": 101,
+      "no-tls13": 59,
+      "unreachable": 144,
       "classical": 133,
       "dns-broken": 20,
-      "hybrid": 271,
+      "hybrid": 272,
       "no-https": 25,
       "probe-failed": 1
      }
@@ -8189,15 +8179,16 @@
     },
     "education": {
      "pass": 24,
-     "fail": 19,
+     "fail": 18,
      "na": 4,
-     "unknown": 7,
+     "unknown": 8,
      "levels": {
       "unreachable": 4,
-      "classical": 16,
+      "classical": 15,
       "dns-broken": 3,
       "hybrid": 24,
       "no-web": 4,
+      "probe-failed": 1,
       "no-tls13": 3
      }
     },
@@ -8209,19 +8200,18 @@
      "levels": {}
     },
     "business": {
-     "pass": 163,
+     "pass": 164,
      "fail": 160,
-     "na": 40,
+     "na": 39,
      "unknown": 66,
      "levels": {
-      "no-web": 40,
-      "no-tls13": 32,
-      "unreachable": 51,
-      "classical": 107,
-      "hybrid": 163,
+      "no-web": 39,
+      "no-tls13": 31,
+      "unreachable": 52,
+      "classical": 108,
+      "hybrid": 164,
       "no-https": 21,
-      "dns-broken": 14,
-      "probe-failed": 1
+      "dns-broken": 14
      }
     },
     "nonprofit": {
@@ -8250,45 +8240,45 @@
    },
    "OM": {
     "all": {
-     "pass": 209,
-     "fail": 433,
-     "na": 135,
-     "unknown": 114,
+     "pass": 206,
+     "fail": 435,
+     "na": 138,
+     "unknown": 113,
      "levels": {
-      "hybrid": 209,
-      "no-https": 30,
-      "classical": 229,
+      "hybrid": 206,
+      "no-https": 29,
+      "classical": 232,
       "no-tls13": 174,
-      "unreachable": 65,
-      "no-web": 135,
+      "unreachable": 64,
+      "no-web": 138,
       "dns-broken": 49
      }
     },
     "government": {
      "pass": 8,
-     "fail": 121,
+     "fail": 120,
      "na": 30,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
       "no-tls13": 83,
-      "classical": 34,
+      "classical": 33,
       "hybrid": 8,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25,
+      "unreachable": 26,
       "no-https": 4
      }
     },
     "education": {
-     "pass": 39,
-     "fail": 114,
+     "pass": 38,
+     "fail": 115,
      "na": 14,
      "unknown": 17,
      "levels": {
       "unreachable": 12,
-      "classical": 74,
+      "classical": 75,
       "no-tls13": 36,
-      "hybrid": 39,
+      "hybrid": 38,
       "no-web": 14,
       "dns-broken": 5,
       "no-https": 4
@@ -8305,18 +8295,18 @@
      }
     },
     "business": {
-     "pass": 155,
-     "fail": 176,
-     "na": 86,
-     "unknown": 62,
+     "pass": 153,
+     "fail": 178,
+     "na": 89,
+     "unknown": 60,
      "levels": {
-      "hybrid": 155,
-      "no-https": 22,
-      "classical": 104,
+      "hybrid": 153,
+      "no-https": 21,
+      "classical": 107,
       "no-tls13": 50,
-      "no-web": 86,
+      "no-web": 89,
       "dns-broken": 34,
-      "unreachable": 28
+      "unreachable": 26
      }
     },
     "nonprofit": {
@@ -8349,46 +8339,46 @@
   "security_txt": {
    "GCC": {
     "all": {
-     "pass": 238,
-     "fail": 12509,
-     "na": 1095,
-     "unknown": 1494,
+     "pass": 244,
+     "fail": 12504,
+     "na": 1109,
+     "unknown": 1481,
      "levels": {
-      "missing": 12465,
-      "no-web": 1095,
-      "unreachable": 1028,
-      "valid": 238,
-      "dns-broken": 456,
-      "fetch-error": 10,
+      "missing": 12459,
+      "no-web": 1109,
+      "unreachable": 1016,
+      "valid": 244,
+      "dns-broken": 451,
+      "fetch-error": 14,
       "expired": 15,
-      "incomplete": 29
+      "incomplete": 30
      }
     },
     "government": {
-     "pass": 9,
-     "fail": 1018,
-     "na": 333,
-     "unknown": 535,
+     "pass": 10,
+     "fail": 1011,
+     "na": 328,
+     "unknown": 544,
      "levels": {
-      "missing": 1018,
-      "no-web": 333,
-      "unreachable": 486,
-      "dns-broken": 45,
-      "valid": 9,
-      "fetch-error": 4
+      "missing": 1011,
+      "no-web": 328,
+      "unreachable": 495,
+      "dns-broken": 44,
+      "fetch-error": 5,
+      "valid": 10
      }
     },
     "education": {
-     "pass": 22,
+     "pass": 23,
      "fail": 1679,
-     "na": 122,
-     "unknown": 136,
+     "na": 121,
+     "unknown": 138,
      "levels": {
       "missing": 1668,
-      "unreachable": 91,
-      "no-web": 122,
+      "unreachable": 93,
+      "no-web": 121,
       "dns-broken": 44,
-      "valid": 22,
+      "valid": 23,
       "expired": 7,
       "fetch-error": 1,
       "incomplete": 4
@@ -8396,57 +8386,57 @@
     },
     "health": {
      "pass": 1,
-     "fail": 171,
-     "na": 16,
+     "fail": 172,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "missing": 171,
+      "no-web": 15,
+      "missing": 172,
       "dns-broken": 7,
       "valid": 1,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 80,
-     "fail": 4934,
+     "pass": 82,
+     "fail": 4933,
      "na": 462,
-     "unknown": 571,
+     "unknown": 553,
      "levels": {
       "no-web": 462,
-      "unreachable": 324,
-      "missing": 4903,
-      "valid": 80,
-      "fetch-error": 4,
-      "dns-broken": 243,
+      "unreachable": 309,
+      "missing": 4901,
+      "valid": 82,
+      "fetch-error": 6,
+      "dns-broken": 238,
       "expired": 7,
-      "incomplete": 24
+      "incomplete": 25
      }
     },
     "nonprofit": {
-     "pass": 121,
-     "fail": 4285,
-     "na": 83,
-     "unknown": 145,
+     "pass": 123,
+     "fail": 4288,
+     "na": 102,
+     "unknown": 138,
      "levels": {
-      "missing": 4284,
-      "unreachable": 64,
+      "missing": 4287,
+      "unreachable": 56,
       "dns-broken": 80,
-      "valid": 121,
-      "no-web": 83,
+      "valid": 123,
+      "no-web": 102,
       "incomplete": 1,
-      "fetch-error": 1
+      "fetch-error": 2
      }
     },
     "network": {
      "pass": 5,
-     "fail": 422,
-     "na": 79,
-     "unknown": 81,
+     "fail": 421,
+     "na": 81,
+     "unknown": 82,
      "levels": {
-      "missing": 421,
-      "no-web": 79,
-      "dns-broken": 37,
+      "missing": 420,
+      "no-web": 81,
+      "dns-broken": 38,
       "unreachable": 44,
       "valid": 5,
       "expired": 1
@@ -8456,17 +8446,17 @@
    "KW": {
     "all": {
      "pass": 12,
-     "fail": 1924,
-     "na": 140,
-     "unknown": 220,
+     "fail": 1919,
+     "na": 142,
+     "unknown": 217,
      "levels": {
-      "unreachable": 134,
-      "missing": 1916,
-      "no-web": 140,
+      "unreachable": 133,
+      "missing": 1911,
+      "no-web": 142,
       "valid": 12,
-      "dns-broken": 84,
+      "dns-broken": 81,
       "expired": 3,
-      "fetch-error": 2,
+      "fetch-error": 3,
       "incomplete": 5
      }
     },
@@ -8484,12 +8474,12 @@
     },
     "education": {
      "pass": 2,
-     "fail": 106,
+     "fail": 108,
      "na": 3,
-     "unknown": 13,
+     "unknown": 11,
      "levels": {
-      "missing": 106,
-      "unreachable": 11,
+      "missing": 108,
+      "unreachable": 9,
       "no-web": 3,
       "valid": 2,
       "dns-broken": 2
@@ -8504,30 +8494,30 @@
     },
     "business": {
      "pass": 10,
-     "fail": 1637,
-     "na": 116,
-     "unknown": 150,
+     "fail": 1631,
+     "na": 118,
+     "unknown": 148,
      "levels": {
       "unreachable": 77,
-      "missing": 1629,
-      "no-web": 116,
+      "missing": 1623,
+      "no-web": 118,
       "valid": 10,
-      "dns-broken": 71,
+      "dns-broken": 68,
       "expired": 3,
-      "fetch-error": 2,
+      "fetch-error": 3,
       "incomplete": 5
      }
     },
     "nonprofit": {
      "pass": 0,
-     "fail": 89,
+     "fail": 88,
      "na": 4,
-     "unknown": 8,
+     "unknown": 9,
      "levels": {
-      "missing": 89,
+      "missing": 88,
       "dns-broken": 4,
       "no-web": 4,
-      "unreachable": 4
+      "unreachable": 5
      }
     },
     "network": {
@@ -8544,102 +8534,102 @@
    },
    "SA": {
     "all": {
-     "pass": 196,
-     "fail": 7005,
-     "na": 356,
-     "unknown": 506,
+     "pass": 200,
+     "fail": 7001,
+     "na": 365,
+     "unknown": 512,
      "levels": {
-      "missing": 6989,
-      "no-web": 356,
-      "unreachable": 344,
-      "valid": 196,
-      "dns-broken": 158,
-      "fetch-error": 4,
+      "missing": 6985,
+      "no-web": 365,
+      "unreachable": 345,
+      "valid": 200,
+      "dns-broken": 159,
+      "fetch-error": 8,
       "expired": 7,
       "incomplete": 9
      }
     },
     "government": {
-     "pass": 3,
-     "fail": 179,
-     "na": 60,
-     "unknown": 168,
+     "pass": 4,
+     "fail": 172,
+     "na": 56,
+     "unknown": 176,
      "levels": {
-      "no-web": 60,
-      "unreachable": 151,
-      "missing": 179,
-      "dns-broken": 15,
-      "valid": 3,
-      "fetch-error": 2
+      "no-web": 56,
+      "unreachable": 158,
+      "missing": 172,
+      "dns-broken": 14,
+      "fetch-error": 4,
+      "valid": 4
      }
     },
     "education": {
      "pass": 16,
      "fail": 1139,
-     "na": 73,
-     "unknown": 67,
+     "na": 72,
+     "unknown": 70,
      "levels": {
       "missing": 1130,
-      "no-web": 73,
+      "no-web": 72,
       "dns-broken": 28,
       "valid": 16,
       "expired": 6,
-      "unreachable": 39,
+      "unreachable": 42,
       "incomplete": 3
      }
     },
     "health": {
      "pass": 1,
-     "fail": 168,
-     "na": 16,
+     "fail": 169,
+     "na": 15,
      "unknown": 26,
      "levels": {
-      "no-web": 16,
-      "missing": 168,
+      "no-web": 15,
+      "missing": 169,
       "dns-broken": 7,
       "valid": 1,
       "unreachable": 19
      }
     },
     "business": {
-     "pass": 51,
-     "fail": 1051,
-     "na": 73,
-     "unknown": 60,
+     "pass": 52,
+     "fail": 1049,
+     "na": 67,
+     "unknown": 63,
      "levels": {
-      "no-web": 73,
-      "missing": 1046,
-      "valid": 51,
-      "fetch-error": 1,
-      "unreachable": 54,
-      "dns-broken": 5,
+      "missing": 1044,
+      "valid": 52,
+      "no-web": 67,
+      "fetch-error": 2,
+      "unreachable": 55,
+      "dns-broken": 6,
       "incomplete": 5
      }
     },
     "nonprofit": {
-     "pass": 120,
-     "fail": 4076,
-     "na": 68,
-     "unknown": 121,
+     "pass": 122,
+     "fail": 4081,
+     "na": 87,
+     "unknown": 112,
      "levels": {
-      "missing": 4075,
-      "unreachable": 49,
+      "missing": 4080,
+      "unreachable": 39,
       "dns-broken": 71,
-      "valid": 120,
-      "no-web": 68,
+      "valid": 122,
+      "no-web": 87,
       "incomplete": 1,
-      "fetch-error": 1
+      "fetch-error": 2
      }
     },
     "network": {
      "pass": 5,
-     "fail": 392,
-     "na": 66,
-     "unknown": 64,
+     "fail": 391,
+     "na": 68,
+     "unknown": 65,
      "levels": {
-      "missing": 391,
-      "no-web": 66,
-      "dns-broken": 32,
+      "missing": 390,
+      "no-web": 68,
+      "dns-broken": 33,
       "unreachable": 32,
       "valid": 5,
       "expired": 1
@@ -8649,40 +8639,40 @@
    "AE": {
     "all": {
      "pass": 7,
-     "fail": 814,
-     "na": 183,
-     "unknown": 176,
+     "fail": 816,
+     "na": 182,
+     "unknown": 173,
      "levels": {
-      "missing": 810,
-      "unreachable": 156,
-      "no-web": 183,
+      "missing": 812,
+      "unreachable": 154,
+      "no-web": 182,
       "valid": 7,
-      "dns-broken": 20,
+      "dns-broken": 19,
       "incomplete": 3,
       "expired": 1
      }
     },
     "government": {
      "pass": 4,
-     "fail": 421,
-     "na": 130,
+     "fail": 422,
+     "na": 129,
      "unknown": 139,
      "levels": {
-      "missing": 421,
+      "missing": 422,
       "unreachable": 129,
-      "no-web": 130,
+      "no-web": 129,
       "valid": 4,
       "dns-broken": 10
      }
     },
     "education": {
      "pass": 0,
-     "fail": 174,
+     "fail": 173,
      "na": 26,
-     "unknown": 21,
+     "unknown": 22,
      "levels": {
-      "unreachable": 16,
-      "missing": 173,
+      "unreachable": 17,
+      "missing": 172,
       "no-web": 26,
       "incomplete": 1,
       "dns-broken": 5
@@ -8697,15 +8687,15 @@
     },
     "business": {
      "pass": 3,
-     "fail": 187,
+     "fail": 189,
      "na": 21,
-     "unknown": 15,
+     "unknown": 11,
      "levels": {
-      "missing": 184,
+      "missing": 186,
       "no-web": 21,
       "valid": 3,
-      "dns-broken": 5,
-      "unreachable": 10,
+      "dns-broken": 4,
+      "unreachable": 7,
       "incomplete": 2,
       "expired": 1
      }
@@ -8734,19 +8724,19 @@
    },
    "QA": {
     "all": {
-     "pass": 13,
-     "fail": 1645,
-     "na": 179,
-     "unknown": 314,
+     "pass": 14,
+     "fail": 1649,
+     "na": 181,
+     "unknown": 301,
      "levels": {
-      "missing": 1639,
-      "no-web": 179,
-      "dns-broken": 125,
-      "unreachable": 186,
-      "valid": 13,
+      "missing": 1642,
+      "no-web": 181,
+      "dns-broken": 123,
+      "unreachable": 175,
+      "valid": 14,
       "fetch-error": 3,
-      "expired": 1,
-      "incomplete": 5
+      "incomplete": 6,
+      "expired": 1
      }
     },
     "government": {
@@ -8785,29 +8775,29 @@
      "levels": {}
     },
     "business": {
-     "pass": 11,
-     "fail": 1409,
-     "na": 126,
-     "unknown": 219,
+     "pass": 12,
+     "fail": 1414,
+     "na": 128,
+     "unknown": 205,
      "levels": {
-      "missing": 1403,
-      "no-web": 126,
-      "dns-broken": 114,
-      "unreachable": 104,
-      "valid": 11,
+      "missing": 1407,
+      "no-web": 128,
+      "dns-broken": 112,
+      "unreachable": 92,
+      "valid": 12,
+      "incomplete": 6,
       "expired": 1,
-      "fetch-error": 1,
-      "incomplete": 5
+      "fetch-error": 1
      }
     },
     "nonprofit": {
      "pass": 0,
-     "fail": 58,
+     "fail": 57,
      "na": 6,
-     "unknown": 10,
+     "unknown": 11,
      "levels": {
-      "missing": 58,
-      "unreachable": 8,
+      "missing": 57,
+      "unreachable": 9,
       "dns-broken": 2,
       "no-web": 6
      }
@@ -8829,15 +8819,14 @@
     "all": {
      "pass": 3,
      "fail": 486,
-     "na": 102,
-     "unknown": 164,
+     "na": 101,
+     "unknown": 165,
      "levels": {
-      "no-web": 102,
+      "no-web": 101,
       "missing": 481,
-      "unreachable": 143,
+      "unreachable": 145,
       "dns-broken": 20,
       "valid": 3,
-      "fetch-error": 1,
       "expired": 1,
       "incomplete": 4
      }
@@ -8848,12 +8837,11 @@
      "na": 56,
      "unknown": 87,
      "levels": {
-      "unreachable": 85,
+      "unreachable": 86,
       "missing": 106,
       "no-web": 56,
       "dns-broken": 1,
-      "valid": 1,
-      "fetch-error": 1
+      "valid": 1
      }
     },
     "education": {
@@ -8878,12 +8866,12 @@
     "business": {
      "pass": 2,
      "fail": 322,
-     "na": 40,
-     "unknown": 65,
+     "na": 39,
+     "unknown": 66,
      "levels": {
-      "no-web": 40,
+      "no-web": 39,
       "missing": 317,
-      "unreachable": 51,
+      "unreachable": 52,
       "dns-broken": 14,
       "valid": 2,
       "expired": 1,
@@ -8914,43 +8902,43 @@
    },
    "OM": {
     "all": {
-     "pass": 7,
-     "fail": 635,
-     "na": 135,
-     "unknown": 114,
+     "pass": 8,
+     "fail": 633,
+     "na": 138,
+     "unknown": 113,
      "levels": {
-      "missing": 630,
-      "unreachable": 65,
-      "no-web": 135,
+      "missing": 628,
+      "unreachable": 64,
+      "no-web": 138,
       "dns-broken": 49,
-      "valid": 7,
+      "valid": 8,
       "expired": 2,
       "incomplete": 3
      }
     },
     "government": {
      "pass": 0,
-     "fail": 129,
+     "fail": 128,
      "na": 30,
-     "unknown": 32,
+     "unknown": 33,
      "levels": {
-      "missing": 129,
+      "missing": 128,
       "dns-broken": 7,
       "no-web": 30,
-      "unreachable": 25
+      "unreachable": 26
      }
     },
     "education": {
-     "pass": 3,
-     "fail": 150,
+     "pass": 4,
+     "fail": 149,
      "na": 14,
      "unknown": 17,
      "levels": {
       "unreachable": 12,
-      "missing": 149,
+      "missing": 148,
       "no-web": 14,
       "dns-broken": 5,
-      "valid": 3,
+      "valid": 4,
       "expired": 1
      }
     },
@@ -8966,13 +8954,13 @@
     "business": {
      "pass": 3,
      "fail": 328,
-     "na": 86,
-     "unknown": 62,
+     "na": 89,
+     "unknown": 60,
      "levels": {
       "missing": 324,
-      "no-web": 86,
+      "no-web": 89,
       "dns-broken": 34,
-      "unreachable": 28,
+      "unreachable": 26,
       "expired": 1,
       "valid": 3,
       "incomplete": 3
@@ -9044,17 +9032,17 @@
  },
  "quality": {
   "agreement": {
-   "same": 14827,
-   "differ": 6,
-   "single": 47
+   "same": 14815,
+   "differ": 4,
+   "single": 68
   },
   "web": {
-   "measured": 12758,
-   "unreachable": 1027,
-   "none": 1095
+   "measured": 12765,
+   "unreachable": 1013,
+   "none": 1109
   },
-  "seconds": 3826,
-  "queries": 225798
+  "seconds": 3945,
+  "queries": 225955
  },
  "scanner": {
   "version": "0.1.0",
@@ -9065,19 +9053,19 @@
   "web": true
  },
  "sources": {
-  "date": "2026-11-02",
+  "date": "2026-11-09",
   "ct": {
    "gov.kw": {
-    "psql": "connection to server at \"crt.sh\" (91.199.212.73), port 5432 failed: ERROR:  no more connections allowed (max_client_conn)",
-    "json": 113
+    "psql": 152,
+    "json": null
    },
    "edu.kw": {
     "psql": 144,
     "json": null
    },
    "com.kw": {
-    "psql": 3017,
-    "json": null
+    "psql": "ERROR:  canceling statement due to statement timeout",
+    "json": 983
    },
    "org.kw": {
     "psql": 140,
@@ -9093,22 +9081,22 @@
    },
    "edu.sa": {
     "psql": "ERROR:  canceling statement due to statement timeout",
-    "json": 679
+    "json": 687
    },
    "sch.sa": {
     "psql": 233,
     "json": null
    },
    "med.sa": {
-    "psql": "\tIs the server running on that host and accepting TCP/IP connections?",
-    "json": 185
+    "psql": 394,
+    "json": null
    },
    "com.sa": {
-    "psql": "ERROR:  canceling statement due to statement timeout",
-    "json": 944
+    "psql": "connection to server at \"crt.sh\" (91.199.212.73), port 5432 failed: ERROR:  no more connections allowed (max_client_conn)",
+    "json": "http-502"
    },
    "org.sa": {
-    "psql": 5589,
+    "psql": 5611,
     "json": null
    },
    "net.sa": {
@@ -9116,7 +9104,7 @@
     "json": null
    },
    "gov.ae": {
-    "psql": 851,
+    "psql": 850,
     "json": null
    },
    "ac.ae": {
@@ -9152,8 +9140,8 @@
     "json": null
    },
    "com.qa": {
-    "psql": "ERROR:  canceling statement due to statement timeout",
-    "json": 838
+    "psql": 2421,
+    "json": null
    },
    "org.qa": {
     "psql": 91,
@@ -9172,7 +9160,7 @@
     "json": null
    },
    "com.bh": {
-    "psql": 495,
+    "psql": 494,
     "json": null
    },
    "org.bh": {
@@ -9188,16 +9176,16 @@
     "json": null
    },
    "edu.om": {
-    "psql": "\tIs the server running on that host and accepting TCP/IP connections?",
-    "json": "http-502"
+    "psql": 238,
+    "json": null
    },
    "med.om": {
-    "psql": "\tIs the server running on that host and accepting TCP/IP connections?",
-    "json": "http-429"
+    "psql": 6,
+    "json": null
    },
    "com.om": {
-    "psql": "\tIs the server running on that host and accepting TCP/IP connections?",
-    "json": 231
+    "psql": 404,
+    "json": null
    },
    "co.om": {
     "psql": 217,
@@ -9213,9 +9201,9 @@
    }
   },
   "tranco": {
-   "list": "V354N",
-   "entities": 676
+   "list": "8P8NV",
+   "entities": 672
   }
  },
- "issue": 4
+ "issue": 5
 }
