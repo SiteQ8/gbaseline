@@ -4,21 +4,19 @@ import { cpSync, mkdtempSync, readFileSync, rmSync, existsSync, readdirSync, sta
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
-import { root } from './helpers.mjs';
+import { root, localDir } from './helpers.mjs';
 import { parseSecurityTxt } from '../docs/assets/engine/records.js';
 import { validate, TOKENS } from '../scripts/name.mjs';
 import { expiryFor, RENEW_DAYS } from '../scripts/site-files.mjs';
 
-const SKIP = new Set(['.git', 'node_modules', '.impeccable', '.taste-skill']);
 const sample = ['--en', 'Example', '--ar', 'مثال', '--slug', 'example-site', '--domain', 'Example.3li.info', '--repo', 'SiteQ8/Example', '--no-og'];
 
 function snapshot(dir) {
   const out = {};
   const walk = (d) => {
     for (const name of readdirSync(d)) {
-      if (SKIP.has(name)) continue;
       const p = join(d, name);
-      if (statSync(p).isDirectory()) walk(p);
+      if (statSync(p).isDirectory()) { if (!localDir(name)) walk(p); }
       else out[relative(dir, p)] = readFileSync(p).toString('base64');
     }
   };
@@ -39,7 +37,7 @@ test('the name script refuses incomplete or malformed values', () => {
 test('naming writes every file that depends on the name, passes the release build and is idempotent', () => {
   const dir = mkdtempSync(join(tmpdir(), 'name-'));
   try {
-    cpSync(root, dir, { recursive: true, filter: (src) => !SKIP.has(src.split(/[\\/]/).pop()) });
+    cpSync(root, dir, { recursive: true, filter: (src) => !(localDir(src.split(/[\\/]/).pop()) && statSync(src).isDirectory()) });
     for (const f of ['docs/data/summary.json', 'docs/data/history.json']) rmSync(join(dir, f), { force: true });
     const run = () => spawnSync(process.execPath, [join(dir, 'scripts/name.mjs'), ...sample], { cwd: dir, encoding: 'utf8' });
     const first = run();

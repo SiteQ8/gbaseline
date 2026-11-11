@@ -51,20 +51,21 @@ export function pairs(value, path = '$', out = []) {
 }
 
 const TEXT = new Set(['.js', '.mjs', '.json', '.md', '.html', '.css', '.txt', '.xml', '.svg', '.yml', '.csv', '']);
-const SKIP = new Set(['.git', 'node_modules', '.impeccable', '.taste-skill']);
+// Dot folders other than these two hold local state, not the project.
+export const localDir = (name) => name === 'node_modules' || (name.startsWith('.') && name !== '.github' && name !== '.well-known');
 const SKIP_FILES = new Set(['PRODUCT.md', 'DESIGN.md']);
 
 // The files of the project: what git tracks or would add, so the working data of a run (the inventory of names and
 // the scanned rows, both ignored) is never read as the project's own text. Outside a git checkout, every file.
 export function repoFiles() {
   const git = spawnSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8' });
-  if (git.status === 0 && git.stdout) return [...new Set(git.stdout.split('\0').filter(Boolean))].filter((f) => existsSync(join(root, f)) && !f.split('/').some((part) => SKIP.has(part)) && !SKIP_FILES.has(f));
+  if (git.status === 0 && git.stdout) return [...new Set(git.stdout.split('\0').filter(Boolean))].filter((f) => existsSync(join(root, f)) && !f.split('/').slice(0, -1).some(localDir) && !SKIP_FILES.has(f));
   const out = [];
   const walk = (dir) => {
     for (const name of readdirSync(dir)) {
-      if (SKIP.has(name) || SKIP_FILES.has(name)) continue;
+      if (SKIP_FILES.has(name)) continue;
       const p = join(dir, name);
-      if (statSync(p).isDirectory()) walk(p);
+      if (statSync(p).isDirectory()) { if (!localDir(name)) walk(p); }
       else out.push(relative(root, p));
     }
   };

@@ -1,10 +1,11 @@
 PRODUCT.md
 DESIGN.md
-.impeccable/
+.*/
+!.github/
+!.well-known/
 node_modules/
 .DS_Store
 *.log
-.taste-skill/
 data/inventory/
 rows/
 rows-*.json
