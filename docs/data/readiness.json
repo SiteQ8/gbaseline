@@ -1,62 +1,63 @@
 {
  "schema": "readiness/1",
- "date": "2026-11-11",
- "run": "manual",
+ "date": "2026-11-16",
+ "run": "issue",
  "census": {
-  "seconds": 1653,
-  "live": 14886,
-  "sites": 12781
+  "seconds": 1493,
+  "live": 14864,
+  "sites": 12771
  },
  "places": {
   "GCC": {
-   "live": 14886,
-   "sites": 12781,
+   "live": 14864,
+   "sites": 12771,
    "announce": {
-    "server": 10070,
-    "version": 3905,
-    "platform": 2422,
-    "cms": 3273,
-    "front": 4547
+    "server": 10068,
+    "version": 3880,
+    "platform": 2414,
+    "cms": 3252,
+    "front": 4617
    },
    "fronts": {
-    "cloudflare": 4054,
-    "cloudfront": 51,
+    "cloudflare": 4092,
+    "cloudfront": 54,
     "akamai": 36,
-    "kestrel": 47,
-    "sucuri": 73,
-    "caddy": 54,
-    "s3": 37,
-    "microsoft-httpapi": 33,
+    "kestrel": 46,
+    "sucuri": 74,
+    "caddy": 84,
+    "s3": 39,
+    "microsoft-httpapi": 29,
     "envoy": 2,
     "google": 31,
     "azure": 22,
-    "aws-elb": 88,
+    "aws-elb": 89,
     "varnish": 19
    },
    "products": {
     "apache": {
-     "sites": 2059,
-     "versioned": 181,
+     "sites": 2030,
+     "versioned": 175,
      "eol": 4,
-     "supported": 167,
+     "supported": 161,
      "unknown": 10,
-     "behind": 170,
+     "behind": 144,
      "cycles": {
-      "2.4": 167,
+      "2.4": 161,
       "2.0": 1,
       "2.2": 3
      },
      "versions": {
       "2": 10,
-      "2.4.58": 39,
-      "2.4.69": 27,
-      "2.4.68": 19,
+      "2.4.58": 38,
+      "2.4.71": 20,
+      "2.4.68": 16,
       "2.4.41": 14,
-      "2.4.52": 13,
+      "2.4.52": 12,
       "2.4.6": 10,
+      "2.4.69": 9,
       "2.4.62": 8,
-      "2.4.29": 8,
       "2.4.67": 6,
+      "2.4.29": 6,
       "2.4.65": 4,
       "2.4.37": 4,
       "2.4.66": 3,
@@ -67,7 +68,6 @@
       "2.4.61": 1,
       "2.4.55": 1,
       "2.4.18": 1,
-      "2.4.10": 1,
       "2.2.34": 1,
       "2.2.22": 1,
       "2.2.15": 1,
@@ -75,57 +75,57 @@
      }
     },
     "php": {
-     "sites": 1425,
-     "versioned": 1424,
-     "eol": 400,
-     "supported": 1024,
+     "sites": 1421,
+     "versioned": 1420,
+     "eol": 397,
+     "supported": 1023,
      "unknown": 0,
-     "behind": 45,
+     "behind": 44,
      "cycles": {
       "5.4": 2,
-      "8.4": 118,
+      "8.4": 126,
       "5.6": 24,
-      "7.4": 152,
-      "8.3": 453,
+      "7.4": 149,
+      "8.3": 443,
       "8.2": 352,
+      "8.5": 102,
       "7.0": 3,
-      "8.5": 101,
-      "7.3": 38,
-      "8.1": 99,
+      "7.3": 36,
+      "8.1": 100,
       "8.0": 48,
       "7.2": 26,
       "7.1": 3,
       "5.3": 2,
-      "5.5": 2,
-      "5.2": 1
+      "5.2": 2,
+      "5.5": 2
      },
      "versions": {
-      "8.3.36": 445,
-      "8.2.35": 346,
-      "7.4.33": 141,
-      "8.4.27": 115,
-      "8.5.12": 96,
-      "8.1.34": 96,
+      "8.3.36": 435,
+      "8.2.35": 345,
+      "7.4.33": 139,
+      "8.4.27": 123,
+      "8.5.12": 97,
+      "8.1.34": 97,
       "8.0.30": 46,
-      "7.3.33": 33,
+      "7.3.33": 31,
       "7.2.34": 24,
       "5.6.40": 23,
+      "8.2.12": 4,
       "8.5.10": 3,
       "8.3.31": 3,
       "8.3.27": 3,
-      "8.2.12": 3,
+      "7.1.33": 3,
       "7.0.33": 3,
       "8.4.24": 2,
       "8.3.35": 2,
       "8.1.22": 2,
       "8.0.31": 2,
-      "7.4.30": 2,
       "7.4.25": 2,
       "7.4.3": 2,
       "7.3.16": 2,
-      "7.1.33": 2,
       "5.5.38": 2,
       "5.4.45": 2,
+      "5.2.17": 2,
       "8.5.5": 1,
       "8.5.4": 1,
       "8.4": 1,
@@ -135,41 +135,41 @@
       "8.1.35": 1,
       "7.4.34": 1,
       "7.4.32": 1,
+      "7.4.30": 1,
       "7.4.29": 1,
       "7.4.24": 1,
       "7.4.13": 1,
-      "7.3.18": 1,
-      "7.3.7": 1
+      "7.3.18": 1
      }
     },
     "wordpress": {
-     "sites": 3120,
-     "versioned": 1682,
+     "sites": 3099,
+     "versioned": 1665,
      "eol": 4,
-     "supported": 1678,
+     "supported": 1661,
      "unknown": 0,
-     "behind": 172,
+     "behind": 162,
      "cycles": {
-      "7.1": 1245,
-      "6.4": 14,
-      "6.1": 7,
-      "6.9": 79,
-      "7.0": 113,
-      "5.6": 3,
+      "7.1": 1240,
+      "6.4": 12,
+      "6.1": 5,
+      "6.9": 77,
+      "7.0": 109,
+      "5.6": 2,
       "5.7": 1,
-      "6.8": 76,
+      "6.8": 78,
       "6.7": 23,
       "5.2": 4,
-      "6.6": 30,
-      "5.5": 6,
+      "6.6": 28,
+      "5.5": 7,
       "5.1": 2,
       "6.5": 8,
-      "5.3": 6,
+      "5.3": 5,
       "6.0": 12,
-      "6.2": 10,
+      "6.2": 11,
       "4.9": 9,
       "5.9": 4,
-      "6.3": 10,
+      "6.3": 8,
       "5.0": 2,
       "4.5": 2,
       "5.8": 7,
@@ -180,101 +180,66 @@
       "3.3": 1
      },
      "versions": {
-      "7.1.4": 1208,
-      "7.0.8": 91,
+      "7.1.4": 1206,
+      "7.0.8": 89,
       "6.9.11": 64,
-      "6.8.12": 51,
-      "7.1.3": 19,
-      "6.6.11": 17,
+      "6.8.12": 54,
+      "7.1.3": 17,
+      "6.6.11": 16,
       "6.7.11": 13,
-      "6.4.14": 11,
-      "7.1.2": 9,
-      "7.0": 9,
-      "6.9.4": 9,
+      "7.0": 10,
+      "6.4.14": 9,
+      "7.1.2": 8,
       "7.1": 8,
+      "6.9.4": 8,
       "6.0.18": 8,
-      "7.0.2": 7,
       "6.8.3": 7,
       "6.8.2": 7,
-      "6.8.1": 6,
+      "7.0.2": 6,
       "6.5.14": 6,
-      "6.3.14": 6,
       "6.2.15": 6,
-      "6.6.2": 5,
+      "6.8.1": 5,
+      "6.3.14": 5,
       "6.1.16": 5,
       "5.8.19": 5,
       "5.5.24": 5,
       "4.9.26": 5,
+      "6.7.2": 4,
+      "6.6.2": 4,
       "6.6.1": 4,
       "7.0.3": 3,
-      "6.7.2": 3,
       "6.7.1": 3,
       "5.9.20": 3,
-      "5.6.23": 3,
       "5.4.25": 3,
-      "7.0.7": 2,
       "6.9.1": 2,
-      "6.9": 2,
-      "6.7": 2,
       "6.6.5": 2,
       "6.4.2": 2,
       "6.3.2": 2,
-      "6.3.1": 2
-     }
-    },
-    "iis": {
-     "sites": 664,
-     "versioned": 664,
-     "eol": 26,
-     "supported": 638,
-     "unknown": 0,
-     "behind": 0,
-     "cycles": {
-      "10.0": 638,
-      "8.5": 15,
-      "6.0": 2,
-      "7.5": 5,
-      "8.0": 4
-     },
-     "versions": {
-      "10.0": 638,
-      "8.5": 15,
-      "7.5": 5,
-      "8.0": 4,
-      "6.0": 2
-     }
-    },
-    "aspnet": {
-     "sites": 729,
-     "versioned": 172,
-     "eol": 0,
-     "supported": 0,
-     "unknown": 172,
-     "behind": 0,
-     "cycles": {},
-     "versions": {
-      "4.0.30319": 166,
-      "2.0.50727": 6
+      "6.2.6": 2,
+      "6.2.2": 2,
+      "5.6.23": 2,
+      "5.2.21": 2,
+      "4.9.8": 2
      }
     },
     "nginx": {
-     "sites": 1721,
-     "versioned": 529,
-     "eol": 449,
-     "supported": 80,
+     "sites": 1684,
+     "versioned": 526,
+     "eol": 445,
+     "supported": 81,
      "unknown": 0,
-     "behind": 77,
+     "behind": 76,
      "cycles": {
-      "1.27": 12,
+      "1.27": 13,
       "1.30": 41,
-      "1.18": 80,
+      "1.18": 81,
       "1.29": 174,
-      "1.28": 21,
+      "1.28": 20,
       "1.14": 16,
-      "1.24": 101,
+      "1.24": 98,
       "1.26": 14,
-      "1.31": 39,
-      "1.20": 13,
+      "1.31": 40,
+      "1.20": 11,
       "1.25": 10,
       "1.22": 6,
       "1.21": 1,
@@ -282,16 +247,16 @@
      },
      "versions": {
       "1.29.8": 167,
-      "1.24.0": 101,
-      "1.18.0": 80,
+      "1.24.0": 98,
+      "1.18.0": 81,
       "1.31.8": 34,
       "1.30.6": 29,
-      "1.28.3": 11,
-      "1.20.1": 11,
+      "1.28.3": 10,
+      "1.20.1": 9,
       "1.14.0": 9,
       "1.28.0": 8,
+      "1.27.5": 8,
       "1.25.5": 8,
-      "1.27.5": 7,
       "1.26.3": 7,
       "1.14.1": 7,
       "1.22.1": 6,
@@ -300,6 +265,7 @@
       "1.30.4": 3,
       "1.27.1": 3,
       "1.31.7": 2,
+      "1.31.2": 2,
       "1.30.1": 2,
       "1.30.0": 2,
       "1.29.6": 2,
@@ -309,7 +275,6 @@
       "1.26.2": 2,
       "1.31.5": 1,
       "1.31.3": 1,
-      "1.31.2": 1,
       "1.30.3": 1,
       "1.29.2": 1,
       "1.27.2": 1,
@@ -334,7 +299,7 @@
      "versions": {}
     },
     "nextjs": {
-     "sites": 249,
+     "sites": 243,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -343,15 +308,50 @@
      "cycles": {},
      "versions": {}
     },
+    "iis": {
+     "sites": 661,
+     "versioned": 661,
+     "eol": 27,
+     "supported": 634,
+     "unknown": 0,
+     "behind": 0,
+     "cycles": {
+      "10.0": 634,
+      "8.5": 16,
+      "6.0": 2,
+      "7.5": 5,
+      "8.0": 4
+     },
+     "versions": {
+      "10.0": 634,
+      "8.5": 16,
+      "7.5": 5,
+      "8.0": 4,
+      "6.0": 2
+     }
+    },
+    "aspnet": {
+     "sites": 726,
+     "versioned": 172,
+     "eol": 0,
+     "supported": 0,
+     "unknown": 172,
+     "behind": 0,
+     "cycles": {},
+     "versions": {
+      "4.0.30319": 166,
+      "2.0.50727": 6
+     }
+    },
     "openssl": {
-     "sites": 40,
-     "versioned": 40,
-     "eol": 30,
+     "sites": 41,
+     "versioned": 41,
+     "eol": 31,
      "supported": 10,
      "unknown": 0,
-     "behind": 15,
+     "behind": 16,
      "cycles": {
-      "3.1": 3,
+      "3.1": 4,
       "3.5": 10,
       "1.0.2": 14,
       "1.1.1": 9,
@@ -363,7 +363,7 @@
       "1.1.1": 9,
       "3.5.8": 4,
       "3.5.1": 4,
-      "3.1.3": 3,
+      "3.1.3": 4,
       "3.2.2": 2,
       "3.5.9": 1,
       "3.5.5": 1,
@@ -372,21 +372,20 @@
      }
     },
     "openresty": {
-     "sites": 69,
-     "versioned": 3,
+     "sites": 66,
+     "versioned": 2,
      "eol": 0,
      "supported": 0,
-     "unknown": 3,
+     "unknown": 2,
      "behind": 0,
      "cycles": {},
      "versions": {
-      "1.31.1.1": 1,
       "1.29.2.3": 1,
       "1.27.1.1": 1
      }
     },
     "joomla": {
-     "sites": 23,
+     "sites": 24,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -396,25 +395,25 @@
      "versions": {}
     },
     "drupal": {
-     "sites": 132,
-     "versioned": 107,
+     "sites": 131,
+     "versioned": 105,
      "eol": 13,
      "supported": 0,
-     "unknown": 94,
+     "unknown": 92,
      "behind": 13,
      "cycles": {
       "7": 13
      },
      "versions": {
       "7": 13,
-      "8": 3,
-      "9": 24,
-      "10": 40,
+      "8": 2,
+      "9": 25,
+      "10": 38,
       "11": 27
      }
     },
     "express": {
-     "sites": 47,
+     "sites": 48,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -446,28 +445,28 @@
    },
    "kev": {
     "CVE-2026-109619": {
-     "exposed": 418,
-     "announced": 1423
+     "exposed": 415,
+     "announced": 1419
     },
     "CVE-2026-109618": {
-     "exposed": 358,
-     "announced": 1423
+     "exposed": 355,
+     "announced": 1419
     },
     "CVE-2026-34486": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-38475": {
-     "exposed": 95,
-     "announced": 168
+     "exposed": 90,
+     "announced": 162
     },
     "CVE-2025-24813": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-4577": {
-     "exposed": 5,
-     "announced": 1424
+     "exposed": 6,
+     "announced": 1420
     },
     "CVE-2023-23752": {
      "exposed": 0,
@@ -479,7 +478,7 @@
     },
     "CVE-2014-0160": {
      "exposed": 0,
-     "announced": 40
+     "announced": 41
     },
     "CVE-2017-12617": {
      "exposed": 0,
@@ -490,8 +489,8 @@
      "announced": 0
     },
     "CVE-2012-1823": {
-     "exposed": 2,
-     "announced": 1424
+     "exposed": 3,
+     "announced": 1420
     },
     "CVE-2020-1938": {
      "exposed": 0,
@@ -499,59 +498,59 @@
     },
     "CVE-2020-13671": {
      "exposed": 0,
-     "announced": 67
+     "announced": 65
     },
     "CVE-2021-42013": {
      "exposed": 0,
-     "announced": 168
+     "announced": 162
     },
     "CVE-2021-41773": {
      "exposed": 0,
-     "announced": 168
+     "announced": 162
     },
     "CVE-2019-0211": {
-     "exposed": 13,
-     "announced": 168
+     "exposed": 11,
+     "announced": 162
     },
     "CVE-2018-7600": {
      "exposed": 0,
-     "announced": 91
+     "announced": 90
     },
     "CVE-2017-7269": {
      "exposed": 2,
-     "announced": 664
+     "announced": 661
     }
    },
    "site": {
     "support": [
-     894,
-     3783
+     889,
+     3760
     ],
     "patch": [
-     452,
-     3783
+     414,
+     3760
     ],
     "kev": [
-     499,
-     2268
+     491,
+     2256
     ]
    }
   },
   "KW": {
-   "live": 2211,
-   "sites": 1936,
+   "live": 2204,
+   "sites": 1930,
    "announce": {
-    "server": 1546,
-    "version": 535,
+    "server": 1541,
+    "version": 530,
     "platform": 387,
-    "cms": 360,
-    "front": 625
+    "cms": 352,
+    "front": 626
    },
    "fronts": {
-    "cloudfront": 6,
+    "cloudfront": 7,
     "akamai": 11,
-    "cloudflare": 527,
-    "microsoft-httpapi": 9,
+    "cloudflare": 528,
+    "microsoft-httpapi": 8,
     "caddy": 11,
     "kestrel": 6,
     "aws-elb": 16,
@@ -562,96 +561,70 @@
     "google": 3
    },
    "products": {
-    "iis": {
-     "sites": 128,
-     "versioned": 128,
-     "eol": 7,
-     "supported": 121,
-     "unknown": 0,
-     "behind": 0,
-     "cycles": {
-      "10.0": 121,
-      "6.0": 1,
-      "8.5": 1,
-      "8.0": 3,
-      "7.5": 2
-     },
-     "versions": {}
-    },
-    "aspnet": {
-     "sites": 152,
-     "versioned": 47,
-     "eol": 0,
-     "supported": 0,
-     "unknown": 47,
-     "behind": 0,
-     "cycles": {},
-     "versions": {}
-    },
     "nginx": {
      "sites": 288,
-     "versioned": 90,
+     "versioned": 91,
      "eol": 65,
-     "supported": 25,
+     "supported": 26,
      "unknown": 0,
-     "behind": 15,
+     "behind": 16,
      "cycles": {
       "1.30": 7,
       "1.18": 5,
-      "1.24": 25,
-      "1.31": 18,
+      "1.24": 24,
+      "1.31": 19,
       "1.20": 4,
       "1.14": 5,
       "1.29": 21,
       "1.28": 2,
-      "1.27": 2,
+      "1.27": 3,
       "1.26": 1
      },
      "versions": {}
     },
     "php": {
-     "sites": 195,
-     "versioned": 195,
-     "eol": 95,
-     "supported": 100,
+     "sites": 193,
+     "versioned": 193,
+     "eol": 94,
+     "supported": 99,
      "unknown": 0,
-     "behind": 15,
+     "behind": 14,
      "cycles": {
       "8.4": 8,
       "5.6": 8,
-      "7.4": 37,
+      "7.4": 36,
       "8.2": 30,
-      "7.3": 11,
-      "8.5": 12,
+      "7.3": 10,
       "8.3": 50,
       "8.1": 19,
       "7.2": 11,
       "7.1": 1,
+      "8.5": 11,
       "8.0": 6,
       "5.3": 1,
+      "5.2": 1,
       "5.5": 1
      },
      "versions": {}
     },
     "wordpress": {
-     "sites": 356,
-     "versioned": 182,
+     "sites": 348,
+     "versioned": 176,
      "eol": 1,
-     "supported": 181,
+     "supported": 175,
      "unknown": 0,
-     "behind": 27,
+     "behind": 23,
      "cycles": {
-      "7.1": 109,
+      "7.1": 107,
       "6.4": 4,
-      "5.5": 2,
-      "6.1": 1,
+      "5.5": 3,
       "5.1": 1,
       "7.0": 17,
       "6.0": 5,
       "5.9": 1,
-      "6.9": 8,
+      "6.9": 7,
       "5.2": 1,
-      "6.6": 7,
+      "6.6": 6,
       "6.8": 8,
       "5.8": 2,
       "5.4": 1,
@@ -659,15 +632,15 @@
       "6.7": 3,
       "4.9": 1,
       "6.5": 3,
-      "5.3": 2,
-      "6.3": 2,
+      "5.3": 1,
       "6.2": 2,
+      "6.3": 1,
       "2.9": 1
      },
      "versions": {}
     },
     "litespeed": {
-     "sites": 127,
+     "sites": 125,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -677,14 +650,14 @@
      "versions": {}
     },
     "apache": {
-     "sites": 368,
-     "versioned": 33,
+     "sites": 365,
+     "versioned": 31,
      "eol": 1,
-     "supported": 31,
+     "supported": 29,
      "unknown": 1,
-     "behind": 32,
+     "behind": 29,
      "cycles": {
-      "2.4": 31,
+      "2.4": 29,
       "2.0": 1
      },
      "versions": {}
@@ -705,8 +678,34 @@
      },
      "versions": {}
     },
+    "iis": {
+     "sites": 127,
+     "versioned": 127,
+     "eol": 8,
+     "supported": 119,
+     "unknown": 0,
+     "behind": 0,
+     "cycles": {
+      "10.0": 119,
+      "6.0": 1,
+      "8.5": 2,
+      "8.0": 3,
+      "7.5": 2
+     },
+     "versions": {}
+    },
+    "aspnet": {
+     "sites": 151,
+     "versioned": 46,
+     "eol": 0,
+     "supported": 0,
+     "unknown": 46,
+     "behind": 0,
+     "cycles": {},
+     "versions": {}
+    },
     "nextjs": {
-     "sites": 40,
+     "sites": 39,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -716,7 +715,7 @@
      "versions": {}
     },
     "express": {
-     "sites": 8,
+     "sites": 10,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -768,20 +767,20 @@
    },
    "kev": {
     "CVE-2026-109619": {
-     "exposed": 97,
-     "announced": 194
+     "exposed": 95,
+     "announced": 192
     },
     "CVE-2026-109618": {
-     "exposed": 76,
-     "announced": 194
+     "exposed": 74,
+     "announced": 192
     },
     "CVE-2026-34486": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-38475": {
-     "exposed": 23,
-     "announced": 32
+     "exposed": 21,
+     "announced": 30
     },
     "CVE-2025-24813": {
      "exposed": 0,
@@ -789,7 +788,7 @@
     },
     "CVE-2024-4577": {
      "exposed": 2,
-     "announced": 195
+     "announced": 193
     },
     "CVE-2023-23752": {
      "exposed": 0,
@@ -812,8 +811,8 @@
      "announced": 0
     },
     "CVE-2012-1823": {
-     "exposed": 1,
-     "announced": 195
+     "exposed": 2,
+     "announced": 193
     },
     "CVE-2020-1938": {
      "exposed": 0,
@@ -825,15 +824,15 @@
     },
     "CVE-2021-42013": {
      "exposed": 0,
-     "announced": 32
+     "announced": 30
     },
     "CVE-2021-41773": {
      "exposed": 0,
-     "announced": 32
+     "announced": 30
     },
     "CVE-2019-0211": {
      "exposed": 3,
-     "announced": 32
+     "announced": 30
     },
     "CVE-2018-7600": {
      "exposed": 0,
@@ -841,43 +840,43 @@
     },
     "CVE-2017-7269": {
      "exposed": 1,
-     "announced": 128
+     "announced": 127
     }
    },
    "site": {
     "support": [
      169,
-     518
+     513
     ],
     "patch": [
-     83,
-     518
+     77,
+     513
     ],
     "kev": [
-     119,
-     341
+     116,
+     338
     ]
    }
   },
   "SA": {
-   "live": 7918,
-   "sites": 7231,
+   "live": 7907,
+   "sites": 7230,
    "announce": {
-    "server": 5963,
-    "version": 2406,
-    "platform": 1430,
-    "cms": 2096,
-    "front": 3073
+    "server": 5971,
+    "version": 2388,
+    "platform": 1423,
+    "cms": 2091,
+    "front": 3134
    },
    "fronts": {
-    "cloudflare": 2918,
+    "cloudflare": 2952,
     "akamai": 2,
-    "kestrel": 36,
-    "sucuri": 22,
-    "s3": 19,
-    "microsoft-httpapi": 15,
+    "kestrel": 34,
+    "sucuri": 23,
+    "s3": 21,
+    "microsoft-httpapi": 13,
+    "caddy": 56,
     "google": 16,
-    "caddy": 28,
     "aws-elb": 9,
     "cloudfront": 5,
     "azure": 1,
@@ -886,36 +885,36 @@
    },
    "products": {
     "apache": {
-     "sites": 1029,
-     "versioned": 73,
+     "sites": 1012,
+     "versioned": 69,
      "eol": 1,
-     "supported": 67,
+     "supported": 63,
      "unknown": 5,
-     "behind": 67,
+     "behind": 45,
      "cycles": {
-      "2.4": 67,
+      "2.4": 63,
       "2.2": 1
      },
      "versions": {}
     },
     "php": {
-     "sites": 840,
-     "versioned": 840,
-     "eol": 178,
-     "supported": 662,
+     "sites": 836,
+     "versioned": 836,
+     "eol": 177,
+     "supported": 659,
      "unknown": 0,
-     "behind": 18,
+     "behind": 17,
      "cycles": {
       "5.4": 2,
-      "8.4": 68,
+      "8.4": 76,
       "8.2": 240,
-      "8.3": 294,
-      "8.5": 60,
-      "8.1": 52,
+      "8.5": 62,
+      "8.1": 53,
+      "8.3": 281,
       "5.6": 8,
       "7.4": 67,
-      "7.3": 12,
-      "8.0": 21,
+      "7.3": 11,
+      "8.0": 20,
       "7.2": 9,
       "5.3": 1,
       "7.1": 2,
@@ -926,40 +925,40 @@
      "versions": {}
     },
     "wordpress": {
-     "sites": 2010,
-     "versioned": 1144,
+     "sites": 2006,
+     "versioned": 1133,
      "eol": 0,
-     "supported": 1144,
+     "supported": 1133,
      "unknown": 0,
-     "behind": 78,
+     "behind": 73,
      "cycles": {
-      "7.1": 923,
-      "6.9": 46,
+      "7.1": 918,
+      "6.9": 45,
       "6.8": 45,
-      "6.7": 12,
+      "6.7": 11,
       "6.6": 16,
-      "7.0": 57,
+      "7.0": 55,
       "5.2": 1,
-      "6.2": 5,
-      "5.6": 2,
+      "6.2": 6,
       "5.3": 2,
       "6.0": 6,
       "6.3": 6,
       "6.1": 3,
       "5.5": 3,
-      "6.4": 6,
       "6.5": 2,
       "4.7": 1,
       "4.9": 2,
       "5.0": 1,
+      "6.4": 4,
       "5.8": 3,
       "5.1": 1,
-      "5.9": 1
+      "5.9": 1,
+      "5.6": 1
      },
      "versions": {}
     },
     "litespeed": {
-     "sites": 597,
+     "sites": 601,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -969,7 +968,7 @@
      "versions": {}
     },
     "nextjs": {
-     "sites": 159,
+     "sites": 158,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -993,44 +992,44 @@
      "versions": {}
     },
     "aspnet": {
-     "sites": 420,
-     "versioned": 84,
+     "sites": 418,
+     "versioned": 85,
      "eol": 0,
      "supported": 0,
-     "unknown": 84,
+     "unknown": 85,
      "behind": 0,
      "cycles": {},
      "versions": {}
     },
     "nginx": {
-     "sites": 855,
-     "versioned": 275,
-     "eol": 247,
+     "sites": 818,
+     "versioned": 271,
+     "eol": 243,
      "supported": 28,
      "unknown": 0,
-     "behind": 40,
+     "behind": 38,
      "cycles": {
       "1.27": 7,
-      "1.29": 88,
+      "1.29": 87,
       "1.18": 61,
       "1.30": 20,
-      "1.28": 14,
+      "1.28": 13,
       "1.14": 9,
       "1.24": 48,
       "1.26": 8,
       "1.25": 3,
-      "1.20": 6,
+      "1.20": 4,
       "1.31": 8,
       "1.22": 3
      },
      "versions": {}
     },
     "openresty": {
-     "sites": 28,
-     "versioned": 2,
+     "sites": 25,
+     "versioned": 1,
      "eol": 0,
      "supported": 0,
-     "unknown": 2,
+     "unknown": 1,
      "behind": 0,
      "cycles": {},
      "versions": {}
@@ -1046,11 +1045,11 @@
      "versions": {}
     },
     "drupal": {
-     "sites": 80,
-     "versioned": 61,
+     "sites": 79,
+     "versioned": 59,
      "eol": 10,
      "supported": 0,
-     "unknown": 51,
+     "unknown": 49,
      "behind": 10,
      "cycles": {
       "7": 10
@@ -1074,7 +1073,7 @@
      "versions": {}
     },
     "express": {
-     "sites": 27,
+     "sites": 26,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -1086,20 +1085,20 @@
    },
    "kev": {
     "CVE-2026-109619": {
-     "exposed": 186,
-     "announced": 840
+     "exposed": 185,
+     "announced": 836
     },
     "CVE-2026-109618": {
-     "exposed": 162,
-     "announced": 840
+     "exposed": 161,
+     "announced": 836
     },
     "CVE-2026-34486": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-38475": {
-     "exposed": 36,
-     "announced": 68
+     "exposed": 33,
+     "announced": 64
     },
     "CVE-2025-24813": {
      "exposed": 0,
@@ -1107,7 +1106,7 @@
     },
     "CVE-2024-4577": {
      "exposed": 2,
-     "announced": 840
+     "announced": 836
     },
     "CVE-2023-23752": {
      "exposed": 0,
@@ -1131,7 +1130,7 @@
     },
     "CVE-2012-1823": {
      "exposed": 1,
-     "announced": 840
+     "announced": 836
     },
     "CVE-2020-1938": {
      "exposed": 0,
@@ -1139,23 +1138,23 @@
     },
     "CVE-2020-13671": {
      "exposed": 0,
-     "announced": 39
+     "announced": 38
     },
     "CVE-2021-42013": {
      "exposed": 0,
-     "announced": 68
+     "announced": 64
     },
     "CVE-2021-41773": {
      "exposed": 0,
-     "announced": 68
+     "announced": 64
     },
     "CVE-2019-0211": {
-     "exposed": 5,
-     "announced": 68
+     "exposed": 3,
+     "announced": 64
     },
     "CVE-2018-7600": {
      "exposed": 0,
-     "announced": 49
+     "announced": 48
     },
     "CVE-2017-7269": {
      "exposed": 1,
@@ -1164,31 +1163,31 @@
    },
    "site": {
     "support": [
-     442,
-     2334
+     437,
+     2318
     ],
     "patch": [
-     202,
-     2334
+     173,
+     2318
     ],
     "kev": [
-     218,
-     1313
+     214,
+     1305
     ]
    }
   },
   "AE": {
-   "live": 1160,
-   "sites": 823,
+   "live": 1159,
+   "sites": 819,
    "announce": {
-    "server": 453,
-    "version": 160,
-    "platform": 101,
-    "cms": 127,
-    "front": 181
+    "server": 452,
+    "version": 161,
+    "platform": 100,
+    "cms": 126,
+    "front": 182
    },
    "fronts": {
-    "cloudflare": 152,
+    "cloudflare": 153,
     "envoy": 1,
     "sucuri": 6,
     "cloudfront": 2,
@@ -1202,19 +1201,19 @@
    },
    "products": {
     "apache": {
-     "sites": 90,
-     "versioned": 16,
+     "sites": 89,
+     "versioned": 17,
      "eol": 0,
-     "supported": 15,
+     "supported": 16,
      "unknown": 1,
-     "behind": 15,
+     "behind": 16,
      "cycles": {
-      "2.4": 15
+      "2.4": 16
      },
      "versions": {}
     },
     "nginx": {
-     "sites": 106,
+     "sites": 105,
      "versioned": 24,
      "eol": 18,
      "supported": 6,
@@ -1244,12 +1243,12 @@
      "versions": {}
     },
     "php": {
-     "sites": 50,
-     "versioned": 50,
+     "sites": 52,
+     "versioned": 52,
      "eol": 19,
-     "supported": 31,
+     "supported": 33,
      "unknown": 0,
-     "behind": 3,
+     "behind": 4,
      "cycles": {
       "7.0": 1,
       "8.0": 2,
@@ -1258,7 +1257,7 @@
       "8.4": 5,
       "7.4": 7,
       "8.2": 14,
-      "8.3": 9,
+      "8.3": 11,
       "7.3": 3,
       "5.6": 1,
       "7.2": 1
@@ -1267,18 +1266,18 @@
     },
     "wordpress": {
      "sites": 119,
-     "versioned": 64,
+     "versioned": 65,
      "eol": 1,
-     "supported": 63,
+     "supported": 64,
      "unknown": 0,
-     "behind": 14,
+     "behind": 13,
      "cycles": {
       "5.6": 1,
-      "7.1": 38,
-      "7.0": 6,
-      "6.8": 4,
+      "7.1": 40,
+      "7.0": 5,
+      "6.8": 5,
       "6.5": 2,
-      "6.6": 2,
+      "6.6": 1,
       "5.3": 1,
       "6.9": 4,
       "6.4": 1,
@@ -1290,11 +1289,11 @@
      "versions": {}
     },
     "drupal": {
-     "sites": 6,
-     "versioned": 5,
+     "sites": 5,
+     "versioned": 4,
      "eol": 0,
      "supported": 0,
-     "unknown": 5,
+     "unknown": 4,
      "behind": 0,
      "cycles": {},
      "versions": {}
@@ -1313,11 +1312,11 @@
      "versions": {}
     },
     "aspnet": {
-     "sites": 37,
-     "versioned": 5,
+     "sites": 35,
+     "versioned": 6,
      "eol": 0,
      "supported": 0,
-     "unknown": 5,
+     "unknown": 6,
      "behind": 0,
      "cycles": {},
      "versions": {}
@@ -1333,21 +1332,22 @@
      "versions": {}
     },
     "openssl": {
-     "sites": 6,
-     "versioned": 6,
-     "eol": 4,
+     "sites": 7,
+     "versioned": 7,
+     "eol": 5,
      "supported": 2,
      "unknown": 0,
-     "behind": 2,
+     "behind": 3,
      "cycles": {
       "1.0.2": 2,
       "1.1.1": 2,
-      "3.5": 2
+      "3.5": 2,
+      "3.1": 1
      },
      "versions": {}
     },
     "nextjs": {
-     "sites": 14,
+     "sites": 12,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -1379,28 +1379,28 @@
    },
    "kev": {
     "CVE-2026-109619": {
-     "exposed": 22,
-     "announced": 50
+     "exposed": 23,
+     "announced": 52
     },
     "CVE-2026-109618": {
-     "exposed": 19,
-     "announced": 50
+     "exposed": 20,
+     "announced": 52
     },
     "CVE-2026-34486": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-38475": {
-     "exposed": 10,
-     "announced": 13
+     "exposed": 11,
+     "announced": 14
     },
     "CVE-2025-24813": {
      "exposed": 0,
      "announced": 0
     },
     "CVE-2024-4577": {
-     "exposed": 1,
-     "announced": 50
+     "exposed": 2,
+     "announced": 52
     },
     "CVE-2023-23752": {
      "exposed": 0,
@@ -1412,7 +1412,7 @@
     },
     "CVE-2014-0160": {
      "exposed": 0,
-     "announced": 6
+     "announced": 7
     },
     "CVE-2017-12617": {
      "exposed": 0,
@@ -1424,7 +1424,7 @@
     },
     "CVE-2012-1823": {
      "exposed": 0,
-     "announced": 50
+     "announced": 52
     },
     "CVE-2020-1938": {
      "exposed": 0,
@@ -1432,23 +1432,23 @@
     },
     "CVE-2020-13671": {
      "exposed": 0,
-     "announced": 3
+     "announced": 2
     },
     "CVE-2021-42013": {
      "exposed": 0,
-     "announced": 13
+     "announced": 14
     },
     "CVE-2021-41773": {
      "exposed": 0,
-     "announced": 13
+     "announced": 14
     },
     "CVE-2019-0211": {
      "exposed": 2,
-     "announced": 13
+     "announced": 14
     },
     "CVE-2018-7600": {
      "exposed": 0,
-     "announced": 4
+     "announced": 3
     },
     "CVE-2017-7269": {
      "exposed": 0,
@@ -1457,41 +1457,41 @@
    },
    "site": {
     "support": [
-     40,
-     153
+     41,
+     155
     ],
     "patch": [
      37,
-     153
+     155
     ],
     "kev": [
-     29,
-     98
+     30,
+     99
     ]
    }
   },
   "QA": {
-   "live": 2020,
+   "live": 2019,
    "sites": 1662,
    "announce": {
-    "server": 1251,
-    "version": 486,
-    "platform": 286,
-    "cms": 451,
-    "front": 353
+    "server": 1247,
+    "version": 483,
+    "platform": 284,
+    "cms": 446,
+    "front": 357
    },
    "fronts": {
     "akamai": 9,
     "cloudflare": 284,
     "sucuri": 23,
-    "microsoft-httpapi": 3,
     "azure": 8,
     "google": 5,
     "varnish": 9,
-    "kestrel": 1,
-    "caddy": 5,
-    "cloudfront": 5,
-    "aws-elb": 1
+    "caddy": 7,
+    "kestrel": 2,
+    "microsoft-httpapi": 2,
+    "cloudfront": 6,
+    "aws-elb": 2
    },
    "products": {
     "litespeed": {
@@ -1505,23 +1505,23 @@
      "versions": {}
     },
     "wordpress": {
-     "sites": 412,
-     "versioned": 200,
+     "sites": 406,
+     "versioned": 198,
      "eol": 1,
-     "supported": 199,
+     "supported": 197,
      "unknown": 0,
      "behind": 36,
      "cycles": {
-      "7.1": 122,
-      "6.1": 3,
-      "7.0": 26,
+      "7.1": 120,
+      "6.1": 2,
+      "7.0": 25,
       "5.7": 1,
       "6.9": 11,
       "5.2": 1,
-      "6.7": 5,
+      "6.7": 6,
       "5.3": 1,
       "4.9": 3,
-      "6.8": 11,
+      "6.8": 12,
       "6.6": 5,
       "4.5": 1,
       "6.5": 1,
@@ -1537,15 +1537,15 @@
     },
     "nginx": {
      "sites": 302,
-     "versioned": 92,
-     "eol": 80,
+     "versioned": 93,
+     "eol": 81,
      "supported": 12,
      "unknown": 0,
      "behind": 4,
      "cycles": {
-      "1.29": 47,
-      "1.24": 10,
-      "1.18": 9,
+      "1.29": 48,
+      "1.24": 9,
+      "1.18": 10,
       "1.20": 1,
       "1.22": 2,
       "1.25": 5,
@@ -1557,14 +1557,14 @@
      "versions": {}
     },
     "apache": {
-     "sites": 359,
-     "versioned": 35,
+     "sites": 352,
+     "versioned": 34,
      "eol": 1,
-     "supported": 32,
+     "supported": 31,
      "unknown": 2,
-     "behind": 33,
+     "behind": 32,
      "cycles": {
-      "2.4": 32,
+      "2.4": 31,
       "2.2": 1
      },
      "versions": {}
@@ -1572,18 +1572,18 @@
     "php": {
      "sites": 215,
      "versioned": 214,
-     "eol": 70,
-     "supported": 144,
+     "eol": 69,
+     "supported": 145,
      "unknown": 0,
      "behind": 6,
      "cycles": {
-      "8.3": 61,
+      "8.3": 62,
       "8.2": 50,
       "7.3": 7,
       "8.5": 10,
-      "8.0": 16,
+      "8.0": 17,
       "8.4": 23,
-      "7.4": 27,
+      "7.4": 25,
       "8.1": 13,
       "5.6": 4,
       "7.2": 3
@@ -1591,7 +1591,7 @@
      "versions": {}
     },
     "nextjs": {
-     "sites": 23,
+     "sites": 21,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -1615,24 +1615,24 @@
      "versions": {}
     },
     "iis": {
-     "sites": 41,
-     "versioned": 41,
+     "sites": 40,
+     "versioned": 40,
      "eol": 1,
-     "supported": 40,
+     "supported": 39,
      "unknown": 0,
      "behind": 0,
      "cycles": {
-      "10.0": 40,
+      "10.0": 39,
       "8.5": 1
      },
      "versions": {}
     },
     "aspnet": {
      "sites": 46,
-     "versioned": 13,
+     "versioned": 12,
      "eol": 0,
      "supported": 0,
-     "unknown": 13,
+     "unknown": 12,
      "behind": 0,
      "cycles": {},
      "versions": {}
@@ -1680,7 +1680,7 @@
      "versions": {}
     },
     "joomla": {
-     "sites": 8,
+     "sites": 9,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -1692,11 +1692,11 @@
    },
    "kev": {
     "CVE-2026-109619": {
-     "exposed": 72,
+     "exposed": 71,
      "announced": 214
     },
     "CVE-2026-109618": {
-     "exposed": 65,
+     "exposed": 64,
      "announced": 214
     },
     "CVE-2026-34486": {
@@ -1704,8 +1704,8 @@
      "announced": 0
     },
     "CVE-2024-38475": {
-     "exposed": 18,
-     "announced": 33
+     "exposed": 17,
+     "announced": 32
     },
     "CVE-2025-24813": {
      "exposed": 0,
@@ -1749,15 +1749,15 @@
     },
     "CVE-2021-42013": {
      "exposed": 0,
-     "announced": 33
+     "announced": 32
     },
     "CVE-2021-41773": {
      "exposed": 0,
-     "announced": 33
+     "announced": 32
     },
     "CVE-2019-0211": {
      "exposed": 3,
-     "announced": 33
+     "announced": 32
     },
     "CVE-2018-7600": {
      "exposed": 0,
@@ -1765,37 +1765,37 @@
     },
     "CVE-2017-7269": {
      "exposed": 0,
-     "announced": 41
+     "announced": 40
     }
    },
    "site": {
     "support": [
      156,
-     467
+     464
     ],
     "patch": [
-     77,
-     467
+     76,
+     464
     ],
     "kev": [
-     87,
-     292
+     85,
+     290
     ]
    }
   },
   "BH": {
-   "live": 735,
-   "sites": 488,
+   "live": 736,
+   "sites": 489,
    "announce": {
-    "server": 403,
-    "version": 115,
+    "server": 404,
+    "version": 114,
     "platform": 71,
     "cms": 99,
-    "front": 207
+    "front": 208
    },
    "fronts": {
     "caddy": 2,
-    "cloudflare": 90,
+    "cloudflare": 91,
     "aws-elb": 60,
     "s3": 10,
     "sucuri": 3,
@@ -1808,12 +1808,12 @@
    },
    "products": {
     "apache": {
-     "sites": 95,
+     "sites": 94,
      "versioned": 12,
      "eol": 0,
      "supported": 11,
      "unknown": 1,
-     "behind": 11,
+     "behind": 10,
      "cycles": {
       "2.4": 11
      },
@@ -1842,17 +1842,16 @@
     },
     "wordpress": {
      "sites": 88,
-     "versioned": 35,
+     "versioned": 36,
      "eol": 0,
-     "supported": 35,
+     "supported": 36,
      "unknown": 0,
-     "behind": 9,
+     "behind": 10,
      "cycles": {
-      "7.1": 15,
+      "7.1": 17,
       "7.0": 3,
       "6.9": 5,
       "6.8": 4,
-      "6.3": 1,
       "5.2": 1,
       "5.0": 1,
       "5.5": 1,
@@ -1895,9 +1894,9 @@
      "versions": {}
     },
     "nginx": {
-     "sites": 51,
-     "versioned": 12,
-     "eol": 9,
+     "sites": 52,
+     "versioned": 11,
+     "eol": 8,
      "supported": 3,
      "unknown": 0,
      "behind": 3,
@@ -1908,7 +1907,7 @@
       "1.18": 1,
       "1.31": 2,
       "1.27": 1,
-      "1.24": 2,
+      "1.24": 1,
       "1.15": 1
      },
      "versions": {}
@@ -2072,12 +2071,12 @@
    },
    "site": {
     "support": [
-     26,
-     109
+     25,
+     108
     ],
     "patch": [
-     26,
-     109
+     25,
+     108
     ],
     "kev": [
      16,
@@ -2086,21 +2085,21 @@
    }
   },
   "OM": {
-   "live": 842,
+   "live": 839,
    "sites": 641,
    "announce": {
-    "server": 454,
-    "version": 203,
-    "platform": 147,
-    "cms": 140,
-    "front": 108
+    "server": 453,
+    "version": 204,
+    "platform": 149,
+    "cms": 138,
+    "front": 110
    },
    "fronts": {
     "akamai": 3,
-    "cloudflare": 83,
+    "cloudflare": 84,
     "azure": 1,
     "google": 4,
-    "cloudfront": 6,
+    "cloudfront": 7,
     "caddy": 5,
     "microsoft-httpapi": 2,
     "sucuri": 2,
@@ -2143,21 +2142,21 @@
      "versions": {}
     },
     "iis": {
-     "sites": 54,
-     "versioned": 54,
+     "sites": 53,
+     "versioned": 53,
      "eol": 3,
-     "supported": 51,
+     "supported": 50,
      "unknown": 0,
      "behind": 0,
      "cycles": {
-      "10.0": 51,
+      "10.0": 50,
       "7.5": 2,
       "8.5": 1
      },
      "versions": {}
     },
     "aspnet": {
-     "sites": 49,
+     "sites": 51,
      "versioned": 13,
      "eol": 0,
      "supported": 0,
@@ -2188,12 +2187,12 @@
      "versions": {}
     },
     "wordpress": {
-     "sites": 135,
+     "sites": 132,
      "versioned": 57,
      "eol": 1,
      "supported": 56,
      "unknown": 0,
-     "behind": 8,
+     "behind": 7,
      "cycles": {
       "7.1": 38,
       "6.8": 4,
@@ -2209,7 +2208,7 @@
      "versions": {}
     },
     "litespeed": {
-     "sites": 51,
+     "sites": 49,
      "versioned": 0,
      "eol": 0,
      "supported": 0,
@@ -2263,11 +2262,11 @@
      "versions": {}
     },
     "drupal": {
-     "sites": 2,
-     "versioned": 2,
+     "sites": 3,
+     "versioned": 3,
      "eol": 0,
      "supported": 0,
-     "unknown": 2,
+     "unknown": 3,
      "behind": 0,
      "cycles": {},
      "versions": {}
@@ -2364,11 +2363,11 @@
     },
     "CVE-2018-7600": {
      "exposed": 0,
-     "announced": 2
+     "announced": 3
     },
     "CVE-2017-7269": {
      "exposed": 0,
-     "announced": 54
+     "announced": 53
     }
    },
    "site": {
@@ -2377,7 +2376,7 @@
      202
     ],
     "patch": [
-     27,
+     26,
      202
     ],
     "kev": [
@@ -3372,7 +3371,7 @@
    {
     "cycle": "2.4",
     "eol": false,
-    "latest": "2.4.70",
+    "latest": "2.4.71",
     "support": null
    },
    {
@@ -4370,19 +4369,19 @@
  "sources": {
   "kev": {
    "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-   "fetched": "2026-11-11T11:07:15.468Z",
-   "version": "2026.11.10",
-   "released": "2026-11-10T19:03:29.8375Z",
-   "count": 1779
+   "fetched": "2026-11-16T11:22:43.280Z",
+   "version": "2026.11.13",
+   "released": "2026-11-13T20:24:18.3008Z",
+   "count": 1781
   },
   "nvd": {
    "url": "https://nvd.nist.gov/",
-   "fetched": "2026-11-11T11:07:15.468Z",
+   "fetched": "2026-11-16T11:22:43.280Z",
    "asked": 0
   },
   "eol": {
    "url": "https://endoflife.date/",
-   "fetched": "2026-11-11T11:07:15.468Z",
+   "fetched": "2026-11-16T11:22:43.280Z",
    "products": 10
   }
  },
@@ -5232,6 +5231,150 @@
     "kev": [
      499,
      2268
+    ]
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "run": "issue",
+   "sites": 12771,
+   "live": 14864,
+   "kev": {
+    "CVE-2026-109619": [
+     415,
+     1419
+    ],
+    "CVE-2026-109618": [
+     355,
+     1419
+    ],
+    "CVE-2026-34486": [
+     0,
+     0
+    ],
+    "CVE-2024-38475": [
+     90,
+     162
+    ],
+    "CVE-2025-24813": [
+     0,
+     0
+    ],
+    "CVE-2024-4577": [
+     6,
+     1420
+    ],
+    "CVE-2023-23752": [
+     0,
+     0
+    ],
+    "CVE-2016-8735": [
+     0,
+     0
+    ],
+    "CVE-2014-0160": [
+     0,
+     41
+    ],
+    "CVE-2017-12617": [
+     0,
+     0
+    ],
+    "CVE-2017-12615": [
+     0,
+     0
+    ],
+    "CVE-2012-1823": [
+     3,
+     1420
+    ],
+    "CVE-2020-1938": [
+     0,
+     0
+    ],
+    "CVE-2020-13671": [
+     0,
+     65
+    ],
+    "CVE-2021-42013": [
+     0,
+     162
+    ],
+    "CVE-2021-41773": [
+     0,
+     162
+    ],
+    "CVE-2019-0211": [
+     11,
+     162
+    ],
+    "CVE-2018-7600": [
+     0,
+     90
+    ],
+    "CVE-2017-7269": [
+     2,
+     661
+    ]
+   },
+   "eol": {
+    "apache": [
+     4,
+     175
+    ],
+    "php": [
+     397,
+     1420
+    ],
+    "wordpress": [
+     4,
+     1665
+    ],
+    "nginx": [
+     445,
+     526
+    ],
+    "nextjs": [
+     0,
+     0
+    ],
+    "iis": [
+     27,
+     661
+    ],
+    "openssl": [
+     31,
+     41
+    ],
+    "joomla": [
+     0,
+     0
+    ],
+    "drupal": [
+     13,
+     105
+    ],
+    "tomcat": [
+     0,
+     0
+    ],
+    "typo3": [
+     0,
+     0
+    ]
+   },
+   "site": {
+    "support": [
+     889,
+     3760
+    ],
+    "patch": [
+     414,
+     3760
+    ],
+    "kev": [
+     491,
+     2256
     ]
    }
   }
